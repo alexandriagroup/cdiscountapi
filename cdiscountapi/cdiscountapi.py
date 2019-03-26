@@ -3,74 +3,46 @@
 # Copyright © 2019 Alexandria
 
 from zeep import Client
-from zeep.exceptions import XMLSyntaxError
-from cdiscountapi.exceptions import (
-    CdiscountApiConnectionError,
-    CdiscountApiTypeError,
-)
 
 
 class CdiscountApi(object):
     """A class ton manage the interaction with the CdiscountMarketplace API"""
-    def __init__(self, credentials):
-        self.headers = {
-                'wsdl': credentials['wsdl'],
-                'token': credentials['token'],
-                'login': credentials['login'],
-
-                }
-
-    def connection(self):
-        try:
-            return Client(self.headers['wsdl'])
-        except XMLSyntaxError:
-            return CdiscountApiConnectionError(f'impossible to connect')
-
-    def get_seller_info(self):
-        """
-        Return the data for the user given (if empty, return the data for the main account).
-        :param user_id: the ID
-        :type user_id: int
-        :return: a dict with the data of the user
-        :rtype: dict
-        """
-
-        client = self.connection()
-        data = {
+    def __init__(self, token):
+        self.wsdl = 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc?wsdl'
+        # self.token = token
+        self.client = Client(self.wsdl)
+        self.header = {
             'Context': {
                 'SiteID': 100
             },
             'Localization': {
-                'Country': 'De',
+                'Country': 'Fr',
             },
             'Security': {
-                'DomainRightsList': {
-                    'DomainRights': {
-                        'Name': 'toto',
-                        'SecurityDescriptorList': {
-                            'SecurityDescriptor': {
-                                'Authorization': 'None',
-                                'FunctionIdentifier': 'toto',
-                                'Version': 10,
-                            }
-                        }
-                    },
-                },
-                'IssuerID': 14511,
-                'SessionID': 45564,
-                'SubjectLocality': {
-                    'Address': 'ta maman',
-                    'DnsName': 'toto',
-                },
-                'TokenId': self.headers('token'),
-                'UserName': 'toto',
+                'IssuerID': None,
+                'SessionID': None,
+                'TokenId': token,
+                'UserName': '',
             },
-            'Version': 100,
+            'Version': 1.0,
         }
-        response = client.service.GetSellerInformation(headerMessage=data)
 
-        if not isinstance(response, Client):
-            raise CdiscountApiTypeError(f'response should be a zeep.Client type not a {type(response)}')
+    def get_seller_info(self):
+        """
+        Return the seller data
+        :return: a dict with the data of the user
+        :rtype: dict
+        """
+        response = self.client.service.GetSellerInformation(headerMessage=self.header)
+        return response
 
+    def get_seller_indicators(self):
+        """
+        Return seller indicators message
+        :return: a dict with the data of the user
+        :rtype: dict
+        """
+
+        response = self.client.service.GetSellerIndicators(headerMessage=self.header)
         return response
 
