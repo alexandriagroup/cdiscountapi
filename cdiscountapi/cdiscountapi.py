@@ -2,7 +2,7 @@
 #
 # Copyright © 2019 Alexandria
 
-from zeep import Client
+from zeep import Client, helpers
 
 
 class CdiscountApi(object):
@@ -34,7 +34,7 @@ class CdiscountApi(object):
         :rtype: dict
         """
         response = self.client.service.GetSellerInformation(headerMessage=self.header)
-        return response
+        return helpers.serialize_object(response, dict)
 
     def get_seller_indicators(self):
         """
@@ -44,5 +44,5 @@ class CdiscountApi(object):
         """
 
         response = self.client.service.GetSellerIndicators(headerMessage=self.header)
-        return response
+        return helpers.serialize_object(response, dict)
 
