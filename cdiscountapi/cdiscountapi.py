@@ -7,15 +7,26 @@ import requests
 import lxml
 
 
+class Seller(object):
+    def __init__(self, api):
+        self.api = api
+
+    def get_seller_info(self):
+        response = self.api.client.service.GetSellerInformation(headerMessage=self.api.header)
+        return helpers.serialize_object(response, dict)
+
+
 class CdiscountApi(object):
     """A class ton manage the interaction with the CdiscountMarketplace API"""
+
+    wsdl = 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc?wsdl'
+    auth_url = ('https://sts.cdiscount.com/users/httpIssue.svc/'
+                '?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc')
     def __init__(self, login, password):
-        self.wsdl = 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc?wsdl'
-        self.auth_url = ('https://sts.cdiscount.com/users/httpIssue.svc/'
-                         '?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc')
         self.login = login
         self.password = password
         self.client = Client(self.wsdl)
+        self.seller = Seller(self)
         self.token = self.get_token()
         self.header = {
             'Context': {
@@ -36,15 +47,6 @@ class CdiscountApi(object):
     def get_token(self):
         response = requests.get(self.auth_url, auth=(self.login, self.password))
         return lxml.etree.XML(response.text).text
-
-    def get_seller_info(self):
-        """
-        Return the seller data
-        :return: a dict with the data of the user
-        :rtype: dict
-        """
-        response = self.client.service.GetSellerInformation(headerMessage=self.header)
-        return helpers.serialize_object(response, dict)
 
     def get_seller_indicators(self):
         """
