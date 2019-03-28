@@ -12,8 +12,8 @@ from cdiscountapi.cdiscountapi import Connection
 konch.config({
     'context': {
         'speak': konch.speak,
-	 'api': Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-			   os.getenv('CDISCOUNT_API_PASSWORD'))
+	'api': Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+			  os.getenv('CDISCOUNT_API_PASSWORD'))
     },
     "shell": "ipython",
     "ipy_autoreload": True,
