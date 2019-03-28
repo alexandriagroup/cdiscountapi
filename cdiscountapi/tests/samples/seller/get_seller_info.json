@@ -1,0 +1,56 @@
+{
+    "ErrorMessage": "None",
+    "OperationSuccess": "True",
+    "ErrorList": "None",
+    "SellerLogin": "toto",
+    "TokenId": "thebesttoken",
+    "DeliveryModes": {
+        "DeliveryModeInformation": [
+            {
+                "Code": "TRK",
+                "Name": "Envoi Suivi"
+            },
+            {
+                "Code": "REG",
+                "Name": "Recommandé"
+            }
+        ]
+    },
+    "OfferPoolList": {
+        "OfferPool": [
+            {
+                "Description": "Cdiscount",
+                "Id": 1
+            }
+        ]
+    },
+    "Seller": {
+        "Email": "the.seller@sonmail.com",
+        "IsAvailable": "ActiveSeller",
+        "Login": "toto",
+        "MobileNumber": "012456789",
+        "PhoneNumber": "012456789",
+        "SellerAddress": {
+            "Address1": "1 rue de l'adresse de test",
+            "Address2": "None",
+            "ApartmentNumber": "None",
+            "Building": "None",
+            "City": "Lyon",
+            "Civility": "None",
+            "CompanyName": "None",
+            "Country": "FR",
+            "County": "None",
+            "FirstName": "None",
+            "Instructions": "None",
+            "LastName": "None",
+            "PlaceName": "None",
+            "RelayId": "None",
+            "Street": "None",
+            "ZipCode": "69000"
+        },
+        "ShopName": "Test",
+        "ShopUrl": "None",
+        "SiretNumber": "SIRETXXXXXX",
+        "State": "Activated"
+    }
+}
