@@ -2,3 +2,4 @@ pdbpp
 ipython
 konch
 vcrpy==2.0.1
+pytest-vcr==1.0.1
