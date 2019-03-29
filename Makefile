@@ -2,7 +2,11 @@ SHELL := /bin/bash
 
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-test-no-vcr:
+install-dev:
+	@echo "Installing the requirements for the development"
+	pip install -r requirements-dev.txt
+
+test:
 	VCR_RECORD_MODE=off py.test
 
 test-renew-vcr-records:
