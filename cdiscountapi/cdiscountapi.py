@@ -240,7 +240,7 @@ class WebMail(object):
 
 
 class Connection(object):
-    """A class ton manage the interaction with the CdiscountMarketplace API"""
+    """A class to manage the interaction with the CdiscountMarketplace API"""
 
     wsdl = 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc?wsdl'
     auth_url = ('https://sts.cdiscount.com/users/httpIssue.svc/'

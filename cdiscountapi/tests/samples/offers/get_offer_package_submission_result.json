@@ -1,0 +1,26 @@
+{
+  "ErrorMessage": "None",
+  "OperationSuccess": "True",
+  "SellerLogin": "toto",
+  "TokenId": "thebesttoken",
+  "NumberOfErrors": "0",
+  "OfferLogList": {
+    "OfferReportLog": {
+      "LogDate": "2012-01-03T17:30:54.0133663+01:00",
+      "OfferIntegrationStatus": "Integrated",
+      "ProductEan": "7332543145324",
+      "PropertyList": {
+        "OfferReportPropertyLog": {
+          "LogMessage": "REF-00000012|7332543145324|ELE7332543145324|OK|9500|Offre mise à jour|Mon corner déco",
+          "PropertyCode": "00",
+          "PropertyError": "95"
+        }
+      },
+      "SellerProductId": "REF-00000012",
+      "Sku": { "-i:nil": "true" },
+      "Validated": "true"
+    }
+  },
+  "PackageId": "106969",
+  "PackageIntegrationStatus": "Integrated"
+}

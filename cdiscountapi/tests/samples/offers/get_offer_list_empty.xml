@@ -1,0 +1,14 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <GetOfferListResponse xmlns="http://www.cdiscount.com">
+         <GetOfferListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            <ErrorMessage i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/>
+            <OperationSuccess xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">false</OperationSuccess>
+            <ErrorList/>
+            <SellerLogin>toto</SellerLogin>
+            <TokenId>thebesttoken</TokenId>
+            <OfferList/>
+         </GetOfferListResult>
+      </GetOfferListResponse>
+   </s:Body>
+</s:Envelope>

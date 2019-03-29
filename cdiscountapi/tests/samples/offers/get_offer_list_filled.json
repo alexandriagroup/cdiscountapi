@@ -1,0 +1,63 @@
+{
+  "ErrorMessage": "None",
+  "OperationSuccess": "True",
+  "ErrorList": "None",
+  "SellerLogin": "toto",
+  "TokenId": "thebesttoken",
+  "OfferList": {
+    "Offer": {
+      "Comments": "Produit livre dans son emballage d'origine.",
+      "CreationDate": "2011-12-28T14:44:48.96",
+      "EcoTax": "1.0000",
+      "LastUpdateDate": "2012-01-03T17:30:56.977",
+      "LogisticMode": "Marketplace",
+      "OfferPoolList": {
+        "OfferPool": {
+          "Description": { "-i:nil": "true" }
+        },
+        "Id": "1"
+      }
+    },
+    "OfferState": "Active",
+    "Price": "14.0000",
+    "ProductCondition": "New",
+    "ProductEan": "7332543145329",
+    "ProductId": "ELE7332543145329",
+    "SellerProductId": "REF-00000015",
+    "ShippingInformationList": {
+      "ShippingInformation": [
+        {
+          "DeliveryMode": {
+            "Code": "STD",
+            "Name": "Normal"
+          },
+          "AdditionalShippingCharges": "1.0000",
+          "MaxLeadTime": "8",
+          "MinLeadTime": "4",
+          "ShippingCharges": "2.0000"
+        },
+        {
+          "DeliveryMode": {
+            "Code": "STD",
+            "Name": "Normal"
+          },
+          "AdditionalShippingCharges": "2.0000",
+          "MaxLeadTime": "8",
+          "MinLeadTime": "4",
+          "ShippingCharges": "4.0000"
+        },
+        {
+          "DeliveryMode": {
+            "Code": "STD",
+            "Name": "Normal"
+          },
+          "AdditionalShippingCharges": "4.0000",
+          "MinLeadTime": "4",
+          "ShippingCharges": "6.0000",
+        }
+      ]
+    },
+    "Stock": "10",
+    "VatRate": "0.1960"
+  }
+}

@@ -1,0 +1,79 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <GetOfferListPaginatedResponse xmlns="http://www.cdiscount.com">
+         <GetOfferListPaginatedResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            <ErrorMessage i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/>
+            <OperationSuccess xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess>
+            <ErrorList/>
+            <SellerLogin>toto</SellerLogin>
+            <TokenId>thebesttoken</TokenId>
+            <OfferList>
+              <Offer>
+                <BestShippingCharges>5.0000</BestShippingCharges>
+                <Comments>test</Comments>
+                <CreationDate>2014-07-08T16:31:21.74</CreationDate>
+                <DeaTax>3.0000</DeaTax>
+                <DiscountList i:nil="true"/>
+                <EcoTax>5.0000</EcoTax>
+                <IntegrationPrice>92.0000</IntegrationPrice>
+                <IsCDAV>false</IsCDAV>
+                <LastUpdateDate>2014-07-08T16:31:21.74</LastUpdateDate>
+                <LogisticMode>Marketplace</LogisticMode>
+                <MinimumPriceForPriceAlignment i:nil="true"/>
+                <OfferBenchMark>
+                  <BestOfferPrice>80.9400</BestOfferPrice>
+                  <ProductCondition>New</ProductCondition>
+                  <ProductState>New</ProductState>
+                  <ShippingCharges>5.9000</ShippingCharges>
+                  <IsBestOfferPrice>false</IsBestOfferPrice>
+                </OfferBenchMark>
+                <OfferPoolList>
+                     <OfferPool>
+                        <Description i:nil="true"/>
+                        <Id>1</Id>
+                     </OfferPool>
+                </OfferPoolList>
+                <OfferState>Active</OfferState>
+                <ParentProductId i:nil="true"/>
+                <Price>92.0000</Price>
+                <PriceMustBeAligned>DontAlign</PriceMustBeAligned>
+                <ProductCondition>New</ProductCondition>
+                <ProductEan>0847663021665</ProductEan>
+                <ProductId>ADO0847663021665</ProductId>
+                <ProductPackagingUnit>None</ProductPackagingUnit>
+                <ProductPackagingUnitPrice>0</ProductPackagingUnitPrice>
+                <ProductPackagingValue>0.00000</ProductPackagingValue>
+                <SellerProductId>Adonit</SellerProductId>
+                <ShippingInformationList>
+                  <ShippingInformation>
+                    <AdditionalShippingCharges>1.0000</AdditionalShippingCharges>
+                    <DeliveryMode>
+                      <Code>TRK</Code>
+                      <Name>Suivi</Name>
+                    </DeliveryMode>
+                    <MaxLeadTime>5</MaxLeadTime>
+                    <MinLeadTime>1</MinLeadTime>
+                    <ShippingCharges>5.0000</ShippingCharges>
+                  </ShippingInformation>
+                  <ShippingInformation>
+                    <AdditionalShippingCharges>1.0000</AdditionalShippingCharges>
+                    <DeliveryMode>
+                      <Code>REG</Code>
+                      <Name>Recommandé</Name>
+                    </DeliveryMode>
+                    <MaxLeadTime>5</MaxLeadTime>
+                    <MinLeadTime>1</MinLeadTime>
+                    <ShippingCharges>5.0000</ShippingCharges>
+                  </ShippingInformation>
+                </ShippingInformationList>
+                <Stock>10</Stock>
+                <StrikedPrice i:nil="true"/>
+                <VatRate>0.0300</VatRate>
+              </Offer>
+            </OfferList>
+            <CurrentPageNumber>1</CurrentPageNumber>
+            <NumberOfPages>1</NumberOfPages>
+         </GetOfferListPaginatedResult>
+      </GetOfferListPaginatedResponse>
+   </s:Body>
+</s:Envelope>
