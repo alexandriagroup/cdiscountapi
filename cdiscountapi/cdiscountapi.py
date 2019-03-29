@@ -15,6 +15,15 @@ class Seller(object):
         response = self.api.client.service.GetSellerInformation(headerMessage=self.api.header)
         return helpers.serialize_object(response, dict)
 
+    def get_seller_indicators(self):
+        """
+        Return seller indicators message
+        :return: a dict with the data of the user
+        :rtype: dict
+        """
+        response = self.client.service.GetSellerIndicators(headerMessage=self.header)
+        return helpers.serialize_object(response, dict)
+
 
 class CdiscountApi(object):
     """A class ton manage the interaction with the CdiscountMarketplace API"""
@@ -22,6 +31,7 @@ class CdiscountApi(object):
     wsdl = 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc?wsdl'
     auth_url = ('https://sts.cdiscount.com/users/httpIssue.svc/'
                 '?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc')
+
     def __init__(self, login, password):
         self.login = login
         self.password = password
@@ -47,13 +57,3 @@ class CdiscountApi(object):
     def get_token(self):
         response = requests.get(self.auth_url, auth=(self.login, self.password))
         return lxml.etree.XML(response.text).text
-
-    def get_seller_indicators(self):
-        """
-        Return seller indicators message
-        :return: a dict with the data of the user
-        :rtype: dict
-        """
-        response = self.client.service.GetSellerIndicators(headerMessage=self.header)
-        return helpers.serialize_object(response, dict)
-
