@@ -1,0 +1,34 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <GetOfferPackageSubmissionResultResponse xmlns="http://www.cdiscount.com">
+         <GetOfferPackageSubmissionResultResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            <ErrorMessage i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/>
+            <OperationSuccess xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess>
+            <ErrorList/>
+            <SellerLogin>toto</SellerLogin>
+            <TokenId>thebesttoken</TokenId>
+            <NumberOfErrors>0</NumberOfErrors>
+            <OfferLogList>
+               <OfferReportLog>
+                  <LogDate>2012-01-03T17:30:54.0133663+01:00</LogDate>
+                  <OfferIntegrationStatus>Integrated</OfferIntegrationStatus>
+                  <ProductEan>7332543145324</ProductEan>
+                  <PropertyList>
+                     <OfferReportPropertyLog>
+                        <LogMessage>REF-00000012|7332543145324|ELE7332543145324|OK|9500|Offre mise à jour|Mon corner déco</LogMessage>
+                        <Name/>
+                        <PropertyCode>00</PropertyCode>
+                        <PropertyError>95</PropertyError>
+                     </OfferReportPropertyLog>
+                  </PropertyList>
+                  <SellerProductId>REF-00000012</SellerProductId>
+                  <Sku i:nil="true"/>
+                  <Validated>true</Validated>
+               </OfferReportLog>
+            </OfferLogList>
+            <PackageId>106969</PackageId>
+            <PackageIntegrationStatus>Integrated</PackageIntegrationStatus>
+         </GetOfferPackageSubmissionResultResult>
+      </GetOfferPackageSubmissionResultResponse>
+   </s:Body>
+</s:Envelope>
