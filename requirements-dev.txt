@@ -1,3 +1,4 @@
 pdbpp
 ipython
 konch
+vcrpy==2.0.1

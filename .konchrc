@@ -3,7 +3,7 @@
 
 import os
 import konch
-from cdiscountapi.cdiscountapi import CdiscountApi
+from cdiscountapi.cdiscountapi import Connection
 
 # Available options:
 #   'context', 'banner', 'shell', 'prompt', 'output',
@@ -12,8 +12,8 @@ from cdiscountapi.cdiscountapi import CdiscountApi
 konch.config({
     'context': {
         'speak': konch.speak,
-        'api': CdiscountApi(os.getenv('CDISCOUNT_API_LOGIN'),
-                            os.getenv('CDISCOUNT_API_PASSWORD'))
+	'api': Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+			  os.getenv('CDISCOUNT_API_PASSWORD'))
     },
     "shell": "ipython",
     "ipy_autoreload": True,
