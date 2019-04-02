@@ -1,0 +1,279 @@
+{
+    "ErrorMessage": "None",
+    "OperationSuccess": "False",
+    "ErrorList": "None",
+    "SellerLogin": "toto",
+    "TokenId": "thebesttoken",
+  "CategoryTree": {
+    "AllowOfferIntegration": "false",
+    "AllowProductIntegration": "false",
+    "ChildrenCategoryList": {
+      "CategoryTree": [
+        {
+          "AllowOfferIntegration": "false",
+          "AllowProductIntegration": "false",
+          "ChildrenCategoryList": {
+            "CategoryTree": [
+              {
+                "AllowOfferIntegration": "false",
+                "AllowProductIntegration": "false",
+                "ChildrenCategoryList": {
+                  "CategoryTree": [
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "06040201",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "DOUDOU"
+                        }
+                      },
+                      "Code": "060402",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "DOUDOU"
+                    },
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "06040301",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "HOCHET",
+                        }
+                      },
+                      "Code": "060403",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "HOCHET"
+                    },
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "06040401",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "MOBILE"
+                        }
+                      },
+                      "Code": "060404",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "MOBILE"
+                    },
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "06040501",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "PORTIQUE BEBE"
+                        }
+                      },
+                      "Code": "060405",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "PORTIQUE BEBE"
+                    },
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "06040601",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "SPIRALE-TORTILLON",
+                        }
+                      },
+                      "Code": "060406",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "SPIRALE-TORTILLON"
+                    },
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "06040701",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "TAPIS EVEIL-AIRE BEBE",
+                        }
+                      },
+                      "Code": "060407",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "TAPIS EVEIL-AIRE BEBE"
+                    }
+                  ]
+                },
+                "Code": "0604",
+                "IsEANOptional": "true",
+                "IsStandardProductKindEligible": "true",
+                "IsVariantProductKindEligible": "true",
+                "Name": "JOUET PREMIER AGE"
+              },
+              {
+                "AllowOfferIntegration": "false",
+                "AllowProductIntegration": "false",
+                "ChildrenCategoryList": {
+                  "CategoryTree": [
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "060D0501",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "CHAMBRE COMPLETE BEBE",
+                        }
+                      },
+                      "Code": "060D05",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "CHAMBRE COMPLETE BEBE",
+                    },
+                    {
+                      "AllowOfferIntegration": "false",
+                      "AllowProductIntegration": "false",
+                      "ChildrenCategoryList": {
+                        "CategoryTree": {
+                          "AllowOfferIntegration": "true",
+                          "AllowProductIntegration": "true",
+                          "Code": "060D0A01",
+                          "IsEANOptional": "true",
+                          "IsStandardProductKindEligible": "true",
+                          "IsVariantProductKindEligible": "true",
+                          "Name": "TOISE BEBE"
+                        }
+                      },
+                      "Code": "060D0A",
+                      "IsEANOptional": "true",
+                      "IsStandardProductKindEligible": "true",
+                      "IsVariantProductKindEligible": "true",
+                      "Name": "TOISE BEBE"
+                    }
+                  ]
+                },
+                "Code": "060D",
+                "IsEANOptional": "true",
+                "IsStandardProductKindEligible": "true",
+                "IsVariantProductKindEligible": "true",
+                "Name": "MEUBLES BEBE"
+              }
+            ]
+          },
+          "Code": "06",
+          "IsEANOptional": "true",
+          "IsStandardProductKindEligible": "true",
+          "IsVariantProductKindEligible": "true",
+          "Name": "PUERICULTURE"
+        },
+        {
+          "AllowOfferIntegration": "false",
+          "AllowProductIntegration": "false",
+          "Code": "07",
+          "IsEANOptional": "true",
+          "IsStandardProductKindEligible": "true",
+          "IsVariantProductKindEligible": "true",
+          "Name": "JOUETS",
+        },
+        {
+          "AllowOfferIntegration": "false",
+          "AllowProductIntegration": "false",
+          "ChildrenCategoryList": {
+            "CategoryTree": {
+              "AllowOfferIntegration": "false",
+              "AllowProductIntegration": "false",
+              "ChildrenCategoryList": {
+                "CategoryTree": [
+                  {
+                    "AllowOfferIntegration": "true",
+                    "AllowProductIntegration": "true",
+                    "Code": "23701",
+                    "IsEANOptional": "true",
+                    "IsStandardProductKindEligible": "true",
+                    "IsVariantProductKindEligible": "true",
+                    "Name": "AUTRES LIVRES"
+                  },
+                  {
+                    "AllowOfferIntegration": "true",
+                    "AllowProductIntegration": "true",
+                    "Code": "256",
+                    "IsEANOptional": "true",
+                    "IsStandardProductKindEligible": "true",
+                    "IsVariantProductKindEligible": "true",
+                    "Name": "ENFANTS / BEBE"
+                  },
+                  {
+                    "AllowOfferIntegration": "true",
+                    "AllowProductIntegration": "true",
+                    "Code": "2781",
+                    "IsEANOptional": "true",
+                    "IsStandardProductKindEligible": "true",
+                    "IsVariantProductKindEligible": "true",
+                    "Name": "ENFANTS / BEBE - JOUET"
+                  }
+                ]
+              },
+              "Code": "237",
+              "IsEANOptional": "true",
+              "IsStandardProductKindEligible": "true",
+              "IsVariantProductKindEligible": "true",
+              "Name": "LIVRES"
+            }
+          },
+          "Code": "193",
+          "IsEANOptional": "true",
+          "IsStandardProductKindEligible": "true",
+          "IsVariantProductKindEligible": "true",
+          "Name": "CULTURE / JEUX"
+        }
+      ]
+    },
+    "Code": { "-i:nil": "true" },
+    "IsEANOptional": "true",
+    "IsStandardProductKindEligible": "true",
+    "IsVariantProductKindEligible": "true",
+    "Name": { "-i:nil": "true" }
+  }
+}
