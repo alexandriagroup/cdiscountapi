@@ -166,15 +166,25 @@ class Offers(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def submit_offer_package(self, offers=None):
+    def submit_offer_package(self, offers_dict, url):
         """
-        To import offers.
-        :return: report message
-        :rtype: dict
+        To ask for the creation of offers.
+
+        :param offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
+        :param url: url to upload offers package
+        :return: the id of package or -1
+        :rtype: int
         """
+        # Get url.
+        package_url = generate_package_url(offers_dict, url)
+
+        # Create request attribute.
+        offer_package = {'ZipFileFullPath': package_url}
+
+        # Send request.
         response = self.api.client.service.SubmitOfferPackage(
             headerMessage=self.api.header,
-            offerPackageRequest=offers,
+            offerPackageRequest=offer_package,
         )
         return helpers.serialize_object(response, dict)
 
@@ -223,17 +233,22 @@ class Products(object):
     def get_brand_list(self):
         pass
 
-    def submit_product_package(self, products_xml, url):
+    def submit_product_package(self, products_dict, url):
         """
         To ask for the creation of products.
 
-        :param package_url: url to find zip package
+        :param products_dict: products as you can see on tests/samples/products/products_to_submit.json
+        :param url: url to upload offers package
         :return: the id of package or -1
-        :rtype: dict
+        :rtype: int
         """
-        package_url = self.generate_package_url(products_xml)
+        # get url.
+        package_url = generate_package_url(products_dict, url)
+
+        # Create request attribute.
         product_package = {'ZipFileFullPath': package_url}
 
+        # Send request.
         response = self.api.client.service.SubmitProductPackage(
             headerMessage=self.api.header,
             productPackageRequest=product_package
