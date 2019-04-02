@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Type="http://cdiscount.com/uri/document"  Target="/Content/Offers.xml" Id="Raa033fe51c984c6f" />
+</Relationships>
