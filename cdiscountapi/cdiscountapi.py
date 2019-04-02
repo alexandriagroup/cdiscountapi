@@ -1,10 +1,103 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright © 2019 Alexandria
+from shutil import (
+    copytree,
+    make_archive,
+    rmtree,
+)
+from tempfile import gettempdir
 
-from zeep import Client, helpers
-import requests
 import lxml
+import requests
+from dicttoxml import dicttoxml
+from zeep import (
+    Client,
+    helpers,
+)
+
+
+def generate_package_url(content_dict, url):
+    """
+    Generate and upload package and return the url
+    :param content_dict: dict of products or offers as you can see on tests/samples/products/products_to_submit.json
+    :param url: url to upload package
+    :return: url to find it
+    """
+    # Create a temporary package.
+    tempdir = gettempdir()
+
+    # Generate package according to content type.
+    if 'Product' in content_dict.keys():
+        package = generate_product_package(tempdir, content_dict)
+    elif 'Offer' in content_dict.keys():
+        package = generate_offer_package(tempdir, content_dict)
+
+    # Generate zip package.
+    zip_package = make_archive(package, 'zip', package)
+
+    # Upload package and get url to download it.
+    package_url = upload_and_get_url(zip_package, url)
+
+    # Remove temporary package.
+    rmtree(tempdir + '/uploading_package')
+    return package_url
+
+
+def generate_product_package(tempdir, product_dict):
+    """
+    Generate a zip product package as cidscount wanted.
+    :param tempdir: directory to create temporary files
+    :param product_dict: products as you can see on tests/samples/products/products_to_submit.json
+    :return: zip package
+    """
+    # Create path.
+    path = f'{tempdir}/uploading_package'
+
+    # Copy tree package.
+    package = copytree('product_package', path)
+
+    # Add Products.xml from product_dict.
+    with open(f"{package}/Content/Products.xml", "wb") as f:
+        f.write(dicttoxml(product_dict))
+
+    # Make a zip from package.
+    zip_package = make_archive(path, 'zip', path)
+
+    # # Remove unzipped package.
+    # rmtree(path)
+    return zip_package
+
+
+def generate_offer_package(tempdir, offer_dict):
+    """
+    Generate a zip offers package as cidscount wanted.
+    :param tempdir:  directory to create temporary files
+    :param offer_dict: offers as you can see on tests/samples/products/offers_to_submit.json
+    :return: zip package
+    """
+    # Create path.
+    path = f'{tempdir}/uploading_package'
+
+    # Copy tree package.
+    package = copytree('offer_package', path)
+
+    # Add Products.xml from product_dict.
+    with open(f"{package}/Content/Offers.xml", "wb") as f:
+        f.write(dicttoxml(offer_dict))
+
+    # Make a zip from package.
+    zip_package = make_archive(path, 'zip', path)
+
+    # # Remove unzipped package.
+    # rmtree(path)
+    return zip_package
+
+
+# TODO find a way to upload package et get url
+def upload_and_get_url(package, url):
+
+    return url + package
 
 
 class Seller(object):
@@ -106,7 +199,7 @@ class Products(object):
 
     def get_allowed_category_tree(self):
         """
-        This operation allows the user API to know the categories of product which are accessible to her.
+        Know the categories of product which are accessible to them.
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
         """
@@ -130,8 +223,22 @@ class Products(object):
     def get_brand_list(self):
         pass
 
-    def submit_product_package(self):
-        pass
+    def submit_product_package(self, products_xml, url):
+        """
+        To ask for the creation of products.
+
+        :param package_url: url to find zip package
+        :return: the id of package or -1
+        :rtype: dict
+        """
+        package_url = self.generate_package_url(products_xml)
+        product_package = {'ZipFileFullPath': package_url}
+
+        response = self.api.client.service.SubmitProductPackage(
+            headerMessage=self.api.header,
+            productPackageRequest=product_package
+        )
+        return helpers.serialize_object(response, dict)
 
     def get_product_package_submission_result(self):
         pass
