@@ -366,18 +366,22 @@ class WebMail(object):
 class Connection(object):
     """A class to manage the interaction with the CdiscountMarketplace API"""
 
-    wsdl = 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc?wsdl'
-    auth_url = ('https://sts.cdiscount.com/users/httpIssue.svc/'
-                '?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc')
-    # wsdl = 'https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc'
-    # auth_url = ('https://sts.preprod-cdiscount.com/users/httpIssue.svc/'
-    #             '?realm=https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc')
+    def __init__(self, login, password, preprod=False):
+        self.preprod = preprod
+        if self.preprod:
+            domain = 'preprod-cdiscount.com'
+        else:
+            domain = 'cdiscount.com'
 
-    def __init__(self, login, password):
+        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc'.format(domain)
+        self.auth_url = ('https://sts.{0}/users/httpIssue.svc/'
+                         '?realm=https://wsvc.{0}/MarketplaceAPIService.svc'.format(domain))
+
         self.login = login
         self.password = password
         self.client = Client(self.wsdl)
         self.token = self.get_token()
+
         self.header = {
             'Context': {
                 'SiteID': 100

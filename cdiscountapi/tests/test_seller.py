@@ -34,6 +34,7 @@ def test_initialization():
         },
         'Version': 1.0,
     }
+    assert api.preprod is False
 
 
 @pytest.mark.vcr()
