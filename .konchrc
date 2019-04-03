@@ -4,23 +4,66 @@
 import os
 import konch
 from cdiscountapi.cdiscountapi import Connection
+from functools import lru_cache
+from collections import defaultdict
+
+
+@lru_cache(maxsize=128)
+def get_tree(api):
+    tree = api.products.get_allowed_category_tree()
+    return tree['CategoryTree']['ChildrenCategoryList']['CategoryTree']
+
+
+def walk_tree(tree):
+    graph = {}
+    for branch in tree:
+        name = branch['Name']
+        if branch.get('ChildrenCategoryList', {}) is not None:
+            graph[name] = walk_tree(branch['ChildrenCategoryList']['CategoryTree'])
+        else:
+            graph[name] = branch['Code']
+    return graph
+
+
+def analyze_preprod_choice(value):
+    """
+    value must be '0' (False) or '1' (True)
+    """
+    if value not in ('0', '1'):
+        raise ValueError('value must be "0" (False) or "1" (True)')
+    return bool(int(value))
+
+
+cdiscount_api_preprod = os.getenv('CDISCOUNT_API_PREPROD')
+preprod = analyze_preprod_choice(cdiscount_api_preprod) if\
+    cdiscount_api_preprod else False
+
+if preprod:
+    banner = '==Preprod environment for Cdiscount=='
+else:
+    banner = '**Production environment for Cdiscount**'
 
 # Available options:
 #   'context', 'banner', 'shell', 'prompt', 'output',
 #   'context_format', 'ipy_extensions', 'ipy_autoreload',
 #   'ipy_colors', 'ipy_highlighting_style'
+
 konch.config({
+    'banner': banner,
     'context': {
-        'speak': konch.speak,
-	'api': Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-			  os.getenv('CDISCOUNT_API_PASSWORD'))
+        'api': Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                          os.getenv('CDISCOUNT_API_PASSWORD'),
+                          preprod=preprod),
+        'get_tree': get_tree,
     },
     "shell": "ipython",
     "ipy_autoreload": True,
 })
 
+
 def setup():
     pass
+
 
 def teardown():
     pass
