@@ -126,8 +126,8 @@ class Seller(object):
         :return: a dict with the data of the user
         :rtype: dict
         """
-        response = self.client.service.GetSellerIndicators(
-            headerMessage=self.header
+        response = self.api.client.service.GetSellerIndicators(
+            headerMessage=self.api.header
         )
         return helpers.serialize_object(response, dict)
 
