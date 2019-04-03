@@ -44,46 +44,28 @@ def generate_package_url(content_dict, url):
     return package_url
 
 
-def generate_product_package(tempdir, product_dict):
+def generate_package(package_type, tempdir, offer_dict):
     """
-    Generate a zip product package as cidscount wanted.
-    :param tempdir: directory to create temporary files
-    :param product_dict: products as you can see on tests/samples/products/products_to_submit.json
-    :return: zip package
-    """
-    # Create path.
-    path = f'{tempdir}/uploading_package'
+    Generate a zip package for the offers or the products
 
-    # Copy tree package.
-    package = copytree('product_package', path)
-
-    # Add Products.xml from product_dict.
-    with open(f"{package}/Content/Products.xml", "wb") as f:
-        f.write(dicttoxml(product_dict))
-
-    # Make a zip from package.
-    zip_package = make_archive(path, 'zip', path)
-
-    # # Remove unzipped package.
-    # rmtree(path)
-    return zip_package
-
-
-def generate_offer_package(tempdir, offer_dict):
-    """
-    Generate a zip offers package as cidscount wanted.
+    :param package_type: 'offer' or 'product'
     :param tempdir:  directory to create temporary files
-    :param offer_dict: offers as you can see on tests/samples/products/offers_to_submit.json
-    :return: zip package
+    :param offer_dict: offers as you can see on
+    tests/samples/products/products_to_submit.json or
+    tests/samples/offers/offers_to_submit.json
     """
+    if package_type not in ('offer', 'product'):
+        raise ValueError('package_type must be either "offer" or "product".')
+
     # Create path.
     path = f'{tempdir}/uploading_package'
 
     # Copy tree package.
-    package = copytree('offer_package', path)
+    package = copytree(f'{package_type}_package', path)
+    xml_filename = package_type.capitalize() + 's.xml'
 
     # Add Products.xml from product_dict.
-    with open(f"{package}/Content/Offers.xml", "wb") as f:
+    with open(f"{package}/Content/{xml_filename}", "wb") as f:
         f.write(dicttoxml(offer_dict))
 
     # Make a zip from package.
@@ -92,6 +74,26 @@ def generate_offer_package(tempdir, offer_dict):
     # # Remove unzipped package.
     # rmtree(path)
     return zip_package
+
+
+def generate_product_package(tempdir, product_dict):
+    """
+    Generate a zip product package as cidscount wanted.
+    :param tempdir: directory to create temporary files
+    :param product_dict: products as you can see on tests/samples/products/products_to_submit.json
+    :return: zip package
+    """
+    return generate_package('product', tempdir, product_dict)
+
+
+def generate_offer_package(tempdir, offer_dict):
+    """
+    Generate a zip offers package as cidscount wanted.
+    :param tempdir:  directory to create temporary files
+    :param offer_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
+    :return: zip package
+    """
+    return generate_package('offer', tempdir, offer_dict)
 
 
 # TODO find a way to upload package et get url
@@ -367,6 +369,9 @@ class Connection(object):
     wsdl = 'https://wsvc.cdiscount.com/MarketplaceAPIService.svc?wsdl'
     auth_url = ('https://sts.cdiscount.com/users/httpIssue.svc/'
                 '?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc')
+    # wsdl = 'https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc'
+    # auth_url = ('https://sts.preprod-cdiscount.com/users/httpIssue.svc/'
+    #             '?realm=https://wsvc.preprod-cdiscount.com/MarketplaceAPIService.svc')
 
     def __init__(self, login, password):
         self.login = login
