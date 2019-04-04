@@ -21,7 +21,8 @@ def test_initialization():
     assert re.match(r'[a-z0-9]{32}', api.token) is not None
     assert api.header == {
         'Context': {
-            'SiteID': 100
+            'SiteID': 100,
+            'CatalogID': 1
         },
         'Localization': {
             'Country': 'Fr',
