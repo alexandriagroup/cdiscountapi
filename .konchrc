@@ -2,10 +2,12 @@
 # vi: set ft=python :
 
 import os
-import konch
 from cdiscountapi.cdiscountapi import Connection
 from functools import lru_cache
 from collections import defaultdict
+from pathlib import Path
+import konch
+import yaml
 
 
 @lru_cache(maxsize=128)
@@ -34,6 +36,29 @@ def analyze_preprod_choice(value):
     return bool(int(value))
 
 
+def load_cassette(cassette_name):
+    """
+    Load the cassette saved in yaml by vcrpy
+
+    :param cassette_name: The name of the cassette
+    :type cassette_name: str
+    :rtype: dict
+    :return: the data contained in the cassette
+    """
+    fname = Path("cdiscountapi/tests/cassettes").joinpath(cassette_name)
+    if not fname.exists():
+        raise Exception(f'{fname} does not exist.')
+    return yaml.load(fname.read_text())
+
+
+def create_request(api, operation, args):
+    """
+    Example
+    >>> element = create_request(api, 'GetProductList', {'CategoryCode': '42'})
+    """
+    return api.client.create_message(api.client.service, operation, args)
+
+
 cdiscount_api_preprod = os.getenv('CDISCOUNT_API_PREPROD')
 preprod = analyze_preprod_choice(cdiscount_api_preprod) if\
     cdiscount_api_preprod else False
@@ -55,6 +80,9 @@ konch.config({
                           os.getenv('CDISCOUNT_API_PASSWORD'),
                           preprod=preprod),
         'get_tree': get_tree,
+        'load_cassette': load_cassette,
+        'decode_response': decode_response,
+        'create_request': create_request,
     },
     "shell": "ipython",
     "ipy_autoreload": True,
