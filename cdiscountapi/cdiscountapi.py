@@ -20,9 +20,12 @@ from zeep import (
 def generate_package_url(content_dict, url):
     """
     Generate and upload package and return the url
-    :param content_dict: dict of products or offers as you can see on tests/samples/products/products_to_submit.json
+    :param content_dict: products or offers as you can see on tests/samples/products/products_to_submit.json
+    :type content_dict: dict
     :param url: url to upload package
+    :type url: str
     :return: url to find it
+    :rtype: str
     """
     # Create a temporary package.
     tempdir = gettempdir()
@@ -49,10 +52,14 @@ def generate_package(package_type, tempdir, offer_dict):
     Generate a zip package for the offers or the products
 
     :param package_type: 'offer' or 'product'
+    :type package_type: str
     :param tempdir:  directory to create temporary files
+    :type tempdir: str
     :param offer_dict: offers as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
+    :type offer_dict: dict
+    :rtype: str
     """
     if package_type not in ('offer', 'product'):
         raise ValueError('package_type must be either "offer" or "product".')
@@ -71,8 +78,7 @@ def generate_package(package_type, tempdir, offer_dict):
     # Make a zip from package.
     zip_package = make_archive(path, 'zip', path)
 
-    # # Remove unzipped package.
-    # rmtree(path)
+    # Remove unzipped package.
     return zip_package
 
 
@@ -80,8 +86,11 @@ def generate_product_package(tempdir, product_dict):
     """
     Generate a zip product package as cidscount wanted.
     :param tempdir: directory to create temporary files
+    :type tempdir: str
     :param product_dict: products as you can see on tests/samples/products/products_to_submit.json
+    :type product_dict: dict
     :return: zip package
+    :rtype: str
     """
     return generate_package('product', tempdir, product_dict)
 
@@ -90,14 +99,26 @@ def generate_offer_package(tempdir, offer_dict):
     """
     Generate a zip offers package as cidscount wanted.
     :param tempdir:  directory to create temporary files
+    :type tempdir: str
     :param offer_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
+    :type offer_dict: dict
     :return: zip package
+    :rtype: str
     """
     return generate_package('offer', tempdir, offer_dict)
 
 
 # TODO find a way to upload package et get url
 def upload_and_get_url(package, url):
+    """
+    Upload package and get url to download it.
+    :param package: way to find zip package
+    :type package: str
+    :param url: where to upload zip package
+    :type url: str
+    :return: where to download zip package
+    :rtype: str
+    """
 
     return url + package
 
@@ -146,6 +167,7 @@ class Offers(object):
         """
         To search offers.
         :param filters: list of filters
+        :type filters: str
         :return: offers answering the search criterion
         :rtype: dict
         """
@@ -173,7 +195,9 @@ class Offers(object):
         To ask for the creation of offers.
 
         :param offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
+        :type offers_dict: dict
         :param url: url to upload offers package
+        :type url: str
         :return: the id of package or -1
         :rtype: int
         """
@@ -221,16 +245,54 @@ class Products(object):
         return helpers.serialize_object(response, dict)
 
     def get_all_allowed_category_tree(self):
-        pass
+        """
+        Know the categories of product which are accessible to them.
+        :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
+        :rtype: dict
+        """
+        response = self.api.client.service.GetAllAllowedCategoryTree(
+            headerMessage=self.api.header
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_product_list(self):
-        pass
+    def get_product_list(self, category):
+        """
+        Search products in the reference frame
+        :param category: category code to filter results
+        :type category: str
+        :return: products corresponding to research
+        :rtype: dict
+        """
+        response = self.api.client.service.GetProductList(
+            headerMessage=self.api.header,
+            productFilter={'CategoryCode': category}
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_model_list(self):
-        pass
+    def get_model_list(self, category=None):
+        """
+        Model categories allocated to the seller.
+        :param category: category code to filter results
+        :type category: str
+        :return: models and mandatory model properties
+        :rtype: dict
+        """
+        response = self.api.client.service.GetModelList(
+            headerMessage=self.api.header,
+            modelFilter=category
+        )
+        return helpers.serialize_object(response, dict)
 
     def get_all_model_list(self):
-        pass
+        """
+        Model categories opened on marketplace.
+        :return: models and mandatory model properties
+        :rtype: dict
+        """
+        response = self.api.client.service.GetAllModelList(
+            headerMessage=self.api.header,
+        )
+        return helpers.serialize_object(response, dict)
 
     def get_brand_list(self):
         pass
@@ -240,7 +302,9 @@ class Products(object):
         To ask for the creation of products.
 
         :param products_dict: products as you can see on tests/samples/products/products_to_submit.json
+        :type products_dict: dict
         :param url: url to upload offers package
+        :type url: str
         :return: the id of package or -1
         :rtype: int
         """
@@ -257,7 +321,7 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_product_package_submission_result(self):
+    def get_product_package_submission_result(self, filer):
         pass
 
     def get_product_package_product_matching_file_data(self):
@@ -373,7 +437,7 @@ class Connection(object):
         else:
             domain = 'cdiscount.com'
 
-        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc'.format(domain)
+        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
         self.auth_url = ('https://sts.{0}/users/httpIssue.svc/'
                          '?realm=https://wsvc.{0}/MarketplaceAPIService.svc'.format(domain))
 
@@ -381,10 +445,10 @@ class Connection(object):
         self.password = password
         self.client = Client(self.wsdl)
         self.token = self.get_token()
-
         self.header = {
             'Context': {
-                'SiteID': 100
+                'SiteID': 100,
+                'CatalogID': 1
             },
             'Localization': {
                 'Country': 'Fr',
