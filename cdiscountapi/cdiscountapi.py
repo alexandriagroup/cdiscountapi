@@ -373,7 +373,7 @@ class Connection(object):
         else:
             domain = 'cdiscount.com'
 
-        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc'.format(domain)
+        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
         self.auth_url = ('https://sts.{0}/users/httpIssue.svc/'
                          '?realm=https://wsvc.{0}/MarketplaceAPIService.svc'.format(domain))
 
