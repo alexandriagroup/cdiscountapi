@@ -3,7 +3,6 @@
 import re
 import pytest
 import vcr
-from parse import search
 
 
 def read_fixture(filename):

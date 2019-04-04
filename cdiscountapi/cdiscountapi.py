@@ -255,7 +255,6 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-<<<<<<< Updated upstream
     def get_product_list(self, category):
         """
         Search products in the reference frame
