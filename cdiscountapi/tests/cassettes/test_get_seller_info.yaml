@@ -165,7 +165,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:11 GMT
+      - Thu, 04 Apr 2019 15:17:53 GMT
       ntCoent-Length:
       - '14164'
     status:
@@ -568,14 +568,12 @@ interactions:
         wsaw:Action="http://www.cdiscount.com/IMarketplaceApiServiceRest/GetOfferProductListPaginatedRestResponse"
         message="tns:IMarketplaceApiServiceRest_GetOfferProductListPaginatedRest_OutputMessage"/></wsdl:operation></wsdl:portType></wsdl:definitions>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
       Cteonnt-Length:
       - '37262'
       Date:
-      - Fri, 29 Mar 2019 10:43:12 GMT
+      - Thu, 04 Apr 2019 15:17:54 GMT
     status:
       code: 200
       message: OK
@@ -2020,12 +2018,14 @@ interactions:
         minOccurs="0" name="SupplyMode" type="q86:SupplyModeType" xmlns:q86="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Offer.Enum"/></xs:sequence></xs:complexType><xs:element
         name="OfferProduct" nillable="true" type="tns:OfferProduct"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Fri, 29 Mar 2019 10:43:13 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '141083'
+      Date:
+      - Thu, 04 Apr 2019 15:17:54 GMT
     status:
       code: 200
       message: OK
@@ -2371,14 +2371,12 @@ interactions:
         type="xs:boolean"/></xs:sequence></xs:complexType><xs:element name="ServiceMessage"
         nillable="true" type="tns:ServiceMessage"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
       Cteonnt-Length:
       - '48866'
       Date:
-      - Fri, 29 Mar 2019 10:43:13 GMT
+      - Thu, 04 Apr 2019 15:17:54 GMT
     status:
       code: 200
       message: OK
@@ -2413,7 +2411,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:12 GMT
+      - Thu, 04 Apr 2019 15:17:54 GMT
     status:
       code: 200
       message: OK
@@ -2461,7 +2459,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:12 GMT
+      - Thu, 04 Apr 2019 15:17:54 GMT
       ntCoent-Length:
       - '2273'
     status:
@@ -2507,7 +2505,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:13 GMT
+      - Thu, 04 Apr 2019 15:17:54 GMT
       ntCoent-Length:
       - '2258'
     status:
@@ -2564,7 +2562,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:12 GMT
+      - Thu, 04 Apr 2019 15:17:55 GMT
       ntCoent-Length:
       - '3109'
     status:
@@ -2608,14 +2606,12 @@ interactions:
         minOccurs="0" name="Size" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
         name="ProductByIdentifier" nillable="true" type="tns:ProductByIdentifier"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2214'
       Date:
-      - Fri, 29 Mar 2019 10:43:13 GMT
+      - Thu, 04 Apr 2019 15:17:54 GMT
+      ntCoent-Length:
+      - '2214'
     status:
       code: 200
       message: OK
@@ -2648,10 +2644,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '1271'
       Date:
-      - Fri, 29 Mar 2019 10:43:13 GMT
+      - Thu, 04 Apr 2019 15:17:54 GMT
+      ntCoent-Length:
+      - '1271'
     status:
       code: 200
       message: OK
@@ -2713,14 +2709,12 @@ interactions:
         minOccurs="0" name="Status" type="q1:ExternalOrderStatus"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="OrderStatusMessage" nillable="true" type="tns:OrderStatusMessage"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
       Cteonnt-Length:
       - '3940'
       Date:
-      - Fri, 29 Mar 2019 10:43:13 GMT
+      - Thu, 04 Apr 2019 15:17:55 GMT
     status:
       code: 200
       message: OK
@@ -2747,12 +2741,14 @@ interactions:
         mixed="false"><xs:extension base="q1:ServiceBaseAPIMessage" xmlns:q1="http://www.cdiscount.com"><xs:sequence/></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="OrderIntegrationMessage" nillable="true" type="tns:OrderIntegrationMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '811'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:14 GMT
+      - Thu, 04 Apr 2019 15:17:55 GMT
     status:
       code: 200
       message: OK
@@ -2796,7 +2792,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:14 GMT
+      - Thu, 04 Apr 2019 15:17:55 GMT
       ntCoent-Length:
       - '2159'
     status:
@@ -2829,7 +2825,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 29 Mar 2019 10:43:13 GMT
+      - Thu, 04 Apr 2019 15:17:55 GMT
     status:
       code: 200
       message: OK
@@ -2840,8 +2836,6 @@ interactions:
       - '*/*'
       Accept-Encoding:
       - gzip, deflate
-      Authorization:
-      - Basic cHJlc3Rpdm8yLWFwaTpGY2NiNEtSLSZzaVAqYQ==
       Connection:
       - keep-alive
       User-Agent:
@@ -2850,22 +2844,16 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
-        VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/Ih43bV0s
-        L9J3i3LZfPbRvG1Xj+7ebabzfJE140UxraumOm/H02pxd29n597d3Z27r/O6yMriB1lbVMu7Hx3t
-        Pdx/sLP/4MH92YMH+9ns3iSfTrOdg08/3cvvTe7tZI/vSidH/w+j6DY/bQAAAA==
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">31ebc2d1d2734f1697df42a5b65c477c</string>
     headers:
-      Content-Encoding:
-      - gzip
-      Content-Length:
-      - '217'
       Content-Type:
       - text/plain
       Date:
-      - Fri, 29 Mar 2019 10:43:14 GMT
+      - Thu, 04 Apr 2019 15:17:56 GMT
       Vary:
       - Accept-Encoding
+      content-length:
+      - '109'
     status:
       code: 200
       message: OK
@@ -2873,13 +2861,13 @@ interactions:
     body: '<?xml version=''1.0'' encoding=''utf-8''?>
 
       <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
-      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetSellerInformation</wsa:Action><wsa:MessageID>urn:uuid:2115dc07-fd3a-417f-97e2-eab1a96668b9</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetSellerInformation
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetSellerInformation</wsa:Action><wsa:MessageID>urn:uuid:7faf93ee-7e39-4cc5-b98b-f946c28dc4a4</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetSellerInformation
       xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
       xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
       xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>294704775d774ad3becca08662e3b30a</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>31ebc2d1d2734f1697df42a5b65c477c</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
       xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage></ns0:GetSellerInformation></soap-env:Body></soap-env:Envelope>'
     headers:
       Accept:
@@ -2900,34 +2888,25 @@ interactions:
     uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
-        VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/Ih43j06X
-        l3lZrfL03aJcNo+azz6at+3q0d27zXSeL7JmTJ83VbYaV/XFXfxyN9c37n50RO8/qWbXR48/z9vX
-        eVnm9dnyvKoXWVtUy1d5s6qWjUK2cK+ursbTWdFMq/WyHU+rBYEZeH1dtvLyoyJ4/eoeY7O3s7N7
-        9/f+4vlrxnS7WDZttpzmBO+0rqv6i7xpsotu92ZYs6zNptWyrbNpa6Dt3915cPfE4vaszhb5VVW/
-        HZ9UdU7/LBbrZTFl7MYKvfno7tHjL1d5zZ++Xk+n9PnPdpdHbb3OH9/tdqvjfl40LSElBH1eXRTL
-        o1WdN21xWe1tZ6vi8V3/q8dvqrf58mx2tPdw/8HO/oMH92cPHuxns3uTfDrNdg4+/XQvvze5t5M9
-        vmtaPn6al8VlXl9/Uc1y6tX/05vAo8cn9MHRm1e/1+O7/NvjFzS4I2K4qkhfr4tLwoQ/eXx3EMLg
-        Fwzw1ennAehXObHTIlvO/tG/+mbQwTc0ii/Pz/P6ZVWVoJ/3J5BopnWx4tfsVOF99/FjIsvu47v0
-        L02Le9P9LkCF8DRPi6wojwiTeVHO8vEPikm1rrPfM5tMt6fE9Gua+vP68V1p9visOb6kX7JJmR8d
-        T2kec4FD/XnfPJb5tFP9+K588PiLalKU+Yv1YkJd73z64P4+zerOvcd3gy8ev5xXS/OH38r/XAdw
-        PJtRL0Qz/WX3aG//YXp8mS/Xefo8m2bg0yVxqP3etNxLi0fLovzsI3AwROd4ldXtIl+20kP36ydr
-        IlCxvOh+flK010fPr6slzT9+pQ8uixK/vSBs8aH+SYyyWGXLa3BDDwjmsb4+evaKXtDf5cPrbtNn
-        Rd20MRhnpHTqNU0Kabrud8+z+Dsvy2yax754lZfZ9dms+/Hrts7ztvvpTxUrZv1PH+5gmsyfRrqV
-        4PT2vFqhs6OX9Dc4g1qYj/jLr+qyC/t1Uec6I0cPHt7bfbjz8NODHVK3n9LL3neEWtYqU9IvM/qW
-        P6CfjAT9Mqzah79ks0FfG+tCv5DWYKNz9P8AxI5U9rMGAAA=
+      string: "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><GetSellerInformationResponse
+        xmlns=\"http://www.cdiscount.com\"><GetSellerInformationResult xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ErrorMessage
+        xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\"/><OperationSuccess
+        xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId>TOKEN_ID</TokenId><DeliveryModes><DeliveryModeInformation><Code>TRK</Code><Name>Envoi
+        Suivi</Name></DeliveryModeInformation><DeliveryModeInformation><Code>REG</Code><Name>Recommand\xE9</Name></DeliveryModeInformation></DeliveryModes><OfferPoolList><OfferPool><Description>Cdiscount</Description><Id>1</Id></OfferPool></OfferPoolList><Seller><Email>EMAIL</Email><IsAvailable>ActiveSeller</IsAvailable><Login>LOGIN</Login><MobileNumber>MOBILE_NUMBER</MobileNumber><PhoneNumber>PHONE_NUMBER</PhoneNumber><SellerAddress><Address1>ADDRESS1</Address1><Address2
+        i:nil=\"true\"/><ApartmentNumber i:nil=\"true\"/><Building i:nil=\"true\"/><City>Lyon</City><Civility>None</Civility><CompanyName
+        i:nil=\"true\"/><Country>FR</Country><County i:nil=\"true\"/><FirstName i:nil=\"true\"/><Instructions
+        i:nil=\"true\"/><LastName i:nil=\"true\"/><PlaceName i:nil=\"true\"/><RelayId
+        i:nil=\"true\"/><Street i:nil=\"true\"/><ZipCode>ZIP_CODE</ZipCode></SellerAddress><ShopName>SHOP_NAME</ShopName><ShopUrl
+        i:nil=\"true\"/><SiretNumber>SIRET_NUMBER</SiretNumber><State>Activated</State></Seller></GetSellerInformationResult></GetSellerInformationResponse></s:Body></s:Envelope>"
     headers:
-      Content-Encoding:
-      - gzip
-      Content-Length:
-      - '890'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Fri, 29 Mar 2019 10:43:14 GMT
+      - Thu, 04 Apr 2019 15:17:55 GMT
       Vary:
       - Accept-Encoding
+      content-length:
+      - '1715'
     status:
       code: 200
       message: OK

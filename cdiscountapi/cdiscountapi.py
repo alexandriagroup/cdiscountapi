@@ -255,6 +255,7 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
+<<<<<<< Updated upstream
     def get_product_list(self, category):
         """
         Search products in the reference frame
@@ -336,8 +337,12 @@ class Orders(object):
     def __init__(self, api):
         self.api = api
 
-    def get_order_list(self):
-        pass
+    def get_order_list(self, filters=None):
+        response = self.api.client.service.GetOrderList(
+            headerMessage=self.api.header,
+            orderFilter=filters,
+        )
+        return helpers.serialize_object(response, dict)
 
     def get_global_configuration(self):
         pass
