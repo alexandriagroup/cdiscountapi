@@ -5,6 +5,7 @@
 import os
 import pytest
 from ..cdiscountapi import Connection
+from . import assert_response_succeeded
 
 
 @pytest.mark.vcr()
@@ -25,9 +26,7 @@ def test_get_model_list():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
     response = api.products.get_model_list()
-    assert response['ErrorList'] is None
-    assert response['ErrorMessage'] is None
-    assert response['OperationSuccess'] is True
+    assert_response_succeeded(response)
     assert 'ModelList' in response
 
 
@@ -59,6 +58,3 @@ def test_get_product_package_product_matching_file_data():
 @pytest.mark.vcr()
 def test_get_product_list_by_identifier():
     pass
-
-
-
