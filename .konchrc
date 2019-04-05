@@ -81,7 +81,6 @@ konch.config({
                           preprod=preprod),
         'get_tree': get_tree,
         'load_cassette': load_cassette,
-        'decode_response': decode_response,
         'create_request': create_request,
     },
     "shell": "ipython",
