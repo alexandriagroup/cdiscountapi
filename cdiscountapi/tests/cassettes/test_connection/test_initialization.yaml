@@ -162,12 +162,14 @@ interactions:
         name="MarketplaceAPIService"><wsdl:port name="BasicHttpBinding_IMarketplaceAPIService"
         binding="tns:BasicHttpBinding_IMarketplaceAPIService"><soap:address location="https://wsvc.cdiscount.com/MarketplaceAPIService.svc"/></wsdl:port></wsdl:service></wsdl:definitions>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
+      Cteonnt-Length:
+      - '14163'
       Date:
-      - Thu, 04 Apr 2019 15:17:51 GMT
-      ntCoent-Length:
-      - '14164'
+      - Fri, 05 Apr 2019 15:56:45 GMT
     status:
       code: 200
       message: OK
@@ -571,9 +573,9 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:52 GMT
+      - Fri, 05 Apr 2019 15:56:45 GMT
       ntCoent-Length:
-      - '37262'
+      - '37260'
     status:
       code: 200
       message: OK
@@ -2018,12 +2020,14 @@ interactions:
         minOccurs="0" name="SupplyMode" type="q86:SupplyModeType" xmlns:q86="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Offer.Enum"/></xs:sequence></xs:complexType><xs:element
         name="OfferProduct" nillable="true" type="tns:OfferProduct"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 04 Apr 2019 15:17:52 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '141083'
+      Date:
+      - Fri, 05 Apr 2019 15:56:45 GMT
     status:
       code: 200
       message: OK
@@ -2371,10 +2375,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 04 Apr 2019 15:17:52 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '48866'
+      Date:
+      - Fri, 05 Apr 2019 15:56:46 GMT
     status:
       code: 200
       message: OK
@@ -2404,12 +2408,14 @@ interactions:
         minOccurs="0" name="VerticalAccuracy" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="GeoCoordinate" nillable="true" type="tns:GeoCoordinate"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '882'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
+      - Fri, 05 Apr 2019 15:56:45 GMT
     status:
       code: 200
       message: OK
@@ -2457,7 +2463,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:52 GMT
+      - Fri, 05 Apr 2019 15:56:46 GMT
       ntCoent-Length:
       - '2273'
     status:
@@ -2503,7 +2509,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:52 GMT
+      - Fri, 05 Apr 2019 15:56:46 GMT
       ntCoent-Length:
       - '2258'
     status:
@@ -2564,7 +2570,7 @@ interactions:
       Cteonnt-Length:
       - '3109'
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
+      - Fri, 05 Apr 2019 15:56:46 GMT
     status:
       code: 200
       message: OK
@@ -2608,10 +2614,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2214'
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
+      - Fri, 05 Apr 2019 15:56:50 GMT
+      ntCoent-Length:
+      - '2214'
     status:
       code: 200
       message: OK
@@ -2642,12 +2648,14 @@ interactions:
         minOccurs="0" name="MailGuid" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="DiscussionMailGuidCreationResultMessage" nillable="true" type="tns:DiscussionMailGuidCreationResultMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
+      Cteonnt-Length:
+      - '1270'
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
-      ntCoent-Length:
-      - '1271'
+      - Fri, 05 Apr 2019 15:56:51 GMT
     status:
       code: 200
       message: OK
@@ -2712,9 +2720,9 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
+      - Fri, 05 Apr 2019 15:56:50 GMT
       ntCoent-Length:
-      - '3940'
+      - '3939'
     status:
       code: 200
       message: OK
@@ -2746,7 +2754,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
+      - Fri, 05 Apr 2019 15:56:51 GMT
     status:
       code: 200
       message: OK
@@ -2787,14 +2795,12 @@ interactions:
         name="Width" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="ProductActivationData" nillable="true" type="tns:ProductActivationData"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2159'
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
+      - Fri, 05 Apr 2019 15:56:51 GMT
+      ntCoent-Length:
+      - '2159'
     status:
       code: 200
       message: OK
@@ -2825,7 +2831,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:53 GMT
+      - Fri, 05 Apr 2019 15:56:51 GMT
     status:
       code: 200
       message: OK
@@ -2844,22 +2850,16 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
-      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">a0b7ab9d7fda41d68fbc5e44c04cb500</string>
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">bfa257a8782d4bae979e7724759ebd71</string>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/plain
-      Cteonnt-Length:
-      - '109'
       Date:
-      - Thu, 04 Apr 2019 15:17:54 GMT
+      - Fri, 05 Apr 2019 15:56:51 GMT
+      Vary:
+      - Accept-Encoding
       content-length:
       - '109'
-      set-cookie:
-      - TBMCookie_6223335112164439712=710872001554391061FbbqR/c9Fw0TRgmvyGrVIz6+PTY=;
-        path=/
-      - ___utmvm=###########; path=/
     status:
       code: 200
       message: OK

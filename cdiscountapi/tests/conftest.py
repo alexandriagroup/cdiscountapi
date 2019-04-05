@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 import re
 import pytest
-import vcr
 
 
-def read_fixture(filename):
-    with open('cdiscountapi/tests/samples/{}'.format(filename),
-              'r', encoding='utf8') as f:
-        return f.read()
+VCR_CASSETTE_DIR = Path(__file__).parent.joinpath('cassettes')
 
 
 def scrub_strings():
@@ -51,9 +48,12 @@ def scrub_strings():
 
 
 @pytest.fixture(scope='module')
-def vcr_config():
+def vcr_config(request):
+    module_name = request.module.__name__.split('.')[-1]
+    cassette_library_dir = str(VCR_CASSETTE_DIR.joinpath(module_name))
     return {
         'filter_headers': [('Authorization', None)],
         'before_record_response': scrub_strings(),
-        'decode_compressed_response': True
+        'decode_compressed_response': True,
+        'cassette_library_dir': cassette_library_dir
     }

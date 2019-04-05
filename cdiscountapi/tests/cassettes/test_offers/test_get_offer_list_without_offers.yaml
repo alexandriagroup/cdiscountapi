@@ -165,7 +165,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:50 GMT
+      - Fri, 05 Apr 2019 15:57:01 GMT
       ntCoent-Length:
       - '14164'
     status:
@@ -568,14 +568,12 @@ interactions:
         wsaw:Action="http://www.cdiscount.com/IMarketplaceApiServiceRest/GetOfferProductListPaginatedRestResponse"
         message="tns:IMarketplaceApiServiceRest_GetOfferProductListPaginatedRest_OutputMessage"/></wsdl:operation></wsdl:portType></wsdl:definitions>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '37262'
       Date:
-      - Thu, 04 Apr 2019 15:17:49 GMT
+      - Fri, 05 Apr 2019 15:57:01 GMT
+      ntCoent-Length:
+      - '37262'
     status:
       code: 200
       message: OK
@@ -2023,7 +2021,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:50 GMT
+      - Fri, 05 Apr 2019 15:57:02 GMT
       ntCoent-Length:
       - '141083'
     status:
@@ -2374,7 +2372,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:50 GMT
+      - Fri, 05 Apr 2019 15:57:01 GMT
       ntCoent-Length:
       - '48866'
     status:
@@ -2406,16 +2404,12 @@ interactions:
         minOccurs="0" name="VerticalAccuracy" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="GeoCoordinate" nillable="true" type="tns:GeoCoordinate"/></xs:schema>
     headers:
+      Content-Length:
+      - '882'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:51 GMT
-      ntCoent-Length:
-      - '882'
-      set-cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        path=/
-      - ___utmvm=###########; path=/
+      - Fri, 05 Apr 2019 15:57:02 GMT
     status:
       code: 200
       message: OK
@@ -2428,9 +2422,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2466,7 +2457,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:50 GMT
+      - Fri, 05 Apr 2019 15:57:02 GMT
       ntCoent-Length:
       - '2273'
     status:
@@ -2481,9 +2472,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2514,10 +2502,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2258'
       Date:
-      - Thu, 04 Apr 2019 15:17:51 GMT
+      - Fri, 05 Apr 2019 15:57:02 GMT
+      ntCoent-Length:
+      - '2258'
     status:
       code: 200
       message: OK
@@ -2530,9 +2518,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2575,7 +2560,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:50 GMT
+      - Fri, 05 Apr 2019 15:57:02 GMT
       ntCoent-Length:
       - '3109'
     status:
@@ -2590,9 +2575,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2622,12 +2604,14 @@ interactions:
         minOccurs="0" name="Size" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
         name="ProductByIdentifier" nillable="true" type="tns:ProductByIdentifier"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 04 Apr 2019 15:17:50 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '2214'
+      Date:
+      - Fri, 05 Apr 2019 15:57:02 GMT
     status:
       code: 200
       message: OK
@@ -2640,9 +2624,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2661,14 +2642,12 @@ interactions:
         minOccurs="0" name="MailGuid" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="DiscussionMailGuidCreationResultMessage" nillable="true" type="tns:DiscussionMailGuidCreationResultMessage"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '1271'
       Date:
-      - Thu, 04 Apr 2019 15:17:51 GMT
+      - Fri, 05 Apr 2019 15:57:02 GMT
+      ntCoent-Length:
+      - '1271'
     status:
       code: 200
       message: OK
@@ -2681,9 +2660,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2736,7 +2712,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:51 GMT
+      - Fri, 05 Apr 2019 15:57:03 GMT
       ntCoent-Length:
       - '3940'
     status:
@@ -2751,9 +2727,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2773,7 +2746,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:51 GMT
+      - Fri, 05 Apr 2019 15:57:03 GMT
     status:
       code: 200
       message: OK
@@ -2786,9 +2759,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2819,10 +2789,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 04 Apr 2019 15:17:50 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '2159'
+      Date:
+      - Fri, 05 Apr 2019 15:57:03 GMT
     status:
       code: 200
       message: OK
@@ -2835,9 +2805,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2856,7 +2823,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 04 Apr 2019 15:17:52 GMT
+      - Fri, 05 Apr 2019 15:57:02 GMT
     status:
       code: 200
       message: OK
@@ -2875,16 +2842,63 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
-      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1d88efc045cb45bfbe3e22f60ba64b86</string>
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">b643586ce93a45c0b9d0f5d6bfb9dbc0</string>
     headers:
       Content-Type:
       - text/plain
       Date:
-      - Thu, 04 Apr 2019 15:17:52 GMT
+      - Fri, 05 Apr 2019 15:57:04 GMT
       Vary:
       - Accept-Encoding
       content-length:
       - '109'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferList</wsa:Action><wsa:MessageID>urn:uuid:e2e98e54-22ff-4a77-ab17-8275c9a0ab43</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>b643586ce93a45c0b9d0f5d6bfb9dbc0</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage></ns0:GetOfferList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1556'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetOfferList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetOfferListResponse
+        xmlns="http://www.cdiscount.com"><GetOfferListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">false</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId>TOKEN_ID</TokenId><OfferList/></GetOfferListResult></GetOfferListResponse></s:Body></s:Envelope>
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 05 Apr 2019 15:57:03 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '642'
     status:
       code: 200
       message: OK
