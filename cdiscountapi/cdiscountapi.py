@@ -15,9 +15,12 @@ from zeep import (
     Client,
     helpers,
 )
-from cdiscountapi.exceptions import CdiscountApiConnectionError
+from cdiscountapi.exceptions import (
+    CdiscountApiOrderError, CdiscountApiConnectionError
+)
 
 
+# HELPER FUNCTIONS
 def generate_package_url(content_dict, url):
     """
     Generate and upload package and return the url
@@ -124,6 +127,52 @@ def upload_and_get_url(package, url):
     return url + package
 
 
+def create_order_line_list(orders, order_number):
+    """
+    <OrderLineList>
+        <ValidateOrderLine>
+            <AcceptationState>AcceptedBySeller</AcceptationState>
+            <ProductCondition>New</ProductCondition>
+            <SellerProductId>CHI8003970895435</SellerProductId>
+        </ValidateOrderLine>
+        <ValidateOrderLine>
+            <AcceptationState>AcceptedBySeller</AcceptationState>
+            <ProductCondition>New</ProductCondition>
+            <SellerProductId>DOD3592668078117</SellerProductId>
+        </ValidateOrderLine>
+    </OrderLineList>
+    """
+    selected_orders = [order for order in orders if order['OrderNumber'] == order_number]
+    if selected_orders == 1:
+        selected_order = selected_orders[0]
+    else:
+        raise CdiscountApiOrderError(
+            "Can't find the order_number {0} in the orders {1}".format(
+                order_number, orders)
+        )
+
+
+def create_order_line(order, seller_product_id, acceptation_state):
+    """
+    <AcceptationState>AcceptedBySeller</AcceptationState>
+    <ProductCondition>New</ProductCondition>
+    <SellerProductId>CHI8003970895435</SellerProductId>
+    """
+    items = [item for item in order['OrderLineList'] if
+             item['SellerProductId'] == seller_product_id]
+
+    if len(items) == 1:
+        product_condition = items[0]['ProductCondition']
+    else:
+        raise ValueError(
+            "Can't find the seller_product_id {0} in the order {1}".format(
+                seller_product_id, order)
+        )
+    return {'AcceptationState': acceptation_state,
+            'ProductCondition': product_condition,
+            'SellerProductId': seller_product_id}
+
+
 class Seller(object):
     """
     Seller section lets sellers retrieve information about their seller account
@@ -164,7 +213,7 @@ class Offers(object):
     def __init__(self, api):
         self.api = api
 
-    def get_offer_list(self, filters=None):
+    def get_offer_list(self, filters={}):
         """
         To search offers.
         :param filters: list of filters
@@ -337,7 +386,57 @@ class Orders(object):
     def __init__(self, api):
         self.api = api
 
-    def get_order_list(self, filters=None):
+    def get_order_list(self, filters={}):
+        """
+        To search orders.
+
+        This operation makes it possible to seek orders according to the
+        following criteria:
+
+        - The order state:
+            - CancelledByCustomer
+            - WaitingForSellerAcceptation
+            - AcceptedBySeller
+            - PaymentInProgress
+            - WaitingForShipmentAcceptation
+            - Shipped
+            - RefusedBySeller
+            - AutomaticCancellation (ex: no answer from the seller)
+            - PaymentRefused
+            - ShipmentRefusedBySeller
+            - Waiting for Fianet validation "A valider Fianet" (None)
+            - Validated Fianet
+            - RefusedNoShipment
+            - AvailableOnStore
+            - NonPickedUpByCustomer
+            - PickedUp
+            - Filled
+
+        - Recovery or not of the products of the order
+
+        - Filter on date:
+            - BeginCreationDate
+            - EndCreationDate
+            - BeginModificationDate
+            - EndModificationDate
+
+        - Order number list Liste (OrderReferenceList) Warning, this filter
+        cannot be combined with others. If there is an order list, the other
+        filters are unaccounted.
+
+        - Filter on website thanks to the corporationCode.
+
+        - Filter by Order Type:
+            - MKPFBC Orders
+            - EXTFBC Orders
+            - FBC Orders(Isfulfillment)
+
+        - PartnerOrderRef filter from 1 to N external order (if it's a multiple
+        search, separate PartnerOrderRefs by semicolon).
+        PartnerOrderRef is the seller's reference
+
+        - Recovery or not of the parcels of the order
+        """
         response = self.api.client.service.GetOrderList(
             headerMessage=self.api.header,
             orderFilter=filters,
@@ -345,10 +444,23 @@ class Orders(object):
         return helpers.serialize_object(response, dict)
 
     def get_global_configuration(self):
-        pass
+        """
+        Get cdiscount settings. This method allows to get a list of several
+        settings:
+        - Carrier list
+        """
+        response = self.api.client.service.GetGlobalConfiguration(
+            headerMessage=self.api.header,
+        )
+        return helpers.serialize_object(response, dict)
 
-    def validate_order_list(self):
-        pass
+    # TODO Use for accept_orders
+    def validate_order_list(self, data):
+        response = self.api.client.service.ValidateOrderList(
+            headerMessage=self.api.header,
+            validateOrderListMessage=data
+        )
+        return helpers.serialize_object(response, dict)
 
     def create_refund_voucher(self):
         pass
@@ -359,7 +471,7 @@ class Fulfilment(object):
     def __init__(self, api):
         self.api = api
 
-    def submit_fulfilmen_supply_order(self):
+    def submit_fulfilment_supply_order(self):
         pass
 
     def get_fulfilment_supply_order_report_list(self):

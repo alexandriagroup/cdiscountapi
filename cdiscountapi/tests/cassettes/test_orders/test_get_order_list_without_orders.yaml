@@ -164,10 +164,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '14164'
       Date:
-      - Fri, 05 Apr 2019 15:57:04 GMT
+      - Fri, 05 Apr 2019 16:12:08 GMT
+      ntCoent-Length:
+      - '14163'
     status:
       code: 200
       message: OK
@@ -575,7 +575,7 @@ interactions:
       Cteonnt-Length:
       - '37262'
       Date:
-      - Fri, 05 Apr 2019 15:57:04 GMT
+      - Fri, 05 Apr 2019 16:12:09 GMT
     status:
       code: 200
       message: OK
@@ -2023,7 +2023,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:04 GMT
+      - Fri, 05 Apr 2019 16:12:09 GMT
       ntCoent-Length:
       - '141083'
     status:
@@ -2371,12 +2371,14 @@ interactions:
         type="xs:boolean"/></xs:sequence></xs:complexType><xs:element name="ServiceMessage"
         nillable="true" type="tns:ServiceMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Fri, 05 Apr 2019 15:57:04 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '48866'
+      Date:
+      - Fri, 05 Apr 2019 16:12:09 GMT
     status:
       code: 200
       message: OK
@@ -2411,7 +2413,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:04 GMT
+      - Fri, 05 Apr 2019 16:12:09 GMT
     status:
       code: 200
       message: OK
@@ -2458,10 +2460,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2273'
       Date:
-      - Fri, 05 Apr 2019 15:57:04 GMT
+      - Fri, 05 Apr 2019 16:12:09 GMT
+      ntCoent-Length:
+      - '2273'
     status:
       code: 200
       message: OK
@@ -2502,14 +2504,12 @@ interactions:
         name="Key" type="xs:int"/><xs:element name="Value" nillable="true" type="xs:string"/></xs:sequence></xs:complexType></xs:element></xs:sequence></xs:complexType><xs:element
         name="ArrayOfKeyValueOfintstring" nillable="true" type="tns:ArrayOfKeyValueOfintstring"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2258'
       Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
+      - Fri, 05 Apr 2019 16:12:10 GMT
+      ntCoent-Length:
+      - '2258'
     status:
       code: 200
       message: OK
@@ -2564,7 +2564,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
+      - Fri, 05 Apr 2019 16:12:09 GMT
       ntCoent-Length:
       - '3109'
     status:
@@ -2611,7 +2611,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:04 GMT
+      - Fri, 05 Apr 2019 16:12:10 GMT
       ntCoent-Length:
       - '2214'
     status:
@@ -2647,7 +2647,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
+      - Fri, 05 Apr 2019 16:12:10 GMT
       ntCoent-Length:
       - '1271'
     status:
@@ -2711,12 +2711,14 @@ interactions:
         minOccurs="0" name="Status" type="q1:ExternalOrderStatus"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="OrderStatusMessage" nillable="true" type="tns:OrderStatusMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '3940'
+      Date:
+      - Fri, 05 Apr 2019 16:12:10 GMT
     status:
       code: 200
       message: OK
@@ -2748,7 +2750,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
+      - Fri, 05 Apr 2019 16:12:10 GMT
     status:
       code: 200
       message: OK
@@ -2792,7 +2794,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
+      - Fri, 05 Apr 2019 16:12:10 GMT
       ntCoent-Length:
       - '2159'
     status:
@@ -2827,7 +2829,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
+      - Fri, 05 Apr 2019 16:12:10 GMT
     status:
       code: 200
       message: OK
@@ -2846,16 +2848,14 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
-      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">864496ba5b7c4405b3bb53e3816bc82c</string>
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0afb84882a4e4d0c90c2404bf81cea89</string>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/plain
-      Cteonnt-Length:
-      - '109'
       Date:
-      - Fri, 05 Apr 2019 15:57:05 GMT
+      - Fri, 05 Apr 2019 16:12:10 GMT
+      Vary:
+      - Accept-Encoding
       content-length:
       - '109'
     status:
@@ -2865,13 +2865,13 @@ interactions:
     body: '<?xml version=''1.0'' encoding=''utf-8''?>
 
       <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
-      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOrderList</wsa:Action><wsa:MessageID>urn:uuid:a94d5d20-2b2d-488c-9c22-5e89957404e5</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOrderList
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOrderList</wsa:Action><wsa:MessageID>urn:uuid:e1edcc25-b306-4c46-b3bd-50d56ba3811e</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOrderList
       xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
       xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
       xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>864496ba5b7c4405b3bb53e3816bc82c</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>0afb84882a4e4d0c90c2404bf81cea89</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
       xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage></ns0:GetOrderList></soap-env:Body></soap-env:Envelope>'
     headers:
       Accept:
@@ -2900,12 +2900,10 @@ interactions:
         reference not set to an instance of an object.</Message></Error></ErrorList><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId>TOKEN_ID</TokenId><OrderList
         i:nil="true"/></GetOrderListResult></GetOrderListResponse></s:Body></s:Envelope>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Fri, 05 Apr 2019 15:57:06 GMT
+      - Fri, 05 Apr 2019 16:12:11 GMT
       Vary:
       - Accept-Encoding
       content-length:
