@@ -15,6 +15,7 @@ from zeep import (
     Client,
     helpers,
 )
+from cdiscountapi.exceptions import CdiscountApiConnectionError
 
 
 def generate_package_url(content_dict, url):
@@ -448,6 +449,12 @@ class Connection(object):
         self.login = login
         self.password = password
         self.client = Client(self.wsdl)
+
+        if self.login is None or self.password is None:
+            raise CdiscountApiConnectionError(
+                'Please provide valid login and password'
+            )
+
         self.token = self.get_token()
         self.header = {
             'Context': {
