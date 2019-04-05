@@ -3,18 +3,33 @@
 # Copyright © 2019 Alexandria
 
 import os
+import json
 import pytest
 from ..cdiscountapi import Connection
 
 
 @pytest.mark.vcr()
 def test_get_allowed_category_tree():
-    pass
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.products.get_allowed_category_tree()
+    assert response['ErrorList'] is None
+    assert response['ErrorMessage'] is None
+    assert response['OperationSuccess'] is True
 
 
 @pytest.mark.vcr()
 def test_get_all_allowed_category_tree():
-    pass
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.products.get_all_allowed_category_tree()
+    assert response['ErrorList'] is None
+    assert response['ErrorMessage'] is None
+    assert response['OperationSuccess'] is True
+    assert 'ModelList' in response
+    with open('cdiscountapi/tests/samples/products/get_all_allowed_categories.json') as f:
+        expected = json.load(f)
+    assert response == expected
 
 
 @pytest.mark.vcr()

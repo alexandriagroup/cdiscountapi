@@ -244,14 +244,16 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_all_allowed_category_tree(self):
+    @staticmethod
+    def get_all_allowed_category_tree():
         """
         Know the categories of product which are accessible to them.
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
         """
-        response = self.api.client.service.GetAllAllowedCategoryTree(
-            headerMessage=self.api.header
+        api_all = Connection('AllData', 'pa$$word')
+        response = api_all.client.service.GetAllAllowedCategoryTree(
+            headerMessage=api_all.header
         )
         return helpers.serialize_object(response, dict)
 
