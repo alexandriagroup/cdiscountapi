@@ -8,6 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 import konch
 import yaml
+from lxml import etree
 
 
 @lru_cache(maxsize=128)
@@ -51,12 +52,19 @@ def load_cassette(cassette_name):
     return yaml.load(fname.read_text())
 
 
-def create_request(api, operation, args):
+def create_request(api, operation, **kwargs):
     """
     Example
-    >>> element = create_request(api, 'GetProductList', {'CategoryCode': '42'})
+    >>> element = create_request(api, 'GetProductList',
+                                 productFilter={'CategoryCode': '42'})
     """
-    return api.client.create_message(api.client.service, operation, args)
+    return api.client.create_message(api.client.service, operation,
+                                     headerMessage=api.header, **kwargs)
+
+
+def show_request(api, operation, **kwargs):
+    request = create_request(api, operation, **kwargs)
+    print(etree.tostring(request, pretty_print=True).decode('utf8'))
 
 
 cdiscount_api_preprod = os.getenv('CDISCOUNT_API_PREPROD')
@@ -82,6 +90,7 @@ konch.config({
         'get_tree': get_tree,
         'load_cassette': load_cassette,
         'create_request': create_request,
+        'show_request': show_request,
     },
     "shell": "ipython",
     "ipy_autoreload": True,
