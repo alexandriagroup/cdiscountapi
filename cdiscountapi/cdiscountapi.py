@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright © 2019 Alexandria
+
 from shutil import (
     copytree,
     make_archive,
@@ -15,12 +16,14 @@ from zeep import (
     Client,
     helpers,
 )
+
 from cdiscountapi.exceptions import (
-    CdiscountApiOrderError, CdiscountApiConnectionError
+    CdiscountApiConnectionError,
+    CdiscountApiOrderError,
 )
 
 
-# HELPER FUNCTIONS
+# HELPER FUNCTIONS.
 def generate_package_url(content_dict, url):
     """
     Generate and upload package and return the url
@@ -88,7 +91,7 @@ def generate_package(package_type, tempdir, offer_dict):
 
 def generate_product_package(tempdir, product_dict):
     """
-    Generate a zip product package as cidscount wanted.
+    Generate a zip product package as cdiscount wanted.
     :param tempdir: directory to create temporary files
     :type tempdir: str
     :param product_dict: products as you can see on tests/samples/products/products_to_submit.json
@@ -101,7 +104,7 @@ def generate_product_package(tempdir, product_dict):
 
 def generate_offer_package(tempdir, offer_dict):
     """
-    Generate a zip offers package as cidscount wanted.
+    Generate a zip offers package as cdiscount wanted.
     :param tempdir:  directory to create temporary files
     :type tempdir: str
     :param offer_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
@@ -183,7 +186,7 @@ class Seller(object):
 
     def get_seller_info(self):
         """
-        This operation allows to obtain the information of the authenticated seller.
+        Seller Information.
         :return: Information of the authenticated seller.
         :rtype: dict
         """
@@ -194,8 +197,7 @@ class Seller(object):
 
     def get_seller_indicators(self):
         """
-        This operation makes it possible to obtain performance indicators of
-        the specified seller.
+        Seller performance indicators.
         :return: a dict with the data of the user
         :rtype: dict
         """
@@ -216,8 +218,8 @@ class Offers(object):
     def get_offer_list(self, filters={}):
         """
         To search offers.
-        :param filters: list of filters
-        :type filters: str
+        :param filters: filters (ex: OfferPoolId, SKU)
+        :type filters: dict
         :return: offers answering the search criterion
         :rtype: dict
         """
@@ -227,10 +229,11 @@ class Offers(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_list_paginated(self, filters):
+    def get_offer_list_paginated(self, filters={}):
         """
         Recovery of the offers page by page.
         :param filters: list of filters
+        :type filters: dict
         :return: offers answering the search criterion
         :rtype: dict
         """
@@ -264,7 +267,7 @@ class Offers(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_package_submission_result(self, packages):
+    def get_offer_package_submission_result(self, packages={}):
         """
         This operation makes it possible to know the progress report of the offers import.
 
@@ -285,7 +288,7 @@ class Products(object):
 
     def get_allowed_category_tree(self):
         """
-        Know the categories of product which are accessible to them.
+        Categories which are accessible to the seller.
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
         """
@@ -296,26 +299,28 @@ class Products(object):
 
     def get_all_allowed_category_tree(self):
         """
-        Know the categories of product which are accessible to them.
+        All categories.
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
         """
-        response = self.api.client.service.GetAllAllowedCategoryTree(
-            headerMessage=self.api.header
+        api_all = Connection('AllData', 'pa$$word')
+        response = api_all.client.service.GetAllAllowedCategoryTree(
+            headerMessage=api_all.header
         )
         return helpers.serialize_object(response, dict)
 
-    def get_product_list(self, category):
+    # TODO find why it doesn't work.
+    def get_product_list(self, filters={}):
         """
         Search products in the reference frame
-        :param category: category code to filter results
-        :type category: str
+        :param filters: (ex:category code)
+        :type filters: dict
         :return: products corresponding to research
         :rtype: dict
         """
         response = self.api.client.service.GetProductList(
             headerMessage=self.api.header,
-            productFilter={'CategoryCode': category}
+            productFilter=filters,
         )
         return helpers.serialize_object(response, dict)
 
@@ -333,19 +338,30 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
+    # TODO find a way to call it.
     def get_all_model_list(self):
         """
         Model categories opened on marketplace.
         :return: models and mandatory model properties
         :rtype: dict
         """
-        response = self.api.client.service.GetAllModelList(
+        # api_all = Connection('AllData', 'pa$$word')
+        # response = api_all.client.service.GetAllModelList(
+        #     headerMessage=api_all.header,
+        # )
+        # return helpers.serialize_object(response, dict)
+        pass
+
+    def get_brand_list(self):
+        """
+        Complete list of the brands
+        :return: all brands
+        :rtype: dict
+        """
+        response = self.api.client.service.GetBrandList(
             headerMessage=self.api.header,
         )
         return helpers.serialize_object(response, dict)
-
-    def get_brand_list(self):
-        pass
 
     def submit_product_package(self, products_dict, url):
         """
@@ -371,14 +387,69 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_product_package_submission_result(self, filer):
-        pass
+    # TODO find why it doesn't work.
+    def get_product_package_submission_result(self, filters={}):
+        """
+        Progress status of a product import.
+        :param filters: (ex: package id)
+        :type filters: dict
+        :return: partial or complete report of package integration
+        :rtype: dict
+        """
+        response = self.api.client.service.GetProductPackageSubmissionResult(
+            headerMessage=self.api.header,
+            productPackageFilter=filters
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_product_package_product_matching_file_data(self):
-        pass
+    def get_product_package_product_matching_file_data(self, package_id=None):
+        """
+        Information of the created products.
+        :param package_id: package id to filter results
+        :type package_id: str
+        :return: information of the created products
+        :rtype: dict
+        """
+        if package_id:
+            response = self.api.client.service.GetProductPackageProductMatchingFileData(
+                headerMessage=self.api.header,
+                productPackageFilter=package_id
+            )
+            return helpers.serialize_object(response, dict)
+        else:
+            return {'ErrorMessage': None,
+                    'OperationSuccess': True,
+                    'ErrorList': None,
+                    'SellerLogin': self.api.login,
+                    'TokenId': self.api.token,
+                    'PackageId': 0,
+                    'ProductMatchingList': None}
 
-    def get_product_list_by_identifier(self):
-        pass
+    def get_product_list_by_identifier(self, ean_list=[]):
+        """
+        Obtain details for a list of products
+        :param ean_list: list of EAN to filter
+        :type ean_list: list
+        :return: complete list of products
+        :rtype: dict
+        """
+        if ean_list:
+            response = self.api.client.service.GetProductPackageProductMatchingFileData(
+                headerMessage=self.api.header,
+                IdentifierRequest=ean_list
+            )
+            return helpers.serialize_object(response, dict)
+        else:
+            return {'ErrorMessage': None,
+                    'OperationSuccess': True,
+                    'ErrorList': None,
+                    'SellerLogin': self.api.login,
+                    'TokenId': self.api.token,
+                    'NumberOfErrors': 0,
+                    'ProductListByIdentifier': {
+                        'ProductByIdentifier': []
+                    }
+            }
 
 
 class Orders(object):
