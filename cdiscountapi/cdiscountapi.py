@@ -23,7 +23,7 @@ from cdiscountapi.exceptions import (
 )
 
 
-# HELPER FUNCTIONS
+# HELPER FUNCTIONS.
 def generate_package_url(content_dict, url):
     """
     Generate and upload package and return the url
@@ -218,8 +218,8 @@ class Offers(object):
     def get_offer_list(self, filters={}):
         """
         To search offers.
-        :param filters: list of filters
-        :type filters: str
+        :param filters: filters (ex: OfferPoolId, SKU)
+        :type filters: dict
         :return: offers answering the search criterion
         :rtype: dict
         """
@@ -229,10 +229,11 @@ class Offers(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_list_paginated(self, filters):
+    def get_offer_list_paginated(self, filters={}):
         """
         Recovery of the offers page by page.
         :param filters: list of filters
+        :type filters: dict
         :return: offers answering the search criterion
         :rtype: dict
         """
@@ -266,7 +267,7 @@ class Offers(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_package_submission_result(self, packages):
+    def get_offer_package_submission_result(self, packages={}):
         """
         This operation makes it possible to know the progress report of the offers import.
 
@@ -308,29 +309,20 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_product_list(self, category=None):
+    # TODO find why it doesn't work.
+    def get_product_list(self, filters={}):
         """
         Search products in the reference frame
-        :param category: category code to filter results
-        :type category: str
+        :param filters: (ex:category code)
+        :type filters: dict
         :return: products corresponding to research
         :rtype: dict
         """
-        if category:
-            response = self.api.client.service.GetProductList(
-                headerMessage=self.api.header,
-                productFilter={'CategoryCode': category}
-            )
-            return helpers.serialize_object(response, dict)
-        else:
-            return {
-                'ErrorMessage': None,
-                'OperationSuccess': True,
-                'ErrorList': None,
-                'SellerLogin': self.api.login,
-                'TokenId': self.api.token,
-                'ProductList': {'Product': []}
-            }
+        response = self.api.client.service.GetProductList(
+            headerMessage=self.api.header,
+            productFilter=filters,
+        )
+        return helpers.serialize_object(response, dict)
 
     def get_model_list(self, category=None):
         """
@@ -354,8 +346,6 @@ class Products(object):
         :rtype: dict
         """
         # api_all = Connection('AllData', 'pa$$word')
-        # import pdb;
-        # pdb.set_trace()
         # response = api_all.client.service.GetAllModelList(
         #     headerMessage=api_all.header,
         # )
@@ -397,31 +387,20 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_product_package_submission_result(self, package_id=None):
+    # TODO find why it doesn't work.
+    def get_product_package_submission_result(self, filters={}):
         """
         Progress status of a product import.
-        :param package_id: package id to filter results
-        :type package_id: str
+        :param filters: (ex: package id)
+        :type filters: dict
         :return: partial or complete report of package integration
         :rtype: dict
         """
-        if package_id:
-            response = self.api.client.service.GetProductPackageSubmissionResult(
-                headerMessage=self.api.header,
-                productPackageFilter=package_id
-            )
-            return helpers.serialize_object(response, dict)
-        else:
-            return {'ErrorMessage': None,
-                    'OperationSuccess': True,
-                    'ErrorList': None,
-                    'SellerLogin': self.api.login,
-                    'TokenId': self.api.token,
-                    'NumberOfErrors': 0,
-                    'PackageId': 0,
-                    'PackageIntegrationStatus': None,
-                    'ProductLogList': {'ProductReportLog': []}
-            }
+        response = self.api.client.service.GetProductPackageSubmissionResult(
+            headerMessage=self.api.header,
+            productPackageFilter=filters
+        )
+        return helpers.serialize_object(response, dict)
 
     def get_product_package_product_matching_file_data(self, package_id=None):
         """
