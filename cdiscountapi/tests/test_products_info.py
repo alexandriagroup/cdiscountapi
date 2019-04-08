@@ -3,7 +3,6 @@
 # Copyright © 2019 Alexandria
 
 import os
-import json
 import pytest
 from ..cdiscountapi import Connection
 

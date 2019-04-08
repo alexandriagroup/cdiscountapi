@@ -49,7 +49,7 @@ def load_cassette(cassette_name):
     fname = Path("cdiscountapi/tests/cassettes").joinpath(cassette_name)
     if not fname.exists():
         raise Exception(f'{fname} does not exist.')
-    return yaml.load(fname.read_text())
+    return yam.load(fname.read_text())
 
 
 def create_request(api, operation, **kwargs):
