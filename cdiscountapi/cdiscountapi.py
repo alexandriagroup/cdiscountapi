@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright © 2019 Alexandria
+
 from shutil import (
     copytree,
     make_archive,
@@ -15,8 +16,10 @@ from zeep import (
     Client,
     helpers,
 )
+
 from cdiscountapi.exceptions import (
-    CdiscountApiOrderError, CdiscountApiConnectionError
+    CdiscountApiConnectionError,
+    CdiscountApiOrderError,
 )
 
 
@@ -343,17 +346,21 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
+    # TODO find a way to call it.
     def get_all_model_list(self):
         """
         Model categories opened on marketplace.
         :return: models and mandatory model properties
         :rtype: dict
         """
-        api_all = self.Connection('AllData', 'pa$$word')
-        response = api_all.client.service.GetAllModelList(
-            headerMessage=api_all.header,
-        )
-        return helpers.serialize_object(response, dict)
+        # api_all = Connection('AllData', 'pa$$word')
+        # import pdb;
+        # pdb.set_trace()
+        # response = api_all.client.service.GetAllModelList(
+        #     headerMessage=api_all.header,
+        # )
+        # return helpers.serialize_object(response, dict)
+        pass
 
     def get_brand_list(self):
         """
