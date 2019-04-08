@@ -16,6 +16,7 @@ def test_get_allowed_category_tree():
     assert response['ErrorList'] is None
     assert response['ErrorMessage'] is None
     assert response['OperationSuccess'] is True
+    assert 'CategoryTree' in response.keys()
 
 
 @pytest.mark.vcr()
@@ -26,34 +27,51 @@ def test_get_all_allowed_category_tree():
     assert response['ErrorList'] is None
     assert response['ErrorMessage'] is None
     assert response['OperationSuccess'] is True
-    assert 'ModelList' in response
-    with open('cdiscountapi/tests/samples/products/get_all_allowed_categories.json') as f:
-        expected = json.load(f)
-    assert response == expected
+    assert 'CategoryTree' in response.keys()
+
+
+@pytest.mark.vcr()
+def test_get_product_list():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.products.get_product_list()
+    assert response['ErrorList'] is None
+    assert response['ErrorMessage'] is None
+    assert response['OperationSuccess'] is True
+    assert 'ProductList' in response.keys()
 
 
 @pytest.mark.vcr()
 def test_get_model_list():
-    """
-    get_product_list should return the information about products
-    """
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
     response = api.products.get_model_list()
     assert response['ErrorList'] is None
     assert response['ErrorMessage'] is None
     assert response['OperationSuccess'] is True
-    assert 'ModelList' in response
+    assert 'ModelList' in response.keys()
 
 
-@pytest.mark.vcr()
-def test_get_all_model_list():
-    pass
+# @pytest.mark.vcr()
+# def test_get_all_model_list():
+#     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+#                      os.getenv('CDISCOUNT_API_PASSWORD'))
+#     response = api.products.get_model_list()
+#     assert response['ErrorList'] is None
+#     assert response['ErrorMessage'] is None
+#     assert response['OperationSuccess'] is True
+#     assert 'ModelList' in response.keys()
 
 
 @pytest.mark.vcr()
 def test_get_brand_list():
-    pass
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.products.get_brand_list()
+    assert response['ErrorList'] is None
+    assert response['ErrorMessage'] is None
+    assert response['OperationSuccess'] is True
+    assert 'BrandList' in response.keys()
 
 
 @pytest.mark.vcr()
@@ -63,17 +81,35 @@ def test_submit_product_package():
 
 @pytest.mark.vcr()
 def test_get_product_package_submission_result():
-    pass
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.products.get_product_package_submission_result()
+    assert response['ErrorList'] is None
+    assert response['ErrorMessage'] is None
+    assert response['OperationSuccess'] is True
+    assert 'PackageId' in response.keys()
 
 
 @pytest.mark.vcr()
 def test_get_product_package_product_matching_file_data():
-    pass
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.products.get_product_package_product_matching_file_data()
+    assert response['ErrorList'] is None
+    assert response['ErrorMessage'] is None
+    assert response['OperationSuccess'] is True
+    assert 'ProductMatchingList' in response.keys()
 
 
 @pytest.mark.vcr()
 def test_get_product_list_by_identifier():
-    pass
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.products.get_product_list_by_identifier()
+    assert response['ErrorList'] is None
+    assert response['ErrorMessage'] is None
+    assert response['OperationSuccess'] is True
+    assert 'ProductListByIdentifier' in response.keys()
 
 
 
