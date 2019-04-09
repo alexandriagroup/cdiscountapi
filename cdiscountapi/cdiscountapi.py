@@ -206,6 +206,10 @@ class Offers(object):
         :return: offers answering the search criterion
         :rtype: dict
         """
+        if 'PageNumber' not in filters.keys():
+            raise KeyError(
+                "Please provide PageNumber key as {'PageNumber': 1}"
+            )
         response = self.api.client.service.GetOfferListPaginated(
             headerMessage=self.api.header,
             offerFilter=filters,
@@ -243,9 +247,13 @@ class Offers(object):
         :return: Offer report logs
         :rtype: dict
         """
+        if 'PackageID' not in packages.keys():
+            raise KeyError(
+                "Please provide PackageID key as {'PackageID': 541}"
+            )
         response = self.api.client.service.GetOfferPackageSubmissionResult(
             headerMessage=self.api.header,
-            packageFilter=packages,
+            offerPackageFilter=packages,
         )
         return helpers.serialize_object(response, dict)
 
