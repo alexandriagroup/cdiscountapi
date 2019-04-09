@@ -166,7 +166,17 @@ interactions:
       - private
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      Date:
+      - Fri, 05 Apr 2019 14:22:42 GMT
+      ntCoent-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:51 GMT
+      ntCoent-Length:
+=======
       Cteonnt-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       - '14164'
       Date:
       - Fri, 05 Apr 2019 15:56:55 GMT
@@ -572,7 +582,17 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      Date:
+      - Fri, 05 Apr 2019 14:22:42 GMT
+      ntCoent-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:52 GMT
+      ntCoent-Length:
+=======
       Cteonnt-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       - '37262'
       Date:
       - Fri, 05 Apr 2019 15:56:56 GMT
@@ -2023,7 +2043,13 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:42 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:52 GMT
+=======
       - Fri, 05 Apr 2019 15:56:56 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       ntCoent-Length:
       - '141083'
     status:
@@ -2373,10 +2399,20 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      Cteonnt-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:52 GMT
+      ntCoent-Length:
+=======
       Date:
       - Fri, 05 Apr 2019 15:56:56 GMT
       ntCoent-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       - '48866'
+      Date:
+      - Fri, 05 Apr 2019 14:22:43 GMT
     status:
       code: 200
       message: OK
@@ -2413,7 +2449,13 @@ interactions:
       Cteonnt-Length:
       - '882'
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:42 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:53 GMT
+=======
       - Fri, 05 Apr 2019 15:56:56 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
     status:
       code: 200
       message: OK
@@ -2461,7 +2503,13 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:42 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:52 GMT
+=======
       - Fri, 05 Apr 2019 15:56:57 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       ntCoent-Length:
       - '2273'
     status:
@@ -2506,10 +2554,20 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      Cteonnt-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:52 GMT
+      ntCoent-Length:
+=======
       Date:
       - Fri, 05 Apr 2019 15:56:56 GMT
       ntCoent-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       - '2258'
+      Date:
+      - Fri, 05 Apr 2019 14:22:43 GMT
     status:
       code: 200
       message: OK
@@ -2563,10 +2621,16 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '3109'
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:43 GMT
+      ntCoent-Length:
+      - '3109'
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:53 GMT
+=======
       - Fri, 05 Apr 2019 15:56:57 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
     status:
       code: 200
       message: OK
@@ -2611,9 +2675,17 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:43 GMT
+      ntCoent-Length:
+      - '2214'
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:53 GMT
+=======
       - Fri, 05 Apr 2019 15:56:57 GMT
       ntCoent-Length:
       - '2214'
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
     status:
       code: 200
       message: OK
@@ -2644,12 +2716,24 @@ interactions:
         minOccurs="0" name="MailGuid" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="DiscussionMailGuidCreationResultMessage" nillable="true" type="tns:DiscussionMailGuidCreationResultMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      Cteonnt-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:53 GMT
+      ntCoent-Length:
+=======
       Date:
       - Fri, 05 Apr 2019 15:57:00 GMT
       ntCoent-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       - '1271'
+      Date:
+      - Fri, 05 Apr 2019 14:22:43 GMT
     status:
       code: 200
       message: OK
@@ -2715,7 +2799,17 @@ interactions:
       - private
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      Date:
+      - Fri, 05 Apr 2019 14:22:43 GMT
+      ntCoent-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:53 GMT
+      ntCoent-Length:
+=======
       Cteonnt-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       - '3940'
       Date:
       - Fri, 05 Apr 2019 15:57:00 GMT
@@ -2745,12 +2839,20 @@ interactions:
         mixed="false"><xs:extension base="q1:ServiceBaseAPIMessage" xmlns:q1="http://www.cdiscount.com"><xs:sequence/></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="OrderIntegrationMessage" nillable="true" type="tns:OrderIntegrationMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '811'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:43 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:53 GMT
+=======
       - Fri, 05 Apr 2019 15:57:01 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
     status:
       code: 200
       message: OK
@@ -2796,7 +2898,13 @@ interactions:
       Cteonnt-Length:
       - '2159'
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:44 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:53 GMT
+=======
       - Fri, 05 Apr 2019 15:57:01 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
     status:
       code: 200
       message: OK
@@ -2827,7 +2935,13 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:44 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:53 GMT
+=======
       - Fri, 05 Apr 2019 15:57:01 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
     status:
       code: 200
       message: OK
@@ -2846,7 +2960,13 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">23f134f360d844ceb865ff310f1b89d5</string>
+||||||| merged common ancestors
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">a0b7ab9d7fda41d68fbc5e44c04cb500</string>
+=======
       string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">62b6511b62284c9d8354c58926536163</string>
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
     headers:
       Cache-Control:
       - private
@@ -2855,7 +2975,13 @@ interactions:
       Cteonnt-Length:
       - '109'
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_token.yaml
+      - Fri, 05 Apr 2019 14:22:44 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:54 GMT
+=======
       - Fri, 05 Apr 2019 15:57:01 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_token.yaml
       content-length:
       - '109'
     status:

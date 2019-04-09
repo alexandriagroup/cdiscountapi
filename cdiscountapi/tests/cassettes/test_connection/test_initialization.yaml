@@ -169,7 +169,17 @@ interactions:
       Cteonnt-Length:
       - '14163'
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:40 GMT
+      ntCoent-Length:
+      - '14164'
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:50 GMT
+      ntCoent-Length:
+      - '14164'
+=======
       - Fri, 05 Apr 2019 15:56:45 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -573,9 +583,17 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:40 GMT
+      ntCoent-Length:
+      - '37262'
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:49 GMT
+=======
       - Fri, 05 Apr 2019 15:56:45 GMT
       ntCoent-Length:
       - '37260'
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2024,7 +2042,17 @@ interactions:
       - private
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      Date:
+      - Fri, 05 Apr 2019 14:22:40 GMT
+      ntCoent-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:50 GMT
+      ntCoent-Length:
+=======
       Cteonnt-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       - '141083'
       Date:
       - Fri, 05 Apr 2019 15:56:45 GMT
@@ -2377,8 +2405,14 @@ interactions:
       - text/xml; charset=UTF-8
       Cteonnt-Length:
       - '48866'
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      Date:
+      - Fri, 05 Apr 2019 14:22:40 GMT
+||||||| merged common ancestors
+=======
       Date:
       - Fri, 05 Apr 2019 15:56:46 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2408,14 +2442,32 @@ interactions:
         minOccurs="0" name="VerticalAccuracy" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="GeoCoordinate" nillable="true" type="tns:GeoCoordinate"/></xs:schema>
     headers:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      Content-Length:
+      - '882'
+||||||| merged common ancestors
+=======
       Cache-Control:
       - private
       Content-Length:
       - '882'
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:40 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:51 GMT
+      ntCoent-Length:
+      - '882'
+      set-cookie:
+      - TBMCookie_6223335112164439712=532214001554391058Y8DOxKS+j9ql/ktNb/s39YwdAZ0=;
+        path=/
+      - ___utmvm=###########; path=/
+=======
       - Fri, 05 Apr 2019 15:56:45 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2460,12 +2512,24 @@ interactions:
         name="FactoryType" type="xs:QName"/><xs:attribute name="Id" type="xs:ID"/><xs:attribute
         name="Ref" type="xs:IDREF"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      Cteonnt-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:50 GMT
+      ntCoent-Length:
+=======
       Date:
       - Fri, 05 Apr 2019 15:56:46 GMT
       ntCoent-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       - '2273'
+      Date:
+      - Fri, 05 Apr 2019 14:22:41 GMT
     status:
       code: 200
       message: OK
@@ -2509,9 +2573,17 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:41 GMT
+      ntCoent-Length:
+      - '2258'
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:51 GMT
+=======
       - Fri, 05 Apr 2019 15:56:46 GMT
       ntCoent-Length:
       - '2258'
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2567,7 +2639,17 @@ interactions:
       - private
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      Date:
+      - Fri, 05 Apr 2019 14:22:41 GMT
+      ntCoent-Length:
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:50 GMT
+      ntCoent-Length:
+=======
       Cteonnt-Length:
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       - '3109'
       Date:
       - Fri, 05 Apr 2019 15:56:46 GMT
@@ -2615,7 +2697,13 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:41 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:50 GMT
+=======
       - Fri, 05 Apr 2019 15:56:50 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       ntCoent-Length:
       - '2214'
     status:
@@ -2648,14 +2736,26 @@ interactions:
         minOccurs="0" name="MailGuid" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="DiscussionMailGuidCreationResultMessage" nillable="true" type="tns:DiscussionMailGuidCreationResultMessage"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+||||||| merged common ancestors
+      Cteonnt-Length:
+      - '1271'
+=======
       Cteonnt-Length:
       - '1270'
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:41 GMT
+      ntCoent-Length:
+      - '1271'
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:51 GMT
+=======
       - Fri, 05 Apr 2019 15:56:51 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2719,10 +2819,22 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      Cteonnt-Length:
+      - '3940'
+      Date:
+      - Fri, 05 Apr 2019 14:22:41 GMT
+||||||| merged common ancestors
+      Date:
+      - Thu, 04 Apr 2019 15:17:51 GMT
+      ntCoent-Length:
+      - '3940'
+=======
       Date:
       - Fri, 05 Apr 2019 15:56:50 GMT
       ntCoent-Length:
       - '3939'
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2749,12 +2861,20 @@ interactions:
         mixed="false"><xs:extension base="q1:ServiceBaseAPIMessage" xmlns:q1="http://www.cdiscount.com"><xs:sequence/></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="OrderIntegrationMessage" nillable="true" type="tns:OrderIntegrationMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '811'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:41 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:51 GMT
+=======
       - Fri, 05 Apr 2019 15:56:51 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2798,7 +2918,13 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:41 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:50 GMT
+=======
       - Fri, 05 Apr 2019 15:56:51 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       ntCoent-Length:
       - '2159'
     status:
@@ -2831,7 +2957,13 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:41 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:52 GMT
+=======
       - Fri, 05 Apr 2019 15:56:51 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     status:
       code: 200
       message: OK
@@ -2850,12 +2982,24 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">74f5f4c700124830941d5d27063b10fe</string>
+||||||| merged common ancestors
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1d88efc045cb45bfbe3e22f60ba64b86</string>
+=======
       string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">bfa257a8782d4bae979e7724759ebd71</string>
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
     headers:
       Content-Type:
       - text/plain
       Date:
+<<<<<<< HEAD:cdiscountapi/tests/cassettes/test_initialization.yaml
+      - Fri, 05 Apr 2019 14:22:42 GMT
+||||||| merged common ancestors
+      - Thu, 04 Apr 2019 15:17:52 GMT
+=======
       - Fri, 05 Apr 2019 15:56:51 GMT
+>>>>>>> master:cdiscountapi/tests/cassettes/test_connection/test_initialization.yaml
       Vary:
       - Accept-Encoding
       content-length:
