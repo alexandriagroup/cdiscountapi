@@ -8,7 +8,7 @@ from . import assert_response_succeeded
 @skip('Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list():
-    pass
+    raise AssertionError
 
 
 @pytest.mark.vcr()
@@ -93,5 +93,13 @@ def test_prepare_validations():
                      os.getenv('CDISCOUNT_API_PASSWORD'))
     assert api.orders.prepare_validations([order1, order2]) == expected
 
+
+@skip('Waiting for orders')
+@pytest.mark.vcr()
+def test_validate_order_list():
+    """
+    Seller.validate_order_list should validate the orders specified
+    """
+    raise AssertionError
 
 
