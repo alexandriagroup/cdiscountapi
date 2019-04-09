@@ -22,6 +22,7 @@ from cdiscountapi.exceptions import (
     CdiscountApiOrderError,
 )
 
+
 def check_element(element_name, dynamic_type):
     """
     Raise an exception if the is not in the dynamic_type
