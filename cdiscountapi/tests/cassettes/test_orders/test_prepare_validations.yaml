@@ -165,9 +165,9 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:25 GMT
+      - Tue, 09 Apr 2019 14:06:54 GMT
       ntCoent-Length:
-      - '14163'
+      - '14164'
     status:
       code: 200
       message: OK
@@ -571,7 +571,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
+      - Tue, 09 Apr 2019 14:06:55 GMT
       ntCoent-Length:
       - '37260'
     status:
@@ -2018,12 +2018,14 @@ interactions:
         minOccurs="0" name="SupplyMode" type="q86:SupplyModeType" xmlns:q86="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Offer.Enum"/></xs:sequence></xs:complexType><xs:element
         name="OfferProduct" nillable="true" type="tns:OfferProduct"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Tue, 09 Apr 2019 14:24:25 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '141083'
+      Date:
+      - Tue, 09 Apr 2019 14:06:54 GMT
     status:
       code: 200
       message: OK
@@ -2371,10 +2373,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '48866'
+      Date:
+      - Tue, 09 Apr 2019 14:06:55 GMT
     status:
       code: 200
       message: OK
@@ -2409,7 +2411,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
+      - Tue, 09 Apr 2019 14:06:56 GMT
     status:
       code: 200
       message: OK
@@ -2454,14 +2456,12 @@ interactions:
         name="FactoryType" type="xs:QName"/><xs:attribute name="Id" type="xs:ID"/><xs:attribute
         name="Ref" type="xs:IDREF"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2273'
       Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
+      - Tue, 09 Apr 2019 14:06:55 GMT
+      ntCoent-Length:
+      - '2273'
     status:
       code: 200
       message: OK
@@ -2505,7 +2505,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
+      - Tue, 09 Apr 2019 14:06:55 GMT
       ntCoent-Length:
       - '2258'
     status:
@@ -2559,14 +2559,12 @@ interactions:
         name="Warehouse" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
         name="ProductStock" nillable="true" type="tns:ProductStock"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '3109'
       Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
+      - Tue, 09 Apr 2019 14:06:56 GMT
+      ntCoent-Length:
+      - '3109'
     status:
       code: 200
       message: OK
@@ -2611,7 +2609,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:27 GMT
+      - Tue, 09 Apr 2019 14:06:56 GMT
       ntCoent-Length:
       - '2214'
     status:
@@ -2647,7 +2645,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
+      - Tue, 09 Apr 2019 14:06:55 GMT
       ntCoent-Length:
       - '1271'
     status:
@@ -2713,10 +2711,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '3940'
       Date:
-      - Tue, 09 Apr 2019 14:24:26 GMT
+      - Tue, 09 Apr 2019 14:06:56 GMT
+      ntCoent-Length:
+      - '3940'
     status:
       code: 200
       message: OK
@@ -2748,7 +2746,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:27 GMT
+      - Tue, 09 Apr 2019 14:06:56 GMT
     status:
       code: 200
       message: OK
@@ -2789,12 +2787,14 @@ interactions:
         name="Width" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="ProductActivationData" nillable="true" type="tns:ProductActivationData"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Tue, 09 Apr 2019 14:24:27 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '2159'
+      Date:
+      - Tue, 09 Apr 2019 14:06:56 GMT
     status:
       code: 200
       message: OK
@@ -2825,7 +2825,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 09 Apr 2019 14:24:27 GMT
+      - Tue, 09 Apr 2019 14:06:56 GMT
     status:
       code: 200
       message: OK
@@ -2844,22 +2844,16 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
-      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6f6e77cae3c345fe898d431efa371693</string>
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6e0539a70a8f4684b797eb748af15d8b</string>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/plain
-      Cteonnt-Length:
-      - '109'
       Date:
-      - Tue, 09 Apr 2019 14:24:27 GMT
+      - Tue, 09 Apr 2019 14:06:56 GMT
+      Vary:
+      - Accept-Encoding
       content-length:
       - '109'
-      set-cookie:
-      - TBMCookie_6223335112164439712=989179001554819580MZX/PSBkDMwYyVqPimXClxd35nM=;
-        path=/
-      - ___utmvm=###########; path=/
     status:
       code: 200
       message: OK

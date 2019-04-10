@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-PYTEST_FLAGS := --disable-pytest-warnings
+PYTEST_FLAGS ?= --disable-pytest-warnings
 
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
@@ -8,11 +8,10 @@ install-dev:
 	pip install -r requirements-dev.txt
 
 test:
-	VCR_RECORD_MODE=off py.test $(PYTEST_FLAGS)
+	py.test $(PYTEST_FLAGS) --vcr-record=none
 
 test-coverage:
-	VCR_RECORD_MODE=off py.test $(PYTEST_FLAGS) --cov=cdiscountapi --cov-report term-missing
+	py.test $(PYTEST_FLAGS) --vcr-record=none --cov=cdiscountapi --cov-report term-missing
 
 test-renew-vcr-records:
-	@rm -vfr $(ROOT_DIR)/cdiscountapi/tests/cassettes
-	VCR_RECORD_MODE=once py.test
+	py.test $(PYTEST_FLAGS) --vcr-record=all

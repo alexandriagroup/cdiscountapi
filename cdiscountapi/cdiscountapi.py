@@ -23,6 +23,21 @@ from cdiscountapi.exceptions import (
 )
 
 
+def check_element(element_name, dynamic_type):
+    """
+    Raise an exception if the is not in the dynamic_type
+
+    Example
+    >>> check_element('CarrierName', api.factory.ValidateOrder)
+    """
+    valid_elements = [x[0] for x in dynamic_type.elements]
+    if element_name not in valid_elements:
+        raise ValueError('{0} is not a valid element of {1}.'
+                         ' Valid elements are {2}'.format(
+                             element_name, dynamic_type.name, valid_elements)
+                         )
+
+
 # HELPER FUNCTIONS.
 def generate_package_url(content_dict, url):
     """
@@ -128,52 +143,6 @@ def upload_and_get_url(package, url):
     """
 
     return url + package
-
-
-def create_order_line_list(orders, order_number):
-    """
-    <OrderLineList>
-        <ValidateOrderLine>
-            <AcceptationState>AcceptedBySeller</AcceptationState>
-            <ProductCondition>New</ProductCondition>
-            <SellerProductId>CHI8003970895435</SellerProductId>
-        </ValidateOrderLine>
-        <ValidateOrderLine>
-            <AcceptationState>AcceptedBySeller</AcceptationState>
-            <ProductCondition>New</ProductCondition>
-            <SellerProductId>DOD3592668078117</SellerProductId>
-        </ValidateOrderLine>
-    </OrderLineList>
-    """
-    selected_orders = [order for order in orders if order['OrderNumber'] == order_number]
-    if selected_orders == 1:
-        selected_order = selected_orders[0]
-    else:
-        raise CdiscountApiOrderError(
-            "Can't find the order_number {0} in the orders {1}".format(
-                order_number, orders)
-        )
-
-
-def create_order_line(order, seller_product_id, acceptation_state):
-    """
-    <AcceptationState>AcceptedBySeller</AcceptationState>
-    <ProductCondition>New</ProductCondition>
-    <SellerProductId>CHI8003970895435</SellerProductId>
-    """
-    items = [item for item in order['OrderLineList'] if
-             item['SellerProductId'] == seller_product_id]
-
-    if len(items) == 1:
-        product_condition = items[0]['ProductCondition']
-    else:
-        raise ValueError(
-            "Can't find the seller_product_id {0} in the order {1}".format(
-                seller_product_id, order)
-        )
-    return {'AcceptationState': acceptation_state,
-            'ProductCondition': product_condition,
-            'SellerProductId': seller_product_id}
 
 
 class Seller(object):
@@ -533,11 +502,129 @@ class Orders(object):
         )
         return helpers.serialize_object(response, dict)
 
+    def _prepare_validation(self, data):
+        """
+        Return the validation data for an order.
+
+        :type data: dict
+        :param data: The information about the order to validate. (cf
+        `Seller.prepare_validations`)
+        """
+        data = data.copy()
+
+        # Check elements in ValidateOrder
+        for element_name in data.keys():
+            check_element(element_name, self.api.factory.ValidateOrder)
+
+        # check elements ValidateOrderLine
+        for i, validate_order_line in enumerate(data['OrderLineList']):
+            for element_name in validate_order_line.keys():
+                check_element(element_name, self.api.factory.ValidateOrderLine)
+
+        data['OrderLineList'] = {
+            'ValidateOrderLine': [x for x in data.pop('OrderLineList')]
+        }
+        return helpers.serialize_object(
+            self.api.factory.ValidateOrder(**data), dict
+        )
+
+    def prepare_validations(self, data):
+        """
+        Return the dictionary used to validate the orders in
+        `Orders.validate_order_list`
+
+        This method tries to simplify the creation of the data necessary to
+        validate the orders by letting the user provide a more intuitive data
+        structure than the one required for the request.
+
+        :type data: list
+        :param data: The validation data for the orders. A list of dictionaries
+        with the following structure:
+
+        {
+            'CarrierName': carrier_name,
+            'OrderNumber': order_number,
+            'OrderState': order_state,
+            'TrackingNumber': tracking_number,
+            'TrackingUrl': tracking_url,
+            'OrderLineList': [
+                {
+                    'AcceptationState': acceptation_state,
+                    'ProductCondition': product_condition,
+                    'SellerProductId': seller_product_id,
+                    'TypeOfReturn': type_of_return
+                },
+                ...
+            ]
+        }
+
+        :rtype dict:
+        :returns: The `validate_order_list_message` dictionary created with
+        `data`
+        """
+        return {
+            'OrderList': {
+                'ValidateOrder': [self._prepare_validation(x) for x in data]
+            }
+        }
+
     # TODO Use for accept_orders
-    def validate_order_list(self, data):
+    def validate_order_list(self, validate_order_list_message):
+        """
+        Validate a list of orders
+
+        :param validate_order_list_message: The information about the orders to
+        validate.
+
+        There are two ways to create `validate_order_list_message`:
+
+        1. you can build the dictionary by yourself:
+
+        Example:
+        >>> api.validate_order_list(
+            {'OrderList':
+                {'ValidateOrder':
+                    [{'CarrierName': carrier_name,
+                      'OrderNumber': order_number,
+                      'OrderState': order_state,
+                      'TrackingNumber': tracking_number,
+                      'TrackingUrl': tracking_url,
+                      'OrderLineList': {
+                          'ValidateOrderLine': [
+                          {'AcceptationState': 'acceptation_state',
+                           'ProductCondition': product_condition,
+                           'SellerProductId': seller_product_id,
+                           'TypeOfReturn': type_of_return},
+                          ...
+                          ]},
+                    },
+                    ...
+                    ]}}
+        )
+
+        2. you can use `Orders.prepare_validations`
+
+        Example:
+        >>> validate_order_list_message = api.orders.prepare_validations(
+                    [{'CarrierName': carrier_name,
+                      'OrderNumber': order_number,
+                      'OrderState': order_state,
+                      'TrackingNumber': tracking_number,
+                      'TrackingUrl': tracking_url,
+                      'OrderLineList': [
+                          {'AcceptationState': 'acceptation_state',
+                           'ProductCondition': product_condition,
+                           'SellerProductId': seller_product_id,
+                           'TypeOfReturn': type_of_return},
+                          ...
+                          ]},
+                        ...]
+
+        >>> api.orders.validate_order_list_message(validate_order_list_message)
+        """
         response = self.api.client.service.ValidateOrderList(
             headerMessage=self.api.header,
-            validateOrderListMessage=data
+            validateOrderListMessage=validate_order_list_message
         )
         return helpers.serialize_object(response, dict)
 
@@ -640,6 +727,7 @@ class Connection(object):
         self.login = login
         self.password = password
         self.client = Client(self.wsdl)
+        self.factory = self.client.type_factory('http://www.cdiscount.com')
 
         if self.login is None or self.password is None:
             raise CdiscountApiConnectionError(
