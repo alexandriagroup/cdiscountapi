@@ -5,3 +5,10 @@ def assert_response_succeeded(response):
         'ErrorMessage should be None but is {}'.format(response['ErrorMessage'])
     assert response['OperationSuccess'] is True,\
         'OperationSuccess should be True but is {}'.format(response['OperationSuccess'])
+
+
+def assert_response_failed(response):
+    assert response['ErrorMessage'] is not None,\
+        'ErrorMessage should not be None but is {}'.format(response['ErrorMessage'])
+    assert response['OperationSuccess'] is False,\
+        'OperationSuccess should be False but is {}'.format(response['OperationSuccess'])
