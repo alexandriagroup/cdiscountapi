@@ -628,8 +628,19 @@ class Orders(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def create_refund_voucher(self):
-        pass
+    def create_refund_voucher(self, request):
+        """
+        This method still allows refunding lines of an order whose state is
+        "ShippedBySeller".
+
+        An additional feature allows to make a commercial gesture on an order
+        MKPCDS before and after shipping and on an order MKPFBC after shipping.
+        """
+        response = self.api.client.service.CreateRefundVoucher(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return response
 
 
 class Fulfilment(object):
