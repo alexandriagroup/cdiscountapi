@@ -379,7 +379,7 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_product_package_product_matching_file_data(self, package_id=None):
+    def get_product_package_product_matching_file_data(self, package_id):
         """
         Information of the created products.
         :param package_id: package id to filter results
@@ -390,17 +390,9 @@ class Products(object):
         if package_id:
             response = self.api.client.service.GetProductPackageProductMatchingFileData(
                 headerMessage=self.api.header,
-                productPackageFilter=package_id
+                productPackageFilter={'PackageID': package_id}
             )
             return helpers.serialize_object(response, dict)
-        else:
-            return {'ErrorMessage': None,
-                    'OperationSuccess': True,
-                    'ErrorList': None,
-                    'SellerLogin': self.api.login,
-                    'TokenId': self.api.token,
-                    'PackageId': 0,
-                    'ProductMatchingList': None}
 
     def get_product_list_by_identifier(self, ean_list=[]):
         """
@@ -410,23 +402,12 @@ class Products(object):
         :return: complete list of products
         :rtype: dict
         """
-        if ean_list:
-            response = self.api.client.service.GetProductPackageProductMatchingFileData(
-                headerMessage=self.api.header,
-                IdentifierRequest=ean_list
-            )
-            return helpers.serialize_object(response, dict)
-        else:
-            return {'ErrorMessage': None,
-                    'OperationSuccess': True,
-                    'ErrorList': None,
-                    'SellerLogin': self.api.login,
-                    'TokenId': self.api.token,
-                    'NumberOfErrors': 0,
-                    'ProductListByIdentifier': {
-                        'ProductByIdentifier': []
-                    }
-            }
+        request = {'IdentifierType': 'EAN', 'ValueList': ean_list}
+        response = self.api.client.service.GetProductListByIdentifier(
+            headerMessage=self.api.header,
+            identifierRequest=request
+        )
+        return helpers.serialize_object(response, dict)
 
 
 class Orders(object):
