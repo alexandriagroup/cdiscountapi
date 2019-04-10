@@ -682,13 +682,58 @@ class Relays(object):
         self.api = api
 
     def get_parcel_shop_list(self):
-        pass
+        response = self.api.client.service.GetParcelShopList(
+            headerMessage=self.api.header,
+        )
+        return response
 
-    def submit_relays_file(self):
-        pass
+    def submit_relays_file(self, relays_file_request):
+        """
+        Send information about relays in a file
 
-    def get_relays_file_submission_result(self):
-        pass
+        Example
+        >>> response = api.relays.submit_relays_file(
+                relays_file_request={'RelaysFileURI': relays_file_uri}
+            )
+
+        where relays_file_uri is the URI to a XLSX file
+
+        :type relays_file_request: dict
+        :param relays_file_request: A dictionary pointing to a XLSX file
+        with information about relays
+
+        :returns: The response with the RelaysFileId for the file.
+
+        """
+        response = self.api.client.service.SubmitRelaysFile(
+            headerMessage=self.api.header,
+            relaysFileRequest=relays_file_request
+        )
+        return response
+
+    def get_relays_file_submission_result(self, relays_file_filter):
+        """
+        Get the state of progress of the relays file submission.
+
+        Usage:
+        >>> response = api.get_relays_file_submission_result(
+        relays_file_filter={'RelaysFileId': relays_file_id}
+        )
+
+        where relays_file_id is the value of RelaysFileId returned by
+        SubmitRelaysFile.
+
+        :param relays_file_filter: The dictionary containing the ID referencing
+        the relays file submitted.
+
+        :returns: The response with the information about the integration of
+        the relays specified.
+        """
+        response = self.api.client.service.GetRelaysFileSubmissionResult(
+            headerMessage=self.api.header,
+            relaysFileFilter=relays_file_filter
+        )
+        return response
 
 
 class Discussions(object):
