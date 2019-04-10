@@ -29,6 +29,7 @@ def test_get_all_allowed_category_tree():
     assert 'CategoryTree' in response.keys()
 
 
+@skip('timeout error unresolve by cdiscount')
 @pytest.mark.vcr()
 def test_get_product_list():
     response = api.products.get_product_list()
@@ -69,6 +70,7 @@ def test_submit_product_package():
     assert 'PackageId' in response.keys()
 
 
+@skip('to test after a submission')
 @pytest.mark.vcr()
 def test_get_product_package_submission_result():
     response = api.products.get_product_package_submission_result()
