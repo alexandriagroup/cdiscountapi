@@ -613,36 +613,52 @@ class Orders(object):
         pass
 
 
-class Fulfilment(object):
+class Fulfillment(object):
 
     def __init__(self, api):
         self.api = api
 
-    def submit_fulfilment_supply_order(self):
+    def submit_fulfillment_supply_order(self, request):
+        response = self.api.client.service.SubmitFulfilmentSupplyOrder(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return helpers.serialize_object(response, dict)
+
+    def submit_fulfillment_on_demand_supply_order(self, request):
+        response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
+            headerMessage=self.api.header,
+            fulfillmentOnDemandSupplyOrderRequest=request
+        )
+        return helpers.serialize_object(response, dict)
+
+    def get_fulfillment_supply_order_report_list(self, request):
+        response = self.api.client.service.GetFulfilmentSupplyOrderReportList(
+            headerMessage=self.api.header,
+            supplyOrderReportRequest=request
+        )
+        return helpers.serialize_object(response, dict)
+
+    def get_fulfillment_delivery_document(self):
         pass
 
-    def get_fulfilment_supply_order_report_list(self):
+    def get_fulfillment_supply_order(self, request):
+        response = self.api.client.service.GetFulfilmentSupplyOrder(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return helpers.serialize_object(response, dict)
+
+    def submit_fulfillment_activation(self):
         pass
 
-    def get_fulfilment_order_list_to_supply(self):
+    def get_fulfillment_activation_report_list(self):
         pass
 
-    def submit_fulfilment_on_demand_supply_order(self):
-        pass
-
-    def get_fulfilment_supply_order(self):
+    def get_fulfillment_order_list_to_supply(self):
         pass
 
     def submit_offer_state_action(self):
-        pass
-
-    def submit_fulfilment_activation(self):
-        pass
-
-    def get_fulfilment_activation_report_list(self):
-        pass
-
-    def get_fulfilment_delivery_document(self):
         pass
 
 
@@ -737,7 +753,7 @@ class Connection(object):
         self.offers = Offers(self)
         self.products = Products(self)
         self.orders = Orders(self)
-        self.fulfilment = Fulfilment(self)
+        self.fulfillment = Fulfillment(self)
         self.relays = Relays(self)
         self.discussions = Discussions(self)
         self.webmail = WebMail(self)
