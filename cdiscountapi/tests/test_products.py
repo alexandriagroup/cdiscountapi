@@ -29,12 +29,18 @@ def test_get_all_allowed_category_tree():
     assert 'CategoryTree' in response.keys()
 
 
-@skip('timeout error unresolve by cdiscount')
 @pytest.mark.vcr()
 def test_get_product_list():
-    response = api.products.get_product_list()
+    filters = {'CategoryCode': '06010201'}
+    response = api.products.get_product_list(filters)
     assert_response_succeeded(response)
     assert 'ProductList' in response.keys()
+
+
+@pytest.mark.vcr()
+def test_get_product_list_empty():
+    with pytest.raises(KeyError):
+        api.products.get_product_list()
 
 
 @pytest.mark.vcr()
