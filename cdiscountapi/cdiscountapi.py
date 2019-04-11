@@ -184,7 +184,7 @@ class Offers(object):
     def __init__(self, api):
         self.api = api
 
-    def get_offer_list(self, filters={}):
+    def get_offer_list(self, **filters):
         """
         To search offers.
         :param filters: filters (ex: OfferPoolId, SKU)
@@ -192,13 +192,14 @@ class Offers(object):
         :return: offers answering the search criterion
         :rtype: dict
         """
+        offer_filter = self.api.factory.OfferFilter(**filters)
         response = self.api.client.service.GetOfferList(
             headerMessage=self.api.header,
-            offerFilter=filters,
+            offerFilter=offer_filter,
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_list_paginated(self, filters={}):
+    def get_offer_list_paginated(self, **filters):
         """
         Recovery of the offers page by page.
         :param filters: list of filters
@@ -206,13 +207,10 @@ class Offers(object):
         :return: offers answering the search criterion
         :rtype: dict
         """
-        if 'PageNumber' not in filters.keys():
-            raise KeyError(
-                "Please provide PageNumber key as {'PageNumber': 1}"
-            )
+        offer_filter = self.api.factory.OfferFilterPaginated(**filters)
         response = self.api.client.service.GetOfferListPaginated(
             headerMessage=self.api.header,
-            offerFilter=filters,
+            offerFilter=offer_filter,
         )
         return helpers.serialize_object(response, dict)
 
@@ -240,20 +238,17 @@ class Offers(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_package_submission_result(self, packages={}):
+    def get_offer_package_submission_result(self, package_id):
         """
         This operation makes it possible to know the progress report of the offers import.
 
         :return: Offer report logs
         :rtype: dict
         """
-        if 'PackageID' not in packages.keys():
-            raise KeyError(
-                "Please provide PackageID key as {'PackageID': 541}"
-            )
+        package = self.api.factory.PackageFilter(package_id)
         response = self.api.client.service.GetOfferPackageSubmissionResult(
             headerMessage=self.api.header,
-            offerPackageFilter=packages,
+            offerPackageFilter=package,
         )
         return helpers.serialize_object(response, dict)
 
@@ -286,15 +281,16 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    # TODO find why it doesn't work.
-    def get_product_list(self, filters={}):
+    def get_product_list(self, category_code):
         """
         Search products in the reference frame
-        :param filters: (ex:category code)
-        :type filters: dict
+        :param category_code: code to filter products by category
+        :type category_code: str
         :return: products corresponding to research
         :rtype: dict
         """
+        filters = self.api.factory.ProductFilter(category_code)
+
         response = self.api.client.service.GetProductList(
             headerMessage=self.api.header,
             productFilter=filters,
