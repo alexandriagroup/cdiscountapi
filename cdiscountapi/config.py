@@ -1,6 +1,3 @@
-# As zeep 3.3.1 doesn't support validation of the values accepted by an XSD
-# type, we manually add it.
-
 REFUND_INFORMATION = {
     'MotiveId': {
         'compensation_on_missing_stock': 131,
@@ -18,25 +15,3 @@ REFUND_INFORMATION = {
         'others': 139,
     }
 }
-
-
-class Values(object):
-    def __init__(self, *values):
-        self.values = values
-
-
-class Description(object):
-    pass
-
-
-class SellerRefundRequestDescription(Description):
-    Mode = Values('Claim', 'Retraction')
-    Motive = Values('VendorRejection',
-                    'ClientCancellation',
-                    'VendorRejectionAndClientCancellation',
-                    'ClientClaim',
-                    'VendorInitiatedRefund',
-                    'ClientRetraction',
-                    'NoClientWithDrawal'
-                    'ProductStockUnavailable')
-
