@@ -2,7 +2,8 @@ import os
 import pytest
 from ..cdiscountapi import Connection
 from unittest import skip
-from . import assert_response_succeeded
+from . import assert_response_succeeded, assert_response_failed
+from ..config import REFUND_INFORMATION
 
 
 @skip('Waiting for orders')
@@ -98,8 +99,44 @@ def test_prepare_validations():
 @pytest.mark.vcr()
 def test_validate_order_list():
     """
-    Seller.validate_order_list should validate the orders specified
+    Orders.validate_order_list should validate the orders specified
     """
     raise AssertionError
 
 
+@skip('Waiting for orders')
+@pytest.mark.vcr()
+def test_create_refund_voucher():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+
+    request = {
+        'CommercialGestureList': {
+            'Amount': 10,
+            'MotiveId': 135
+        },
+        'OrderNumber': 'ORDER_NUMBER',
+        'SellerRefundList': {
+            'Mode': 'Claim',
+            'Motive': 'VendorRejection',
+            'RefundOrderLine': {
+                'Ean': 'EAN',
+                'RefundShippingCharges': True,
+                'SellerProductId': 'SKU1'
+            }
+        }
+    }
+
+    response = api.orders.create_refund_voucher(request=request)
+    raise AssertionError
+
+
+@pytest.mark.vcr()
+def test_create_refund_voucher_with_invalid_data():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.create_refund_voucher(request={})
+    assert_response_failed(response)
+    assert response['CommercialGestureList'] is None
+    assert response['OrderNumber'] is None
+    assert response['SellerRefundList'] is None
