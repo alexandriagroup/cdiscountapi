@@ -3,13 +3,13 @@ interactions:
     body: '<?xml version=''1.0'' encoding=''utf-8''?>
 
       <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
-      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetProductListByIdentifier</wsa:Action><wsa:MessageID>urn:uuid:92a8d98e-bbff-4016-bb0e-b07380916421</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetProductListByIdentifier
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetProductListByIdentifier</wsa:Action><wsa:MessageID>urn:uuid:af8facab-4496-4e49-b0cb-7e1f1a423276</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetProductListByIdentifier
       xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
       xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
       xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>1ebfced19962453b8d28c1d73b39a47c</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>c3a2ad34c2974d19bd30458c553c5965</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
       xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:identifierRequest><ns0:IdentifierType>EAN</ns0:IdentifierType><ns0:ValueList><ns5:string
       xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/Arrays">7426775682419</ns5:string></ns0:ValueList></ns0:identifierRequest></ns0:GetProductListByIdentifier></soap-env:Body></soap-env:Envelope>'
     headers:
@@ -41,12 +41,14 @@ interactions:
         i:nil="true"/><a:FatherProductId>MP03030783</a:FatherProductId><a:HasError>false</a:HasError><a:ImageUrl>https://i2.cdscdn.com/pdt2/7/8/3/1/700x700/MP03030783.jpg</a:ImageUrl><a:Name>Hugo
         Boss Polo Homme HU6724928  Regular Fit</a:Name><a:ProductType>Variant</a:ProductType><a:Size>M</a:Size></a:ProductByIdentifier></a:ProductListByIdentifier></GetProductListByIdentifierResult></GetProductListByIdentifierResponse></s:Body></s:Envelope>
     headers:
-      Content-Length:
-      - '1236'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Thu, 11 Apr 2019 09:00:19 GMT
+      - Thu, 11 Apr 2019 12:17:40 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '1236'
     status:
       code: 200
       message: OK

@@ -18,8 +18,7 @@ def test_get_offer_list():
 
 @pytest.mark.vcr()
 def test_get_offer_list_paginated():
-    pn = {'PageNumber': 1}
-    response = api.offers.get_offer_list_paginated(pn)
+    response = api.offers.get_offer_list_paginated(PageNumber=2)
     assert_response_succeeded(response)
     assert 'OfferList' in response.keys()
 
@@ -34,7 +33,6 @@ def test_submit_offer_package():
 
 @pytest.mark.vcr()
 def test_get_offer_package_submission_result():
-    packages = {'PackageID': 541}
-    response = api.offers.get_offer_package_submission_result(packages)
+    response = api.offers.get_offer_package_submission_result(541)
     assert_response_succeeded(response)
     assert 'OfferLogList' in response.keys()

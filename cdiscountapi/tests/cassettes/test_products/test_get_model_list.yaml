@@ -3,13 +3,13 @@ interactions:
     body: '<?xml version=''1.0'' encoding=''utf-8''?>
 
       <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
-      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetModelList</wsa:Action><wsa:MessageID>urn:uuid:8e3cf071-9103-4ad7-a4a9-1ea0d38ff065</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetModelList
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetModelList</wsa:Action><wsa:MessageID>urn:uuid:e8ecff0c-e4b1-44c4-a8a1-a63aa1493e5f</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetModelList
       xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
       xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
       xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>1ebfced19962453b8d28c1d73b39a47c</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>c3a2ad34c2974d19bd30458c553c5965</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
       xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage></ns0:GetModelList></soap-env:Body></soap-env:Envelope>'
     headers:
       Accept:
@@ -36,12 +36,10 @@ interactions:
         xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId>TOKEN_ID</TokenId><ModelList
         i:nil="true"/></GetModelListResult></GetModelListResponse></s:Body></s:Envelope>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Thu, 11 Apr 2019 09:00:12 GMT
+      - Thu, 11 Apr 2019 12:17:33 GMT
       Vary:
       - Accept-Encoding
       content-length:

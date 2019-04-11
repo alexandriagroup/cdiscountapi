@@ -31,15 +31,14 @@ def test_get_all_allowed_category_tree():
 
 @pytest.mark.vcr()
 def test_get_product_list():
-    filters = {'CategoryCode': '06010201'}
-    response = api.products.get_product_list(filters)
+    response = api.products.get_product_list('06010201')
     assert_response_succeeded(response)
     assert 'ProductList' in response.keys()
 
 
 @pytest.mark.vcr()
 def test_get_product_list_empty():
-    with pytest.raises(KeyError):
+    with pytest.raises(TypeError):
         api.products.get_product_list()
 
 
