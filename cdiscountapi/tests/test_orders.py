@@ -127,7 +127,7 @@ def test_create_refund_voucher():
         }
     }
 
-    response = api.orders.create_refund_voucher(request=request)
+    response = api.orders.create_refund_voucher(**request)
     raise AssertionError
 
 
@@ -135,7 +135,7 @@ def test_create_refund_voucher():
 def test_create_refund_voucher_with_invalid_data():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
-    response = api.orders.create_refund_voucher(request={})
+    response = api.orders.create_refund_voucher()
     assert_response_failed(response)
     assert response['CommercialGestureList'] is None
     assert response['OrderNumber'] is None

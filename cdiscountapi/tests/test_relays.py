@@ -21,7 +21,7 @@ def test_submit_relays_file():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
     response = api.relays.submit_relays_file(
-        relays_file_request={'RelaysFileURI': ''}
+        RelaysFileURI=''
     )
 
 
@@ -31,7 +31,7 @@ def test_get_relays_file_submission_result():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
     response = api.relays.get_relays_file_submission_result(
-        relays_file_filter={'RelaysFileId': 1}
+        RelaysFileId=1
     )
 
 
@@ -44,7 +44,7 @@ def test_get_relays_file_submission_result_without_relays_file():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
     response = api.relays.get_relays_file_submission_result(
-        relays_file_filter={'RelaysFileId': 1}
+        RelaysFileId='http://endertromb.com/chunky.xlsx'
     )
     assert_response_failed(response)
     assert response['RelaysFileIntegrationStatus'] is None
