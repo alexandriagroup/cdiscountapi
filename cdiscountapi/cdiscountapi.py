@@ -632,24 +632,60 @@ class Fulfillment(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def submit_fulfillment_on_demand_supply_order(self, request):
+    def submit_fulfillment_on_demand_supply_order(self, order_list):
+        """
+
+        :param order_list: list of dict as
+        [{'OrderReference': 1703182124BNXCO,
+        'ProductEan': 2009854780777}]
+        :return:
+        """
         response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
             headerMessage=self.api.header,
-            fulfillmentOnDemandSupplyOrderRequest=request
+            request={'OrderLineList': order_list}
         )
         return helpers.serialize_object(response, dict)
 
-    def get_fulfillment_supply_order_report_list(self, request):
+    def get_fulfillment_supply_order_report_list(self, **request):
+        """
+        To search supply order reports.
+        :param request:
+            'BeginCreationDate': date,
+            'DepositIdList': int list,
+            'EndCreationDate': date,
+            'PageNumber': int,
+            'PageSize': int
+        :return:supply order reports
+        """
+        supply_order_report_request = self.api.factory.SupplyOrderReportRequest(**request)
         response = self.api.client.service.GetFulfilmentSupplyOrderReportList(
             headerMessage=self.api.header,
-            supplyOrderReportRequest=request
+            request=supply_order_report_request
         )
         return helpers.serialize_object(response, dict)
 
-    def get_fulfillment_delivery_document(self):
-        pass
+    def get_fulfillment_delivery_document(self, deposit_id):
+        """
+        :param deposit_id: Unique identification number of the supply order request
+        :type deposit_id: int
+        :return: data for printing PDF documents, in the form of a Base64-encoded string.
+        """
+        response = self.api.client.service.GetFulfilmentDeliveryDocument(
+            headerMessage=self.api.header,
+            request={'DepositId': deposit_id}
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_fulfillment_supply_order(self, request):
+    def get_fulfillment_supply_order(self, **request):
+        """
+        :param request:
+            'BeginModificationDate': date,
+            'EndModificationDate': date,
+            'PageNumber': int,
+            'PageSize': int,
+            'SupplyOrderNumberList': string list
+        :return: supply orders
+        """
         response = self.api.client.service.GetFulfilmentSupplyOrder(
             headerMessage=self.api.header,
             request=request
@@ -666,6 +702,15 @@ class Fulfillment(object):
         pass
 
     def submit_offer_state_action(self):
+        pass
+
+    def create_external_order(self):
+        pass
+
+    def get_external_order(self):
+        pass
+
+    def get_product_stock_list(self):
         pass
 
 

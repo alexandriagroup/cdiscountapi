@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright © 2019 Alexandria
+
 import os
 import pytest
 from ..cdiscountapi import Connection
