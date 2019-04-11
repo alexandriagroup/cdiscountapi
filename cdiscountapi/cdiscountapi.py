@@ -685,7 +685,7 @@ class Relays(object):
         response = self.api.client.service.GetParcelShopList(
             headerMessage=self.api.header,
         )
-        return response
+        return helpers.serialize_object(response, dict)
 
     def submit_relays_file(self, relays_file_request):
         """
@@ -709,7 +709,7 @@ class Relays(object):
             headerMessage=self.api.header,
             relaysFileRequest=relays_file_request
         )
-        return response
+        return helpers.serialize_object(response, dict)
 
     def get_relays_file_submission_result(self, relays_file_filter):
         """
@@ -733,19 +733,39 @@ class Relays(object):
             headerMessage=self.api.header,
             relaysFileFilter=relays_file_filter
         )
-        return response
+        return helpers.serialize_object(response, dict)
 
 
 class Discussions(object):
+    """
+    There are 3 ways to get discussions: discussions id, the discussions
+    status, and all messages.
+
+    Thanks to the discussion Id and the method GetDiscussionMailList you can
+    get an encrypted mail address to reply to a question or a claim.  You can
+    close a discussion list with the method CloseDiscussionList and the
+    Discussion id, you cannot close a discussion without having answered
+    Operations are included in the Discussions API section.
+    (https://dev.cdiscount.com/marketplace/?page_id=148)
+    """
 
     def __init__(self, api):
         self.api = api
 
-    def get_order_claim_list(self):
-        pass
+    # TODO Test
+    def get_order_claim_list(self, order_claim_filter):
+        response = self.api.client.service.GetOrderClaimList(
+            headerMessage=self.api.header,
+            orderClaimFilter=order_claim_filter
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_offer_question_list(self):
-        pass
+    def get_offer_question_list(self, offer_question_filter):
+        response = self.api.client.service.GetOfferQuestionList(
+            headerMessage=self.api.header,
+            offerQuestionFilter=offer_question_filter
+        )
+        return helpers.serialize_object(response, dict)
 
     def get_order_question_list(self):
         pass
