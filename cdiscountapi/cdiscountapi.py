@@ -434,7 +434,7 @@ class Orders(object):
     def __init__(self, api):
         self.api = api
 
-    def get_order_list(self, filters={}):
+    def get_order_list(self, **order_filter):
         """
         To search orders.
 
@@ -485,9 +485,10 @@ class Orders(object):
 
         - Recovery or not of the parcels of the order
         """
+        order_filter = self.api.factory.OrderFilter(**order_filter)
         response = self.api.client.service.GetOrderList(
             headerMessage=self.api.header,
-            orderFilter=filters,
+            orderFilter=order_filter,
         )
         return helpers.serialize_object(response, dict)
 
@@ -569,7 +570,7 @@ class Orders(object):
         }
 
     # TODO Use for accept_orders
-    def validate_order_list(self, validate_order_list_message):
+    def validate_order_list(self, **validate_order_list_message):
         """
         Validate a list of orders
 
@@ -582,24 +583,23 @@ class Orders(object):
 
         Example:
         >>> api.validate_order_list(
-            {'OrderList':
-                {'ValidateOrder':
-                    [{'CarrierName': carrier_name,
-                      'OrderNumber': order_number,
-                      'OrderState': order_state,
-                      'TrackingNumber': tracking_number,
-                      'TrackingUrl': tracking_url,
-                      'OrderLineList': {
-                          'ValidateOrderLine': [
-                          {'AcceptationState': 'acceptation_state',
-                           'ProductCondition': product_condition,
-                           'SellerProductId': seller_product_id,
-                           'TypeOfReturn': type_of_return},
-                          ...
-                          ]},
-                    },
-                    ...
-                    ]}}
+            OrderList= {'ValidateOrder':
+                        [{'CarrierName': carrier_name,
+                          'OrderNumber': order_number,
+                          'OrderState': order_state,
+                          'TrackingNumber': tracking_number,
+                          'TrackingUrl': tracking_url,
+                          'OrderLineList': {
+                              'ValidateOrderLine': [
+                              {'AcceptationState': 'acceptation_state',
+                               'ProductCondition': product_condition,
+                               'SellerProductId': seller_product_id,
+                               'TypeOfReturn': type_of_return},
+                              ...
+                              ]},
+                        },
+                        ...
+                        ]}
         )
 
         2. you can use `Orders.prepare_validations`
@@ -620,15 +620,18 @@ class Orders(object):
                           ]},
                         ...]
 
-        >>> api.orders.validate_order_list_message(validate_order_list_message)
+        >>> api.orders.validate_order_list_message(**validate_order_list_message)
         """
+        validate_order_list_message = self.api.factory.ValidateOrderListMessage(
+            **validate_order_list_message
+        )
         response = self.api.client.service.ValidateOrderList(
             headerMessage=self.api.header,
             validateOrderListMessage=validate_order_list_message
         )
         return helpers.serialize_object(response, dict)
 
-    def create_refund_voucher(self, request):
+    def create_refund_voucher(self, **request):
         """
         This method still allows refunding lines of an order whose state is
         "ShippedBySeller".
@@ -636,11 +639,15 @@ class Orders(object):
         An additional feature allows to make a commercial gesture on an order
         MKPCDS before and after shipping and on an order MKPFBC after shipping.
         """
+        request = self.api.factory.SellerRefundRequest(**request)
         response = self.api.client.service.CreateRefundVoucher(
             headerMessage=self.api.header,
             request=request
         )
-        return response
+        return helpers.serialize_object(response, dict)
+
+    def manage_parcel(self, manage_parcel_request):
+        pass
 
 
 class Fulfilment(object):
@@ -687,13 +694,13 @@ class Relays(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def submit_relays_file(self, relays_file_request):
+    def submit_relays_file(self, **relays_file_request):
         """
         Send information about relays in a file
 
         Example
         >>> response = api.relays.submit_relays_file(
-                relays_file_request={'RelaysFileURI': relays_file_uri}
+                relays_file_request=RelaysFileURI=relays_file_uri
             )
 
         where relays_file_uri is the URI to a XLSX file
@@ -705,13 +712,16 @@ class Relays(object):
         :returns: The response with the RelaysFileId for the file.
 
         """
+        relays_file_request = self.api.factory.RelaysFileIntegrationRequest(
+            **relays_file_request
+        )
         response = self.api.client.service.SubmitRelaysFile(
             headerMessage=self.api.header,
             relaysFileRequest=relays_file_request
         )
         return helpers.serialize_object(response, dict)
 
-    def get_relays_file_submission_result(self, relays_file_filter):
+    def get_relays_file_submission_result(self, **relays_file_filter):
         """
         Get the state of progress of the relays file submission.
 
@@ -729,6 +739,9 @@ class Relays(object):
         :returns: The response with the information about the integration of
         the relays specified.
         """
+        relays_file_filter = self.api.factory.RelaysFileFilter(
+            **relays_file_filter
+        )
         response = self.api.client.service.GetRelaysFileSubmissionResult(
             headerMessage=self.api.header,
             relaysFileFilter=relays_file_filter
@@ -752,15 +765,23 @@ class Discussions(object):
     def __init__(self, api):
         self.api = api
 
-    # TODO Test
-    def get_order_claim_list(self, order_claim_filter):
+    def get_order_claim_list(self, **order_claim_filter):
+        """
+        Return the list of order claims
+        """
+        order_claim_filter = self.api.factory.OrderClaimFilter(
+            **order_claim_filter
+        )
         response = self.api.client.service.GetOrderClaimList(
             headerMessage=self.api.header,
             orderClaimFilter=order_claim_filter
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_question_list(self, offer_question_filter):
+    def get_offer_question_list(self, **offer_question_filter):
+        offer_question_filter = self.api.factory.OfferQuestionFilter(
+            **offer_question_filter
+        )
         response = self.api.client.service.GetOfferQuestionList(
             headerMessage=self.api.header,
             offerQuestionFilter=offer_question_filter
