@@ -7,6 +7,7 @@ import datetime
 
 
 # close_discussion
+@pytest.mark.vcr()
 def test_close_discussion_not_found():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
