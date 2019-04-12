@@ -31,9 +31,15 @@ def test_get_all_allowed_category_tree():
 
 @pytest.mark.vcr()
 def test_get_product_list():
-    response = api.products.get_product_list()
+    response = api.products.get_product_list('06010201')
     assert_response_succeeded(response)
     assert 'ProductList' in response.keys()
+
+
+@pytest.mark.vcr()
+def test_get_product_list_empty():
+    with pytest.raises(TypeError):
+        api.products.get_product_list()
 
 
 @pytest.mark.vcr()
@@ -69,6 +75,7 @@ def test_submit_product_package():
     assert 'PackageId' in response.keys()
 
 
+@skip('to test after a submission')
 @pytest.mark.vcr()
 def test_get_product_package_submission_result():
     response = api.products.get_product_package_submission_result()
@@ -76,6 +83,7 @@ def test_get_product_package_submission_result():
     assert 'PackageId' in response.keys()
 
 
+@skip('to test with a correct package id')
 @pytest.mark.vcr()
 def test_get_product_package_product_matching_file_data():
     response = api.products.get_product_package_product_matching_file_data()
@@ -85,6 +93,6 @@ def test_get_product_package_product_matching_file_data():
 
 @pytest.mark.vcr()
 def test_get_product_list_by_identifier():
-    response = api.products.get_product_list_by_identifier()
+    response = api.products.get_product_list_by_identifier(['7426775682419'])
     assert_response_succeeded(response)
     assert 'ProductListByIdentifier' in response.keys()

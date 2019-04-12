@@ -184,7 +184,7 @@ class Offers(object):
     def __init__(self, api):
         self.api = api
 
-    def get_offer_list(self, filters={}):
+    def get_offer_list(self, **filters):
         """
         To search offers.
         :param filters: filters (ex: OfferPoolId, SKU)
@@ -192,13 +192,14 @@ class Offers(object):
         :return: offers answering the search criterion
         :rtype: dict
         """
+        offer_filter = self.api.factory.OfferFilter(**filters)
         response = self.api.client.service.GetOfferList(
             headerMessage=self.api.header,
-            offerFilter=filters,
+            offerFilter=offer_filter,
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_list_paginated(self, filters={}):
+    def get_offer_list_paginated(self, **filters):
         """
         Recovery of the offers page by page.
         :param filters: list of filters
@@ -206,13 +207,10 @@ class Offers(object):
         :return: offers answering the search criterion
         :rtype: dict
         """
-        if 'PageNumber' not in filters.keys():
-            raise KeyError(
-                "Please provide PageNumber key as {'PageNumber': 1}"
-            )
+        offer_filter = self.api.factory.OfferFilterPaginated(**filters)
         response = self.api.client.service.GetOfferListPaginated(
             headerMessage=self.api.header,
-            offerFilter=filters,
+            offerFilter=offer_filter,
         )
         return helpers.serialize_object(response, dict)
 
@@ -240,20 +238,17 @@ class Offers(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_offer_package_submission_result(self, packages={}):
+    def get_offer_package_submission_result(self, package_id):
         """
         This operation makes it possible to know the progress report of the offers import.
 
         :return: Offer report logs
         :rtype: dict
         """
-        if 'PackageID' not in packages.keys():
-            raise KeyError(
-                "Please provide PackageID key as {'PackageID': 541}"
-            )
+        package = self.api.factory.PackageFilter(package_id)
         response = self.api.client.service.GetOfferPackageSubmissionResult(
             headerMessage=self.api.header,
-            offerPackageFilter=packages,
+            offerPackageFilter=package,
         )
         return helpers.serialize_object(response, dict)
 
@@ -286,15 +281,16 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    # TODO find why it doesn't work.
-    def get_product_list(self, filters={}):
+    def get_product_list(self, category_code):
         """
         Search products in the reference frame
-        :param filters: (ex:category code)
-        :type filters: dict
+        :param category_code: code to filter products by category
+        :type category_code: str
         :return: products corresponding to research
         :rtype: dict
         """
+        filters = self.api.factory.ProductFilter(category_code)
+
         response = self.api.client.service.GetProductList(
             headerMessage=self.api.header,
             productFilter=filters,
@@ -379,7 +375,7 @@ class Products(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_product_package_product_matching_file_data(self, package_id=None):
+    def get_product_package_product_matching_file_data(self, package_id):
         """
         Information of the created products.
         :param package_id: package id to filter results
@@ -390,17 +386,9 @@ class Products(object):
         if package_id:
             response = self.api.client.service.GetProductPackageProductMatchingFileData(
                 headerMessage=self.api.header,
-                productPackageFilter=package_id
+                productPackageFilter={'PackageID': package_id}
             )
             return helpers.serialize_object(response, dict)
-        else:
-            return {'ErrorMessage': None,
-                    'OperationSuccess': True,
-                    'ErrorList': None,
-                    'SellerLogin': self.api.login,
-                    'TokenId': self.api.token,
-                    'PackageId': 0,
-                    'ProductMatchingList': None}
 
     def get_product_list_by_identifier(self, ean_list=[]):
         """
@@ -410,23 +398,12 @@ class Products(object):
         :return: complete list of products
         :rtype: dict
         """
-        if ean_list:
-            response = self.api.client.service.GetProductPackageProductMatchingFileData(
-                headerMessage=self.api.header,
-                IdentifierRequest=ean_list
-            )
-            return helpers.serialize_object(response, dict)
-        else:
-            return {'ErrorMessage': None,
-                    'OperationSuccess': True,
-                    'ErrorList': None,
-                    'SellerLogin': self.api.login,
-                    'TokenId': self.api.token,
-                    'NumberOfErrors': 0,
-                    'ProductListByIdentifier': {
-                        'ProductByIdentifier': []
-                    }
-            }
+        request = {'IdentifierType': 'EAN', 'ValueList': ean_list}
+        response = self.api.client.service.GetProductListByIdentifier(
+            headerMessage=self.api.header,
+            identifierRequest=request
+        )
+        return helpers.serialize_object(response, dict)
 
 
 class Orders(object):
@@ -650,36 +627,97 @@ class Orders(object):
         pass
 
 
-class Fulfilment(object):
+class Fulfillment(object):
 
     def __init__(self, api):
         self.api = api
 
-    def submit_fulfilment_supply_order(self):
+    def submit_fulfillment_supply_order(self, request):
+        response = self.api.client.service.SubmitFulfilmentSupplyOrder(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return helpers.serialize_object(response, dict)
+
+    def submit_fulfillment_on_demand_supply_order(self, order_list):
+        """
+
+        :param order_list: list of dict as
+        [{'OrderReference': 1703182124BNXCO,
+        'ProductEan': 2009854780777}]
+        :return:
+        """
+        response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
+            headerMessage=self.api.header,
+            request={'OrderLineList': order_list}
+        )
+        return helpers.serialize_object(response, dict)
+
+    def get_fulfillment_supply_order_report_list(self, **request):
+        """
+        To search supply order reports.
+        :param request:
+            'BeginCreationDate': date,
+            'DepositIdList': int list,
+            'EndCreationDate': date,
+            'PageNumber': int,
+            'PageSize': int
+        :return:supply order reports
+        """
+        supply_order_report_request = self.api.factory.SupplyOrderReportRequest(**request)
+        response = self.api.client.service.GetFulfilmentSupplyOrderReportList(
+            headerMessage=self.api.header,
+            request=supply_order_report_request
+        )
+        return helpers.serialize_object(response, dict)
+
+    def get_fulfillment_delivery_document(self, deposit_id):
+        """
+        :param deposit_id: Unique identification number of the supply order request
+        :type deposit_id: int
+        :return: data for printing PDF documents, in the form of a Base64-encoded string.
+        """
+        response = self.api.client.service.GetFulfilmentDeliveryDocument(
+            headerMessage=self.api.header,
+            request={'DepositId': deposit_id}
+        )
+        return helpers.serialize_object(response, dict)
+
+    def get_fulfillment_supply_order(self, **request):
+        """
+        :param request:
+            'BeginModificationDate': date,
+            'EndModificationDate': date,
+            'PageNumber': int,
+            'PageSize': int,
+            'SupplyOrderNumberList': string list
+        :return: supply orders
+        """
+        response = self.api.client.service.GetFulfilmentSupplyOrder(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return helpers.serialize_object(response, dict)
+
+    def submit_fulfillment_activation(self):
         pass
 
-    def get_fulfilment_supply_order_report_list(self):
+    def get_fulfillment_activation_report_list(self):
         pass
 
-    def get_fulfilment_order_list_to_supply(self):
-        pass
-
-    def submit_fulfilment_on_demand_supply_order(self):
-        pass
-
-    def get_fulfilment_supply_order(self):
+    def get_fulfillment_order_list_to_supply(self):
         pass
 
     def submit_offer_state_action(self):
         pass
 
-    def submit_fulfilment_activation(self):
+    def create_external_order(self):
         pass
 
-    def get_fulfilment_activation_report_list(self):
+    def get_external_order(self):
         pass
 
-    def get_fulfilment_delivery_document(self):
+    def get_product_stock_list(self):
         pass
 
 
@@ -923,7 +961,7 @@ class Connection(object):
         self.offers = Offers(self)
         self.products = Products(self)
         self.orders = Orders(self)
-        self.fulfilment = Fulfilment(self)
+        self.fulfillment = Fulfillment(self)
         self.relays = Relays(self)
         self.discussions = Discussions(self)
         self.webmail = WebMail(self)

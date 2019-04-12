@@ -3,13 +3,13 @@ interactions:
     body: '<?xml version=''1.0'' encoding=''utf-8''?>
 
       <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
-      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferPackageSubmissionResult</wsa:Action><wsa:MessageID>urn:uuid:829d5cc4-ef70-4d3f-b0fa-7c143dda12c3</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferPackageSubmissionResult
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferPackageSubmissionResult</wsa:Action><wsa:MessageID>urn:uuid:08c31140-2265-413a-883b-6657e66d8a18</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferPackageSubmissionResult
       xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
       xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
       xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>dc6e462d43f54768a5a865eb16b944e9</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>a639f982d4714063a53852dd9351728c</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
       xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:offerPackageFilter><ns0:PackageID>541</ns0:PackageID></ns0:offerPackageFilter></ns0:GetOfferPackageSubmissionResult></soap-env:Body></soap-env:Envelope>'
     headers:
       Accept:
@@ -39,7 +39,7 @@ interactions:
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Thu, 11 Apr 2019 08:29:45 GMT
+      - Thu, 11 Apr 2019 12:19:58 GMT
       Vary:
       - Accept-Encoding
       content-length:
