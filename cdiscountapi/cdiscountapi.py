@@ -623,27 +623,27 @@ class Orders(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def manage_parcel(self, ParcelActionsList=None, ScopusId=None):
+    def manage_parcel(self, parcel_actions_list=None, scopus_id=None):
         """
         Ask for investigation or ask for delivery certification.
 
-        :param manage_parcel_request: The keywords from
+        :param parcel_actions_list: The keywords from
 
         >>> api.manage_parcel(ParcelInfos=[
             {'ManageParcel': manage_parcel, 'ParcelNumber': parcel_number, 'Sku': sku},
             ...
              ],
-             ScopusId=scopus_id)
+             scopus_id=scopus_id)
 
         where manage_parcel is either 'AskingForInvestigation' or
         'AskingForDeliveryCertification'.
 
         """
         # Handle properly the case where no information is provided for
-        # ParcelActionsList
-        if ParcelActionsList is not None:
+        # parcel_actions_list
+        if parcel_actions_list is not None:
             new_parcel_actions_list = []
-            for parcel_infos in ParcelActionsList:
+            for parcel_infos in parcel_actions_list:
                 new_parcel_infos = self.api.factory.ParcelInfos(parcel_infos)
                 if not isinstance(new_parcel_infos.ManageParcel, list):
                     new_parcel_infos.ManageParcel = [new_parcel_infos.ManageParcel]
@@ -652,8 +652,8 @@ class Orders(object):
             new_parcel_actions_list = None
 
         manage_parcel_request = self.api.factory.ManageParcelRequest(
-            ParcelActionsList=new_parcel_actions_list,
-            ScopusId=ScopusId
+            parcel_actions_list=new_parcel_actions_list,
+            ScopusId=scopus_id
         )
 
         response = self.api.client.service.ManageParcel(
