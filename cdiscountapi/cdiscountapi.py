@@ -623,8 +623,44 @@ class Orders(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def manage_parcel(self, manage_parcel_request):
-        pass
+    def manage_parcel(self, ParcelActionsList=None, ScopusId=None):
+        """
+        Ask for investigation or ask for delivery certification.
+
+        :param manage_parcel_request: The keywords from
+
+        >>> api.manage_parcel(ParcelInfos=[
+            {'ManageParcel': manage_parcel, 'ParcelNumber': parcel_number, 'Sku': sku},
+            ...
+             ],
+             ScopusId=scopus_id)
+
+        where manage_parcel is either 'AskingForInvestigation' or
+        'AskingForDeliveryCertification'.
+
+        """
+        # Handle properly the case where no information is provided for
+        # ParcelActionsList
+        if ParcelActionsList is not None:
+            new_parcel_actions_list = []
+            for parcel_infos in ParcelActionsList:
+                new_parcel_infos = self.api.factory.ParcelInfos(parcel_infos)
+                if not isinstance(new_parcel_infos.ManageParcel, list):
+                    new_parcel_infos.ManageParcel = [new_parcel_infos.ManageParcel]
+                new_parcel_actions_list.append(new_parcel_infos)
+        else:
+            new_parcel_actions_list = None
+
+        manage_parcel_request = self.api.factory.ManageParcelRequest(
+            ParcelActionsList=new_parcel_actions_list,
+            ScopusId=ScopusId
+        )
+
+        response = self.api.client.service.ManageParcel(
+            headerMessage=self.api.header,
+            manageParcelRequest=manage_parcel_request
+        )
+        return helpers.serialize_object(response, dict)
 
 
 class Fulfillment(object):
@@ -909,7 +945,12 @@ class WebMail(object):
         self.api = api
 
     def generate_mail_discussion_guid(self):
-        pass
+        """
+        Obtain an encrypted mail address.
+
+        This operation allows getting an encrypted mail address to contact a
+        customer about an order.
+        """
 
     def get_discussion_mail_list(self):
         pass
