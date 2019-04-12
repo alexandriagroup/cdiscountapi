@@ -156,20 +156,6 @@ def test_manage_parcel_with_nonexistent_order():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
 
-    # manage_parcel_request = {
-    #     'ParcelActionsList': [
-    #         {'ParcelInfos': [{
-    #             'ManageParcel': [
-    #                 'AskingForInvestigation'
-    #             ],
-    #             'ParcelNumber': 'PARCEL_NUMBER',
-    #             'Sku': 'SKU'
-    #         }]
-    #         }
-    #     ],
-    #     'ScopusId': 'SCOPUS_ID'
-    #     }
-
     parcel_actions_list = [
         {
             'ManageParcel': 'AskingForInvestigation',
