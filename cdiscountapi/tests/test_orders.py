@@ -140,3 +140,44 @@ def test_create_refund_voucher_with_invalid_data():
     assert response['CommercialGestureList'] is None
     assert response['OrderNumber'] is None
     assert response['SellerRefundList'] is None
+
+
+@pytest.mark.vcr()
+def test_manage_parcel_without_argument():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.manage_parcel()
+    assert_response_failed(response)
+    assert response['ParcelActionResultList'] is None
+
+
+@pytest.mark.vcr()
+def test_manage_parcel_with_nonexistent_order():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+
+    # manage_parcel_request = {
+    #     'ParcelActionsList': [
+    #         {'ParcelInfos': [{
+    #             'ManageParcel': [
+    #                 'AskingForInvestigation'
+    #             ],
+    #             'ParcelNumber': 'PARCEL_NUMBER',
+    #             'Sku': 'SKU'
+    #         }]
+    #         }
+    #     ],
+    #     'ScopusId': 'SCOPUS_ID'
+    #     }
+
+    parcel_actions_list = [
+        {
+            'ManageParcel': 'AskingForInvestigation',
+            'ParcelNumber': 'PARCEL_NUMBER',
+            'Sku': 'SKU',
+         }
+    ]
+    response = api.orders.manage_parcel(ParcelActionsList=parcel_actions_list,
+                                        ScopusId='SCOPUS_ID')
+    assert_response_failed(response)
+    assert response['ParcelActionResultList'] is None
