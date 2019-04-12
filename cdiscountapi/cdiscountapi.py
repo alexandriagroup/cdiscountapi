@@ -652,7 +652,7 @@ class Orders(object):
             new_parcel_actions_list = None
 
         manage_parcel_request = self.api.factory.ManageParcelRequest(
-            parcel_actions_list=new_parcel_actions_list,
+            ParcelActionsList=new_parcel_actions_list,
             ScopusId=scopus_id
         )
 

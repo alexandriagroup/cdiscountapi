@@ -163,7 +163,8 @@ def test_manage_parcel_with_nonexistent_order():
             'Sku': 'SKU',
          }
     ]
-    response = api.orders.manage_parcel(ParcelActionsList=parcel_actions_list,
-                                        ScopusId='SCOPUS_ID')
+    response = api.orders.manage_parcel(
+        parcel_actions_list=parcel_actions_list, scopus_id='SCOPUS_ID'
+    )
     assert_response_failed(response)
     assert response['ParcelActionResultList'] is None
