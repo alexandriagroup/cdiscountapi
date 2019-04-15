@@ -5,7 +5,8 @@ ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 install-dev:
 	@echo "Installing the requirements for the development"
-	pip install -r requirements-dev.txt
+	pip install flit
+	flit install --deps develop
 
 test:
 	py.test $(PYTEST_FLAGS) --vcr-record=none
