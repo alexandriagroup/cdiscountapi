@@ -31,3 +31,6 @@ dev = [
     "konch",
 ]
 doc = ["sphinx"]
+
+[tool.black]
+line-length = 88
