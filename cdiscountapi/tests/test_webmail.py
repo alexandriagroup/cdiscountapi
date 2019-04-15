@@ -2,10 +2,10 @@ import os
 import pytest
 from ..cdiscountapi import Connection
 from unittest import skip
-from . import assert_response_succeeded, assert_response_failed
+from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 
 
-@skip('Waiting for orders')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_generate_mail_discussion_guid():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),

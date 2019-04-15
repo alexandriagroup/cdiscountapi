@@ -5,14 +5,13 @@
 import os
 import pytest
 from ..cdiscountapi import Connection
-from . import assert_response_succeeded
-from unittest import skip
+from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 
 api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                  os.getenv('CDISCOUNT_API_PASSWORD'))
 
 
-@skip('timeout error unresolve by cdiscount')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='timeout error unresolve by cdiscount')
 @pytest.mark.vcr()
 def test_get_offer_list():
     response = api.offers.get_offer_list()
@@ -27,7 +26,7 @@ def test_get_offer_list_paginated():
     assert 'OfferList' in response.keys()
 
 
-@skip('submit_offer_package not ready')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_offer_package not ready')
 @pytest.mark.vcr()
 def test_submit_offer_package():
     response = api.offers.submit_offer_package()

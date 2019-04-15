@@ -1,3 +1,9 @@
+import os
+
+
+CDISCOUNT_WITHOUT_DATA = True if os.getenv('CDISCOUNT_WITHOUT_DATA') == '1' else False
+
+
 def assert_response_succeeded(response):
     assert response['ErrorList'] is None,\
         'ErrorList should be None but is {}'.format(response['ErrorList'])

@@ -2,13 +2,16 @@ import os
 import pytest
 from ..cdiscountapi import Connection
 from unittest import skip
-from . import assert_response_succeeded, assert_response_failed
+from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 from ..config import REFUND_INFORMATION
 
 
-@skip('Waiting for orders')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.get_order_list()
     raise AssertionError
 
 
@@ -95,7 +98,7 @@ def test_prepare_validations():
     assert api.orders.prepare_validations([order1, order2]) == expected
 
 
-@skip('Waiting for orders')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_validate_order_list():
     """
@@ -104,7 +107,7 @@ def test_validate_order_list():
     raise AssertionError
 
 
-@skip('Waiting for orders')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_create_refund_voucher():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
@@ -126,9 +129,8 @@ def test_create_refund_voucher():
             }
         }
     }
-
-    response = api.orders.create_refund_voucher(**request)
     raise AssertionError
+    response = api.orders.create_refund_voucher(**request)
 
 
 @pytest.mark.vcr()

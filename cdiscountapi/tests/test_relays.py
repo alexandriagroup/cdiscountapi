@@ -2,7 +2,7 @@ import os
 import pytest
 from unittest import skip
 from ..cdiscountapi import Connection
-from . import assert_response_succeeded, assert_response_failed
+from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 
 
 # TODO Find out how to get a not empty ParcelShopList
@@ -15,7 +15,7 @@ def test_get_parcel_shop_list():
     assert response['ParcelShopList'] is None
 
 
-@skip('Standby')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Standby')
 @pytest.mark.vcr()
 def test_submit_relays_file():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
@@ -25,7 +25,7 @@ def test_submit_relays_file():
     )
 
 
-@skip('Standby')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Standby')
 @pytest.mark.vcr()
 def test_get_relays_file_submission_result():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),

@@ -4,10 +4,9 @@
 
 import json
 import os
-from unittest import skip
 
 import pytest
-from . import assert_response_succeeded
+from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 
 from ..cdiscountapi import Connection
 
@@ -49,7 +48,7 @@ def test_get_model_list():
     assert 'ModelList' in response.keys()
 
 
-@skip('get_all_model_list not ready')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='get_all_model_list not ready')
 @pytest.mark.vcr()
 def test_get_all_model_list():
     response = api.products.get_model_list()
@@ -64,7 +63,7 @@ def test_get_brand_list():
     assert 'BrandList' in response.keys()
 
 
-@skip('submit_product_package not ready')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_product_package not ready')
 @pytest.mark.vcr()
 def test_submit_product_package():
     with open('cdiscountapi/tests/samples/products/products_to_submit.json') as f:
@@ -75,7 +74,7 @@ def test_submit_product_package():
     assert 'PackageId' in response.keys()
 
 
-@skip('to test after a submission')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='to test after a submission')
 @pytest.mark.vcr()
 def test_get_product_package_submission_result():
     response = api.products.get_product_package_submission_result()
@@ -83,7 +82,7 @@ def test_get_product_package_submission_result():
     assert 'PackageId' in response.keys()
 
 
-@skip('to test with a correct package id')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='to test with a correct package id')
 @pytest.mark.vcr()
 def test_get_product_package_product_matching_file_data():
     response = api.products.get_product_package_product_matching_file_data()

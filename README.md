@@ -37,3 +37,13 @@ make test
 ```sh
 make test-renew-vcr-records
 ```
+
+* Run only the tests that don't necesitate real data
+  
+```sh
+  CDISCOUNT_WITHOUT_DATA=1 make test
+```
+
+by default `CDISCOUNT_WITHOUT_DATA` equals 1. By setting this environment
+variable to 0, the tests may fail  if no real data there are available (and no
+cassette is available)

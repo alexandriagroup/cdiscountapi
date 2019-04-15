@@ -2,7 +2,7 @@ import os
 import pytest
 from ..cdiscountapi import Connection
 from unittest import skip
-from . import assert_response_succeeded
+from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 import datetime
 
 
@@ -71,13 +71,13 @@ def test_get_offer_question_list_by_date():
         assert response['OfferQuestionList'] is None
 
 
-@skip('Standby')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 @pytest.mark.vcr()
 def test_get_offer_question_list_by_eans():
     pass
 
 
-@skip('Standby')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 @pytest.mark.vcr()
 def test_get_offer_question_list_by_seller_refrences():
     pass
@@ -125,13 +125,13 @@ def test_get_order_question_list_by_date():
         assert response['OrderQuestionList'] is None
 
 
-@skip('Standby')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 @pytest.mark.vcr()
 def test_get_order_question_list_by_eans():
     pass
 
 
-@skip('Standby')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 @pytest.mark.vcr()
 def test_get_order_question_list_by_seller_refrences():
     pass
