@@ -622,8 +622,44 @@ class Orders(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def manage_parcel(self, manage_parcel_request):
-        pass
+    def manage_parcel(self, parcel_actions_list=None, scopus_id=None):
+        """
+        Ask for investigation or ask for delivery certification.
+
+        :param parcel_actions_list: The keywords from
+
+        >>> api.manage_parcel(ParcelInfos=[
+            {'ManageParcel': manage_parcel, 'ParcelNumber': parcel_number, 'Sku': sku},
+            ...
+             ],
+             scopus_id=scopus_id)
+
+        where manage_parcel is either 'AskingForInvestigation' or
+        'AskingForDeliveryCertification'.
+
+        """
+        # Handle properly the case where no information is provided for
+        # parcel_actions_list
+        if parcel_actions_list is not None:
+            new_parcel_actions_list = []
+            for parcel_infos in parcel_actions_list:
+                new_parcel_infos = self.api.factory.ParcelInfos(parcel_infos)
+                if not isinstance(new_parcel_infos.ManageParcel, list):
+                    new_parcel_infos.ManageParcel = [new_parcel_infos.ManageParcel]
+                new_parcel_actions_list.append(new_parcel_infos)
+        else:
+            new_parcel_actions_list = None
+
+        manage_parcel_request = self.api.factory.ManageParcelRequest(
+            ParcelActionsList=new_parcel_actions_list,
+            ScopusId=scopus_id
+        )
+
+        response = self.api.client.service.ManageParcel(
+            headerMessage=self.api.header,
+            manageParcelRequest=manage_parcel_request
+        )
+        return helpers.serialize_object(response, dict)
 
 
 class Fulfillment(object):
@@ -989,15 +1025,51 @@ class Discussions(object):
 
 
 class WebMail(object):
+    """
+    The WebMail API allows the seller to retrieve encrypted email address to
+    contact a customer
+    """
 
     def __init__(self, api):
         self.api = api
 
-    def generate_mail_discussion_guid(self):
-        pass
+    def generate_discussion_mail_guid(self, scopus_id=None):
+        """
+        Obtain an encrypted mail address.
 
-    def get_discussion_mail_list(self):
-        pass
+        This operation allows getting an encrypted mail address to contact a
+        customer about an order.
+
+        Usage:
+        >>> response = api.generate_discussion_mail_guid(scopus_id)
+        """
+        response = self.api.client.service.GenerateDiscussionMailGuid(
+            headerMessage=self.api.header,
+            request={'ScopusId': scopus_id}
+        )
+        return helpers.serialize_object(response, dict)
+
+    def get_discussion_mail_list(self, discussion_ids):
+        """
+        Obtain an encrypted mail address about a discussion.
+
+        This operation allows getting an encrypted mail address to contact a
+        customer about a discussion (claim, retraction, questions).
+
+        Usage:
+        >>> response = api.webmail.generate_discussion_mail_guid(discussion_ids)
+        """
+        arrays_factory = self.api.client.type_factory(
+            'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
+        )
+        request = self.api.factory.GetDiscussionMailListRequest(
+            DiscussionIds=arrays_factory.ArrayOflong(discussion_ids)
+        )
+        response = self.api.client.service.GetDiscussionMailList(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return helpers.serialize_object(response, dict)
 
 
 class Connection(object):
