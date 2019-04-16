@@ -1,17 +1,88 @@
 import os
 import pytest
+import datetime
 from ..cdiscountapi import Connection
-from unittest import skip
 from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 from ..config import REFUND_INFORMATION
 
 
+# TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list():
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                      os.getenv('CDISCOUNT_API_PASSWORD'))
     response = api.orders.get_order_list()
+    raise AssertionError
+
+
+# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_get_order_list_by_state():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.get_order_list(States=['AcceptedBySeller', 'Shipped'])
+    raise AssertionError
+
+
+# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_get_order_list_by_date():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.get_order_list(
+        BeginCreationDate=datetime.datetime(2077, 1, 1)
+    )
+    raise AssertionError
+
+
+# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_get_order_list_with_corporation_code():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.get_order_list(
+        CorporationCode='CDSB2C'
+    )
+    raise AssertionError
+
+
+# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_get_order_list_with_order_type():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.get_order_list(
+        OrderType='MKPFBC'
+    )
+    raise AssertionError
+
+
+# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_get_order_list_with_order_numbers():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.get_order_list(
+        PartnerOrderRef='X'
+    )
+    raise AssertionError
+
+
+# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_get_order_list_with_fetch_parcels():
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+    response = api.orders.get_order_list(
+        FetchParcels=True, OrderReferenceList=['ORDER_NUMBER_1']
+    )
     raise AssertionError
 
 
@@ -98,6 +169,7 @@ def test_prepare_validations():
     assert api.orders.prepare_validations([order1, order2]) == expected
 
 
+# TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_validate_order_list():
@@ -107,6 +179,7 @@ def test_validate_order_list():
     raise AssertionError
 
 
+# TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_create_refund_voucher():
@@ -129,8 +202,8 @@ def test_create_refund_voucher():
             }
         }
     }
-    raise AssertionError
     response = api.orders.create_refund_voucher(**request)
+    raise AssertionError
 
 
 @pytest.mark.vcr()

@@ -438,6 +438,11 @@ class Orders(object):
             - PickedUp
             - Filled
 
+        Example:
+        >>> response = api.orders.get_order_list(
+            States=['CancelledByCustomer', 'Shipped']
+        )
+
         - Recovery or not of the products of the order
 
         - Filter on date:
@@ -446,23 +451,59 @@ class Orders(object):
             - BeginModificationDate
             - EndModificationDate
 
+        Example:
+        >>> response = api.orders.get_order_list(
+            BeginCreationDate=datetime.datetime(2077, 1, 1)
+        )
+
         - Order number list Liste (OrderReferenceList) Warning, this filter
         cannot be combined with others. If there is an order list, the other
         filters are unaccounted.
 
+        Example:
+        >>> response = api.orders.get_order_list(OrderReferenceList=['X1', 'X2'])
+
         - Filter on website thanks to the corporationCode.
+
+        Example:
+        >>> response = api.orders.get_order_list(CorporationCode='CDSB2C')
 
         - Filter by Order Type:
             - MKPFBC Orders
             - EXTFBC Orders
             - FBC Orders(Isfulfillment)
 
+        Example:
+        >>> response = api.get_order_list(OrderType='MKPFBC')
+
         - PartnerOrderRef filter from 1 to N external order (if it's a multiple
         search, separate PartnerOrderRefs by semicolon).
         PartnerOrderRef is the seller's reference
 
+        Example:
+        >>> response = api.get_order_list(PartnerOrderRef='SELLER_REF')
+
         - Recovery or not of the parcels of the order
+
+        Example:
+        >>> response = api.get_order_list(FetchParcels=True, OrderReferenceList=['X1'])
         """
+        if 'States' in order_filter:
+            order_filter.update(States=self.api.factory.ArrayOfOrderStateEnum(
+                order_filter['States'])
+            )
+
+        if 'OrderReferenceList' in order_filter:
+            arrays_factory = self.api.client.type_factory(
+                'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
+            )
+            order_filter.update(OrderReferenceList=arrays_factory.ArrayOfstring(
+                order_filter['OrderReferenceList'])
+            )
+
+        if 'FetchOrderLines' not in order_filter:
+            order_filter.update(FetchOrderLines=True)
+
         order_filter = self.api.factory.OrderFilter(**order_filter)
         response = self.api.client.service.GetOrderList(
             headerMessage=self.api.header,
@@ -1030,6 +1071,7 @@ class Connection(object):
             },
             'Version': 1.0,
         }
+
         # Instanciated sections.
         self.seller = Seller(self)
         self.offers = Offers(self)
