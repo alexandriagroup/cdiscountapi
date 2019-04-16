@@ -1133,3 +1133,24 @@ class Connection(object):
     def get_token(self):
         response = requests.get(self.auth_url, auth=(self.login, self.password))
         return lxml.etree.XML(response.text).text
+
+    def _analyze_history(self, attr, error_msg):
+        if len(self.history._buffer) == 0:
+            return error_msg
+
+        envelope = getattr(self.history, attr)['envelope']
+        return lxml.etree.tostring(envelope, pretty_print=True).decode('utf8')
+
+    @property
+    def last_request(self):
+        """
+        Return the last SOAP request
+        """
+        return self._analyze_history('last_sent', 'No request sent.')
+
+    @property
+    def last_response(self):
+        """
+        Return the last SOAP response
+        """
+        return self._analyze_history('last_received', 'No response received.')
