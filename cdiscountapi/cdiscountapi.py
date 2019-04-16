@@ -20,7 +20,6 @@ from zeep.plugins import HistoryPlugin
 
 from cdiscountapi.exceptions import (
     CdiscountApiConnectionError,
-    CdiscountApiOrderError,
 )
 
 from cdiscountapi.config import REFUND_INFORMATION
@@ -767,7 +766,6 @@ class Fulfillment(object):
 
     def submit_fulfillment_on_demand_supply_order(self, order_list):
         """
-
         :param order_list: list of dict as
         [{'OrderReference': 1703182124BNXCO,
         'ProductEan': 2009854780777}]
@@ -819,32 +817,119 @@ class Fulfillment(object):
             'SupplyOrderNumberList': string list
         :return: supply orders
         """
+
         response = self.api.client.service.GetFulfilmentSupplyOrder(
             headerMessage=self.api.header,
             request=request
         )
         return helpers.serialize_object(response, dict)
 
-    def submit_fulfillment_activation(self):
-        pass
+    def submit_fulfillment_activation(self, request):
+        """
+        To ask for products activation (or deactivation)
+        :param request:
+            'ProductList': ProductActivationData list
+        :return: deposit id
+        """
+        response = self.api.client.service.SubmitFulfilmentActivation(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_fulfillment_activation_report_list(self):
-        pass
+    def get_fulfillment_activation_report_list(self, **request):
+        """
+        :param request:
+            'BeginDate': date,
+            'DepositIdList': int list,
+            'EndDate': date
+        """
+        activation_report_request = self.api.factory.FulfilmentActivationReportRequest(**request)
+        response = self.api.client.service.GetFulfilmentActivationReportList(
+            headerMessage=self.api.header,
+            request=activation_report_request
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_fulfillment_order_list_to_supply(self):
-        pass
+    def get_fulfillment_order_list_to_supply(self, **request):
+        """
+        :param request:
+            'OrderReference': str,
+            'ProductEan': str,
+            'Warehouse': str
+        :return:
+        """
+        references = self.api.factory.FulfilmentOnDemandOrderLineFilter(**request)
+        response = self.api.client.service.GetFulfilmentActivationReportList(
+            headerMessage=self.api.header,
+            request=references
+        )
+        return helpers.serialize_object(response, dict)
 
-    def submit_offer_state_action(self):
-        pass
+    def submit_offer_state_action(self, **request):
+        """
+        To set an offer online or offline
+        :param request:
+            'Action': 'Publish' or 'Unpublish'
+            'SellerProductId': str
+        :return:
+        """
+        seller_action = self.api.factory.OfferStateActionRequest(**request)
+        response = self.api.client.service.SubmitOfferStateAction(
+            headerMessage=self.api.header,
+            offerStateRequest=seller_action
+        )
+        return helpers.serialize_object(response, dict)
 
-    def create_external_order(self):
-        pass
+    def create_external_order(self, order):
+        """
+        create an order from another marketplace.
+        :param order: dict as {
+                    'Comments': str,
+                    'Corporation': str (ex:FNAC),
+                    'Customer': customer info dict,
+                    'CustomerOrderNumber': str,
+                    'OrderDate': date,
+                    'OrderLineList': {
+                        'ExternalOrderLine': {
+                            'ProductEan': str,
+                            'ProductReference': str,
+                            'Quantity': int
+                        }
+                    },
+                    'ShippingMode': str,
 
-    def get_external_order(self):
-        pass
+        :return:
+        """
+        response = self.api.client.service.CreateExternalOrder(
+            headerMessage=self.api.header,
+            request={'Order': order}
+        )
+        return helpers.serialize_object(response, dict)
 
-    def get_product_stock_list(self):
-        pass
+    def get_external_order_status(self, **request):
+        response = self.api.client.service.GetExternalOrderStatus(
+            headerMessage=self.api.header,
+            request={
+                'Corporation': request.get('Corporation'),
+                'CustomerOrderNumber': request.get('CustomerOrderNumber')
+            }
+        )
+        return helpers.serialize_object(response, dict)
+
+    def get_product_stock_list(self, **request):
+        """
+
+        :param request:
+            "BarCodeList": str list
+            "FulfilmentReferencement"
+        :return:
+        """
+        response = self.api.client.service.GetProductStockList(
+            headerMessage=self.api.header,
+            request=request
+        )
+        return helpers.serialize_object(response, dict)
 
 
 class Relays(object):
