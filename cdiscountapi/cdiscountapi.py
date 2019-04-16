@@ -23,6 +23,8 @@ from cdiscountapi.exceptions import (
     CdiscountApiOrderError,
 )
 
+from cdiscountapi.config import REFUND_INFORMATION
+
 
 def check_element(element_name, dynamic_type):
     """
@@ -657,8 +659,54 @@ class Orders(object):
 
         An additional feature allows to make a commercial gesture on an order
         MKPCDS before and after shipping and on an order MKPFBC after shipping.
+
+        Example:
+        >>> response = api.orders.create_refund_voucher(
+            CommercialGestureList=[{'Amount': 10, 'MotiveId': 'late_delivery'}],
+            OrderNumber='ORDER_NUMBER_1',
+            SellerRefundList={
+                'Mode': 'Claim',
+                'Motive': 'ClientClaim',
+                'RefundOrderLine': {'Ean': '4005274238223',
+                                    'SellerProductId': '42382235',
+                                    'RefundShippingCharges': True}
+                }
+            )
         """
-        request = self.api.factory.SellerRefundRequest(**request)
+        # Check CommercialGestureList
+        if 'CommercialGestureList' in request:
+            commercial_gestures = request['CommercialGestureList']
+            if isinstance(commercial_gestures, dict):
+                commercial_gestures = [commercial_gestures]
+
+            for commercial_gesture in commercial_gestures:
+                motive_id = commercial_gesture.get('MotiveId')
+                if motive_id not in REFUND_INFORMATION['MotiveId'] and \
+                        not isinstance(motive_id, int):
+                    raise CdiscountApiOrderError(
+                        '{0} is not a valid value for MotiveId. '
+                        'MotiveId should have be a value amongst {1} or {2}'
+                        ' (cf https://dev.cdiscount.com/marketplace/?page_id=140#refundInformation)'.format(
+                            motive_id,
+                            list(REFUND_INFORMATION['MotiveId'].keys()),
+                            set(REFUND_INFORMATION['MotiveId'].values())
+                        )
+                    )
+                if motive_id in REFUND_INFORMATION['MotiveId']:
+                    commercial_gesture['MotiveId'] = REFUND_INFORMATION['MotiveId'][motive_id]
+        else:
+            commercial_gestures = None
+
+        # Request
+        request = self.api.factory.CreateRefundVoucherRequest(
+            OrderNumber=request.get('OrderNumber'),
+            CommercialGestureList=self.api.factory.ArrayOfRefundInformation(
+                commercial_gestures
+            ),
+            SellerRefundList=self.api.factory.ArrayOfSellerRefundRequest(
+                request.get('SellerRefundList')
+            )
+        )
         response = self.api.client.service.CreateRefundVoucher(
             headerMessage=self.api.header,
             request=request

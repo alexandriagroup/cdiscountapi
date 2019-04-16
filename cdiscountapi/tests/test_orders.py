@@ -179,6 +179,24 @@ def test_validate_order_list():
     raise AssertionError
 
 
+# create_refund_voucher
+@pytest.fixture
+def refund_voucher_request():
+    return {
+        'OrderNumber': 'ORDER_NUMBER',
+        'SellerRefundList': {
+            'Mode': 'Claim',
+            'Motive': 'VendorRejection',
+            'RefundOrderLine': {
+                'Ean': 'EAN',
+                'RefundShippingCharges': True,
+                'SellerProductId': 'SKU1'
+            }
+        }
+    }
+
+
+
 # TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
@@ -202,6 +220,36 @@ def test_create_refund_voucher():
             }
         }
     }
+    response = api.orders.create_refund_voucher(**request)
+    raise AssertionError
+
+
+# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_create_refund_voucher_with_commercial_gesture(refund_voucher_request):
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+
+    # CommercialGestureList accepts a single dict
+    commercial_gestures = {'Amount': 10, 'MotiveId': 135}
+    request = refund_voucher_request
+    request['CommercialGestureList'] = [commercial_gestures]
+    response = api.orders.create_refund_voucher(**request)
+    raise AssertionError
+
+
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_create_refund_voucher_with_commercial_gestures(refund_voucher_request):
+    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                     os.getenv('CDISCOUNT_API_PASSWORD'))
+
+    # CommercialGestureList accepts a list of dicts
+    commercial_gestures = [{'Amount': 10, 'MotiveId': 135},
+                           {'Amount': 10, 'MotiveId': 132}]
+    request = refund_voucher_request
+    request['CommercialGestureList'] = [commercial_gestures]
     response = api.orders.create_refund_voucher(**request)
     raise AssertionError
 
