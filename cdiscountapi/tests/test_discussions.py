@@ -1,7 +1,6 @@
 import os
 import pytest
 from ..cdiscountapi import Connection
-from unittest import skip
 from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 import datetime
 
