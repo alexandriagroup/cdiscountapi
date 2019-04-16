@@ -16,6 +16,7 @@ from zeep import (
     Client,
     helpers,
 )
+from zeep.plugins import HistoryPlugin
 
 from cdiscountapi.exceptions import (
     CdiscountApiConnectionError,
@@ -1003,7 +1004,8 @@ class Connection(object):
 
         self.login = login
         self.password = password
-        self.client = Client(self.wsdl)
+        self.history = HistoryPlugin()
+        self.client = Client(self.wsdl, plugins=[self.history])
         self.factory = self.client.type_factory('http://www.cdiscount.com')
 
         if self.login is None or self.password is None:
