@@ -15,9 +15,53 @@ api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
 @skip('submit not ready')
 @pytest.mark.vcr()
 def test_submit_fulfillment_supply_order():
-    response = api.fulfillment.submit_fulfillment_supply_order()
+    product_list = [
+        {
+            'ExternalSupplyOrderId': 12,
+            'ProductEan': 1234567891234,
+            'Quantity': 122,
+            'SellerProductReference': 154,
+            'Warehouse': 'ANZ',
+            'WarehouseReceptionMinDate': '2018-12-12'
+        },
+        {
+            'ExternalSupplyOrderId': 13,
+            'ProductEan': 1234567895234,
+            'Quantity': 3,
+            'SellerProductReference': 164,
+            'Warehouse': 'ANZ',
+            'WarehouseReceptionMinDate': '2019-02-04'
+        },
+    ]
+
+    response = api.fulfillment.submit_fulfillment_supply_order(product_list)
     assert_response_succeeded(response)
     assert 'DepositId' in response.keys()
+
+
+@skip('submit not ready')
+@pytest.mark.vcr()
+def test_submit_fulfillment_supply_order_raises():
+    product_list = [
+        {
+            'ExternalSupplyOrderId': 12,
+            'ProductEan': 1234567891234,
+            'Quantity': 122,
+            'SellerProductReference': 154,
+            'Toto': 'ANZ',
+            'WarehouseReceptionMinDate': '2018-12-12'
+        },
+        {
+            'ExternalSupplyOrderId': 13,
+            'ProductEan': 1234567895234,
+            'Quantity': 3,
+            'SellerProductReference': 164,
+            'Warehouse': 'ANZ',
+            'WarehouseReceptionMinDate': '2019-02-04'
+        },
+    ]
+    # TODO test raise
+
 
 
 @skip('submit not ready')
@@ -93,6 +137,7 @@ def test_create_external_order():
     assert_response_succeeded(response)
 
 
+@skip('not authorized to access')
 @pytest.mark.vcr()
 def test_get_external_order_status():
     response = api.fulfillment.get_external_order_status(
@@ -103,6 +148,7 @@ def test_get_external_order_status():
     assert 'Status' in response.keys()
 
 
+@skip('not authorized to access')
 @pytest.mark.vcr()
 def test_get_product_stock_list():
     response = api.fulfillment.get_product_stock_list(

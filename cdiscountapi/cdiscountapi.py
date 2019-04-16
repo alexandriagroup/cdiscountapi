@@ -667,7 +667,31 @@ class Fulfillment(object):
     def __init__(self, api):
         self.api = api
 
-    def submit_fulfillment_supply_order(self, request):
+    def submit_fulfillment_supply_order(self, product_list):
+        """
+        :param request: list of dict as:
+            [
+                {
+                "ExternalSupplyOrderId": int,
+                "ProductEan": str,
+                "Quantity": int,
+                "SellerProductReference": int,
+                "Warehouse": str,
+                "WarehouseReceptionMinDate": date
+                }
+            ]
+        :return:
+        """
+        for prod in product_list:
+            for key in prod:
+                check_element(key, self.api.factory.FulfilmentProductDescription)
+
+        # req is based on arr keys.
+        req = self.api.factory.FulfilmentSupplyOrderRequest
+        # arr is composed by desc key.
+        arr = self.api.factory.ArrayOfFulfilmentProductDescription
+
+        request = req([arr(x) for x in product_list])
         response = self.api.client.service.SubmitFulfilmentSupplyOrder(
             headerMessage=self.api.header,
             request=request
@@ -677,13 +701,17 @@ class Fulfillment(object):
     def submit_fulfillment_on_demand_supply_order(self, order_list):
         """
         :param order_list: list of dict as
-        [{'OrderReference': 1703182124BNXCO,
-        'ProductEan': 2009854780777}]
+        [{'OrderReference': '1703182124BNXCO',
+        'ProductEan': '2009854780777'}]
         :return:
         """
         response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
             headerMessage=self.api.header,
-            request={'OrderLineList': order_list}
+            request={
+                'OrderLineList': {
+                    'FulfilmentOrderLineRequest': order_list
+                }
+            }
         )
         return helpers.serialize_object(response, dict)
 
@@ -711,9 +739,10 @@ class Fulfillment(object):
         :type deposit_id: int
         :return: data for printing PDF documents, in the form of a Base64-encoded string.
         """
+        request = self.api.factory.FulfilmentDeliveryDocumentRequest(deposit_id)
         response = self.api.client.service.GetFulfilmentDeliveryDocument(
             headerMessage=self.api.header,
-            request={'DepositId': deposit_id}
+            request=request
         )
         return helpers.serialize_object(response, dict)
 
