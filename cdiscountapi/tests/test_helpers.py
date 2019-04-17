@@ -20,7 +20,7 @@ def test_check_element_with_valid_element():
 @pytest.mark.vcr()
 def test_check_element_with_invalid_element():
     """
-    check_element should raise a ValueError when the element is invalid for the
+    check_element should raise a TypeError when the element is invalid for the
     XSD type
     """
     api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
@@ -29,4 +29,4 @@ def test_check_element_with_invalid_element():
     dynamic_type = api.factory.ValidateOrder
     valid_elements = [x[0] for x in dynamic_type.elements]
     assert 'INVALID_ELEMENT' not in valid_elements
-    pytest.raises(ValueError, check_element, 'INVALID_ELEMENT', dynamic_type)
+    pytest.raises(TypeError, check_element, 'INVALID_ELEMENT', dynamic_type)
