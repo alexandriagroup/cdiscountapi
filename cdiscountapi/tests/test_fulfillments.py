@@ -59,7 +59,7 @@ def test_submit_fulfillment_supply_order_raises():
             'WarehouseReceptionMinDate': '2019-02-04'
         },
     ]
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         api.fulfillment.submit_fulfillment_supply_order(product_list)
 
 
@@ -93,7 +93,7 @@ def test_submit_fulfillment_on_demand_supply_order_raises():
             'Toto': '350075411599'
          }
     ]
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         api.fulfillment.submit_fulfillment_on_demand_supply_order(order_list)
 
 
@@ -103,6 +103,12 @@ def test_get_fulfillment_supply_order_report_list():
     response = api.fulfillment.get_fulfillment_supply_order_report_list(PageSize=10)
     assert_response_succeeded(response)
     assert 'ReportList' in response.keys()
+
+
+@pytest.mark.vcr()
+def test_get_fulfillment_supply_order_report_list_raises():
+    with pytest.raises(TypeError):
+        api.fulfillment.get_fulfillment_supply_order_report_list(Toto=10)
 
 
 @skip('not authorized to access')
@@ -124,7 +130,19 @@ def test_get_fulfillment_supply_order():
 @skip('submit not ready')
 @pytest.mark.vcr()
 def test_submit_fulfillment_activation():
-    response = api.fulfillment.submit_fulfillment_activation()
+    product_list = [{
+        'ProductActivationData': {
+            'Action': 'Activation',
+            'Height': 1,
+            'Length': 20,
+            'ProductEan': 'AX34567891234',
+            'SellerProductReference': 'ABVG45K',
+            'Weight': 50,
+            'Width': 10
+        }
+    }]
+    req = api.factory.FulfilmentActivationRequest(product_list)
+    response = api.fulfillment.submit_fulfillment_activation(req)
     assert_response_succeeded(response)
     assert 'DepositId' in response.keys()
 
@@ -132,7 +150,7 @@ def test_submit_fulfillment_activation():
 @skip('not authorized to access')
 @pytest.mark.vcr()
 def test_get_fulfillment_activation_report_list():
-    response = api.fulfillment.get_fulfillment_activation_report_list()
+    response = api.fulfillment.get_fulfillment_activation_report_list(DepositIdList=10)
     assert_response_succeeded(response)
     assert 'FulfilmentActivationReportList' in response.keys()
 
@@ -140,7 +158,7 @@ def test_get_fulfillment_activation_report_list():
 @skip('not authorized to access')
 @pytest.mark.vcr()
 def test_get_fulfillment_order_list_to_supply():
-    response = api.fulfillment.get_fulfillment_order_list_to_supply()
+    response = api.fulfillment.get_fulfillment_order_list_to_supply(ProductEan=3515338039204)
     assert_response_succeeded(response)
     assert 'FulfilmentActivationReportList' in response.keys()
 
@@ -158,7 +176,31 @@ def test_submit_offer_state_action():
 @skip('not authorized to access')
 @pytest.mark.vcr()
 def test_create_external_order():
-    response = api.fulfillment.create_external_order()
+    order_dict = {
+        'Comments': None,
+        'Corporation': 'FNAC',
+        'Customer': {
+            'Civility': 'M',
+            'CustomerEmailAdress': 'toto@mail.com',
+            'CustomerFirstName': 'Toto',
+            'CustomerLastName': 'Titi',
+            'ShippingAdress': '19 rue Toto',
+            'ShippingCity': 'Toto',
+            'ShippingCountry': 'TOTO',
+            'ShippingPostalCode': 00000
+        },
+        'CustomerOrderNumber': 'CDS2',
+        'OrderDate': '2019-03-04-T01:01:01',
+        'OrderLineList': {
+            'ExternalOrderLine': {
+                'ProductEan': '3401565611712',
+                'ProductReference': None,
+                'Quantity': 1
+            }
+        },
+        'ShippingMode': str,
+    }
+    response = api.fulfillment.create_external_order(order_dict)
     assert_response_succeeded(response)
 
 

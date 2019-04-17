@@ -31,10 +31,10 @@ def check_element(element_name, dynamic_type):
     """
     valid_elements = [x[0] for x in dynamic_type.elements]
     if element_name not in valid_elements:
-        raise ValueError('{0} is not a valid element of {1}.'
-                         ' Valid elements are {2}'.format(
+        raise TypeError('{0} is not a valid element of {1}.'
+                        ' Valid elements are {2}'.format(
                              element_name, dynamic_type.name, valid_elements)
-                         )
+                        )
 
 
 # HELPER FUNCTIONS.
@@ -752,7 +752,7 @@ class Fulfillment(object):
         )
         return helpers.serialize_object(response, dict)
 
-    def get_fulfillment_supply_order(self, **request):
+    def get_fulfillment_supply_order(self, **info):
         """
         :param request:
             'BeginModificationDate': date,
@@ -762,7 +762,7 @@ class Fulfillment(object):
             'SupplyOrderNumberList': string list
         :return: supply orders
         """
-
+        request = self.api.factory.SupplyOrderRequest(**info)
         response = self.api.client.service.GetFulfilmentSupplyOrder(
             headerMessage=self.api.header,
             request=request
@@ -773,7 +773,19 @@ class Fulfillment(object):
         """
         To ask for products activation (or deactivation)
         :param request:
-            'ProductList': ProductActivationData list
+            {
+                'ProductList': [{
+                    ProductActivationData: {
+                        Action: str,
+                        Height: int,
+                        Length: int,
+                        ProductEan: str,
+                        SellerProductReference: str,
+                        Weight: int,
+                        Width: int
+                    }
+                }]
+            }
         :return: deposit id
         """
         response = self.api.client.service.SubmitFulfilmentActivation(
