@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
-#
-# Copyright © 2019 Alexandria
+"""
+    cdiscountapi.exceptions
+    -------------------------
+
+    Define specific exceptions.
+
+    :copyright: © 2019 Alexandria
+"""
 
 
 class CdiscountApiException(Exception):
