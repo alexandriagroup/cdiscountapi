@@ -11,8 +11,8 @@ Welcome to CdiscountAPI's documentation!
    :caption: Contents:
 
    quickstart
-   api
    advanced_usage
+   api
    CHANGELOG
 
 

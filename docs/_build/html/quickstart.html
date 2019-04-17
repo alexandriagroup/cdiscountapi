@@ -14,7 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API" href="api.html" />
+    <link rel="next" title="Developer interface" href="api.html" />
     <link rel="prev" title="Welcome to CdiscountAPI’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -36,18 +36,18 @@
 <span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="create-a-connection-to-the-server">
 <h2>Create a connection to the server<a class="headerlink" href="#create-a-connection-to-the-server" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<p>The first thing to do is to connect to the API:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>After the connection is created, the token is available. You can get it with
+the attribute <code class="docutils literal notranslate"><span class="pre">token</span></code>.</p>
 </div>
 <div class="section" id="retrieve-information-about-your-seller-account">
 <h2>Retrieve information about your seller account<a class="headerlink" href="#retrieve-information-about-your-seller-account" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt>::</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">seller_info</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">seller</span><span class="o">.</span><span class="n">get_seller_info</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seller_info</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">seller</span><span class="o">.</span><span class="n">get_seller_info</span><span class="p">()</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </div>
 </div>
 
@@ -75,7 +75,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#retrieve-information-about-your-seller-account">Retrieve information about your seller account</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Developer interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change log</a></li>
 </ul>
 
@@ -84,7 +85,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Welcome to CdiscountAPI’s documentation!</a></li>
-      <li>Next: <a href="api.html" title="next chapter">API</a></li>
+      <li>Next: <a href="api.html" title="next chapter">Developer interface</a></li>
   </ul></li>
 </ul>
 </div>
