@@ -39,7 +39,6 @@ def test_submit_fulfillment_supply_order():
     assert 'DepositId' in response.keys()
 
 
-@skip('submit not ready')
 @pytest.mark.vcr()
 def test_submit_fulfillment_supply_order_raises():
     product_list = [
@@ -60,16 +59,42 @@ def test_submit_fulfillment_supply_order_raises():
             'WarehouseReceptionMinDate': '2019-02-04'
         },
     ]
-    # TODO test raise
-
+    with pytest.raises(ValueError):
+        api.fulfillment.submit_fulfillment_supply_order(product_list)
 
 
 @skip('submit not ready')
 @pytest.mark.vcr()
 def test_submit_fulfillment_on_demand_supply_order():
-    response = api.fulfillment.submit_fulfillment_on_demand_supply_order()
+    order_list = [
+        {
+            'OrderReference': '1703182124BNXCO',
+            'ProductEan': '2009854780777'
+        },
+        {
+            'OrderReference': '1852175648RHFTY',
+            'ProductEan': '350075411599'
+         }
+    ]
+    response = api.fulfillment.submit_fulfillment_on_demand_supply_order(order_list)
     assert_response_succeeded(response)
     assert 'DepositId' in response.keys()
+
+
+@pytest.mark.vcr()
+def test_submit_fulfillment_on_demand_supply_order_raises():
+    order_list = [
+        {
+            'OrderReference': '1703182124BNXCO',
+            'ProductEan': '2009854780777'
+        },
+        {
+            'OrderReference': '1852175648RHFTY',
+            'Toto': '350075411599'
+         }
+    ]
+    with pytest.raises(ValueError):
+        api.fulfillment.submit_fulfillment_on_demand_supply_order(order_list)
 
 
 @skip('not authorized to access')

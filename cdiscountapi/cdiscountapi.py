@@ -669,7 +669,7 @@ class Fulfillment(object):
 
     def submit_fulfillment_supply_order(self, product_list):
         """
-        :param request: list of dict as:
+        :param product_list: list of dict as:
             [
                 {
                 "ExternalSupplyOrderId": int,
@@ -686,9 +686,9 @@ class Fulfillment(object):
             for key in prod:
                 check_element(key, self.api.factory.FulfilmentProductDescription)
 
-        # req is based on arr keys.
+        # req corresponds to what request parameter needs.
         req = self.api.factory.FulfilmentSupplyOrderRequest
-        # arr is composed by desc key.
+        # arr corresponds to what req needs.
         arr = self.api.factory.ArrayOfFulfilmentProductDescription
 
         request = req([arr(x) for x in product_list])
@@ -705,13 +705,19 @@ class Fulfillment(object):
         'ProductEan': '2009854780777'}]
         :return:
         """
+        for order in order_list:
+            for key in order:
+                check_element(key, self.api.factory.FulfilmentOrderLineRequest)
+
+        # req corresponds to what request parameter needs.
+        req = self.api.factory.FulfilmentOnDemandSupplyOrderRequest
+        # arr corresponds to what req needs.
+        arr = self.api.factory.ArrayOfFulfilmentOrderLineRequest
+
+        request = req([arr(x) for x in order_list])
         response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
             headerMessage=self.api.header,
-            request={
-                'OrderLineList': {
-                    'FulfilmentOrderLineRequest': order_list
-                }
-            }
+            request=request
         )
         return helpers.serialize_object(response, dict)
 
