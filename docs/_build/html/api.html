@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>API &#8212; CdiscountAPI  documentation</title>
+    <title>Developer interface &#8212; CdiscountAPI  documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Change log" href="CHANGELOG.html" />
+    <link rel="next" title="Advanced usage" href="advanced_usage.html" />
     <link rel="prev" title="Quickstart" href="quickstart.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -32,12 +32,874 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="api">
-<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="developer-interface">
+<span id="api"></span><h1>Developer interface<a class="headerlink" href="#developer-interface" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-cdiscountapi"></span><div class="section" id="module-cdiscountapi">
-<span id="connection"></span><h2>Connection<a class="headerlink" href="#module-cdiscountapi" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-cdiscountapi.cdiscountapi"></span><div class="section" id="connection">
+<h2>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Connection">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>login</em>, <em>password</em>, <em>preprod=False</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to manage the interaction with the CdiscountMarketplace API</p>
+<dl class="attribute">
+<dt id="cdiscountapi.cdiscountapi.Connection.last_request">
+<code class="descname">last_request</code><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection.last_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last SOAP request</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cdiscountapi.cdiscountapi.Connection.last_response">
+<code class="descname">last_response</code><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection.last_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last SOAP response</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="seller">
+<h2>Seller<a class="headerlink" href="#seller" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Seller">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Seller</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seller section lets sellers retrieve information about their seller account
+and their performance indicator.</p>
+<p>Operations are included in the Seller API section.
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=36">https://dev.cdiscount.com/marketplace/?page_id=36</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Seller.get_seller_indicators">
+<code class="descname">get_seller_indicators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_indicators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seller performance indicators.
+:return: a dict with the data of the user
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Seller.get_seller_info">
+<code class="descname">get_seller_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seller Information.
+:return: Information of the authenticated seller.
+:rtype: dict</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="offers">
+<h2>Offers<a class="headerlink" href="#offers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Offers">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Offers</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Offers section lets sellers retrieve informations about their offers.</p>
+<p>Operations are included in the Products API section
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=84">https://dev.cdiscount.com/marketplace/?page_id=84</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Offers.get_offer_list">
+<code class="descname">get_offer_list</code><span class="sig-paren">(</span><em>**filters</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>To search offers.
+:param filters: filters (ex: OfferPoolId, SKU)
+:type filters: dict
+:return: offers answering the search criterion
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Offers.get_offer_list_paginated">
+<code class="descname">get_offer_list_paginated</code><span class="sig-paren">(</span><em>**filters</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list_paginated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recovery of the offers page by page.
+:param filters: list of filters
+:type filters: dict
+:return: offers answering the search criterion
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Offers.get_offer_package_submission_result">
+<code class="descname">get_offer_package_submission_result</code><span class="sig-paren">(</span><em>package_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_package_submission_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>This operation makes it possible to know the progress report of the offers import.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Offer report logs</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Offers.submit_offer_package">
+<code class="descname">submit_offer_package</code><span class="sig-paren">(</span><em>offers_dict</em>, <em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.submit_offer_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>To ask for the creation of offers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offers_dict</strong> (<em>dict</em>) – offers as you can see on tests/samples/offers/offers_to_submit.json</p></li>
+<li><p><strong>url</strong> (<em>str</em>) – url to upload offers package</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the id of package or -1</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="orders">
+<h2>Orders<a class="headerlink" href="#orders" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Orders">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Orders</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to list, validate or refund orders.</p>
+<p>Operations are included in the Orders API section.
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=128">https://dev.cdiscount.com/marketplace/?page_id=128</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.create_refund_voucher">
+<code class="descname">create_refund_voucher</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.create_refund_voucher" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method still allows refunding lines of an order whose state is
+“ShippedBySeller”.</p>
+<p>An additional feature allows to make a commercial gesture on an order
+MKPCDS before and after shipping and on an order MKPFBC after shipping.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">create_refund_voucher</span><span class="p">(</span>
+<span class="go">    CommercialGestureList=[{&#39;Amount&#39;: 10, &#39;MotiveId&#39;: &#39;late_delivery&#39;}],</span>
+<span class="go">    OrderNumber=&#39;ORDER_NUMBER_1&#39;,</span>
+<span class="go">    SellerRefundList={</span>
+<span class="go">        &#39;Mode&#39;: &#39;Claim&#39;,</span>
+<span class="go">        &#39;Motive&#39;: &#39;ClientClaim&#39;,</span>
+<span class="go">        &#39;RefundOrderLine&#39;: {&#39;Ean&#39;: &#39;4005274238223&#39;,</span>
+<span class="go">                            &#39;SellerProductId&#39;: &#39;42382235&#39;,</span>
+<span class="go">                            &#39;RefundShippingCharges&#39;: True}</span>
+<span class="go">        }</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.get_global_configuration">
+<code class="descname">get_global_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.get_global_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get cdiscount settings. This method allows to get a list of several
+settings:
+- Carrier list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.get_order_list">
+<code class="descname">get_order_list</code><span class="sig-paren">(</span><em>**order_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.get_order_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>To search orders.</p>
+<p>This operation makes it possible to seek orders according to the
+following criteria:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The order state:</dt><dd><ul>
+<li><p>CancelledByCustomer</p></li>
+<li><p>WaitingForSellerAcceptation</p></li>
+<li><p>AcceptedBySeller</p></li>
+<li><p>PaymentInProgress</p></li>
+<li><p>WaitingForShipmentAcceptation</p></li>
+<li><p>Shipped</p></li>
+<li><p>RefusedBySeller</p></li>
+<li><p>AutomaticCancellation (ex: no answer from the seller)</p></li>
+<li><p>PaymentRefused</p></li>
+<li><p>ShipmentRefusedBySeller</p></li>
+<li><p>Waiting for Fianet validation “A valider Fianet” (None)</p></li>
+<li><p>Validated Fianet</p></li>
+<li><p>RefusedNoShipment</p></li>
+<li><p>AvailableOnStore</p></li>
+<li><p>NonPickedUpByCustomer</p></li>
+<li><p>PickedUp</p></li>
+<li><p>Filled</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span>
+<span class="go">    States=[&#39;CancelledByCustomer&#39;, &#39;Shipped&#39;]</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Recovery or not of the products of the order</p></li>
+<li><dl class="simple">
+<dt>Filter on date:</dt><dd><ul>
+<li><p>BeginCreationDate</p></li>
+<li><p>EndCreationDate</p></li>
+<li><p>BeginModificationDate</p></li>
+<li><p>EndModificationDate</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span>
+<span class="go">    BeginCreationDate=datetime.datetime(2077, 1, 1)</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Order number list Liste (OrderReferenceList) Warning, this filter
+cannot be combined with others. If there is an order list, the other
+filters are unaccounted.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderReferenceList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Filter on website thanks to the corporationCode.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">CorporationCode</span><span class="o">=</span><span class="s1">&#39;CDSB2C&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Filter by Order Type:</dt><dd><ul>
+<li><p>MKPFBC Orders (Marketplace fulfillment by Cdiscount)</p></li>
+<li><p>EXTFBC Orders (External fulfillment by Cdiscount)</p></li>
+<li><p>FBC Orders (Isfulfillment)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderType</span><span class="o">=</span><span class="s1">&#39;MKPFBC&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>PartnerOrderRef filter from 1 to N external order (if it’s a multiple
+search, separate PartnerOrderRefs by semicolon).
+PartnerOrderRef is the seller’s reference</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">PartnerOrderRef</span><span class="o">=</span><span class="s1">&#39;SELLER_REF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Recovery or not of the parcels of the order</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">FetchParcels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OrderReferenceList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.manage_parcel">
+<code class="descname">manage_parcel</code><span class="sig-paren">(</span><em>parcel_actions_list=None</em>, <em>scopus_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.manage_parcel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask for investigation or ask for delivery certification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parcel_actions_list</strong> – <p>The keywords from</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">manage_parcel</span><span class="p">(</span><span class="n">ParcelInfos</span><span class="o">=</span><span class="p">[</span>
+<span class="go">    {&#39;ManageParcel&#39;: manage_parcel, &#39;ParcelNumber&#39;: parcel_number,</span>
+<span class="go">     &#39;Sku&#39;: sku},</span>
+<span class="go">    ...</span>
+<span class="go">     ],</span>
+<span class="go">     scopus_id=scopus_id)</span>
+</pre></div>
+</div>
+</p>
+</dd>
+</dl>
+<p>where manage_parcel is either ‘AskingForInvestigation’ or
+‘AskingForDeliveryCertification’.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.prepare_validations">
+<code class="descname">prepare_validations</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.prepare_validations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the dictionary used to validate the orders in
+<cite>Orders.validate_order_list</cite></p>
+<p>This method tries to simplify the creation of the data necessary to
+validate the orders by letting the user provide a more intuitive data
+structure than the one required for the request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em>) – <p>The validation data for the orders. A list of dictionaries with the following structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>’CarrierName’: carrier_name,
+‘OrderNumber’: order_number,
+‘OrderState’: order_state,
+‘TrackingNumber’: tracking_number,
+‘TrackingUrl’: tracking_url,
+‘OrderLineList’: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>‘AcceptationState’: acceptation_state,
+‘ProductCondition’: product_condition,
+‘SellerProductId’: seller_product_id,
+‘TypeOfReturn’: type_of_return</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+</p>
+</dd>
+<dt class="field-even">Rtype dict</dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The <cite>validate_order_list_message</cite> dictionary created with</p>
+</dd>
+</dl>
+<p><cite>data</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.validate_order_list">
+<code class="descname">validate_order_list</code><span class="sig-paren">(</span><em>**validate_order_list_message</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.validate_order_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate a list of orders</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>validate_order_list_message</strong> – The information about the orders to validate.</p>
+</dd>
+</dl>
+<p>There are two ways to create a <cite>validate_order_list_message</cite>:</p>
+<ol class="arabic simple">
+<li><p>you can build the dictionary by yourself:</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">validate_order_list</span><span class="p">(</span>
+<span class="go">    OrderList= {&#39;ValidateOrder&#39;:</span>
+<span class="go">                [{&#39;CarrierName&#39;: carrier_name,</span>
+<span class="go">                  &#39;OrderNumber&#39;: order_number,</span>
+<span class="go">                  &#39;OrderState&#39;: order_state,</span>
+<span class="go">                  &#39;TrackingNumber&#39;: tracking_number,</span>
+<span class="go">                  &#39;TrackingUrl&#39;: tracking_url,</span>
+<span class="go">                  &#39;OrderLineList&#39;: {</span>
+<span class="go">                      &#39;ValidateOrderLine&#39;: [</span>
+<span class="go">                      {&#39;AcceptationState&#39;: &#39;acceptation_state&#39;,</span>
+<span class="go">                       &#39;ProductCondition&#39;: product_condition,</span>
+<span class="go">                       &#39;SellerProductId&#39;: seller_product_id,</span>
+<span class="go">                       &#39;TypeOfReturn&#39;: type_of_return},</span>
+<span class="go">                      ...</span>
+<span class="go">                      ]},</span>
+<span class="go">                },</span>
+<span class="go">                ...</span>
+<span class="go">                ]})</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>you can use <cite>Orders.prepare_validations</cite>:</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">validate_order_list_message</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">prepare_validations</span><span class="p">(</span>
+<span class="go">            [{&#39;CarrierName&#39;: carrier_name,</span>
+<span class="go">              &#39;OrderNumber&#39;: order_number,</span>
+<span class="go">              &#39;OrderState&#39;: order_state,</span>
+<span class="go">              &#39;TrackingNumber&#39;: tracking_number,</span>
+<span class="go">              &#39;TrackingUrl&#39;: tracking_url,</span>
+<span class="go">              &#39;OrderLineList&#39;: [</span>
+<span class="go">                  {&#39;AcceptationState&#39;: &#39;acceptation_state&#39;,</span>
+<span class="go">                   &#39;ProductCondition&#39;: product_condition,</span>
+<span class="go">                   &#39;SellerProductId&#39;: seller_product_id,</span>
+<span class="go">                   &#39;TypeOfReturn&#39;: type_of_return},</span>
+<span class="go">                  ...</span>
+<span class="go">                  ]},</span>
+<span class="go">            ...]</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">validate_order_list_message</span><span class="p">(</span><span class="o">**</span><span class="n">validate_order_list_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="products">
+<h2>Products<a class="headerlink" href="#products" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Products">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Products</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to get information about products and submit new products on Cdiscount.</p>
+<p>Operations are included in the Products API section.
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=220">https://dev.cdiscount.com/marketplace/?page_id=220</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree">
+<code class="descname">get_all_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>All categories.
+:return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_all_model_list">
+<code class="descname">get_all_model_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_model_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model categories opened on marketplace.
+:return: models and mandatory model properties
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_allowed_category_tree">
+<code class="descname">get_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Categories which are accessible to the seller.
+:return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_brand_list">
+<code class="descname">get_brand_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_brand_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Complete list of the brands
+:return: all brands
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_model_list">
+<code class="descname">get_model_list</code><span class="sig-paren">(</span><em>category=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_model_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model categories allocated to the seller.
+:param category: category code to filter results
+:type category: str
+:return: models and mandatory model properties
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_product_list">
+<code class="descname">get_product_list</code><span class="sig-paren">(</span><em>category_code</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search products in the reference frame
+:param category_code: code to filter products by category
+:type category_code: str
+:return: products corresponding to research
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_product_list_by_identifier">
+<code class="descname">get_product_list_by_identifier</code><span class="sig-paren">(</span><em>ean_list=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list_by_identifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain details for a list of products
+:param ean_list: list of EAN to filter
+:type ean_list: list
+:return: complete list of products
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_product_package_product_matching_file_data">
+<code class="descname">get_product_package_product_matching_file_data</code><span class="sig-paren">(</span><em>package_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_product_matching_file_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information of the created products.
+:param package_id: package id to filter results
+:type package_id: str
+:return: information of the created products
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.get_product_package_submission_result">
+<code class="descname">get_product_package_submission_result</code><span class="sig-paren">(</span><em>filters={}</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_submission_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Progress status of a product import.
+:param filters: (ex: package id)
+:type filters: dict
+:return: partial or complete report of package integration
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.submit_product_package">
+<code class="descname">submit_product_package</code><span class="sig-paren">(</span><em>products_dict</em>, <em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.submit_product_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>To ask for the creation of products.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>products_dict</strong> (<em>dict</em>) – products as you can see on tests/samples/products/products_to_submit.json</p></li>
+<li><p><strong>url</strong> (<em>str</em>) – url to upload offers package</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the id of package or -1</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="relays">
+<h2>Relays<a class="headerlink" href="#relays" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Relays">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Relays</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to get information about the different available relays and submit
+new ones.</p>
+<p>Operations are included in the Relays API section.
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=108">https://dev.cdiscount.com/marketplace/?page_id=108</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result">
+<code class="descname">get_relays_file_submission_result</code><span class="sig-paren">(</span><em>**relays_file_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the state of progress of the relays file submission.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_relays_file_submission_result</span><span class="p">(</span>
+<span class="go">relays_file_filter={&#39;RelaysFileId&#39;: relays_file_id}</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+<p>where relays_file_id is the value of RelaysFileId returned by
+SubmitRelaysFile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>relays_file_filter</strong> – The dictionary containing the ID referencing</p>
+</dd>
+</dl>
+<p>the relays file submitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The response with the information about the integration of</p>
+</dd>
+</dl>
+<p>the relays specified.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Relays.submit_relays_file">
+<code class="descname">submit_relays_file</code><span class="sig-paren">(</span><em>**relays_file_request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.submit_relays_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send information about relays in a file</p>
+<p>Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">submit_relays_file</span><span class="p">(</span>
+<span class="go">        relays_file_request=RelaysFileURI=relays_file_uri</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
+<p>where relays_file_uri is the URI to a XLSX file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>relays_file_request</strong> (<em>dict</em>) – A dictionary pointing to a XLSX file</p>
+</dd>
+</dl>
+<p>with information about relays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The response with the RelaysFileId for the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="fulfillment">
+<h2>Fulfillment<a class="headerlink" href="#fulfillment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Fulfillment</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to manage the fulfillment of the supply orders.</p>
+<p>Operations are included in the Fulfillment API section
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=2222">https://dev.cdiscount.com/marketplace/?page_id=2222</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.create_external_order">
+<code class="descname">create_external_order</code><span class="sig-paren">(</span><em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.create_external_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an order from another marketplace.
+:param order: dict as {</p>
+<blockquote>
+<div><p>‘Comments’: str,
+‘Corporation’: str (ex:FNAC),
+‘Customer’: customer info dict,
+‘CustomerOrderNumber’: str,
+‘OrderDate’: date,
+‘OrderLineList’: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘ExternalOrderLine’: {</dt><dd><p>‘ProductEan’: str,
+‘ProductReference’: str,
+‘Quantity’: int</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>},
+‘ShippingMode’: str,</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_activation_report_list">
+<code class="descname">get_fulfillment_activation_report_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_activation_report_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – ‘BeginDate’: date,
+‘DepositIdList’: int list,
+‘EndDate’: date</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_delivery_document">
+<code class="descname">get_fulfillment_delivery_document</code><span class="sig-paren">(</span><em>deposit_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_delivery_document" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deposit_id</strong> (<em>int</em>) – Unique identification number of the supply order request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data for printing PDF documents, in the form of a Base64-encoded string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_order_list_to_supply">
+<code class="descname">get_fulfillment_order_list_to_supply</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_order_list_to_supply" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – ‘OrderReference’: str,
+‘ProductEan’: str,
+‘Warehouse’: str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order">
+<code class="descname">get_fulfillment_supply_order</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – ‘BeginModificationDate’: date,
+‘EndModificationDate’: date,
+‘PageNumber’: int,
+‘PageSize’: int,
+‘SupplyOrderNumberList’: string list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>supply orders</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order_report_list">
+<code class="descname">get_fulfillment_supply_order_report_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order_report_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>To search supply order reports.
+:param request:</p>
+<blockquote>
+<div><p>‘BeginCreationDate’: date,
+‘DepositIdList’: int list,
+‘EndCreationDate’: date,
+‘PageNumber’: int,
+‘PageSize’: int</p>
+</div></blockquote>
+<p>:return:supply order reports</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.get_product_stock_list">
+<code class="descname">get_product_stock_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_product_stock_list" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – “BarCodeList”: str list
+“FulfilmentReferencement”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_activation">
+<code class="descname">submit_fulfillment_activation</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>To ask for products activation (or deactivation)
+:param request:</p>
+<blockquote>
+<div><p>‘ProductList’: ProductActivationData list</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>deposit id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_on_demand_supply_order">
+<code class="descname">submit_fulfillment_on_demand_supply_order</code><span class="sig-paren">(</span><em>order_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_on_demand_supply_order" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>order_list</strong> – list of dict as</p>
+</dd>
+</dl>
+<p>[{‘OrderReference’: 1703182124BNXCO,
+‘ProductEan’: 2009854780777}]
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_offer_state_action">
+<code class="descname">submit_offer_state_action</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_offer_state_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>To set an offer online or offline
+:param request:</p>
+<blockquote>
+<div><p>‘Action’: ‘Publish’ or ‘Unpublish’
+‘SellerProductId’: str</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="discussions">
+<h2>Discussions<a class="headerlink" href="#discussions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.Discussions">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Discussions</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions" title="Permalink to this definition">¶</a></dt>
+<dd><p>There are 3 ways to get discussions: discussions id, the discussions
+status, and all messages.</p>
+<p>Thanks to the discussion Id and the method GetDiscussionMailList you can
+get an encrypted mail address to reply to a question or a claim.  You can
+close a discussion list with the method CloseDiscussionList and the
+Discussion id, you cannot close a discussion without having answered
+Operations are included in the Discussions API section.
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=148">https://dev.cdiscount.com/marketplace/?page_id=148</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Discussions.close_discussion_list">
+<code class="descname">close_discussion_list</code><span class="sig-paren">(</span><em>discussion_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.close_discussion_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close a discussion list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>discussion_ids</strong> (<em>list</em>) – The list of discussion_ids to close</p>
+</dd>
+</dl>
+<p>Example:
+&gt;&gt;&gt; response = api.discussions.close_discussion_list([31, 4, 159])</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Discussions.get_offer_question_list">
+<code class="descname">get_offer_question_list</code><span class="sig-paren">(</span><em>**offer_question_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_offer_question_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of questions about offers with the specified criteria</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>offer_question_filter</strong> – The keywords for the filter</p>
+</dd>
+</dl>
+<p><cite>offerQuestionFilter</cite>:</p>
+<ul class="simple">
+<li><p>BeginCreationDate</p></li>
+<li><p>BeginModificationDate</p></li>
+<li><p>EndCreationDate</p></li>
+<li><p>EndModificationDate</p></li>
+<li><p>StatusList</p></li>
+<li><p>ProductEANList</p></li>
+<li><p>ProductSellerReferenceList</p></li>
+</ul>
+<p>Example:
+&gt;&gt;&gt; response = api.get_offer_question_list(</p>
+<blockquote>
+<div><p>StatusList={‘DiscussionStateFilter’: ‘Open’}
+)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An OfferQuestionListMessage dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Discussions.get_order_claim_list">
+<code class="descname">get_order_claim_list</code><span class="sig-paren">(</span><em>**order_claim_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_order_claim_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of order claims</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Discussions.get_order_question_list">
+<code class="descname">get_order_question_list</code><span class="sig-paren">(</span><em>**order_question_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_order_question_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of questions about orders with the specified criteria</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>order_question_filter</strong> – The keywords for the filter</p>
+</dd>
+</dl>
+<p><cite>orderQuestionFilter</cite>:</p>
+<ul class="simple">
+<li><p>BeginCreationDate</p></li>
+<li><p>BeginModificationDate</p></li>
+<li><p>EndCreationDate</p></li>
+<li><p>EndModificationDate</p></li>
+<li><p>StatusList</p></li>
+<li><p>ProductEANList</p></li>
+<li><p>ProductSellerReferenceList</p></li>
+</ul>
+<p>Example:
+&gt;&gt;&gt; response = api.get_order_question_list(</p>
+<blockquote>
+<div><p>StatusList={‘DiscussionStateFilter’: ‘Open’}
+)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An OrderQuestionListMessage dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="webmail">
+<h2>WebMail<a class="headerlink" href="#webmail" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cdiscountapi.cdiscountapi.WebMail">
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">WebMail</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail" title="Permalink to this definition">¶</a></dt>
+<dd><p>The WebMail API allows the seller to retrieve encrypted email address to
+contact a customer</p>
+<p>Operations are included in the WebMail API section.
+(<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=167">https://dev.cdiscount.com/marketplace/?page_id=167</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid">
+<code class="descname">generate_discussion_mail_guid</code><span class="sig-paren">(</span><em>scopus_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain an encrypted mail address.</p>
+<p>This operation allows getting an encrypted mail address to contact a
+customer about an order.</p>
+<p>Usage:
+&gt;&gt;&gt; response = api.generate_discussion_mail_guid(scopus_id)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.WebMail.get_discussion_mail_list">
+<code class="descname">get_discussion_mail_list</code><span class="sig-paren">(</span><em>discussion_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.get_discussion_mail_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain an encrypted mail address about a discussion.</p>
+<p>This operation allows getting an encrypted mail address to contact a
+customer about a discussion (claim, retraction, questions).</p>
+<p>Usage:
+&gt;&gt;&gt; response = api.webmail.generate_discussion_mail_guid(discussion_ids)</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -61,10 +923,19 @@
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-cdiscountapi">Connection</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connection">Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seller">Seller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#offers">Offers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#orders">Orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#products">Products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relays">Relays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fulfillment">Fulfillment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#discussions">Discussions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#webmail">WebMail</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change log</a></li>
 </ul>
 
@@ -73,7 +944,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="quickstart.html" title="previous chapter">Quickstart</a></li>
-      <li>Next: <a href="CHANGELOG.html" title="next chapter">Change log</a></li>
+      <li>Next: <a href="advanced_usage.html" title="next chapter">Advanced usage</a></li>
   </ul></li>
 </ul>
 </div>

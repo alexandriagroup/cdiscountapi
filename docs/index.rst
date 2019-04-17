@@ -12,6 +12,7 @@ Welcome to CdiscountAPI's documentation!
 
    quickstart
    api
+   advanced_usage
    CHANGELOG
 
 
