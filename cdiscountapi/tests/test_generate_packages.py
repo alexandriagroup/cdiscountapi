@@ -5,7 +5,7 @@ from tempfile import gettempdir
 
 import pytest
 
-from cdiscountapi.cdiscountapi import (
+from cdiscountapi.helpers import (
     generate_offer_package,
     generate_product_package,
 )

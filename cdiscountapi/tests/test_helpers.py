@@ -1,6 +1,7 @@
 import os
 import pytest
-from ..cdiscountapi import Connection, check_element
+from cdiscountapi.cdiscountapi import Connection
+from cdiscountapi.helpers import check_element
 
 
 @pytest.mark.vcr()

@@ -3,7 +3,6 @@ import pytest
 import datetime
 from ..cdiscountapi import Connection
 from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
-from ..config import REFUND_INFORMATION
 
 
 # TODO Finish this test

@@ -1,6 +1,6 @@
 import os
 import pytest
-from ..cdiscountapi import Connection
+from cdiscountapi.cdiscountapi import Connection
 from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 
 
