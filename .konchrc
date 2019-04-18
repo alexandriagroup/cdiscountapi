@@ -76,6 +76,22 @@ if preprod:
 else:
     banner = '**Production environment for Cdiscount**'
 
+header_message = {
+    'Context': {
+        'SiteID': 100,
+        'CatalogID': 1
+    },
+    'Localization': {
+        'Country': 'Fr',
+    },
+    'Security': {
+        'IssuerID': None,
+        'SessionID': None,
+        'UserName': '',
+    },
+    'Version': 1.0,
+}
+
 # Available options:
 #   'context', 'banner', 'shell', 'prompt', 'output',
 #   'context_format', 'ipy_extensions', 'ipy_autoreload',
@@ -86,7 +102,8 @@ konch.config({
     'context': {
         'api': Connection(os.getenv('CDISCOUNT_API_LOGIN'),
                           os.getenv('CDISCOUNT_API_PASSWORD'),
-                          preprod=preprod),
+                          preprod=preprod,
+                          header_message=header_message),
         'get_tree': get_tree,
         'load_cassette': load_cassette,
         'create_request': create_request,

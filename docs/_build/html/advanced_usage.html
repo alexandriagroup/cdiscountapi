@@ -14,8 +14,8 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Change log" href="CHANGELOG.html" />
-    <link rel="prev" title="Developer interface" href="api.html" />
+    <link rel="next" title="Developer interface" href="api.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -42,6 +42,41 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="use-a-configuration-file">
+<h2>Use a configuration file<a class="headerlink" href="#use-a-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>You can use a YAML configuration file to store the information used in the <a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=212">HeaderMessage</a>.</p>
+<p>For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Context</span><span class="p">:</span>
+    <span class="nt">SiteID</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
+    <span class="nt">CatalogID</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="nt">CustomerNumber</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XXX</span>
+
+<span class="nt">Localization</span><span class="p">:</span>
+    <span class="nt">Country</span><span class="p">:</span> <span class="s">&#39;Fr&#39;</span>
+    <span class="nt">Currency</span><span class="p">:</span> <span class="s">&#39;Eur&#39;</span>
+    <span class="nt">DecimalPosition</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="nt">Security</span><span class="p">:</span>
+    <span class="nt">UserName</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
+    <span class="nt">SubjectLocality</span><span class="p">:</span>
+        <span class="nt">Address</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XXX</span>
+        <span class="nt">DnsName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">XXX</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The field TokenId doesn’t have to be provided as it will be retrieved
+automatically.</p></li>
+<li><p>The fields not provided will have default values:</p></li>
+</ol>
+<ul class="simple">
+<li><p>SiteID: 100</p></li>
+<li><p>CatalogID: 1</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code> for all the other fields.</p>
+</div>
+</div>
 </div>
 
 
@@ -64,11 +99,12 @@
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">Developer interface</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#get-the-latest-request-and-response">Get the latest request and response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-a-configuration-file">Use a configuration file</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Developer interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change log</a></li>
 </ul>
 
@@ -76,8 +112,8 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="api.html" title="previous chapter">Developer interface</a></li>
-      <li>Next: <a href="CHANGELOG.html" title="next chapter">Change log</a></li>
+      <li>Previous: <a href="quickstart.html" title="previous chapter">Quickstart</a></li>
+      <li>Next: <a href="api.html" title="next chapter">Developer interface</a></li>
   </ul></li>
 </ul>
 </div>
