@@ -136,7 +136,7 @@ def check_element(element_name, dynamic_type):
     """
     valid_elements = [x[0] for x in dynamic_type.elements]
     if element_name not in valid_elements:
-        raise ValueError('{0} is not a valid element of {1}.'
+        raise TypeError('{0} is not a valid element of {1}.'
                          ' Valid elements are {2}'.format(
                              element_name, dynamic_type.name, valid_elements)
                          )
