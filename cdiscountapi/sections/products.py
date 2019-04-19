@@ -41,7 +41,7 @@ class Products(object):
         :rtype: dict
         """
         from ..cdiscountapi import Connection
-        api_all = Connection('AllData', 'pa$$word')
+        api_all = Connection('AllData', 'pa$$word', header_message=self.header)
         response = api_all.client.service.GetAllAllowedCategoryTree(
             headerMessage=api_all.header
         )
