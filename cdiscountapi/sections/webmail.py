@@ -10,9 +10,10 @@
 
 
 from zeep.helpers import serialize_object
+from .base import BaseSection
 
 
-class WebMail(object):
+class WebMail(BaseSection):
     """
     The WebMail API allows the seller to retrieve encrypted email address to
     contact a customer
@@ -20,10 +21,6 @@ class WebMail(object):
     Operations are included in the WebMail API section.
     (https://dev.cdiscount.com/marketplace/?page_id=167)
     """
-
-    def __init__(self, api):
-        self.api = api
-
     def generate_discussion_mail_guid(self, scopus_id=None):
         """
         Obtain an encrypted mail address.
@@ -50,11 +47,8 @@ class WebMail(object):
         Usage:
         >>> response = api.webmail.generate_discussion_mail_guid(discussion_ids)
         """
-        arrays_factory = self.api.client.type_factory(
-            'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
-        )
         request = self.api.factory.GetDiscussionMailListRequest(
-            DiscussionIds=arrays_factory.ArrayOflong(discussion_ids)
+            DiscussionIds=self.array_of('long', discussion_ids)
         )
         response = self.api.client.service.GetDiscussionMailList(
             headerMessage=self.api.header,

@@ -10,19 +10,16 @@
 
 
 from zeep.helpers import serialize_object
+from .base import BaseSection
 
 
-class Products(object):
+class Products(BaseSection):
     """
     Allows to get information about products and submit new products on Cdiscount.
 
     Operations are included in the Products API section.
     (https://dev.cdiscount.com/marketplace/?page_id=220)
     """
-
-    def __init__(self, api):
-        self.api = api
-
     def get_allowed_category_tree(self):
         """
         Categories which are accessible to the seller.

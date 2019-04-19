@@ -10,9 +10,10 @@
 
 
 from zeep.helpers import serialize_object
+from .base import BaseSection
 
 
-class Discussions(object):
+class Discussions(BaseSection):
     """
     There are 3 ways to get discussions: discussions id, the discussions
     status, and all messages.
@@ -24,10 +25,6 @@ class Discussions(object):
     Operations are included in the Discussions API section.
     (https://dev.cdiscount.com/marketplace/?page_id=148)
     """
-
-    def __init__(self, api):
-        self.api = api
-
     def get_order_claim_list(self, **order_claim_filter):
         """
         Return the list of order claims
@@ -115,15 +112,11 @@ class Discussions(object):
         Example:
         >>> response = api.discussions.close_discussion_list([31, 4, 159])
         """
-        arrays_factory = self.api.client.type_factory(
-            'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
-        )
         close_discussion_request = self.api.factory.CloseDiscussionRequest(
-            DiscussionIds=arrays_factory.ArrayOflong(discussion_ids)
+            DiscussionIds=self.array_of('long', discussion_ids)
         )
         response = self.api.client.service.CloseDiscussionList(
             headerMessage=self.api.header,
             closeDiscussionRequest=close_discussion_request
         )
         return serialize_object(response, dict)
-

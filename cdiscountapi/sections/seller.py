@@ -10,9 +10,10 @@
 
 
 from zeep.helpers import serialize_object
+from .base import BaseSection
 
 
-class Seller(object):
+class Seller(BaseSection):
     """
     Seller section lets sellers retrieve information about their seller account
     and their performance indicator.
@@ -20,9 +21,6 @@ class Seller(object):
     Operations are included in the Seller API section.
     (https://dev.cdiscount.com/marketplace/?page_id=36)
     """
-    def __init__(self, api):
-        self.api = api
-
     def get_seller_info(self):
         """
         Seller Information.

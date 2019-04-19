@@ -10,18 +10,16 @@
 
 from cdiscountapi.helpers import generate_package_url
 from zeep.helpers import serialize_object
+from .base import BaseSection
 
 
-class Offers(object):
+class Offers(BaseSection):
     """
     Offers section lets sellers retrieve informations about their offers.
 
     Operations are included in the Products API section
     (https://dev.cdiscount.com/marketplace/?page_id=84)
     """
-    def __init__(self, api):
-        self.api = api
-
     def get_offer_list(self, **filters):
         """
         To search offers.

@@ -10,19 +10,16 @@
 
 
 from zeep.helpers import serialize_object
+from .base import BaseSection
 
 
-class Fulfillment(object):
+class Fulfillment(BaseSection):
     """
     Allows to manage the fulfillment of the supply orders.
 
     Operations are included in the Fulfillment API section
     (https://dev.cdiscount.com/marketplace/?page_id=2222)
     """
-
-    def __init__(self, api):
-        self.api = api
-
     def submit_fulfillment_supply_order(self, request):
         response = self.api.client.service.SubmitFulfilmentSupplyOrder(
             headerMessage=self.api.header,
@@ -68,13 +65,7 @@ class Fulfillment(object):
 
         :return:supply order reports
         """
-        if 'DepositIdList' in request:
-            arrays_factory = self.api.client.type_factory(
-                'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
-            )
-            request.update(DepositIdList=arrays_factory.ArrayOfint(
-                request['DepositIdList'])
-            )
+        self.update_with_valid_array_type(request, {'DepositIdList': 'int'})
 
         supply_order_report_request = self.api.factory.SupplyOrderReportRequest(**request)
         response = self.api.client.service.GetFulfilmentSupplyOrderReportList(
@@ -102,7 +93,6 @@ class Fulfillment(object):
         - PageSize (int) [mandatory]
         - BeginCreationDate, EndCreationDate (date)
         - PageNumber (int)
-        - DepositIdList (list of ints)
         - SupplyOrderNumberList (list of strings)
 
         Examples::
@@ -119,21 +109,7 @@ class Fulfillment(object):
 
         :return: supply orders
         """
-        if 'SupplyOrderNumberList' in request:
-            arrays_factory = self.api.client.type_factory(
-                'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
-            )
-            request.update(SupplyOrderNumberList=arrays_factory.ArrayOfstring(
-                request['SupplyOrderNumberList'])
-            )
-
-        if 'DepositIdList' in request:
-            arrays_factory = self.api.client.type_factory(
-                'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
-            )
-            request.update(DepositIdList=arrays_factory.ArrayOfint(
-                request['DepositIdList'])
-            )
+        self.update_with_valid_array_type(request, {'SupplyOrderNumberList': 'string'})
 
         supply_order_report_request = self.api.factory.SupplyOrderRequest(**request)
         response = self.api.client.service.GetFulfilmentSupplyOrder(
@@ -142,6 +118,7 @@ class Fulfillment(object):
         )
         return serialize_object(response, dict)
 
+    # TODO Make this method more robust
     def submit_fulfillment_activation(self, request):
         """
         To ask for products activation (or deactivation)

@@ -11,9 +11,10 @@
 
 from zeep.helpers import serialize_object
 from cdiscountapi.helpers import check_element, get_motive_id
+from .base import BaseSection
 
 
-class Orders(object):
+class Orders(BaseSection):
     """
     Allows to list, validate or refund orders.
 
@@ -112,13 +113,7 @@ class Orders(object):
                 order_filter['States'])
             )
 
-        if 'OrderReferenceList' in order_filter:
-            arrays_factory = self.api.client.type_factory(
-                'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
-            )
-            order_filter.update(OrderReferenceList=arrays_factory.ArrayOfstring(
-                order_filter['OrderReferenceList'])
-            )
+        self.update_with_valid_array_type(order_filter, {'OrderReferenceList': 'string'})
 
         if 'FetchOrderLines' not in order_filter:
             order_filter.update(FetchOrderLines=True)
@@ -177,7 +172,10 @@ class Orders(object):
         structure than the one required for the request.
 
         :type data: list
-        :param data: The validation data for the orders. A list of dictionaries with the following structure::
+        :param data: The validation data for the orders. A list of dictionaries with the following structure:
+
+
+        .. code-block:: python
 
             {
                 'CarrierName': carrier_name,
@@ -197,8 +195,7 @@ class Orders(object):
             }
 
         :rtype dict:
-        :returns: The `validate_order_list_message` dictionary created with
-        `data`
+        :returns: The ``validate_order_list_message`` dictionary created with ``data``
         """
         return {
             'OrderList': {
@@ -213,7 +210,7 @@ class Orders(object):
 
         :param validate_order_list_message: The information about the orders to validate.
 
-        There are two ways to create a `validate_order_list_message`:
+        There are two ways to create a ``validate_order_list_message``:
 
         1. you can build the dictionary by yourself:
 
@@ -238,7 +235,7 @@ class Orders(object):
                             ...
                             ]})
 
-        2. you can use `Orders.prepare_validations`:
+        2. you can use ``Orders.prepare_validations``:
 
         Example::
 

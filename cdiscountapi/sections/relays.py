@@ -10,9 +10,10 @@
 
 
 from zeep.helpers import serialize_object
+from .base import BaseSection
 
 
-class Relays(object):
+class Relays(BaseSection):
     """
     Allows to get information about the different available relays and submit
     new ones.
@@ -20,10 +21,6 @@ class Relays(object):
     Operations are included in the Relays API section.
     (https://dev.cdiscount.com/marketplace/?page_id=108)
     """
-
-    def __init__(self, api):
-        self.api = api
-
     def get_parcel_shop_list(self):
         response = self.api.client.service.GetParcelShopList(
             headerMessage=self.api.header,
@@ -62,20 +59,17 @@ class Relays(object):
         """
         Get the state of progress of the relays file submission.
 
-        Usage:
+        Usage::
 
-            >>> response = api.get_relays_file_submission_result(
+            response = api.get_relays_file_submission_result(
             relays_file_filter={'RelaysFileId': relays_file_id}
             )
 
-        where relays_file_id is the value of RelaysFileId returned by
+        where ``relays_file_id`` is the value of RelaysFileId returned by
         SubmitRelaysFile.
 
-        :param relays_file_filter: The dictionary containing the ID referencing
-        the relays file submitted.
-
-        :returns: The response with the information about the integration of
-        the relays specified.
+        :param relays_file_filter: The dictionary containing the ID referencing the relays file submitted.
+        :returns: The response with the information about the integration of the relays specified.
         """
         relays_file_filter = self.api.factory.RelaysFileFilter(
             **relays_file_filter
