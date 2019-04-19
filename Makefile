@@ -8,6 +8,9 @@ install-dev:
 	pip install flit
 	flit install --deps develop
 
+docs:
+	cd docs && make html && cd -
+
 test:
 	py.test $(PYTEST_FLAGS) --vcr-record=none
 
@@ -16,3 +19,6 @@ test-coverage:
 
 test-renew-vcr-records:
 	py.test $(PYTEST_FLAGS) --vcr-record=all
+
+
+.PHONY: docs test
