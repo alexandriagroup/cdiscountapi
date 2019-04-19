@@ -165,7 +165,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:00 GMT
+      - Fri, 19 Apr 2019 09:44:30 GMT
       ntCoent-Length:
       - '14163'
     status:
@@ -568,14 +568,12 @@ interactions:
         wsaw:Action="http://www.cdiscount.com/IMarketplaceApiServiceRest/GetOfferProductListPaginatedRestResponse"
         message="tns:IMarketplaceApiServiceRest_GetOfferProductListPaginatedRest_OutputMessage"/></wsdl:operation></wsdl:portType></wsdl:definitions>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '37260'
       Date:
-      - Wed, 10 Apr 2019 10:33:00 GMT
+      - Fri, 19 Apr 2019 09:44:31 GMT
+      ntCoent-Length:
+      - '37260'
     status:
       code: 200
       message: OK
@@ -1723,10 +1721,16 @@ interactions:
         name="headerMessage" nillable="true" type="q64:HeaderMessage" xmlns:q64="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><xs:element
         minOccurs="0" name="request" nillable="true" type="q65:FulfilmentProductRequest"
         xmlns:q65="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product"/></xs:sequence></xs:complexType></xs:element><xs:simpleType
+        name="StockFilter"><xs:restriction base="xs:string"><xs:enumeration value="All"/><xs:enumeration
+        value="WithStock"/><xs:enumeration value="WithoutStock"/></xs:restriction></xs:simpleType><xs:element
+        name="StockFilter" nillable="true" type="tns:StockFilter"/><xs:simpleType
         name="FbcReferencementFilter"><xs:restriction base="xs:string"><xs:enumeration
         value="All"/><xs:enumeration value="OnlyReferenced"/><xs:enumeration value="OnlyNotReferenced"/></xs:restriction></xs:simpleType><xs:element
-        name="FbcReferencementFilter" nillable="true" type="tns:FbcReferencementFilter"/><xs:element
-        name="GetProductStockListResponse"><xs:complexType><xs:sequence><xs:element
+        name="FbcReferencementFilter" nillable="true" type="tns:FbcReferencementFilter"/><xs:simpleType
+        name="SoldOut"><xs:restriction base="xs:string"><xs:enumeration value="None"/><xs:enumeration
+        value="All"/><xs:enumeration value="InSoldOut"/><xs:enumeration value="InSoldOutFiveDays"/><xs:enumeration
+        value="InSoldOutFifteenDays"/><xs:enumeration value="InSoldOutAfterFifteenDays"/></xs:restriction></xs:simpleType><xs:element
+        name="SoldOut" nillable="true" type="tns:SoldOut"/><xs:element name="GetProductStockListResponse"><xs:complexType><xs:sequence><xs:element
         minOccurs="0" name="GetProductStockListResult" nillable="true" type="q66:ProductStockListMessage"
         xmlns:q66="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product"/></xs:sequence></xs:complexType></xs:element><xs:simpleType
         name="FulfilmentProductListStatus"><xs:restriction base="xs:string"><xs:enumeration
@@ -2023,9 +2027,9 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:01 GMT
+      - Fri, 19 Apr 2019 09:44:31 GMT
       ntCoent-Length:
-      - '141083'
+      - '141749'
     status:
       code: 200
       message: OK
@@ -2371,14 +2375,12 @@ interactions:
         type="xs:boolean"/></xs:sequence></xs:complexType><xs:element name="ServiceMessage"
         nillable="true" type="tns:ServiceMessage"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '48866'
       Date:
-      - Wed, 10 Apr 2019 10:33:01 GMT
+      - Fri, 19 Apr 2019 09:44:31 GMT
+      ntCoent-Length:
+      - '48866'
     status:
       code: 200
       message: OK
@@ -2408,12 +2410,14 @@ interactions:
         minOccurs="0" name="VerticalAccuracy" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="GeoCoordinate" nillable="true" type="tns:GeoCoordinate"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '882'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:31 GMT
     status:
       code: 200
       message: OK
@@ -2461,7 +2465,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:32 GMT
       ntCoent-Length:
       - '2273'
     status:
@@ -2507,7 +2511,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:01 GMT
+      - Fri, 19 Apr 2019 09:44:32 GMT
       ntCoent-Length:
       - '2258'
     status:
@@ -2533,40 +2537,69 @@ interactions:
         xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product"><xs:import
         schemaLocation="https://wsvc.cdiscount.com/MarketplaceAPIService.svc?xsd=xsd0"
         namespace="http://www.cdiscount.com"/><xs:import schemaLocation="https://wsvc.cdiscount.com/MarketplaceAPIService.svc?xsd=xsd4"
-        namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:complexType
+        namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:import
+        schemaLocation="https://wsvc.cdiscount.com/MarketplaceAPIService.svc?xsd=xsd1"
+        namespace="http://schemas.microsoft.com/2003/10/Serialization/"/><xs:complexType
         name="BrandListMessage"><xs:complexContent mixed="false"><xs:extension base="q1:ServiceBaseAPIMessage"
         xmlns:q1="http://www.cdiscount.com"><xs:sequence><xs:element minOccurs="0"
         name="BrandList" nillable="true" type="q1:ArrayOfBrand"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="BrandListMessage" nillable="true" type="tns:BrandListMessage"/><xs:complexType
         name="FulfilmentProductRequest"><xs:sequence><xs:element minOccurs="0" name="BarCodeList"
         nillable="true" type="q2:ArrayOfstring" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/><xs:element
-        minOccurs="0" name="FulfilmentReferencement" type="q3:FbcReferencementFilter"
-        xmlns:q3="http://www.cdiscount.com"/></xs:sequence></xs:complexType><xs:element
+        minOccurs="0" name="BlockedStock" type="q3:StockFilter" xmlns:q3="http://www.cdiscount.com"/><xs:element
+        minOccurs="0" name="FulfilmentReferencement" type="q4:FbcReferencementFilter"
+        xmlns:q4="http://www.cdiscount.com"/><xs:element minOccurs="0" name="ShippableStock"
+        type="q5:StockFilter" xmlns:q5="http://www.cdiscount.com"/><xs:element minOccurs="0"
+        name="SoldOut" type="q6:SoldOut" xmlns:q6="http://www.cdiscount.com"/></xs:sequence></xs:complexType><xs:element
         name="FulfilmentProductRequest" nillable="true" type="tns:FulfilmentProductRequest"/><xs:complexType
         name="ProductStockListMessage"><xs:complexContent mixed="false"><xs:extension
-        base="q4:ServiceBaseAPIMessage" xmlns:q4="http://www.cdiscount.com"><xs:sequence><xs:element
+        base="q7:ServiceBaseAPIMessage" xmlns:q7="http://www.cdiscount.com"><xs:sequence><xs:element
         minOccurs="0" name="ProductStockList" nillable="true" type="tns:ArrayOfProductStock"/><xs:element
-        minOccurs="0" name="Status" type="q4:FulfilmentProductListStatus"/><xs:element
+        minOccurs="0" name="Status" type="q7:FulfilmentProductListStatus"/><xs:element
         minOccurs="0" name="TotalProductCount" type="xs:int"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="ProductStockListMessage" nillable="true" type="tns:ProductStockListMessage"/><xs:complexType
         name="ArrayOfProductStock"><xs:sequence><xs:element minOccurs="0" maxOccurs="unbounded"
         name="ProductStock" nillable="true" type="tns:ProductStock"/></xs:sequence></xs:complexType><xs:element
         name="ArrayOfProductStock" nillable="true" type="tns:ArrayOfProductStock"/><xs:complexType
-        name="ProductStock"><xs:sequence><xs:element name="BlockedStock" type="xs:int"/><xs:element
+        name="ProductStock"><xs:sequence><xs:element name="AverageWeeklySales" type="xs:int"/><xs:element
+        name="BlockedStock" type="xs:int"/><xs:element name="CurrentWeeklySales" type="xs:int"/><xs:element
+        name="DamagedReturns" type="xs:int"/><xs:element name="DeliveryDisputes" type="xs:int"/><xs:element
         name="Ean" nillable="true" type="xs:string"/><xs:element name="FodStock" nillable="true"
-        type="xs:int"/><xs:element name="FrontStock" type="xs:int"/><xs:element name="IsReferenced"
-        type="xs:boolean"/><xs:element name="Libelle" nillable="true" type="xs:string"/><xs:element
-        name="SellerReference" nillable="true" type="xs:string"/><xs:element name="Sku"
-        nillable="true" type="xs:string"/><xs:element name="StockInWarehouse" type="xs:int"/><xs:element
-        name="Warehouse" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
-        name="ProductStock" nillable="true" type="tns:ProductStock"/></xs:schema>
+        type="xs:int"/><xs:element name="ForecastingStockShortage" type="xs:int"/><xs:element
+        name="FrontStock" type="xs:int"/><xs:element name="IncomingShipment" type="xs:int"/><xs:element
+        name="IsReferenced" type="xs:boolean"/><xs:element name="Libelle" nillable="true"
+        type="xs:string"/><xs:element name="LogisticFees" type="xs:double"/><xs:element
+        name="OngoingRecoveries" type="xs:int"/><xs:element name="OrderInProgress"
+        type="xs:int"/><xs:element name="OverheadOutsizeFees" type="xs:double"/><xs:element
+        name="ProductConditionId" type="tns:ProductCondition"/><xs:element name="ProductState"
+        type="tns:ProductState"/><xs:element name="SellerReference" nillable="true"
+        type="xs:string"/><xs:element name="ShippableStock" type="xs:int"/><xs:element
+        name="Sku" nillable="true" type="xs:string"/><xs:element name="StockCategory"
+        nillable="true" type="xs:string"/><xs:element name="StockFees" type="xs:double"/><xs:element
+        name="StockInWarehouse" type="xs:int"/><xs:element name="Warehouse" nillable="true"
+        type="xs:string"/><xs:element name="WarehouseCode" nillable="true" type="xs:string"/></xs:sequence></xs:complexType><xs:element
+        name="ProductStock" nillable="true" type="tns:ProductStock"/><xs:simpleType
+        name="ProductCondition"><xs:restriction base="xs:string"><xs:enumeration value="UsedLikeNew"><xs:annotation><xs:appinfo><EnumerationValue
+        xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="UsedVeryGoodCondition"><xs:annotation><xs:appinfo><EnumerationValue
+        xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="UsedGoodCondition"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="UsedSatisfactoryCondtion"><xs:annotation><xs:appinfo><EnumerationValue
+        xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="NewRefurbished"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="NewNew"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration></xs:restriction></xs:simpleType><xs:element
+        name="ProductCondition" nillable="true" type="tns:ProductCondition"/><xs:simpleType
+        name="ProductState"><xs:restriction base="xs:string"><xs:enumeration value="New"><xs:annotation><xs:appinfo><EnumerationValue
+        xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration><xs:enumeration
+        value="Used"><xs:annotation><xs:appinfo><EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue></xs:appinfo></xs:annotation></xs:enumeration></xs:restriction></xs:simpleType><xs:element
+        name="ProductState" nillable="true" type="tns:ProductState"/></xs:schema>
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '3109'
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:31 GMT
+      ntCoent-Length:
+      - '6479'
     status:
       code: 200
       message: OK
@@ -2611,7 +2644,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:32 GMT
       ntCoent-Length:
       - '2214'
     status:
@@ -2647,7 +2680,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:32 GMT
       ntCoent-Length:
       - '1271'
     status:
@@ -2714,7 +2747,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:32 GMT
       ntCoent-Length:
       - '3940'
     status:
@@ -2748,7 +2781,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:32 GMT
     status:
       code: 200
       message: OK
@@ -2789,12 +2822,14 @@ interactions:
         name="Width" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="ProductActivationData" nillable="true" type="tns:ProductActivationData"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
       Cteonnt-Length:
       - '2159'
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:32 GMT
     status:
       code: 200
       message: OK
@@ -2820,14 +2855,12 @@ interactions:
         value="Fbc"/><xs:enumeration value="Ttd"/></xs:restriction></xs:simpleType><xs:element
         name="SupplyModeType" nillable="true" type="tns:SupplyModeType"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Length:
       - '649'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
+      - Fri, 19 Apr 2019 09:44:33 GMT
     status:
       code: 200
       message: OK
@@ -2846,118 +2879,22 @@ interactions:
     uri: https://sts.cdiscount.com/users/httpIssue.svc/?realm=https://wsvc.cdiscount.com/MarketplaceAPIService.svc
   response:
     body:
-      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">442c39fc42b84f23908f250e191104df</string>
+      string: <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">735db533c56b42fe82871d2c0aac5a92</string>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/plain
+      Cteonnt-Length:
+      - '109'
       Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
-      Vary:
-      - Accept-Encoding
+      - Fri, 19 Apr 2019 09:44:33 GMT
       content-length:
       - '109'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '<?xml version=''1.0'' encoding=''utf-8''?>
-
-      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
-      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/CreateRefundVoucher</wsa:Action><wsa:MessageID>urn:uuid:eb2470b4-d154-4195-9e71-2bc2f67bc5b5</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:CreateRefundVoucher
-      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
-      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
-      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>442c39fc42b84f23908f250e191104df</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
-      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:request><ns0:OrderNumber
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/></ns0:request></ns0:CreateRefundVoucher></soap-env:Body></soap-env:Envelope>'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '1691'
-      Content-Type:
-      - text/xml; charset=utf-8
-      SOAPAction:
-      - '"http://www.cdiscount.com/IMarketplaceAPIService/CreateRefundVoucher"'
-      User-Agent:
-      - Zeep/3.3.1 (www.python-zeep.org)
-    method: POST
-    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
-  response:
-    body:
-      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><CreateRefundVoucherResponse
-        xmlns="http://www.cdiscount.com"><CreateRefundVoucherResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
-        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">Demande
-        de remboursement invalide</ErrorMessage><OperationSuccess xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">false</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId>TOKEN_ID</TokenId><CommercialGestureList/><OrderNumber
-        i:nil="true"/><SellerRefundList/></CreateRefundVoucherResult></CreateRefundVoucherResponse></s:Body></s:Envelope>
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - text/xml; charset=utf-8
-      Date:
-      - Wed, 10 Apr 2019 10:33:02 GMT
-      Vary:
-      - Accept-Encoding
-      content-length:
-      - '762'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '<?xml version=''1.0'' encoding=''utf-8''?>
-
-      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
-      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/CreateRefundVoucher</wsa:Action><wsa:MessageID>urn:uuid:d832636e-b689-45d7-9473-dec62d259c80</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:CreateRefundVoucher
-      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
-      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
-      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>7ba88f638d9f4a428623eede97081d07</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
-      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:request><ns0:CommercialGestureList/><ns0:OrderNumber
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns0:SellerRefundList/></ns0:request></ns0:CreateRefundVoucher></soap-env:Body></soap-env:Envelope>'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '1742'
-      Content-Type:
-      - text/xml; charset=utf-8
-      SOAPAction:
-      - '"http://www.cdiscount.com/IMarketplaceAPIService/CreateRefundVoucher"'
-      User-Agent:
-      - Zeep/3.3.1 (www.python-zeep.org)
-    method: POST
-    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
-  response:
-    body:
-      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><CreateRefundVoucherResponse
-        xmlns="http://www.cdiscount.com"><CreateRefundVoucherResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
-        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">Demande
-        de remboursement invalide</ErrorMessage><OperationSuccess xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">false</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId>TOKEN_ID</TokenId><CommercialGestureList/><OrderNumber
-        i:nil="true"/><SellerRefundList/></CreateRefundVoucherResult></CreateRefundVoucherResponse></s:Body></s:Envelope>
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - text/xml; charset=utf-8
-      Date:
-      - Fri, 19 Apr 2019 10:10:25 GMT
-      Vary:
-      - Accept-Encoding
-      content-length:
-      - '762'
+      set-cookie:
+      - TBMCookie_6223335112164439712=478120001555667073+luABG3lX6cbV+lMUAyJwrKGtds=;
+        path=/
+      - ___utmvm=###########; path=/
     status:
       code: 200
       message: OK

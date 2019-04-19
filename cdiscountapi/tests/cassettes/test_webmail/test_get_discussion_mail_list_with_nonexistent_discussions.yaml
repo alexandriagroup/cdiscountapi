@@ -2915,4 +2915,61 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetDiscussionMailList</wsa:Action><wsa:MessageID>urn:uuid:13cfe398-9741-4dbe-b32b-f0ce8d058a41</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetDiscussionMailList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>d904675859c046c4b7834e65b54ca220</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:request><ns0:DiscussionIds><ns5:long
+      xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/Arrays">1</ns5:long><ns6:long
+      xmlns:ns6="http://schemas.microsoft.com/2003/10/Serialization/Arrays">2</ns6:long></ns0:DiscussionIds></ns0:request></ns0:GetDiscussionMailList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1833'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Cookie:
+      - TBMCookie_6223335112164439712=784487001555669976yKUYMqcEwGBCo1SqiRb6DTuNbDw=;
+        ___utmvm=###########
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetDiscussionMailList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetDiscussionMailListResponse
+        xmlns="http://www.cdiscount.com"><GetDiscussionMailListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin
+        i:nil="true"/><TokenId i:nil="true"/><DiscussionMailList><DiscussionMail><DiscussionId>1</DiscussionId><MailAddress
+        i:nil="true"/><OperationStatus>UnknownError</OperationStatus></DiscussionMail><DiscussionMail><DiscussionId>2</DiscussionId><MailAddress
+        i:nil="true"/><OperationStatus>UnknownError</OperationStatus></DiscussionMail></DiscussionMailList></GetDiscussionMailListResult></GetDiscussionMailListResponse></s:Body></s:Envelope>
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 10:33:45 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '926'
+    status:
+      code: 200
+      message: OK
 version: 1

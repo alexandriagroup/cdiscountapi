@@ -2949,4 +2949,292 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList</wsa:Action><wsa:MessageID>urn:uuid:db960b5d-afbe-4e37-a134-e8971f246f45</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferQuestionList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>d59265a8bdf8487fa078a70b9e0bbd4b</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:offerQuestionFilter><ns0:BeginCreationDate>2077-01-01T09:00:00</ns0:BeginCreationDate><ns0:EndCreationDate>2077-01-11T09:00:00</ns0:EndCreationDate></ns0:offerQuestionFilter></ns0:GetOfferQuestionList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1759'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetOfferQuestionListResponse
+        xmlns="http://www.cdiscount.com"><GetOfferQuestionListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId
+        i:nil="true"/><OfferQuestionList/></GetOfferQuestionListResult></GetOfferQuestionListResponse></s:Body></s:Envelope>
+    headers:
+      Content-Length:
+      - '636'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 09:29:24 GMT
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList</wsa:Action><wsa:MessageID>urn:uuid:d4fa208c-a3cc-41b2-a3c6-35de1f2fe451</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferQuestionList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>d59265a8bdf8487fa078a70b9e0bbd4b</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:offerQuestionFilter><ns0:BeginModificationDate>2077-01-01T09:00:00</ns0:BeginModificationDate><ns0:EndModificationDate>2077-01-11T09:00:00</ns0:EndModificationDate></ns0:offerQuestionFilter></ns0:GetOfferQuestionList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1775'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetOfferQuestionListResponse
+        xmlns="http://www.cdiscount.com"><GetOfferQuestionListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId
+        i:nil="true"/><OfferQuestionList/></GetOfferQuestionListResult></GetOfferQuestionListResponse></s:Body></s:Envelope>
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 09:29:24 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '636'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList</wsa:Action><wsa:MessageID>urn:uuid:ad7a06d4-5ac2-40b2-8a8d-2201727541eb</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferQuestionList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>482f2b93efb2487194eeb7b9954ba35e</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:offerQuestionFilter><ns0:BeginCreationDate>2077-01-01T09:00:00</ns0:BeginCreationDate><ns0:EndCreationDate>2077-01-11T09:00:00</ns0:EndCreationDate></ns0:offerQuestionFilter></ns0:GetOfferQuestionList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1759'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetOfferQuestionListResponse
+        xmlns="http://www.cdiscount.com"><GetOfferQuestionListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId
+        i:nil="true"/><OfferQuestionList/></GetOfferQuestionListResult></GetOfferQuestionListResponse></s:Body></s:Envelope>
+    headers:
+      Content-Length:
+      - '636'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 09:29:37 GMT
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList</wsa:Action><wsa:MessageID>urn:uuid:57cb05b3-5bcf-4eb9-8ed6-e157e22c2ac6</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferQuestionList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>482f2b93efb2487194eeb7b9954ba35e</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:offerQuestionFilter><ns0:BeginModificationDate>2077-01-01T09:00:00</ns0:BeginModificationDate><ns0:EndModificationDate>2077-01-11T09:00:00</ns0:EndModificationDate></ns0:offerQuestionFilter></ns0:GetOfferQuestionList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1775'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetOfferQuestionListResponse
+        xmlns="http://www.cdiscount.com"><GetOfferQuestionListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId
+        i:nil="true"/><OfferQuestionList/></GetOfferQuestionListResult></GetOfferQuestionListResponse></s:Body></s:Envelope>
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 09:29:37 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '636'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList</wsa:Action><wsa:MessageID>urn:uuid:dbfb6b5a-185a-4593-9daf-bebae063e589</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferQuestionList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>bddcb00e98004b1a87abefaa23c7e0dd</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:offerQuestionFilter><ns0:BeginCreationDate>2077-01-01T09:00:00</ns0:BeginCreationDate><ns0:EndCreationDate>2077-01-11T09:00:00</ns0:EndCreationDate></ns0:offerQuestionFilter></ns0:GetOfferQuestionList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1759'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetOfferQuestionListResponse
+        xmlns="http://www.cdiscount.com"><GetOfferQuestionListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId
+        i:nil="true"/><OfferQuestionList/></GetOfferQuestionListResult></GetOfferQuestionListResponse></s:Body></s:Envelope>
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 10:11:53 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '636'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList</wsa:Action><wsa:MessageID>urn:uuid:9bd79acf-bec2-4f8d-b580-7d074557e1bb</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetOfferQuestionList
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>bddcb00e98004b1a87abefaa23c7e0dd</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:offerQuestionFilter><ns0:BeginModificationDate>2077-01-01T09:00:00</ns0:BeginModificationDate><ns0:EndModificationDate>2077-01-11T09:00:00</ns0:EndModificationDate></ns0:offerQuestionFilter></ns0:GetOfferQuestionList></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1775'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetOfferQuestionList"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetOfferQuestionListResponse
+        xmlns="http://www.cdiscount.com"><GetOfferQuestionListResult xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><ErrorMessage
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"/><OperationSuccess
+        xmlns="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">true</OperationSuccess><ErrorList/><SellerLogin>SELLER_LOGIN</SellerLogin><TokenId
+        i:nil="true"/><OfferQuestionList/></GetOfferQuestionListResult></GetOfferQuestionListResponse></s:Body></s:Envelope>
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 10:11:53 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '636'
+    status:
+      code: 200
+      message: OK
 version: 1

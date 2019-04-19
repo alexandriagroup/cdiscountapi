@@ -4,17 +4,13 @@
 
 import os
 import pytest
-from ..cdiscountapi import Connection
 from . import assert_response_succeeded
 from unittest import skip
-
-api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                 os.getenv('CDISCOUNT_API_PASSWORD'))
 
 
 @skip('submit not ready')
 @pytest.mark.vcr()
-def test_submit_fulfillment_supply_order():
+def test_submit_fulfillment_supply_order(api):
     product_list = [
         {
             'ExternalSupplyOrderId': 12,
@@ -40,7 +36,7 @@ def test_submit_fulfillment_supply_order():
 
 
 @pytest.mark.vcr()
-def test_submit_fulfillment_supply_order_raises():
+def test_submit_fulfillment_supply_order_raises(api):
     product_list = [
         {
             'ExternalSupplyOrderId': 12,
@@ -65,7 +61,7 @@ def test_submit_fulfillment_supply_order_raises():
 
 @skip('submit not ready')
 @pytest.mark.vcr()
-def test_submit_fulfillment_on_demand_supply_order():
+def test_submit_fulfillment_on_demand_supply_order(api):
     order_list = [
         {
             'OrderReference': '1703182124BNXCO',
@@ -82,7 +78,7 @@ def test_submit_fulfillment_on_demand_supply_order():
 
 
 @pytest.mark.vcr()
-def test_submit_fulfillment_on_demand_supply_order_raises():
+def test_submit_fulfillment_on_demand_supply_order_raises(api):
     order_list = [
         {
             'OrderReference': '1703182124BNXCO',
@@ -99,21 +95,21 @@ def test_submit_fulfillment_on_demand_supply_order_raises():
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_get_fulfillment_supply_order_report_list():
+def test_get_fulfillment_supply_order_report_list(api):
     response = api.fulfillment.get_fulfillment_supply_order_report_list(PageSize=10)
     assert_response_succeeded(response)
     assert 'ReportList' in response.keys()
 
 
 @pytest.mark.vcr()
-def test_get_fulfillment_supply_order_report_list_raises():
+def test_get_fulfillment_supply_order_report_list_raises(api):
     with pytest.raises(TypeError):
         api.fulfillment.get_fulfillment_supply_order_report_list(Toto=10)
 
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_get_fulfillment_delivery_document():
+def test_get_fulfillment_delivery_document(api):
     response = api.fulfillment.get_fulfillment_delivery_document(DepositId=233575)
     assert_response_succeeded(response)
     assert 'ReportList' in response.keys()
@@ -121,7 +117,7 @@ def test_get_fulfillment_delivery_document():
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_get_fulfillment_supply_order():
+def test_get_fulfillment_supply_order(api):
     response = api.fulfillment.get_fulfillment_supply_order(PageNumber=1)
     assert_response_succeeded(response)
     assert 'SupplyOrderLineList' in response.keys()
@@ -129,7 +125,7 @@ def test_get_fulfillment_supply_order():
 
 @skip('submit not ready')
 @pytest.mark.vcr()
-def test_submit_fulfillment_activation():
+def test_submit_fulfillment_activation(api):
     product_list = [{
         'ProductActivationData': {
             'Action': 'Activation',
@@ -149,7 +145,7 @@ def test_submit_fulfillment_activation():
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_get_fulfillment_activation_report_list():
+def test_get_fulfillment_activation_report_list(api):
     response = api.fulfillment.get_fulfillment_activation_report_list(DepositIdList=10)
     assert_response_succeeded(response)
     assert 'FulfilmentActivationReportList' in response.keys()
@@ -157,7 +153,7 @@ def test_get_fulfillment_activation_report_list():
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_get_fulfillment_order_list_to_supply():
+def test_get_fulfillment_order_list_to_supply(api):
     response = api.fulfillment.get_fulfillment_order_list_to_supply(ProductEan=3515338039204)
     assert_response_succeeded(response)
     assert 'FulfilmentActivationReportList' in response.keys()
@@ -165,7 +161,7 @@ def test_get_fulfillment_order_list_to_supply():
 
 @skip('submit not ready')
 @pytest.mark.vcr()
-def test_submit_offer_state_action():
+def test_submit_offer_state_action(api):
     response = api.fulfillment.submit_offer_state_action(
         Action='Unpublish',
         SellerProductId=11504
@@ -175,7 +171,7 @@ def test_submit_offer_state_action():
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_create_external_order():
+def test_create_external_order(api):
     order_dict = {
         'Comments': None,
         'Corporation': 'FNAC',
@@ -206,7 +202,7 @@ def test_create_external_order():
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_get_external_order_status():
+def test_get_external_order_status(api):
     response = api.fulfillment.get_external_order_status(
         Corporation='FNAC',
         CustomerOrderNumber='YLA_test_APIFBC_FODETP_20160414_02'
@@ -217,7 +213,7 @@ def test_get_external_order_status():
 
 @skip('not authorized to access')
 @pytest.mark.vcr()
-def test_get_product_stock_list():
+def test_get_product_stock_list(api):
     response = api.fulfillment.get_product_stock_list(
         BarCodeList=['3515450012475'],
         FulfilmentReferencement=None

@@ -2948,4 +2948,55 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetRelaysFileSubmissionResult</wsa:Action><wsa:MessageID>urn:uuid:40848613-794d-4d7b-a63f-661b2a895121</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetRelaysFileSubmissionResult
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>363dbfb502f24690bc7e42e63c7c568f</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage><ns0:relaysFileFilter><ns0:RelaysFileId>http://endertromb.com/chunky.xlsx</ns0:RelaysFileId></ns0:relaysFileFilter></ns0:GetRelaysFileSubmissionResult></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1722'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetRelaysFileSubmissionResult"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><s:Fault><faultcode
+        xmlns:a="http://schemas.microsoft.com/net/2005/12/windowscommunicationfoundation/dispatcher">a:DeserializationFailed</faultcode><faultstring
+        xml:lang="fr-FR">The formatter threw an exception while trying to deserialize
+        the message: There was an error while trying to deserialize parameter http://www.cdiscount.com:relaysFileFilter.
+        The InnerException message was ''There was an error deserializing the object
+        of type Cdiscount.Service.Marketplace.API.External.Contract.Data.Filter.RelaysFileFilter.
+        The value ''http://endertromb.com/chunky.xlsx'' cannot be parsed as the type
+        ''Int32''.''.  Please see InnerException for more details.</faultstring></s:Fault></s:Body></s:Envelope>'
+    headers:
+      Cache-Control:
+      - private
+      Content-Length:
+      - '766'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Fri, 19 Apr 2019 10:32:57 GMT
+    status:
+      code: 500
+      message: Internal Server Error
 version: 1

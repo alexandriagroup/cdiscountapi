@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+import os
 import re
 import pytest
+from functools import lru_cache
+from ..cdiscountapi import Connection
 
 
 VCR_CASSETTE_DIR = Path(__file__).parent.joinpath('cassettes')
@@ -57,3 +60,34 @@ def vcr_config(request):
         'decode_compressed_response': True,
         'cassette_library_dir': cassette_library_dir
     }
+
+
+@pytest.fixture
+def vcr_cassette_name(request):
+    """Name of the VCR cassette"""
+    # f = request.function
+    # Don't take into account the class
+    # if hasattr(f, '__self__'):
+    #     return f.__self__.__class__.__name__ + '.' + request.node.name
+    return request.node.name
+
+
+# We use a cache to prevent sending the request for each test
+@pytest.fixture
+@lru_cache(2)
+def api():
+    return Connection(os.getenv('CDISCOUNT_API_LOGIN'),
+                      os.getenv('CDISCOUNT_API_PASSWORD'),
+                      header_message={
+                          'Context': {
+                              'SiteID': 100,
+                              'CatalogID': 1
+                          },
+                          'Localization': {
+                              'Country': 'Fr',
+                          },
+                          'Security': {
+                              'UserName': '',
+                          },
+                          'Version': '1.0',
+                      })

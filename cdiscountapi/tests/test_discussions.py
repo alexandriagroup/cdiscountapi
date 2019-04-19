@@ -1,15 +1,11 @@
 import os
 import pytest
-from ..cdiscountapi import Connection
 from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 import datetime
 
 
-# close_discussion
 @pytest.mark.vcr()
-def test_close_discussion_not_found():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
+def test_close_discussion_not_found(api):
     response = api.discussions.close_discussion_list(
         [-2, -1]
     )
@@ -30,11 +26,7 @@ def test_close_discussion_not_found():
 
 # offer_question
 @pytest.mark.vcr()
-def test_get_offer_question_list_by_status():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
-
-    # Case where there are no offer questions closed
+def test_get_offer_question_list_by_status(api):
     response = api.discussions.get_offer_question_list(
         StatusList={'DiscussionStateFilter': 'Closed'}
     )
@@ -42,11 +34,9 @@ def test_get_offer_question_list_by_status():
     assert response['OfferQuestionList'] is None
 
 
+# close_discussion
 @pytest.mark.vcr()
-def test_get_offer_question_list_by_date():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
-
+def test_get_offer_question_list_by_date(api):
     # Case where there are no offer question between the selected creation
     # dates
     dtime = datetime.datetime(2077, 1, 1, 9, 0)
@@ -71,23 +61,18 @@ def test_get_offer_question_list_by_date():
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
-@pytest.mark.vcr()
-def test_get_offer_question_list_by_eans():
+def test_get_offer_question_list_by_eans(api):
     pass
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
-@pytest.mark.vcr()
-def test_get_offer_question_list_by_seller_refrences():
+def test_get_offer_question_list_by_seller_refrences(api):
     pass
 
 
 # order_question
 @pytest.mark.vcr()
-def test_get_order_question_list_by_status():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
-
+def test_get_order_question_list_by_status(api):
     # Case where there are no order questions closed
     response = api.discussions.get_order_question_list(
         StatusList={'DiscussionStateFilter': 'Closed'}
@@ -97,10 +82,7 @@ def test_get_order_question_list_by_status():
 
 
 @pytest.mark.vcr()
-def test_get_order_question_list_by_date():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
-
+def test_get_order_question_list_by_date(api):
     # Case where there are no order question between the selected creation
     # dates
     dtime = datetime.datetime(2077, 1, 1, 9, 0)
@@ -124,13 +106,13 @@ def test_get_order_question_list_by_date():
         assert response['OrderQuestionList'] is None
 
 
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 @pytest.mark.vcr()
-def test_get_order_question_list_by_eans():
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
+def test_get_order_question_list_by_eans(api):
     pass
 
 
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 @pytest.mark.vcr()
-def test_get_order_question_list_by_seller_refrences():
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
+def test_get_order_question_list_by_seller_refrences(api):
     pass

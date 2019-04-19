@@ -1,31 +1,23 @@
-import os
 import pytest
-from cdiscountapi.cdiscountapi import Connection
 from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 
 
 # TODO Finish the test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
-def test_generate_mail_discussion_guid():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
+def test_generate_mail_discussion_guid(api):
     response = api.webmail.generate_mail_discussion_guid('SCOPUS_ID')
 
 
 @pytest.mark.vcr()
-def test_generate_mail_discussion_guid_with_invalid_scopus_id():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
+def test_generate_mail_discussion_guid_with_invalid_scopus_id(api):
     response = api.webmail.generate_discussion_mail_guid('INVALID_SCOPUS_ID')
     assert response['ErrorMessage'] is None
     assert response['MailGuid'] is None
 
 
 @pytest.mark.vcr()
-def test_generate_mail_discussion_guid_without_scopus_id():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
+def test_generate_mail_discussion_guid_without_scopus_id(api):
     response = api.webmail.generate_discussion_mail_guid()
     assert_response_failed(response)
     assert response['MailGuid'] is None
@@ -33,9 +25,7 @@ def test_generate_mail_discussion_guid_without_scopus_id():
 
 
 @pytest.mark.vcr()
-def test_get_discussion_mail_list_with_nonexistent_discussions():
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'))
+def test_get_discussion_mail_list_with_nonexistent_discussions(api):
     response = api.webmail.get_discussion_mail_list([1, 2])
     assert_response_succeeded(response)
     assert response['DiscussionMailList'] == {
