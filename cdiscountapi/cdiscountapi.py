@@ -37,19 +37,16 @@ class Connection(object):
     """A class to manage the interaction with the CdiscountMarketplace API
 
     ::
-        api = Connection(login, password, preprod)
 
-    :type login: str
-    :param login: The login
+        api = Connection(login, password, preprod, header_message=header_message, config=config)
 
-    :type password: str
-    :param password: The password
+    :param str login: The login
+    :param str password: The password
+    :param bool preprod: Whether we use the preprod (True) or the production environment (False)
+                         (default value: False)
+    :param dict header_message: The header message
+    :param str config: The path to a YAML config file
 
-    :type preprod: bool
-    :param password: Whether we use the preprod (True) or the production environment (False)
-                     (default value: False)
-
-    :param header_message: desc
     """
 
     def __init__(self, login, password, preprod=False, header_message={}, config=''):

@@ -8,7 +8,6 @@ Welcome to CdiscountAPI's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    quickstart
    advanced_usage

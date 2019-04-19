@@ -23,6 +23,8 @@ For example:
 
 .. code-block:: yaml
 
+    Version: '1.0'
+
     Context:
         SiteID: 100
         CatalogID: 1

@@ -165,7 +165,7 @@ class Orders(BaseSection):
     def prepare_validations(self, data):
         """
         Return the dictionary used to validate the orders in
-        `Orders.validate_order_list`
+        :py:meth:`Orders.validate_order_list`
 
         This method tries to simplify the creation of the data necessary to
         validate the orders by letting the user provide a more intuitive data
@@ -235,7 +235,7 @@ class Orders(BaseSection):
                             ...
                             ]})
 
-        2. you can use ``Orders.prepare_validations``:
+        2. you can use :py:meth:`Orders.prepare_validations`:
 
         Example::
 

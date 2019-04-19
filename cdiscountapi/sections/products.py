@@ -23,6 +23,7 @@ class Products(BaseSection):
     def get_allowed_category_tree(self):
         """
         Categories which are accessible to the seller.
+
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
         """
@@ -34,6 +35,7 @@ class Products(BaseSection):
     def get_all_allowed_category_tree(self):
         """
         All categories.
+
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
         """
@@ -47,6 +49,7 @@ class Products(BaseSection):
     def get_product_list(self, category_code):
         """
         Search products in the reference frame
+
         :param category_code: code to filter products by category
         :type category_code: str
         :return: products corresponding to research
@@ -78,6 +81,7 @@ class Products(BaseSection):
     def get_all_model_list(self):
         """
         Model categories opened on marketplace.
+
         :return: models and mandatory model properties
         :rtype: dict
         """
@@ -127,6 +131,7 @@ class Products(BaseSection):
     def get_product_package_submission_result(self, filters={}):
         """
         Progress status of a product import.
+
         :param filters: (ex: package id)
         :type filters: dict
         :return: partial or complete report of package integration
@@ -141,6 +146,7 @@ class Products(BaseSection):
     def get_product_package_product_matching_file_data(self, package_id):
         """
         Information of the created products.
+
         :param package_id: package id to filter results
         :type package_id: str
         :return: information of the created products
@@ -156,6 +162,7 @@ class Products(BaseSection):
     def get_product_list_by_identifier(self, ean_list=[]):
         """
         Obtain details for a list of products
+
         :param ean_list: list of EAN to filter
         :type ean_list: list
         :return: complete list of products

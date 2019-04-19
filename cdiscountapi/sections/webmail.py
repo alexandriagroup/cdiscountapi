@@ -28,8 +28,10 @@ class WebMail(BaseSection):
         This operation allows getting an encrypted mail address to contact a
         customer about an order.
 
-        Usage:
-        >>> response = api.generate_discussion_mail_guid(scopus_id)
+        Usage::
+
+            >>> response = api.generate_discussion_mail_guid(scopus_id)
+
         """
         response = self.api.client.service.GenerateDiscussionMailGuid(
             headerMessage=self.api.header,
@@ -44,8 +46,10 @@ class WebMail(BaseSection):
         This operation allows getting an encrypted mail address to contact a
         customer about a discussion (claim, retraction, questions).
 
-        Usage:
-        >>> response = api.webmail.generate_discussion_mail_guid(discussion_ids)
+        Usage::
+
+            >>> response = api.webmail.generate_discussion_mail_guid(discussion_ids)
+
         """
         request = self.api.factory.GetDiscussionMailListRequest(
             DiscussionIds=self.array_of('long', discussion_ids)

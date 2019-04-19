@@ -40,19 +40,20 @@
 <h2>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="cdiscountapi.cdiscountapi.Connection">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>login</em>, <em>password</em>, <em>preprod=False</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>login</em>, <em>password</em>, <em>preprod=False</em>, <em>header_message={}</em>, <em>config=''</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class to manage the interaction with the CdiscountMarketplace API</p>
-<dl class="simple">
-<dt>::</dt><dd><p>api = Connection(login, password, preprod)</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">preprod</span><span class="p">,</span> <span class="n">header_message</span><span class="o">=</span><span class="n">header_message</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>login</strong> (<em>str</em>) – The login</p></li>
 <li><p><strong>password</strong> (<em>str</em>) – The password</p></li>
-<li><p><strong>password</strong> – Whether we use the preprod (True) or the production environment (False)
+<li><p><strong>preprod</strong> (<em>bool</em>) – Whether we use the preprod (True) or the production environment (False)
 (default value: False)</p></li>
+<li><p><strong>header_message</strong> (<em>dict</em>) – The header message</p></li>
+<li><p><strong>config</strong> (<em>str</em>) – The path to a YAML config file</p></li>
 </ul>
 </dd>
 </dl>
@@ -81,19 +82,70 @@ and their performance indicator.</p>
 <p>Operations are included in the Seller API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=36">https://dev.cdiscount.com/marketplace/?page_id=36</a>)</p>
 <dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Seller.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Seller.get_seller_indicators">
 <code class="descname">get_seller_indicators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_indicators" title="Permalink to this definition">¶</a></dt>
-<dd><p>Seller performance indicators.
-:return: a dict with the data of the user
-:rtype: dict</p>
+<dd><p>Seller performance indicators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a dict with the data of the user</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Seller.get_seller_info">
 <code class="descname">get_seller_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Seller Information.
-:return: Information of the authenticated seller.
-:rtype: dict</p>
+<dd><p>Seller Information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Information of the authenticated seller.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Seller.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -107,6 +159,14 @@ and their performance indicator.</p>
 <dd><p>Offers section lets sellers retrieve informations about their offers.</p>
 <p>Operations are included in the Products API section
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=84">https://dev.cdiscount.com/marketplace/?page_id=84</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Offers.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Offers.get_offer_list">
 <code class="descname">get_offer_list</code><span class="sig-paren">(</span><em>**filters</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list" title="Permalink to this definition">¶</a></dt>
@@ -161,6 +221,37 @@ and their performance indicator.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Offers.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -172,6 +263,14 @@ and their performance indicator.</p>
 <dd><p>Allows to list, validate or refund orders.</p>
 <p>Operations are included in the Orders API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=128">https://dev.cdiscount.com/marketplace/?page_id=128</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Orders.create_refund_voucher">
 <code class="descname">create_refund_voucher</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.create_refund_voucher" title="Permalink to this definition">¶</a></dt>
@@ -334,44 +433,71 @@ PartnerOrderRef is the seller’s reference</p></li>
 <dt id="cdiscountapi.cdiscountapi.Orders.prepare_validations">
 <code class="descname">prepare_validations</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.prepare_validations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the dictionary used to validate the orders in
-<cite>Orders.validate_order_list</cite></p>
+<a class="reference internal" href="#cdiscountapi.cdiscountapi.Orders.validate_order_list" title="cdiscountapi.cdiscountapi.Orders.validate_order_list"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Orders.validate_order_list()</span></code></a></p>
 <p>This method tries to simplify the creation of the data necessary to
 validate the orders by letting the user provide a more intuitive data
 structure than the one required for the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<em>list</em>) – <p>The validation data for the orders. A list of dictionaries with the following structure:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em>) – The validation data for the orders. A list of dictionaries with the following structure:</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;CarrierName&#39;</span><span class="p">:</span> <span class="n">carrier_name</span><span class="p">,</span>
+    <span class="s1">&#39;OrderNumber&#39;</span><span class="p">:</span> <span class="n">order_number</span><span class="p">,</span>
+    <span class="s1">&#39;OrderState&#39;</span><span class="p">:</span> <span class="n">order_state</span><span class="p">,</span>
+    <span class="s1">&#39;TrackingNumber&#39;</span><span class="p">:</span> <span class="n">tracking_number</span><span class="p">,</span>
+    <span class="s1">&#39;TrackingUrl&#39;</span><span class="p">:</span> <span class="n">tracking_url</span><span class="p">,</span>
+    <span class="s1">&#39;OrderLineList&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;AcceptationState&#39;</span><span class="p">:</span> <span class="n">acceptation_state</span><span class="p">,</span>
+            <span class="s1">&#39;ProductCondition&#39;</span><span class="p">:</span> <span class="n">product_condition</span><span class="p">,</span>
+            <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="n">seller_product_id</span><span class="p">,</span>
+            <span class="s1">&#39;TypeOfReturn&#39;</span><span class="p">:</span> <span class="n">type_of_return</span>
+        <span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p>’CarrierName’: carrier_name,
-‘OrderNumber’: order_number,
-‘OrderState’: order_state,
-‘TrackingNumber’: tracking_number,
-‘TrackingUrl’: tracking_url,
-‘OrderLineList’: [</p>
-<blockquote>
-<div><dl class="simple">
-<dt>{</dt><dd><p>‘AcceptationState’: acceptation_state,
-‘ProductCondition’: product_condition,
-‘SellerProductId’: seller_product_id,
-‘TypeOfReturn’: type_of_return</p>
+<dl class="field-list simple">
+<dt class="field-odd">Rtype dict</dt>
+<dd class="field-odd"><p></p></dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">validate_order_list_message</span></code> dictionary created with <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
 </dd>
 </dl>
-</div></blockquote>
-<p>]</p>
-</div></blockquote>
-<p>}</p>
-</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Orders.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
 </dd>
-<dt class="field-even">Rtype dict</dt>
-<dd class="field-even"><p></p></dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The <cite>validate_order_list_message</cite> dictionary created with</p>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
-<p><cite>data</cite></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -383,7 +509,7 @@ structure than the one required for the request.</p>
 <dd class="field-odd"><p><strong>validate_order_list_message</strong> – The information about the orders to validate.</p>
 </dd>
 </dl>
-<p>There are two ways to create a <cite>validate_order_list_message</cite>:</p>
+<p>There are two ways to create a <code class="docutils literal notranslate"><span class="pre">validate_order_list_message</span></code>:</p>
 <ol class="arabic simple">
 <li><p>you can build the dictionary by yourself:</p></li>
 </ol>
@@ -409,7 +535,7 @@ structure than the one required for the request.</p>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>you can use <cite>Orders.prepare_validations</cite>:</p></li>
+<li><p>you can use <a class="reference internal" href="#cdiscountapi.cdiscountapi.Orders.prepare_validations" title="cdiscountapi.cdiscountapi.Orders.prepare_validations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Orders.prepare_validations()</span></code></a>:</p></li>
 </ol>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">validate_order_list_message</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">prepare_validations</span><span class="p">(</span>
@@ -446,27 +572,53 @@ structure than the one required for the request.</p>
 <p>Operations are included in the Products API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=220">https://dev.cdiscount.com/marketplace/?page_id=220</a>)</p>
 <dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree">
 <code class="descname">get_all_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>All categories.
-:return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
-:rtype: dict</p>
+<dd><p>All categories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tree of the categories leaves of which are authorized for the integration of products and/or offers</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_all_model_list">
 <code class="descname">get_all_model_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_model_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Model categories opened on marketplace.
-:return: models and mandatory model properties
-:rtype: dict</p>
+<dd><p>Model categories opened on marketplace.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>models and mandatory model properties</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_allowed_category_tree">
 <code class="descname">get_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Categories which are accessible to the seller.
-:return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
-:rtype: dict</p>
+<dd><p>Categories which are accessible to the seller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tree of the categories leaves of which are authorized for the integration of products and/or offers</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -490,41 +642,69 @@ structure than the one required for the request.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_list">
 <code class="descname">get_product_list</code><span class="sig-paren">(</span><em>category_code</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search products in the reference frame
-:param category_code: code to filter products by category
-:type category_code: str
-:return: products corresponding to research
-:rtype: dict</p>
+<dd><p>Search products in the reference frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>category_code</strong> (<em>str</em>) – code to filter products by category</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>products corresponding to research</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_list_by_identifier">
 <code class="descname">get_product_list_by_identifier</code><span class="sig-paren">(</span><em>ean_list=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list_by_identifier" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtain details for a list of products
-:param ean_list: list of EAN to filter
-:type ean_list: list
-:return: complete list of products
-:rtype: dict</p>
+<dd><p>Obtain details for a list of products</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ean_list</strong> (<em>list</em>) – list of EAN to filter</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>complete list of products</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_package_product_matching_file_data">
 <code class="descname">get_product_package_product_matching_file_data</code><span class="sig-paren">(</span><em>package_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_product_matching_file_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Information of the created products.
-:param package_id: package id to filter results
-:type package_id: str
-:return: information of the created products
-:rtype: dict</p>
+<dd><p>Information of the created products.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>package_id</strong> (<em>str</em>) – package id to filter results</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>information of the created products</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_package_submission_result">
 <code class="descname">get_product_package_submission_result</code><span class="sig-paren">(</span><em>filters={}</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_submission_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Progress status of a product import.
-:param filters: (ex: package id)
-:type filters: dict
-:return: partial or complete report of package integration
-:rtype: dict</p>
+<dd><p>Progress status of a product import.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filters</strong> (<em>dict</em>) – (ex: package id)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>partial or complete report of package integration</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -547,6 +727,37 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Products.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -560,29 +771,33 @@ new ones.</p>
 <p>Operations are included in the Relays API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=108">https://dev.cdiscount.com/marketplace/?page_id=108</a>)</p>
 <dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Relays.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result">
 <code class="descname">get_relays_file_submission_result</code><span class="sig-paren">(</span><em>**relays_file_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the state of progress of the relays file submission.</p>
 <p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_relays_file_submission_result</span><span class="p">(</span>
-<span class="go">relays_file_filter={&#39;RelaysFileId&#39;: relays_file_id}</span>
-<span class="go">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_relays_file_submission_result</span><span class="p">(</span>
+<span class="n">relays_file_filter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileId&#39;</span><span class="p">:</span> <span class="n">relays_file_id</span><span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p>where relays_file_id is the value of RelaysFileId returned by
+<p>where <code class="docutils literal notranslate"><span class="pre">relays_file_id</span></code> is the value of RelaysFileId returned by
 SubmitRelaysFile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>relays_file_filter</strong> – The dictionary containing the ID referencing</p>
+<dd class="field-odd"><p><strong>relays_file_filter</strong> – The dictionary containing the ID referencing the relays file submitted.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response with the information about the integration of the relays specified.</p>
 </dd>
 </dl>
-<p>the relays file submitted.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The response with the information about the integration of</p>
-</dd>
-</dl>
-<p>the relays specified.</p>
 </dd></dl>
 
 <dl class="method">
@@ -609,6 +824,37 @@ SubmitRelaysFile.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Relays.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -621,32 +867,42 @@ SubmitRelaysFile.</p>
 <p>Operations are included in the Fulfillment API section
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=2222">https://dev.cdiscount.com/marketplace/?page_id=2222</a>)</p>
 <dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.create_external_order">
 <code class="descname">create_external_order</code><span class="sig-paren">(</span><em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.create_external_order" title="Permalink to this definition">¶</a></dt>
-<dd><p>create an order from another marketplace.
-:param order: dict as {</p>
-<blockquote>
-<div><p>‘Comments’: str,
-‘Corporation’: str (ex:FNAC),
-‘Customer’: customer info dict,
-‘CustomerOrderNumber’: str,
-‘OrderDate’: date,
-‘OrderLineList’: {</p>
-<blockquote>
-<div><dl class="simple">
-<dt>‘ExternalOrderLine’: {</dt><dd><p>‘ProductEan’: str,
-‘ProductReference’: str,
-‘Quantity’: int</p>
+<dd><p>create an order from another marketplace.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>order</strong> – A dictionary with the structure:</p>
 </dd>
 </dl>
-<p>}</p>
-</div></blockquote>
-<p>},
-‘ShippingMode’: str,</p>
-</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;Comments&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;Corporation&#39;</span><span class="p">:</span> <span class="nb">str</span> <span class="p">(</span><span class="n">ex</span><span class="p">:</span><span class="n">FNAC</span><span class="p">),</span>
+    <span class="s1">&#39;Customer&#39;</span><span class="p">:</span> <span class="n">customer</span> <span class="n">info</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="s1">&#39;CustomerOrderNumber&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s1">&#39;OrderDate&#39;</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+    <span class="s1">&#39;OrderLineList&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ExternalOrderLine&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;ProductEan&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;ProductReference&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="nb">int</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;ShippingMode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>The response</p>
 </dd>
 </dl>
 </dd></dl>
@@ -696,14 +952,30 @@ SubmitRelaysFile.</p>
 <code class="descname">get_fulfillment_supply_order</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> – ‘BeginModificationDate’: date,
-‘EndModificationDate’: date,
-‘PageNumber’: int,
-‘PageSize’: int,
-‘SupplyOrderNumberList’: string list</p>
+<dd class="field-odd"><p><strong>request</strong> – The keywords used to filter the supply order reports:</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>supply orders</p>
+</dl>
+<ul class="simple">
+<li><p>PageSize (int) [mandatory]</p></li>
+<li><p>BeginCreationDate, EndCreationDate (date)</p></li>
+<li><p>PageNumber (int)</p></li>
+<li><p>SupplyOrderNumberList (list of strings)</p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order_report_list</span><span class="p">(</span>
+    <span class="n">PageSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">BeginCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">EndCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order_report_list</span><span class="p">(</span>
+    <span class="n">PageSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">SupplyOrderNumberList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>supply orders</p>
 </dd>
 </dl>
 </dd></dl>
@@ -711,15 +983,30 @@ SubmitRelaysFile.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order_report_list">
 <code class="descname">get_fulfillment_supply_order_report_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order_report_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>To search supply order reports.
-:param request:</p>
-<blockquote>
-<div><p>‘BeginCreationDate’: date,
-‘DepositIdList’: int list,
-‘EndCreationDate’: date,
-‘PageNumber’: int,
-‘PageSize’: int</p>
-</div></blockquote>
+<dd><p>To search supply order reports.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – The keywords used to filter the supply order reports:</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>PageSize (int) [mandatory]</p></li>
+<li><p>BeginCreationDate, EndCreationDate (date)</p></li>
+<li><p>PageNumber (int)</p></li>
+<li><p>DepositIdList (list of ints)</p></li>
+</ul>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order_report_list</span><span class="p">(</span>
+    <span class="n">PageSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">BeginCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">EndCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order_report_list</span><span class="p">(</span>
+    <span class="n">PageSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">DepositIdList</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 <p>:return:supply order reports</p>
 </dd></dl>
 
@@ -740,11 +1027,13 @@ SubmitRelaysFile.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_activation">
 <code class="descname">submit_fulfillment_activation</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_activation" title="Permalink to this definition">¶</a></dt>
-<dd><p>To ask for products activation (or deactivation)
-:param request:</p>
-<blockquote>
-<div><p>‘ProductList’: ProductActivationData list</p>
-</div></blockquote>
+<dd><p>To ask for products activation (or deactivation)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – </p>
+</dd>
+</dl>
+<p>‘ProductList’: ProductActivationData list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>deposit id</p>
@@ -768,17 +1057,47 @@ SubmitRelaysFile.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_offer_state_action">
 <code class="descname">submit_offer_state_action</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_offer_state_action" title="Permalink to this definition">¶</a></dt>
-<dd><p>To set an offer online or offline
-:param request:</p>
-<blockquote>
-<div><p>‘Action’: ‘Publish’ or ‘Unpublish’
-‘SellerProductId’: str</p>
-</div></blockquote>
+<dd><p>To set an offer online or offline</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> – ‘Action’: ‘Publish’ or ‘Unpublish’
+‘SellerProductId’: str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -794,9 +1113,17 @@ status, and all messages.</p>
 <p>Thanks to the discussion Id and the method GetDiscussionMailList you can
 get an encrypted mail address to reply to a question or a claim.  You can
 close a discussion list with the method CloseDiscussionList and the
-Discussion id, you cannot close a discussion without having answered
-Operations are included in the Discussions API section.
+Discussion id, you cannot close a discussion without having answered</p>
+<p>Operations are included in the Discussions API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=148">https://dev.cdiscount.com/marketplace/?page_id=148</a>)</p>
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Discussions.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Discussions.close_discussion_list">
 <code class="descname">close_discussion_list</code><span class="sig-paren">(</span><em>discussion_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.close_discussion_list" title="Permalink to this definition">¶</a></dt>
@@ -806,8 +1133,10 @@ Operations are included in the Discussions API section.
 <dd class="field-odd"><p><strong>discussion_ids</strong> (<em>list</em>) – The list of discussion_ids to close</p>
 </dd>
 </dl>
-<p>Example:
-&gt;&gt;&gt; response = api.discussions.close_discussion_list([31, 4, 159])</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">discussions</span><span class="o">.</span><span class="n">close_discussion_list</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">159</span><span class="p">])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -819,7 +1148,7 @@ Operations are included in the Discussions API section.
 <dd class="field-odd"><p><strong>offer_question_filter</strong> – The keywords for the filter</p>
 </dd>
 </dl>
-<p><cite>offerQuestionFilter</cite>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">offerQuestionFilter</span></code>:</p>
 <ul class="simple">
 <li><p>BeginCreationDate</p></li>
 <li><p>BeginModificationDate</p></li>
@@ -857,7 +1186,7 @@ Operations are included in the Discussions API section.
 <dd class="field-odd"><p><strong>order_question_filter</strong> – The keywords for the filter</p>
 </dd>
 </dl>
-<p><cite>orderQuestionFilter</cite>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">orderQuestionFilter</span></code>:</p>
 <ul class="simple">
 <li><p>BeginCreationDate</p></li>
 <li><p>BeginModificationDate</p></li>
@@ -867,17 +1196,48 @@ Operations are included in the Discussions API section.
 <li><p>ProductEANList</p></li>
 <li><p>ProductSellerReferenceList</p></li>
 </ul>
-<p>Example:
-&gt;&gt;&gt; response = api.get_order_question_list(</p>
-<blockquote>
-<div><p>StatusList={‘DiscussionStateFilter’: ‘Open’}
-)</p>
-</div></blockquote>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_question_list</span><span class="p">(</span>
+<span class="go">    StatusList={&#39;DiscussionStateFilter&#39;: &#39;Open&#39;}</span>
+<span class="go">    )</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>An OrderQuestionListMessage dictionary.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Discussions.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -893,13 +1253,23 @@ contact a customer</p>
 <p>Operations are included in the WebMail API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=167">https://dev.cdiscount.com/marketplace/?page_id=167</a>)</p>
 <dl class="method">
+<dt id="cdiscountapi.cdiscountapi.WebMail.array_of">
+<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.array_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cast the sequence into an array of the given type.</p>
+<p>The arrays are defined in the XSD file
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid">
 <code class="descname">generate_discussion_mail_guid</code><span class="sig-paren">(</span><em>scopus_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain an encrypted mail address.</p>
 <p>This operation allows getting an encrypted mail address to contact a
 customer about an order.</p>
-<p>Usage:
-&gt;&gt;&gt; response = api.generate_discussion_mail_guid(scopus_id)</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">scopus_id</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -908,8 +1278,41 @@ customer about an order.</p>
 <dd><p>Obtain an encrypted mail address about a discussion.</p>
 <p>This operation allows getting an encrypted mail address to contact a
 customer about a discussion (claim, retraction, questions).</p>
-<p>Usage:
-&gt;&gt;&gt; response = api.webmail.generate_discussion_mail_guid(discussion_ids)</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">webmail</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">discussion_ids</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.WebMail.update_with_valid_array_type">
+<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the dictionary with the array having the valid type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>record</strong> (<em>dict</em>) – The dictionary to update</p></li>
+<li><p><strong>keys_to_cast</strong> (<em>dict</em>) – The dictionary specifying what keys to convert and what types</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
+<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -934,7 +1337,6 @@ customer about a discussion (claim, retraction, questions).</p>
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>

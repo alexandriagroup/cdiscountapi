@@ -22,6 +22,7 @@ class Discussions(BaseSection):
     get an encrypted mail address to reply to a question or a claim.  You can
     close a discussion list with the method CloseDiscussionList and the
     Discussion id, you cannot close a discussion without having answered
+
     Operations are included in the Discussions API section.
     (https://dev.cdiscount.com/marketplace/?page_id=148)
     """
@@ -43,7 +44,7 @@ class Discussions(BaseSection):
         Return the list of questions about offers with the specified criteria
 
         :param offer_question_filter: The keywords for the filter
-        `offerQuestionFilter`:
+        ``offerQuestionFilter``:
 
         - BeginCreationDate
         - BeginModificationDate
@@ -75,7 +76,7 @@ class Discussions(BaseSection):
         Return the list of questions about orders with the specified criteria
 
         :param order_question_filter: The keywords for the filter
-        `orderQuestionFilter`:
+        ``orderQuestionFilter``:
 
         - BeginCreationDate
         - BeginModificationDate
@@ -85,10 +86,11 @@ class Discussions(BaseSection):
         - ProductEANList
         - ProductSellerReferenceList
 
-        Example:
-        >>> response = api.get_order_question_list(
-            StatusList={'DiscussionStateFilter': 'Open'}
-            )
+        Example::
+
+            >>> response = api.get_order_question_list(
+                StatusList={'DiscussionStateFilter': 'Open'}
+                )
 
         :returns: An OrderQuestionListMessage dictionary.
 
@@ -106,11 +108,12 @@ class Discussions(BaseSection):
         """
         Close a discussion list
 
-        :type discussion_ids: list
-        :param discussion_ids: The list of discussion_ids to close
+        :param list discussion_ids: The list of discussion_ids to close
 
-        Example:
-        >>> response = api.discussions.close_discussion_list([31, 4, 159])
+        Example::
+
+            >>> response = api.discussions.close_discussion_list([31, 4, 159])
+
         """
         close_discussion_request = self.api.factory.CloseDiscussionRequest(
             DiscussionIds=self.array_of('long', discussion_ids)

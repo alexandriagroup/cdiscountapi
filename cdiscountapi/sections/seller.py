@@ -24,6 +24,7 @@ class Seller(BaseSection):
     def get_seller_info(self):
         """
         Seller Information.
+
         :return: Information of the authenticated seller.
         :rtype: dict
         """
@@ -35,6 +36,7 @@ class Seller(BaseSection):
     def get_seller_indicators(self):
         """
         Seller performance indicators.
+
         :return: a dict with the data of the user
         :rtype: dict
         """
