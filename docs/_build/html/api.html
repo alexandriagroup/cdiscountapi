@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Developer interface &#8212; CdiscountAPI  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nameko.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -17,19 +17,36 @@
     <link rel="next" title="Change log" href="CHANGELOG.html" />
     <link rel="prev" title="Advanced usage" href="advanced_usage.html" />
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
   </head><body>
   
+  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="CHANGELOG.html" title="Change log"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="advanced_usage.html" title="Advanced usage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">CdiscountAPI  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <div class="section" id="developer-interface">
@@ -134,7 +151,7 @@ and their performance indicator.</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -298,7 +315,7 @@ following criteria:</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -338,17 +355,17 @@ following criteria:</p>
 <p>An additional feature allows to make a commercial gesture on an order
 MKPCDS before and after shipping and on an order MKPFBC after shipping.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">create_refund_voucher</span><span class="p">(</span>
-<span class="go">    CommercialGestureList=[{&#39;Amount&#39;: 10, &#39;MotiveId&#39;: &#39;late_delivery&#39;}],</span>
-<span class="go">    OrderNumber=&#39;ORDER_NUMBER_1&#39;,</span>
-<span class="go">    SellerRefundList={</span>
-<span class="go">        &#39;Mode&#39;: &#39;Claim&#39;,</span>
-<span class="go">        &#39;Motive&#39;: &#39;ClientClaim&#39;,</span>
-<span class="go">        &#39;RefundOrderLine&#39;: {&#39;Ean&#39;: &#39;4005274238223&#39;,</span>
-<span class="go">                            &#39;SellerProductId&#39;: &#39;42382235&#39;,</span>
-<span class="go">                            &#39;RefundShippingCharges&#39;: True}</span>
-<span class="go">        }</span>
-<span class="go">    )</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">create_refund_voucher</span><span class="p">(</span>
+<span class="n">CommercialGestureList</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;Amount&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;MotiveId&#39;</span><span class="p">:</span> <span class="s1">&#39;late_delivery&#39;</span><span class="p">}],</span>
+<span class="n">OrderNumber</span><span class="o">=</span><span class="s1">&#39;ORDER_NUMBER_1&#39;</span><span class="p">,</span>
+<span class="n">SellerRefundList</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;Mode&#39;</span><span class="p">:</span> <span class="s1">&#39;Claim&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Motive&#39;</span><span class="p">:</span> <span class="s1">&#39;ClientClaim&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RefundOrderLine&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ean&#39;</span><span class="p">:</span> <span class="s1">&#39;4005274238223&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="s1">&#39;42382235&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;RefundShippingCharges&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -393,9 +410,9 @@ following criteria:</p>
 </li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span>
-<span class="go">    States=[&#39;CancelledByCustomer&#39;, &#39;Shipped&#39;]</span>
-<span class="go">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span>
+    <span class="n">States</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;CancelledByCustomer&#39;</span><span class="p">,</span> <span class="s1">&#39;Shipped&#39;</span><span class="p">]</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -412,9 +429,9 @@ following criteria:</p>
 </li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span>
-<span class="go">    BeginCreationDate=datetime.datetime(2077, 1, 1)</span>
-<span class="go">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span>
+    <span class="n">BeginCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2077</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -423,14 +440,14 @@ cannot be combined with others. If there is an order list, the other
 filters are unaccounted.</p></li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderReferenceList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderReferenceList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Filter on website thanks to the corporationCode.</p></li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">CorporationCode</span><span class="o">=</span><span class="s1">&#39;CDSB2C&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">CorporationCode</span><span class="o">=</span><span class="s1">&#39;CDSB2C&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -445,7 +462,7 @@ filters are unaccounted.</p></li>
 </li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderType</span><span class="o">=</span><span class="s1">&#39;MKPFBC&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderType</span><span class="o">=</span><span class="s1">&#39;MKPFBC&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -454,14 +471,14 @@ search, separate PartnerOrderRefs by semicolon).
 PartnerOrderRef is the seller’s reference</p></li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">PartnerOrderRef</span><span class="o">=</span><span class="s1">&#39;SELLER_REF&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">PartnerOrderRef</span><span class="o">=</span><span class="s1">&#39;SELLER_REF&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Recovery or not of the parcels of the order</p></li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">FetchParcels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OrderReferenceList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">FetchParcels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OrderReferenceList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -552,7 +569,7 @@ structure than the one required for the request.</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -579,48 +596,47 @@ structure than the one required for the request.</p>
 <li><p>you can build the dictionary by yourself:</p></li>
 </ol>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">validate_order_list</span><span class="p">(</span>
-<span class="go">    OrderList= {&#39;ValidateOrder&#39;:</span>
-<span class="go">                [{&#39;CarrierName&#39;: carrier_name,</span>
-<span class="go">                  &#39;OrderNumber&#39;: order_number,</span>
-<span class="go">                  &#39;OrderState&#39;: order_state,</span>
-<span class="go">                  &#39;TrackingNumber&#39;: tracking_number,</span>
-<span class="go">                  &#39;TrackingUrl&#39;: tracking_url,</span>
-<span class="go">                  &#39;OrderLineList&#39;: {</span>
-<span class="go">                      &#39;ValidateOrderLine&#39;: [</span>
-<span class="go">                      {&#39;AcceptationState&#39;: &#39;acceptation_state&#39;,</span>
-<span class="go">                       &#39;ProductCondition&#39;: product_condition,</span>
-<span class="go">                       &#39;SellerProductId&#39;: seller_product_id,</span>
-<span class="go">                       &#39;TypeOfReturn&#39;: type_of_return},</span>
-<span class="go">                      ...</span>
-<span class="go">                      ]},</span>
-<span class="go">                },</span>
-<span class="go">                ...</span>
-<span class="go">                ]})</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">validate_order_list</span><span class="p">(</span>
+    <span class="n">OrderList</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ValidateOrder&#39;</span><span class="p">:</span>
+                <span class="p">[{</span><span class="s1">&#39;CarrierName&#39;</span><span class="p">:</span> <span class="n">carrier_name</span><span class="p">,</span>
+                  <span class="s1">&#39;OrderNumber&#39;</span><span class="p">:</span> <span class="n">order_number</span><span class="p">,</span>
+                  <span class="s1">&#39;OrderState&#39;</span><span class="p">:</span> <span class="n">order_state</span><span class="p">,</span>
+                  <span class="s1">&#39;TrackingNumber&#39;</span><span class="p">:</span> <span class="n">tracking_number</span><span class="p">,</span>
+                  <span class="s1">&#39;TrackingUrl&#39;</span><span class="p">:</span> <span class="n">tracking_url</span><span class="p">,</span>
+                  <span class="s1">&#39;OrderLineList&#39;</span><span class="p">:</span> <span class="p">{</span>
+                      <span class="s1">&#39;ValidateOrderLine&#39;</span><span class="p">:</span> <span class="p">[</span>
+                      <span class="p">{</span><span class="s1">&#39;AcceptationState&#39;</span><span class="p">:</span> <span class="s1">&#39;acceptation_state&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;ProductCondition&#39;</span><span class="p">:</span> <span class="n">product_condition</span><span class="p">,</span>
+                       <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="n">seller_product_id</span><span class="p">,</span>
+                       <span class="s1">&#39;TypeOfReturn&#39;</span><span class="p">:</span> <span class="n">type_of_return</span><span class="p">},</span>
+                      <span class="o">...</span>
+                      <span class="p">]},</span>
+                <span class="p">},</span>
+                <span class="o">...</span>
+<span class="p">]})</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
 <li><p>you can use <a class="reference internal" href="#cdiscountapi.cdiscountapi.Orders.prepare_validations" title="cdiscountapi.cdiscountapi.Orders.prepare_validations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Orders.prepare_validations()</span></code></a>:</p></li>
 </ol>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">validate_order_list_message</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">prepare_validations</span><span class="p">(</span>
-<span class="go">            [{&#39;CarrierName&#39;: carrier_name,</span>
-<span class="go">              &#39;OrderNumber&#39;: order_number,</span>
-<span class="go">              &#39;OrderState&#39;: order_state,</span>
-<span class="go">              &#39;TrackingNumber&#39;: tracking_number,</span>
-<span class="go">              &#39;TrackingUrl&#39;: tracking_url,</span>
-<span class="go">              &#39;OrderLineList&#39;: [</span>
-<span class="go">                  {&#39;AcceptationState&#39;: &#39;acceptation_state&#39;,</span>
-<span class="go">                   &#39;ProductCondition&#39;: product_condition,</span>
-<span class="go">                   &#39;SellerProductId&#39;: seller_product_id,</span>
-<span class="go">                   &#39;TypeOfReturn&#39;: type_of_return},</span>
-<span class="go">                  ...</span>
-<span class="go">                  ]},</span>
-<span class="go">            ...]</span>
-<span class="go">    )</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">validate_order_list_message</span><span class="p">(</span><span class="o">**</span><span class="n">validate_order_list_message</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">validate_order_list_message</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">prepare_validations</span><span class="p">(</span>
+        <span class="p">[{</span><span class="s1">&#39;CarrierName&#39;</span><span class="p">:</span> <span class="n">carrier_name</span><span class="p">,</span>
+          <span class="s1">&#39;OrderNumber&#39;</span><span class="p">:</span> <span class="n">order_number</span><span class="p">,</span>
+          <span class="s1">&#39;OrderState&#39;</span><span class="p">:</span> <span class="n">order_state</span><span class="p">,</span>
+          <span class="s1">&#39;TrackingNumber&#39;</span><span class="p">:</span> <span class="n">tracking_number</span><span class="p">,</span>
+          <span class="s1">&#39;TrackingUrl&#39;</span><span class="p">:</span> <span class="n">tracking_url</span><span class="p">,</span>
+          <span class="s1">&#39;OrderLineList&#39;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span><span class="s1">&#39;AcceptationState&#39;</span><span class="p">:</span> <span class="s1">&#39;acceptation_state&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;ProductCondition&#39;</span><span class="p">:</span> <span class="n">product_condition</span><span class="p">,</span>
+               <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="n">seller_product_id</span><span class="p">,</span>
+               <span class="s1">&#39;TypeOfReturn&#39;</span><span class="p">:</span> <span class="n">type_of_return</span><span class="p">},</span>
+              <span class="o">...</span>
+              <span class="p">]},</span>
+        <span class="o">...</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">validate_order_list_message</span><span class="p">(</span><span class="o">**</span><span class="n">validate_order_list_message</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -809,7 +825,7 @@ structure than the one required for the request.</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -848,12 +864,12 @@ new ones.</p>
 <dd><p>Get the state of progress of the relays file submission.</p>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_relays_file_submission_result</span><span class="p">(</span>
-<span class="n">relays_file_filter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileId&#39;</span><span class="p">:</span> <span class="n">relays_file_id</span><span class="p">}</span>
+    <span class="n">relays_file_filter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileId&#39;</span><span class="p">:</span> <span class="n">relays_file_id</span><span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">relays_file_id</span></code> is the value of RelaysFileId returned by
-SubmitRelaysFile.</p>
+<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=112">SubmitRelaysFile</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>relays_file_filter</strong> – The dictionary containing the ID referencing the relays file submitted.</p>
@@ -868,10 +884,10 @@ SubmitRelaysFile.</p>
 <dt id="cdiscountapi.cdiscountapi.Relays.submit_relays_file">
 <code class="descname">submit_relays_file</code><span class="sig-paren">(</span><em>**relays_file_request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.submit_relays_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send information about relays in a file</p>
-<p>Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">submit_relays_file</span><span class="p">(</span>
-<span class="go">        relays_file_request=RelaysFileURI=relays_file_uri</span>
-<span class="go">    )</span>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">submit_relays_file</span><span class="p">(</span>
+    <span class="n">relays_file_request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileURI&#39;</span><span class="p">:</span> <span class="n">relays_file_uri</span><span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <p>where relays_file_uri is the URI to a XLSX file</p>
@@ -905,7 +921,7 @@ SubmitRelaysFile.</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -1153,7 +1169,7 @@ SubmitRelaysFile.</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -1200,7 +1216,7 @@ Discussion id, you cannot close a discussion without having answered</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">discussions</span><span class="o">.</span><span class="n">close_discussion_list</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">159</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">discussions</span><span class="o">.</span><span class="n">close_discussion_list</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">159</span><span class="p">])</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1220,16 +1236,31 @@ Discussion id, you cannot close a discussion without having answered</p>
 <li><p>BeginModificationDate</p></li>
 <li><p>EndCreationDate</p></li>
 <li><p>EndModificationDate</p></li>
-<li><p>StatusList</p></li>
+<li><dl class="simple">
+<dt>StatusList</dt><dd><ul>
+<li><dl class="simple">
+<dt>DiscussionStateFilter can have the values</dt><dd><ul>
+<li><p>All</p></li>
+<li><p>Open</p></li>
+<li><p>Closed</p></li>
+<li><p>NotProcessed</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>ProductEANList</p></li>
 <li><p>ProductSellerReferenceList</p></li>
 </ul>
-<p>Example:
-&gt;&gt;&gt; response = api.get_offer_question_list(</p>
-<blockquote>
-<div><p>StatusList={‘DiscussionStateFilter’: ‘Open’}
-)</p>
-</div></blockquote>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_offer_question_list</span><span class="p">(</span>
+    <span class="n">StatusList</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DiscussionStateFilter&#39;</span><span class="p">:</span> <span class="s1">&#39;Open&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>An OfferQuestionListMessage dictionary.</p>
@@ -1258,14 +1289,29 @@ Discussion id, you cannot close a discussion without having answered</p>
 <li><p>BeginModificationDate</p></li>
 <li><p>EndCreationDate</p></li>
 <li><p>EndModificationDate</p></li>
-<li><p>StatusList</p></li>
+<li><dl class="simple">
+<dt>StatusList</dt><dd><ul>
+<li><dl class="simple">
+<dt>DiscussionStateFilter can have the values</dt><dd><ul>
+<li><p>All</p></li>
+<li><p>Open</p></li>
+<li><p>Closed</p></li>
+<li><p>NotProcessed</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>ProductEANList</p></li>
 <li><p>ProductSellerReferenceList</p></li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_question_list</span><span class="p">(</span>
-<span class="go">    StatusList={&#39;DiscussionStateFilter&#39;: &#39;Open&#39;}</span>
-<span class="go">    )</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_question_list</span><span class="p">(</span>
+    <span class="n">StatusList</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DiscussionStateFilter&#39;</span><span class="p">:</span> <span class="s1">&#39;Open&#39;</span><span class="p">}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -1292,7 +1338,7 @@ Discussion id, you cannot close a discussion without having answered</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -1332,7 +1378,7 @@ contact a customer</p>
 <p>This operation allows getting an encrypted mail address to contact a
 customer about an order.</p>
 <p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">scopus_id</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">scopus_id</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1344,7 +1390,7 @@ customer about an order.</p>
 <p>This operation allows getting an encrypted mail address to contact a
 customer about a discussion (claim, retraction, questions).</p>
 <p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">webmail</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">discussion_ids</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">webmail</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">discussion_ids</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1366,7 +1412,7 @@ customer about a discussion (claim, retraction, questions).</p>
 <span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -1386,48 +1432,39 @@ customer about a discussion (claim, retraction, questions).</p>
 
 
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">CdiscountAPI</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#connection">Connection</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#seller">Seller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#offers">Offers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#orders">Orders</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#products">Products</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#relays">Relays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#fulfillment">Fulfillment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#discussions">Discussions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#webmail">WebMail</a></li>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Developer interface</a><ul>
+<li><a class="reference internal" href="#connection">Connection</a></li>
+<li><a class="reference internal" href="#seller">Seller</a></li>
+<li><a class="reference internal" href="#offers">Offers</a></li>
+<li><a class="reference internal" href="#orders">Orders</a></li>
+<li><a class="reference internal" href="#products">Products</a></li>
+<li><a class="reference internal" href="#relays">Relays</a></li>
+<li><a class="reference internal" href="#fulfillment">Fulfillment</a></li>
+<li><a class="reference internal" href="#discussions">Discussions</a></li>
+<li><a class="reference internal" href="#webmail">WebMail</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change log</a></li>
 </ul>
-
-<div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Documentation index</a><ul>
       <li>Previous: <a href="advanced_usage.html" title="previous chapter">Advanced usage</a></li>
       <li>Next: <a href="CHANGELOG.html" title="next chapter">Change log</a></li>
   </ul></li>
 </ul>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -1438,32 +1475,10 @@ customer about a discussion (claim, retraction, questions).</p>
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2019, ZIBOURA Mathilde, RABOIS Damien.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/api.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
+  
   </body>
 </html>

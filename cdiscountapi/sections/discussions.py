@@ -51,12 +51,18 @@ class Discussions(BaseSection):
         - EndCreationDate
         - EndModificationDate
         - StatusList
+            - DiscussionStateFilter can have the values
+                - All
+                - Open
+                - Closed
+                - NotProcessed
         - ProductEANList
         - ProductSellerReferenceList
 
-        Example:
-        >>> response = api.get_offer_question_list(
-            StatusList={'DiscussionStateFilter': 'Open'}
+        Example::
+
+            response = api.get_offer_question_list(
+                StatusList={'DiscussionStateFilter': 'Open'}
             )
 
         :returns: An OfferQuestionListMessage dictionary.
@@ -83,14 +89,19 @@ class Discussions(BaseSection):
         - EndCreationDate
         - EndModificationDate
         - StatusList
+            - DiscussionStateFilter can have the values
+                - All
+                - Open
+                - Closed
+                - NotProcessed
         - ProductEANList
         - ProductSellerReferenceList
 
         Example::
 
-            >>> response = api.get_order_question_list(
+            response = api.get_order_question_list(
                 StatusList={'DiscussionStateFilter': 'Open'}
-                )
+            )
 
         :returns: An OrderQuestionListMessage dictionary.
 
@@ -112,7 +123,7 @@ class Discussions(BaseSection):
 
         Example::
 
-            >>> response = api.discussions.close_discussion_list([31, 4, 159])
+            response = api.discussions.close_discussion_list([31, 4, 159])
 
         """
         close_discussion_request = self.api.factory.CloseDiscussionRequest(

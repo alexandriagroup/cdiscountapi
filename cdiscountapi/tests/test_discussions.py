@@ -5,6 +5,13 @@ import datetime
 
 
 @pytest.mark.vcr()
+def test_close_discussion(api):
+    response = api.discussions.close_discussion_list([113157784])
+    assert_response_succeeded(response)
+    assert 'CloseDiscussionResultList' in response
+
+
+@pytest.mark.vcr()
 def test_close_discussion_not_found(api):
     response = api.discussions.close_discussion_list(
         [-2, -1]
@@ -26,12 +33,20 @@ def test_close_discussion_not_found(api):
 
 # offer_question
 @pytest.mark.vcr()
+def test_get_offer_question_list(api):
+    response = api.discussions.get_offer_question_list()
+    assert_response_succeeded(response)
+    assert 'OfferQuestionList' in response
+
+
+@pytest.mark.vcr()
 def test_get_offer_question_list_by_status(api):
     response = api.discussions.get_offer_question_list(
         StatusList={'DiscussionStateFilter': 'Closed'}
     )
     assert_response_succeeded(response)
-    assert response['OfferQuestionList'] is None
+    # If there are closed questions, OfferQuestionList should not be None
+    assert response['OfferQuestionList'] is not None
 
 
 # close_discussion
@@ -60,14 +75,24 @@ def test_get_offer_question_list_by_date(api):
         assert response['OfferQuestionList'] is None
 
 
+# We created some data for the tests:
+# ProductEANList: '2009863600561'
+# ProductSellerReference: 'PRES1'
+
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
+@pytest.mark.vcr()
 def test_get_offer_question_list_by_eans(api):
-    pass
+    response = api.discussions.get_offer_question_list(ProductEANList=['2009863600561'])
+    assert_response_succeeded(response)
+    assert response['OfferQuestionList'] is not None
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
+@pytest.mark.vcr()
 def test_get_offer_question_list_by_seller_refrences(api):
-    pass
+    response = api.discussions.get_offer_question_list(ProductSellerReferenceList=['PRES1'])
+    assert_response_succeeded(response)
+    assert response['OfferQuestionList'] is not None
 
 
 # order_question

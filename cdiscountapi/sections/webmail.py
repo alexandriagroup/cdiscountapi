@@ -30,7 +30,7 @@ class WebMail(BaseSection):
 
         Usage::
 
-            >>> response = api.generate_discussion_mail_guid(scopus_id)
+            response = api.generate_discussion_mail_guid(scopus_id)
 
         """
         response = self.api.client.service.GenerateDiscussionMailGuid(
@@ -48,7 +48,7 @@ class WebMail(BaseSection):
 
         Usage::
 
-            >>> response = api.webmail.generate_discussion_mail_guid(discussion_ids)
+            response = api.webmail.generate_discussion_mail_guid(discussion_ids)
 
         """
         request = self.api.factory.GetDiscussionMailListRequest(
