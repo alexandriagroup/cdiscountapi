@@ -38,7 +38,11 @@ class Offers(BaseSection):
     def get_offer_list_paginated(self, **filters):
         """
         Recovery of the offers page by page.
+
         :param filters: list of filters
+
+        - PageNumber (int) [mandatory]
+
         :type filters: dict
         :return: offers answering the search criterion
         :rtype: dict

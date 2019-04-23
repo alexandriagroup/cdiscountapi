@@ -8,7 +8,7 @@ from ..cdiscountapi import Connection
 from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 
 
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='timeout error unresolve by cdiscount')
+@pytest.mark.skip(reason='timeout error unresolve by cdiscount')
 @pytest.mark.vcr()
 def test_get_offer_list(api):
     response = api.offers.get_offer_list()
