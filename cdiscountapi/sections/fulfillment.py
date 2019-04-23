@@ -63,9 +63,9 @@ class Fulfillment(BaseSection):
                 PageSize=10, DepositIdList=[1, 2, 3]
             )
 
-        :return:supply order reports
+        :return: supply order reports
         """
-        self.update_with_valid_array_type(request, {'DepositIdList': 'int'})
+        request = self.update_with_valid_array_type(request, {'DepositIdList': 'int'})
 
         supply_order_report_request = self.api.factory.SupplyOrderReportRequest(**request)
         response = self.api.client.service.GetFulfilmentSupplyOrderReportList(
@@ -109,7 +109,7 @@ class Fulfillment(BaseSection):
 
         :return: supply orders
         """
-        self.update_with_valid_array_type(request, {'SupplyOrderNumberList': 'string'})
+        request = self.update_with_valid_array_type(request, {'SupplyOrderNumberList': 'string'})
 
         supply_order_report_request = self.api.factory.SupplyOrderRequest(**request)
         response = self.api.client.service.GetFulfilmentSupplyOrder(

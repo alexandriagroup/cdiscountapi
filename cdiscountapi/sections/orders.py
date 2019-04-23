@@ -113,7 +113,9 @@ class Orders(BaseSection):
                 order_filter['States'])
             )
 
-        self.update_with_valid_array_type(order_filter, {'OrderReferenceList': 'string'})
+        order_filter = self.update_with_valid_array_type(
+            order_filter, {'OrderReferenceList': 'string'}
+        )
 
         if 'FetchOrderLines' not in order_filter:
             order_filter.update(FetchOrderLines=True)
@@ -326,17 +328,22 @@ class Orders(BaseSection):
         """
         Ask for investigation or ask for delivery certification.
 
-        :param parcel_actions_list: The keywords from
+        :param list parcel_actions_list: The list of dictionaries with the keys:
 
-            >>> api.manage_parcel(ParcelInfos=[
-                {'ManageParcel': manage_parcel, 'ParcelNumber': parcel_number,
-                 'Sku': sku},
+            - ManageParcel: ('AskingForDeliveryCertification' or 'AskingForInvestigation')
+            - ParcelNumber: The parcel customer number
+            - Sku: The product number
+
+        :param int scopus_id: The scopus id
+
+        Usage::
+
+            api.manage_parcel(ParcelInfos=[
+                {'ManageParcel': manage_parcel, 'ParcelNumber': parcel_number, 'Sku': sku},
                 ...
-                 ],
-                 scopus_id=scopus_id)
-
-        where manage_parcel is either 'AskingForInvestigation' or
-        'AskingForDeliveryCertification'.
+                ],
+                scopus_id=scopus_id
+            )
 
         """
         # Handle properly the case where no information is provided for
