@@ -53,7 +53,7 @@ class Orders(BaseSection):
 
         Example::
 
-            >>> response = api.orders.get_order_list(
+            response = api.orders.get_order_list(
                 States=['CancelledByCustomer', 'Shipped']
             )
 
@@ -67,7 +67,7 @@ class Orders(BaseSection):
 
         Example::
 
-            >>> response = api.orders.get_order_list(
+            response = api.orders.get_order_list(
                 BeginCreationDate=datetime.datetime(2077, 1, 1)
             )
 
@@ -77,13 +77,13 @@ class Orders(BaseSection):
 
         Example::
 
-            >>> response = api.orders.get_order_list(OrderReferenceList=['X1', 'X2'])
+            response = api.orders.get_order_list(OrderReferenceList=['X1', 'X2'])
 
         - Filter on website thanks to the corporationCode.
 
         Example::
 
-            >>> response = api.orders.get_order_list(CorporationCode='CDSB2C')
+            response = api.orders.get_order_list(CorporationCode='CDSB2C')
 
         - Filter by Order Type:
             - MKPFBC Orders (Marketplace fulfillment by Cdiscount)
@@ -92,7 +92,7 @@ class Orders(BaseSection):
 
         Example::
 
-            >>> response = api.get_order_list(OrderType='MKPFBC')
+            response = api.get_order_list(OrderType='MKPFBC')
 
         - PartnerOrderRef filter from 1 to N external order (if it's a multiple
           search, separate PartnerOrderRefs by semicolon).
@@ -100,13 +100,13 @@ class Orders(BaseSection):
 
         Example::
 
-            >>> response = api.get_order_list(PartnerOrderRef='SELLER_REF')
+            response = api.get_order_list(PartnerOrderRef='SELLER_REF')
 
         - Recovery or not of the parcels of the order
 
         Example::
 
-            >>> response = api.get_order_list(FetchParcels=True, OrderReferenceList=['X1'])
+            response = api.get_order_list(FetchParcels=True, OrderReferenceList=['X1'])
         """
         if 'States' in order_filter:
             order_filter.update(States=self.api.factory.ArrayOfOrderStateEnum(
@@ -218,7 +218,7 @@ class Orders(BaseSection):
 
         Example::
 
-            >>> api.validate_order_list(
+            response = api.validate_order_list(
                 OrderList= {'ValidateOrder':
                             [{'CarrierName': carrier_name,
                               'OrderNumber': order_number,
@@ -235,29 +235,29 @@ class Orders(BaseSection):
                                   ]},
                             },
                             ...
-                            ]})
+            ]})
 
         2. you can use :py:meth:`Orders.prepare_validations`:
 
         Example::
 
-            >>> validate_order_list_message = api.orders.prepare_validations(
-                        [{'CarrierName': carrier_name,
-                          'OrderNumber': order_number,
-                          'OrderState': order_state,
-                          'TrackingNumber': tracking_number,
-                          'TrackingUrl': tracking_url,
-                          'OrderLineList': [
-                              {'AcceptationState': 'acceptation_state',
-                               'ProductCondition': product_condition,
-                               'SellerProductId': seller_product_id,
-                               'TypeOfReturn': type_of_return},
-                              ...
-                              ]},
-                        ...]
-                )
+            validate_order_list_message = api.orders.prepare_validations(
+                    [{'CarrierName': carrier_name,
+                      'OrderNumber': order_number,
+                      'OrderState': order_state,
+                      'TrackingNumber': tracking_number,
+                      'TrackingUrl': tracking_url,
+                      'OrderLineList': [
+                          {'AcceptationState': 'acceptation_state',
+                           'ProductCondition': product_condition,
+                           'SellerProductId': seller_product_id,
+                           'TypeOfReturn': type_of_return},
+                          ...
+                          ]},
+                    ...]
+            )
 
-        >>> api.orders.validate_order_list_message(**validate_order_list_message)
+            response = api.orders.validate_order_list_message(**validate_order_list_message)
 
         """
         validate_order_list_message = self.api.factory.ValidateOrderListMessage(
@@ -279,17 +279,17 @@ class Orders(BaseSection):
 
         Example::
 
-            >>> response = api.orders.create_refund_voucher(
-                CommercialGestureList=[{'Amount': 10, 'MotiveId': 'late_delivery'}],
-                OrderNumber='ORDER_NUMBER_1',
-                SellerRefundList={
-                    'Mode': 'Claim',
-                    'Motive': 'ClientClaim',
-                    'RefundOrderLine': {'Ean': '4005274238223',
-                                        'SellerProductId': '42382235',
-                                        'RefundShippingCharges': True}
-                    }
-                )
+            response = api.orders.create_refund_voucher(
+            CommercialGestureList=[{'Amount': 10, 'MotiveId': 'late_delivery'}],
+            OrderNumber='ORDER_NUMBER_1',
+            SellerRefundList={
+                'Mode': 'Claim',
+                'Motive': 'ClientClaim',
+                'RefundOrderLine': {'Ean': '4005274238223',
+                                    'SellerProductId': '42382235',
+                                    'RefundShippingCharges': True}
+                }
+            )
 
         """
         # Check CommercialGestureList

@@ -51,7 +51,7 @@ class BaseSection(object):
             new_record = section.update_with_valid_array_type(
                 {'DepositIdList': [1, 2, 3], 'PageSize': 10},
                 {'DepositIdList': 'int'}
-                )
+            )
 
         :rtype: dict
         :returns: The updated dictionary with the valid array type
