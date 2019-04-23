@@ -51,6 +51,11 @@ class Discussions(BaseSection):
         - EndCreationDate
         - EndModificationDate
         - StatusList
+            - DiscussionStateFilter can have the values
+                - All
+                - Open
+                - Closed
+                - NotProcessed
         - ProductEANList
         - ProductSellerReferenceList
 
@@ -83,6 +88,11 @@ class Discussions(BaseSection):
         - EndCreationDate
         - EndModificationDate
         - StatusList
+            - DiscussionStateFilter can have the values
+                - All
+                - Open
+                - Closed
+                - NotProcessed
         - ProductEANList
         - ProductSellerReferenceList
 
