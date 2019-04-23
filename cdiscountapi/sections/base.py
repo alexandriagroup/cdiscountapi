@@ -9,6 +9,9 @@
 """
 
 
+from zeep.helpers import serialize_object
+
+
 class BaseSection(object):
 
     def __init__(self, api):
@@ -32,7 +35,8 @@ class BaseSection(object):
             raise TypeError("Invalid type_name. "
                             "Please choose between {}".format(valid_type_names))
 
-        return getattr(self.arrays_factory, 'ArrayOf{}'.format(type_name))(sequence)
+        array = getattr(self.arrays_factory, 'ArrayOf{}'.format(type_name))(sequence)
+        return serialize_object(array, dict)
 
     def update_with_valid_array_type(self, record, keys_to_cast):
         """
@@ -44,18 +48,17 @@ class BaseSection(object):
         Example::
 
             section = BaseSection(api)
-            section.update_with_valid_array_type(
+            new_record = section.update_with_valid_array_type(
                 {'DepositIdList': [1, 2, 3], 'PageSize': 10},
                 {'DepositIdList': 'int'}
                 )
 
-        :returns: None
+        :rtype: dict
+        :returns: The updated dictionary with the valid array type
 
-        .. note:: This method mutates the dictionary ``record``.
         """
+        new_record = record.copy()
         for key, type_name in keys_to_cast.items():
-            if key in record:
-                record[key] = self.array_of(type_name, record[key])
-
-
-
+            if key in new_record:
+                new_record[key] = self.array_of(type_name, new_record[key])
+        return new_record
