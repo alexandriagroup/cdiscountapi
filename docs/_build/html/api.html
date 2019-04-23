@@ -131,21 +131,20 @@ and their performance indicator.</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -156,7 +155,7 @@ and their performance indicator.</p>
 <dl class="class">
 <dt id="cdiscountapi.cdiscountapi.Offers">
 <em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Offers</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers" title="Permalink to this definition">¶</a></dt>
-<dd><p>Offers section lets sellers retrieve informations about their offers.</p>
+<dd><p>Offers section lets sellers retrieve information about their offers.</p>
 <p>Operations are included in the Products API section
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=84">https://dev.cdiscount.com/marketplace/?page_id=84</a>)</p>
 <dl class="method">
@@ -170,21 +169,82 @@ and their performance indicator.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Offers.get_offer_list">
 <code class="descname">get_offer_list</code><span class="sig-paren">(</span><em>**filters</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>To search offers.
-:param filters: filters (ex: OfferPoolId, SKU)
-:type filters: dict
-:return: offers answering the search criterion
-:rtype: dict</p>
+<dd><p>To search offers.</p>
+<p>This operation seeks offers according to the
+following criteria:</p>
+<ul class="simple">
+<li><p>SellerProductIdList is a list of seller product references</p></li>
+<li><p>OfferPoolId is</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">get_offer_list</span><span class="p">(</span>
+    <span class="n">SellerProductIdList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;REF1&#39;</span><span class="p">,</span> <span class="s1">&#39;REF2&#39;</span><span class="p">,</span> <span class="s1">&#39;REF3&#39;</span><span class="p">],</span>
+    <span class="n">OfferPoolId</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>offers answering the search criterion</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Offers.get_offer_list_paginated">
 <code class="descname">get_offer_list_paginated</code><span class="sig-paren">(</span><em>**filters</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list_paginated" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recovery of the offers page by page.
-:param filters: list of filters
-:type filters: dict
-:return: offers answering the search criterion
-:rtype: dict</p>
+<dd><p>Recovery of the offers page by page.</p>
+<ul class="simple">
+<li><p>PageNumber (int) [mandatory]</p></li>
+<li><dl class="simple">
+<dt>OfferFilterCriterion:</dt><dd><ul>
+<li><p>‘NewOffersOnly’</p></li>
+<li><p>‘UsedOffersOnly’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>OfferPoolId (int) is the distribution website Id</p></li>
+<li><dl class="simple">
+<dt>OfferSortOrder:</dt><dd><ul>
+<li><p>ByPriceAscending</p></li>
+<li><p>ByPriceDescending</p></li>
+<li><p>BySoldQuantityDescending</p></li>
+<li><p>ByCreationDateDescending</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>OfferStateFilter:</dt><dd><ul>
+<li><p>WaitingForProductActivation</p></li>
+<li><p>Active</p></li>
+<li><p>Inactive</p></li>
+<li><p>Archived</p></li>
+<li><p>Fulfillment</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>SellerProductIdList (list of str)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">get_offer_list_paginated</span><span class="p">(</span>
+    <span class="n">PageNumber</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">OfferFilterCriterion</span><span class="o">=</span><span class="s1">&#39;NewOffersOnly&#39;</span><span class="p">,</span>
+    <span class="n">OfferSortOrder</span><span class="o">=</span><span class="s1">&#39;BySoldQuantityDescending&#39;</span><span class="p">,</span>
+    <span class="n">OfferStateFilter</span><span class="o">=</span><span class="s1">&#39;Active&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>offers answering the search criterion</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -235,21 +295,20 @@ and their performance indicator.</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -413,20 +472,27 @@ PartnerOrderRef is the seller’s reference</p></li>
 <dd><p>Ask for investigation or ask for delivery certification.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>parcel_actions_list</strong> – <p>The keywords from</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">api</span><span class="o">.</span><span class="n">manage_parcel</span><span class="p">(</span><span class="n">ParcelInfos</span><span class="o">=</span><span class="p">[</span>
-<span class="go">    {&#39;ManageParcel&#39;: manage_parcel, &#39;ParcelNumber&#39;: parcel_number,</span>
-<span class="go">     &#39;Sku&#39;: sku},</span>
-<span class="go">    ...</span>
-<span class="go">     ],</span>
-<span class="go">     scopus_id=scopus_id)</span>
-</pre></div>
-</div>
-</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parcel_actions_list</strong> (<em>list</em>) – <p>The list of dictionaries with the keys:</p>
+<ul>
+<li><p>ManageParcel: (‘AskingForDeliveryCertification’ or ‘AskingForInvestigation’)</p></li>
+<li><p>ParcelNumber: The parcel customer number</p></li>
+<li><p>Sku: The product number</p></li>
+</ul>
+</p></li>
+<li><p><strong>scopus_id</strong> (<em>int</em>) – The scopus id</p></li>
+</ul>
 </dd>
 </dl>
-<p>where manage_parcel is either ‘AskingForInvestigation’ or
-‘AskingForDeliveryCertification’.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">manage_parcel</span><span class="p">(</span><span class="n">ParcelInfos</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;ManageParcel&#39;</span><span class="p">:</span> <span class="n">manage_parcel</span><span class="p">,</span> <span class="s1">&#39;ParcelNumber&#39;</span><span class="p">:</span> <span class="n">parcel_number</span><span class="p">,</span> <span class="s1">&#39;Sku&#39;</span><span class="p">:</span> <span class="n">sku</span><span class="p">},</span>
+    <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="n">scopus_id</span><span class="o">=</span><span class="n">scopus_id</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -483,21 +549,20 @@ structure than the one required for the request.</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 <dl class="method">
@@ -741,21 +806,20 @@ structure than the one required for the request.</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -838,21 +902,20 @@ SubmitRelaysFile.</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -1007,7 +1070,11 @@ SubmitRelaysFile.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>:return:supply order reports</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>supply order reports</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1083,21 +1150,20 @@ SubmitRelaysFile.</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -1223,21 +1289,20 @@ Discussion id, you cannot close a discussion without having answered</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -1298,21 +1363,20 @@ customer about a discussion (claim, retraction, questions).</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">BaseSection</span><span class="p">(</span><span class="n">api</span><span class="p">)</span>
-<span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
+<span class="n">new_record</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">update_with_valid_array_type</span><span class="p">(</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;DepositIdList&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">}</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method mutates the dictionary <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
-</div>
 </dd></dl>
 
 </dd></dl>

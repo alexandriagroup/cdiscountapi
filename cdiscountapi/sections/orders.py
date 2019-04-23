@@ -22,9 +22,6 @@ class Orders(BaseSection):
     (https://dev.cdiscount.com/marketplace/?page_id=128)
     """
 
-    def __init__(self, api):
-        self.api = api
-
     def get_order_list(self, **order_filter):
         """
         To search orders.

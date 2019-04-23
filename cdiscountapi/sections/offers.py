@@ -15,19 +15,33 @@ from .base import BaseSection
 
 class Offers(BaseSection):
     """
-    Offers section lets sellers retrieve informations about their offers.
+    Offers section lets sellers retrieve information about their offers.
 
     Operations are included in the Products API section
     (https://dev.cdiscount.com/marketplace/?page_id=84)
     """
+
     def get_offer_list(self, **filters):
         """
         To search offers.
-        :param filters: filters (ex: OfferPoolId, SKU)
-        :type filters: dict
+
+        This operation seeks offers according to the
+        following criteria:
+
+        - SellerProductIdList is a list of seller product references
+        - OfferPoolId is
+
+        Example::
+
+            response = api.offers.get_offer_list(
+                SellerProductIdList=['REF1', 'REF2', 'REF3'],
+                OfferPoolId=1
+            )
+
         :return: offers answering the search criterion
-        :rtype: dict
         """
+        filters = self.update_with_valid_array_type(filters, {'SellerProductIdList': 'string'})
+
         offer_filter = self.api.factory.OfferFilter(**filters)
         response = self.api.client.service.GetOfferList(
             headerMessage=self.api.header,
@@ -39,11 +53,33 @@ class Offers(BaseSection):
         """
         Recovery of the offers page by page.
 
-        :param filters: list of filters
-
         - PageNumber (int) [mandatory]
+        - OfferFilterCriterion:
+            - 'NewOffersOnly'
+            - 'UsedOffersOnly'
+        - OfferPoolId (int) is the distribution website Id
+        - OfferSortOrder:
+            - ByPriceAscending
+            - ByPriceDescending
+            - BySoldQuantityDescending
+            - ByCreationDateDescending
+        - OfferStateFilter:
+            - WaitingForProductActivation
+            - Active
+            - Inactive
+            - Archived
+            - Fulfillment
+        - SellerProductIdList (list of str)
 
-        :type filters: dict
+        Example::
+
+            response = api.offers.get_offer_list_paginated(
+                PageNumber=1,
+                OfferFilterCriterion='NewOffersOnly',
+                OfferSortOrder='BySoldQuantityDescending',
+                OfferStateFilter='Active'
+            )
+
         :return: offers answering the search criterion
         :rtype: dict
         """
