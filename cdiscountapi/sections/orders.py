@@ -21,10 +21,6 @@ class Orders(BaseSection):
     Operations are included in the Orders API section.
     (https://dev.cdiscount.com/marketplace/?page_id=128)
     """
-
-    def __init__(self, api):
-        self.api = api
-
     def get_order_list(self, **order_filter):
         """
         To search orders.
@@ -68,8 +64,13 @@ class Orders(BaseSection):
         Example::
 
             response = api.orders.get_order_list(
-                BeginCreationDate=datetime.datetime(2077, 1, 1)
+                BeginCreationDate=datetime.datetime(2077, 1, 1),
+                States=['CancelledByCustomer', 'Shipped']
             )
+
+        .. note:: The date parameters must be combined with another parameter
+                  (like ``States``). Otherwise all the orders will be taken
+                  into account.
 
         - Order number list Liste (OrderReferenceList) Warning, this filter
           cannot be combined with others. If there is an order list, the other
@@ -89,10 +90,11 @@ class Orders(BaseSection):
             - MKPFBC Orders (Marketplace fulfillment by Cdiscount)
             - EXTFBC Orders (External fulfillment by Cdiscount)
             - FBC Orders (Isfulfillment)
+            - None
 
         Example::
 
-            response = api.get_order_list(OrderType='MKPFBC')
+            response = api.get_order_list(OrderType=None)
 
         - PartnerOrderRef filter from 1 to N external order (if it's a multiple
           search, separate PartnerOrderRefs by semicolon).
@@ -107,6 +109,9 @@ class Orders(BaseSection):
         Example::
 
             response = api.get_order_list(FetchParcels=True, OrderReferenceList=['X1'])
+
+        .. note:: If ``FetchOrderLines`` is not specified in keywords, its
+                  default value will be ``True``.
         """
         if 'States' in order_filter:
             order_filter.update(States=self.api.factory.ArrayOfOrderStateEnum(
@@ -338,7 +343,7 @@ class Orders(BaseSection):
 
         Usage::
 
-            api.manage_parcel(ParcelInfos=[
+            api.manage_parcel(parcel_actions_list=[
                 {'ManageParcel': manage_parcel, 'ParcelNumber': parcel_number, 'Sku': sku},
                 ...
                 ],
@@ -351,7 +356,7 @@ class Orders(BaseSection):
         if parcel_actions_list is not None:
             new_parcel_actions_list = []
             for parcel_infos in parcel_actions_list:
-                new_parcel_infos = self.api.factory.ParcelInfos(parcel_infos)
+                new_parcel_infos = self.api.factory.ParcelInfos(**parcel_infos)
                 if not isinstance(new_parcel_infos.ManageParcel, list):
                     new_parcel_infos.ManageParcel = [new_parcel_infos.ManageParcel]
                 new_parcel_actions_list.append(new_parcel_infos)
@@ -359,7 +364,7 @@ class Orders(BaseSection):
             new_parcel_actions_list = None
 
         manage_parcel_request = self.api.factory.ManageParcelRequest(
-            ParcelActionsList=new_parcel_actions_list,
+            ParcelActionsList=self.api.factory.ArrayOfParcelInfos(new_parcel_actions_list),
             ScopusId=scopus_id
         )
 
