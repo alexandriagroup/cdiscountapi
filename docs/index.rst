@@ -11,6 +11,7 @@ Welcome to CdiscountAPI's documentation!
 
    quickstart
    advanced_usage
+   cookbook
    api
    CHANGELOG
 
