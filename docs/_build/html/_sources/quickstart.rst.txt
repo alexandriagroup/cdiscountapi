@@ -20,3 +20,12 @@ Retrieve information about your seller account
 ::
 
     seller_info = api.seller.get_seller_info()
+
+
+Validate an order
+-----------------
+
+In order to validate an order, you have to provide the information 
+- about each item in the order (order line) and the corresponding AcceptationState,
+- about the order and the OrderState.
+

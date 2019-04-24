@@ -83,6 +83,7 @@ header_message = {
     },
     'Localization': {
         'Country': 'Fr',
+        'Currency': 'Eur',
     },
     'Security': {
         'IssuerID': None,

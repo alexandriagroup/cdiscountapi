@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Change log" href="CHANGELOG.html" />
-    <link rel="prev" title="Advanced usage" href="advanced_usage.html" />
+    <link rel="prev" title="Cookbook" href="cookbook.html" />
    
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Lora:400' rel='stylesheet' type='text/css'>
@@ -38,7 +38,7 @@
           <a href="CHANGELOG.html" title="Change log"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="advanced_usage.html" title="Advanced usage"
+          <a href="cookbook.html" title="Cookbook"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">CdiscountAPI  documentation</a> &#187;</li> 
       </ul>
@@ -381,9 +381,16 @@ following criteria:</p>
 </ul>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span>
-    <span class="n">BeginCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2077</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">BeginCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2077</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">States</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;CancelledByCustomer&#39;</span><span class="p">,</span> <span class="s1">&#39;Shipped&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The date parameters must be combined with another parameter
+(like <code class="docutils literal notranslate"><span class="pre">States</span></code>). Otherwise all the orders will be taken
+into account.</p>
 </div>
 <ul class="simple">
 <li><p>Order number list Liste (OrderReferenceList) Warning, this filter
@@ -407,13 +414,14 @@ filters are unaccounted.</p></li>
 <li><p>MKPFBC Orders (Marketplace fulfillment by Cdiscount)</p></li>
 <li><p>EXTFBC Orders (External fulfillment by Cdiscount)</p></li>
 <li><p>FBC Orders (Isfulfillment)</p></li>
+<li><p>None</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderType</span><span class="o">=</span><span class="s1">&#39;MKPFBC&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">OrderType</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -431,6 +439,11 @@ PartnerOrderRef is the seller’s reference</p></li>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">(</span><span class="n">FetchParcels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">OrderReferenceList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">])</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">FetchOrderLines</span></code> is not specified in keywords, its
+default value will be <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </div>
 </dd></dl>
 
@@ -453,7 +466,7 @@ PartnerOrderRef is the seller’s reference</p></li>
 </dd>
 </dl>
 <p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">manage_parcel</span><span class="p">(</span><span class="n">ParcelInfos</span><span class="o">=</span><span class="p">[</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="o">.</span><span class="n">manage_parcel</span><span class="p">(</span><span class="n">parcel_actions_list</span><span class="o">=</span><span class="p">[</span>
     <span class="p">{</span><span class="s1">&#39;ManageParcel&#39;</span><span class="p">:</span> <span class="n">manage_parcel</span><span class="p">,</span> <span class="s1">&#39;ParcelNumber&#39;</span><span class="p">:</span> <span class="n">parcel_number</span><span class="p">,</span> <span class="s1">&#39;Sku&#39;</span><span class="p">:</span> <span class="n">sku</span><span class="p">},</span>
     <span class="o">...</span>
     <span class="p">],</span>
@@ -1405,7 +1418,7 @@ customer about a discussion (claim, retraction, questions).</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation index</a><ul>
-      <li>Previous: <a href="advanced_usage.html" title="previous chapter">Advanced usage</a></li>
+      <li>Previous: <a href="cookbook.html" title="previous chapter">Cookbook</a></li>
       <li>Next: <a href="CHANGELOG.html" title="next chapter">Change log</a></li>
   </ul></li>
 </ul>
