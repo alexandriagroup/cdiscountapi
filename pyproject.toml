@@ -30,7 +30,7 @@ dev = [
     "ipython",
     "konch",
 ]
-doc = ["sphinx"]
+doc = ["sphinx", "sphinx-nameko-theme"]
 
 [tool.black]
 line-length = 88
