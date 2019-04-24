@@ -4,80 +4,94 @@ import datetime
 from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 
 
-# TODO Finish this test
+@pytest.fixture
+def refund_voucher_request():
+    return {
+        'OrderNumber': 'ORDER_NUMBER',
+        'SellerRefundList': {
+            'Mode': 'Claim',
+            'Motive': 'VendorRejection',
+            'RefundOrderLine': {
+                'Ean': 'EAN',
+                'RefundShippingCharges': True,
+                'SellerProductId': 'SKU1'
+            }
+        }
+    }
+
+
+# get_order_list {{{1
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list(api):
     response = api.orders.get_order_list()
-    raise AssertionError
+    assert_response_succeeded(response)
+    assert response['OrderList'] is not None
 
 
-# TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
-def test_get_order_list_by_state(api):
-    response = api.orders.get_order_list(States=['AcceptedBySeller', 'Shipped'])
-    raise AssertionError
+def test_get_order_list_by_state_with_orders_waiting_to_be_accepted(api):
+    response = api.orders.get_order_list(States=['ShipmentRefusedBySeller'])
+    assert_response_succeeded(response)
+    assert response['OrderList'] is not None
 
 
-# TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list_by_date(api):
     response = api.orders.get_order_list(
-        BeginCreationDate=datetime.datetime(2077, 1, 1)
+        BeginCreationDate=datetime.datetime(2019, 4, 24),
+        States=['None']
     )
-    raise AssertionError
+    assert_response_succeeded(response)
+    assert response['OrderList'] is not None
 
 
-# TODO Finish this test
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.vcr()
+def test_get_order_list_by_date_with_no_order_at_date(api):
+    response = api.orders.get_order_list(
+        BeginCreationDate=datetime.datetime(2077, 1, 1),
+        States=['ShipmentRefusedBySeller']
+    )
+    assert_response_succeeded(response)
+    assert response['OrderList'] is None
+
+
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list_with_corporation_code(api):
     response = api.orders.get_order_list(
         CorporationCode='CDSB2C'
     )
-    raise AssertionError
+    assert_response_succeeded(response)
+    assert response['OrderList'] is not None
 
 
-# TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list_with_order_type(api):
     response = api.orders.get_order_list(
-        OrderType='MKPFBC'
+        OrderType='None'
     )
-    raise AssertionError
+    assert_response_succeeded(response)
+    assert response['OrderList'] is not None
 
 
-# TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_get_order_list_with_order_numbers(api):
     response = api.orders.get_order_list(
-        PartnerOrderRef='X'
+        OrderReferenceList=['ORDER_NUMBER_1', '1904240959CN8HI', 'ORDER_NUMBER_2']
     )
-    raise AssertionError
-
-
-# TODO Finish this test
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
-@pytest.mark.vcr()
-def test_get_order_list_with_fetch_parcels(api):
-    response = api.orders.get_order_list(
-        FetchParcels=True, OrderReferenceList=['ORDER_NUMBER_1']
-    )
-    raise AssertionError
-
-
-@pytest.mark.vcr()
-def test_get_order_list_without_orders(api):
-    response = api.orders.get_order_list()
     assert_response_succeeded(response)
-    # OrderList should be None
-    assert response['OrderList'] is None
+
+    # Only 1904240959CN8HI is an existing order number
+    assert len(response['OrderList']['Order']) == 1
 
 
+# get_global_configuration {{{1
 @pytest.mark.vcr()
 def test_get_global_configuration(api):
     response = api.orders.get_global_configuration()
@@ -86,6 +100,7 @@ def test_get_global_configuration(api):
     assert response['CarrierList'] is not None
 
 
+# prepare_validations {{{1
 @pytest.mark.vcr()
 def test_prepare_validations(api):
     """
@@ -146,34 +161,53 @@ def test_prepare_validations(api):
     assert api.orders.prepare_validations([order1, order2]) == expected
 
 
+# validate_order_list {{{1
+# TODO Difficult to test validate_order_list with vcr, as the action must be
+# run at least once, which will change the state of the order that won't be
+# allowed to change the next run.
+# @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+# @pytest.mark.vcr()
+# def test_validate_order_list(api):
+#     """
+#     Orders.validate_order_list should validate the orders specified
+#     """
+#     shipment_refused_by_seller = {'OrderNumber': '1904240959CN8HI',
+#                                   'OrderState': 'ShipmentRefusedBySeller',
+#                                   'OrderLineList': [{
+#                                   'AcceptationState': 'ShipmentRefusedBySeller',
+#                                   'SellerProductId': 'PRES1',
+#                                   'ProductCondition': 'AverageState'}]}
+#     validations = api.orders.prepare_validations([shipment_refused_by_seller])
+#     response = api.orders.validate_order_list(**validations)
+#     assert_response_succeeded(response)
+
+
 # TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
-def test_validate_order_list(api):
+def test_validate_order_list_with_new_action_not_allowed(api):
     """
-    Orders.validate_order_list should validate the orders specified
+    Orders.validate_order_list should return an error response when
+    the action chosen is not allowed
     """
-    raise AssertionError
+    # In this case, the order has already been cancelled.
+    # Cancelling it another time is not allowed
+    shipment_refused_by_seller = {'OrderNumber': '1904240959CN8HI',
+                                  'OrderState': 'ShipmentRefusedBySeller',
+                                  'OrderLineList': [{
+                                  'AcceptationState': 'ShipmentRefusedBySeller',
+                                  'SellerProductId': 'PRES1',
+                                  'ProductCondition': 'AverageState'}]}
+
+    validations = api.orders.prepare_validations([shipment_refused_by_seller])
+    response = api.orders.validate_order_list(**validations)
+    assert response['OperationSuccess'] is True
+    assert response['ValidateOrderResults'] is not None
+    results = response['ValidateOrderResults']
+    assert results['ValidateOrderResult'][0]['Errors']['Error'][0]['ErrorType'] == 'OrderStateIncoherent'
 
 
-# create_refund_voucher
-@pytest.fixture
-def refund_voucher_request():
-    return {
-        'OrderNumber': 'ORDER_NUMBER',
-        'SellerRefundList': {
-            'Mode': 'Claim',
-            'Motive': 'VendorRejection',
-            'RefundOrderLine': {
-                'Ean': 'EAN',
-                'RefundShippingCharges': True,
-                'SellerProductId': 'SKU1'
-            }
-        }
-    }
-
-
-
+# create_refund_voucher {{{1
 # TODO Finish this test
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
@@ -231,6 +265,7 @@ def test_create_refund_voucher_with_invalid_data(api):
     assert response['SellerRefundList'] is None
 
 
+# manage_parcel {{{1
 @pytest.mark.vcr()
 def test_manage_parcel_without_argument(api):
     response = api.orders.manage_parcel()
