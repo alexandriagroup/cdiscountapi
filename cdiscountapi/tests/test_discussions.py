@@ -4,6 +4,7 @@ from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 import datetime
 
 
+# close_discussion
 @pytest.mark.vcr()
 def test_close_discussion(api):
     response = api.discussions.close_discussion_list([113157784])
@@ -49,7 +50,6 @@ def test_get_offer_question_list_by_status(api):
     assert response['OfferQuestionList'] is not None
 
 
-# close_discussion
 @pytest.mark.vcr()
 def test_get_offer_question_list_by_date(api):
     # Case where there are no offer question between the selected creation
@@ -141,3 +141,11 @@ def test_get_order_question_list_by_eans(api):
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 def test_get_order_question_list_by_seller_refrences(api):
     pass
+
+
+# get_order_claim_list
+@pytest.mark.vcr()
+def test_get_order_claim_list(api):
+    response = api.discussions.get_order_claim_list()
+    assert_response_succeeded(response)
+    assert 'OrderClaimList' in response
