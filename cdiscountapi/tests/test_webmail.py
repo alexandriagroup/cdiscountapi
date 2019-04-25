@@ -6,7 +6,9 @@ from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHO
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
 @pytest.mark.vcr()
 def test_generate_mail_discussion_guid(api):
-    response = api.webmail.generate_discussion_mail_guid('SCOPUS_ID')
+    response = api.webmail.generate_discussion_mail_guid('1904241640CLE8Z')
+    assert_response_succeeded(response)
+    assert response['MailGuid'] is not None
 
 
 @pytest.mark.vcr()
