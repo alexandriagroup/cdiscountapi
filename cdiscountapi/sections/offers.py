@@ -92,7 +92,9 @@ class Offers(BaseSection):
 
     def submit_offer_package(self, offers_dict, url):
         """
-        To ask for the creation of offers.
+        To import offers.
+        It is used to add new offers to the Cdiscount marketplace or to modify/update offers taht already exists.
+
 
         :param offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
         :type offers_dict: dict
@@ -118,6 +120,8 @@ class Offers(BaseSection):
         """
         This operation makes it possible to know the progress report of the offers import.
 
+        :param package_id: id of package we want to know the progress
+        :type package_id: long
         :return: Offer report logs
         :rtype: dict
         """

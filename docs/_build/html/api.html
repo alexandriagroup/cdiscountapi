@@ -269,11 +269,14 @@ following criteria:</p>
 <code class="descname">get_offer_package_submission_result</code><span class="sig-paren">(</span><em>package_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_package_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>This operation makes it possible to know the progress report of the offers import.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Offer report logs</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>package_id</strong> (<em>long</em>) – id of package we want to know the progress</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Offer report logs</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,7 +284,8 @@ following criteria:</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Offers.submit_offer_package">
 <code class="descname">submit_offer_package</code><span class="sig-paren">(</span><em>offers_dict</em>, <em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.submit_offer_package" title="Permalink to this definition">¶</a></dt>
-<dd><p>To ask for the creation of offers.</p>
+<dd><p>To import offers.
+It is used to add new offers to the Cdiscount marketplace or to modify/update offers taht already exists.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
