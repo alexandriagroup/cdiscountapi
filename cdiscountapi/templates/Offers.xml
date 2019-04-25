@@ -1,0 +1,22 @@
+<OfferPackage Name="Nom fichier offres" PurgeAndReplace="false" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <OfferPackage.Offers>
+    <OfferCollection Capacity="1">
+
+        {% for offer in offers %}
+        <Offer SellerProductId="{{ offer.SellerProductId }}" ProductEan="{{ offer.ProductEan }}" ProductCondition="{{ offer.ProductCondition }}" Price="{{ offer.Price }}" EcoPart="{{ offer.EcoPart }}" DeaTax="{{ offer.DeaTax }}" Vat="{{ offer.Vat }}" Stock="{{ offer.Vat }}" StrikedPrice="{{ offer.StrikedPrice }}" Comment="{{ offer.Comment }}" PreparationTime="{{ offer.PreparationTime }}">
+        {% endfor %}
+        <Offer.ShippingInformationList>
+            <ShippingInformationList Capacity="{{ capacity }}">
+            {% for shipping_info in shipping_infos %}
+            <ShippingInformation AdditionalShippingCharges="{{ shipping_info.AdditionalShippingCharges }}" DeliveryMode="{{ shipping_info.Standard }}" ShippingCharges="{{ shipping_info.ShippingCharges }}" />
+            {% endfor %}
+          </ShippingInformationList>
+        </Offer.ShippingInformationList>
+
+        <!-- TODO Finish PriceAndDiscountList -->
+        <Offer.PriceAndDiscountList>
+          <DiscountComponentList Capacity="1">
+            <DiscountComponent DiscountUnit="1" DiscountValue="60" EndDate="2012-12-22T20:00" StartDate="2012-12-21T21:00" Type="1" />
+          </DiscountComponentList>
+        </Offer.PriceAndDiscountList>
+      </Offer>

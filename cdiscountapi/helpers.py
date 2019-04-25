@@ -163,3 +163,71 @@ def get_motive_id(label):
             list(label_to_motive_id))
         )
     return label_to_motive_id[label]
+
+
+class XmlGenerator(object):
+    """
+    Generate an offer to upload
+
+    Usage::
+
+        generator = XmlGenerator()
+        ship_info1 = generator.ShippingInformation(DeliveryMode='')
+        ship_info2 = generator.ShippingInformation(DeliveryMode='')
+        discount_component = generator.DiscountComponent(DiscountValue='', Type='')
+
+        offer = generator.Offer(Price=100,
+            ShippingInformationList=[ship_info1, ship_info2],
+            DiscountList=[discount_component]
+            )
+
+        generator.add_offers([offer])
+        generator.save()
+
+    """
+    def __init__(self, preprod=False):
+        self.preprod = preprod
+        if self.preprod:
+            domain = 'preprod-cdiscount.com'
+        else:
+            domain = 'cdiscount.com'
+
+        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
+        self.factory = self.client.type_factory('http://www.cdiscount.com')
+
+    def Offer(self, **kwargs):
+
+        new_kwargs = self.update_types(
+            kwargs,
+            {'DiscountList': 'ArrayOfDiscountComponent',
+             'ShippingInformationList': 'ArrayOfShippingInformation',
+             'OfferPoolList': 'ArrayOfOfferPool'},
+        )
+
+        return self.factory.Offer(**new_kwargs)
+
+    def ShippingInformation(self, **kwargs):
+        return self.factory.ShippingInformation(**kwargs)
+
+    def DiscountComponent(self, **kwargs):
+        pass
+
+    def save(self):
+        pass
+
+    def update_types(self, record, keys_to_cast):
+        """
+        ::
+
+            new_record = self.update_types({'DiscountList': [1, 2, 3]},
+                {'DiscountList': 'ArrayOfDiscountComponent'}
+            )
+        """
+        new_record = record.copy()
+        for key, type_name in keys_to_cast.items():
+            if key in new_record:
+                new_type = getattr(self.factory, type_name)
+                new_record[key] = new_type(new_record[key])
+        return new_record
+
+
