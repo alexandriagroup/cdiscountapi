@@ -92,8 +92,8 @@
 </div>
 <div class="section" id="refuse-the-shipment-of-an-order">
 <h3>Refuse the shipment of an order<a class="headerlink" href="#refuse-the-shipment-of-an-order" title="Permalink to this headline">¶</a></h3>
-<p>After the order is accepted, if for some reason, you can’t ship it to your
-customer, you can refuse the shipment.</p>
+<p>After the order is accepted if, for some reason, you can’t ship it to your
+customer, you can refuse the shipment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shipment_refused_by_seller</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;OrderNumber&#39;</span><span class="p">:</span> <span class="s1">&#39;ORDER_NUMBER&#39;</span><span class="p">,</span>
                               <span class="s1">&#39;OrderState&#39;</span><span class="p">:</span> <span class="s1">&#39;ShipmentRefusedBySeller&#39;</span><span class="p">,</span>
                               <span class="s1">&#39;OrderLineList&#39;</span><span class="p">:</span> <span class="p">[{</span>
@@ -103,6 +103,27 @@ customer, you can refuse the shipment.</p>
 
 <span class="n">validations</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">prepare_validations</span><span class="p">([</span><span class="n">shipment_refused_by_seller</span><span class="p">])</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">validate_order_list</span><span class="p">(</span><span class="o">**</span><span class="n">validations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="refund-the-customer">
+<h3>Refund the customer<a class="headerlink" href="#refund-the-customer" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">create_refund_voucher</span><span class="p">(</span>
+    <span class="n">OrderNumber</span><span class="o">=</span><span class="s1">&#39;ORDER_NUMBER&#39;</span><span class="p">,</span>
+    <span class="n">SellerRefundList</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Mode&#39;</span><span class="p">:</span> <span class="s1">&#39;Claim&#39;</span><span class="p">,</span> <span class="s1">&#39;Motive&#39;</span><span class="p">:</span> <span class="s1">&#39;ClientClaim&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RefundOrderLine&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ean&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="s1">&#39;SKU&#39;</span>
+                            <span class="s1">&#39;RefundShippingCharges&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>A commercial gesture is also possible by adding the keyword <code class="docutils literal notranslate"><span class="pre">CommercialGestureList</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">create_refund_voucher</span><span class="p">(</span>
+    <span class="n">OrderNumber</span><span class="o">=</span><span class="s1">&#39;ORDER_NUMBER&#39;</span><span class="p">,</span>
+    <span class="n">CommercialGestureList</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;Amount&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;MotiveId&#39;</span><span class="p">:</span> <span class="s1">&#39;late_delivery&#39;</span><span class="p">}],</span>
+    <span class="n">SellerRefundList</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Mode&#39;</span><span class="p">:</span> <span class="s1">&#39;Claim&#39;</span><span class="p">,</span> <span class="s1">&#39;Motive&#39;</span><span class="p">:</span> <span class="s1">&#39;ClientClaim&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RefundOrderLine&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ean&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="s1">&#39;SKU&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;RefundShippingCharges&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}}</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -121,6 +142,7 @@ customer, you can refuse the shipment.</p>
 <li><a class="reference internal" href="#orders">Orders</a><ul>
 <li><a class="reference internal" href="#accept-the-order">Accept the order</a></li>
 <li><a class="reference internal" href="#refuse-the-shipment-of-an-order">Refuse the shipment of an order</a></li>
+<li><a class="reference internal" href="#refund-the-customer">Refund the customer</a></li>
 </ul>
 </li>
 </ul>
