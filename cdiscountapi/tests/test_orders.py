@@ -42,7 +42,7 @@ def test_get_order_list_by_state_with_orders_waiting_to_be_accepted(api):
 def test_get_order_list_by_date(api):
     response = api.orders.get_order_list(
         BeginCreationDate=datetime.datetime(2019, 4, 24),
-        States=['None']
+        States=['ShipmentRefusedBySeller']
     )
     assert_response_succeeded(response)
     assert response['OrderList'] is not None
@@ -162,24 +162,24 @@ def test_prepare_validations(api):
 
 
 # validate_order_list {{{1
-# TODO Difficult to test validate_order_list with vcr, as the action must be
+# Difficult to test validate_order_list with vcr, as the action must be
 # run at least once, which will change the state of the order that won't be
 # allowed to change the next run.
-# @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
-# @pytest.mark.vcr()
-# def test_validate_order_list(api):
-#     """
-#     Orders.validate_order_list should validate the orders specified
-#     """
-#     shipment_refused_by_seller = {'OrderNumber': '1904240959CN8HI',
-#                                   'OrderState': 'ShipmentRefusedBySeller',
-#                                   'OrderLineList': [{
-#                                   'AcceptationState': 'ShipmentRefusedBySeller',
-#                                   'SellerProductId': 'PRES1',
-#                                   'ProductCondition': 'AverageState'}]}
-#     validations = api.orders.prepare_validations([shipment_refused_by_seller])
-#     response = api.orders.validate_order_list(**validations)
-#     assert_response_succeeded(response)
+@pytest.mark.skip
+@pytest.mark.vcr()
+def test_validate_order_list(api):
+    """
+    Orders.validate_order_list should validate the orders specified
+    """
+    shipment_refused_by_seller = {'OrderNumber': '1904240959CN8HI',
+                                  'OrderState': 'ShipmentRefusedBySeller',
+                                  'OrderLineList': [{
+                                  'AcceptationState': 'ShipmentRefusedBySeller',
+                                  'SellerProductId': 'PRES1',
+                                  'ProductCondition': 'AverageState'}]}
+    validations = api.orders.prepare_validations([shipment_refused_by_seller])
+    response = api.orders.validate_order_list(**validations)
+    assert_response_succeeded(response)
 
 
 # TODO Finish this test
@@ -208,15 +208,13 @@ def test_validate_order_list_with_new_action_not_allowed(api):
 
 
 # create_refund_voucher {{{1
-# TODO Finish this test
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+# Difficult to test create_refund_voucher with vcr, as the action must be
+# run at least once, which will change the state of the order that won't be
+# allowed to change the next run.
+@pytest.mark.skip
 @pytest.mark.vcr()
 def test_create_refund_voucher(api):
     request = {
-        'CommercialGestureList': {
-            'Amount': 10,
-            'MotiveId': 135
-        },
         'OrderNumber': 'ORDER_NUMBER',
         'SellerRefundList': {
             'Mode': 'Claim',
@@ -232,8 +230,7 @@ def test_create_refund_voucher(api):
     raise AssertionError
 
 
-# TODO Finish this test
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.skip
 @pytest.mark.vcr()
 def test_create_refund_voucher_with_commercial_gesture(api, refund_voucher_request):
     # CommercialGestureList accepts a single dict
@@ -244,7 +241,7 @@ def test_create_refund_voucher_with_commercial_gesture(api, refund_voucher_reque
     raise AssertionError
 
 
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for orders')
+@pytest.mark.skip
 @pytest.mark.vcr()
 def test_create_refund_voucher_with_commercial_gestures(api, refund_voucher_request):
     # CommercialGestureList accepts a list of dicts
@@ -284,6 +281,22 @@ def test_manage_parcel_with_nonexistent_order(api):
     ]
     response = api.orders.manage_parcel(
         parcel_actions_list=parcel_actions_list, scopus_id='SCOPUS_ID'
+    )
+    assert_response_failed(response)
+    assert response['ParcelActionResultList'] is None
+
+
+@pytest.mark.vcr()
+def test_manage_parcel_with_internal_order(api):
+    parcel_actions_list = [
+        {
+            'ManageParcel': 'AskingForDeliveryCertification',
+            'ParcelNumber': 'TN1',
+            'Sku': 'PRES1',
+         }
+    ]
+    response = api.orders.manage_parcel(
+        parcel_actions_list=parcel_actions_list, scopus_id='1904241640CLE8'
     )
     assert_response_failed(response)
     assert response['ParcelActionResultList'] is None
