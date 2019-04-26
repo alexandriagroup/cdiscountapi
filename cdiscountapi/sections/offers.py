@@ -102,6 +102,41 @@ class Offers(BaseSection):
         :type url: str
         :return: the id of package or -1
         :rtype: int
+
+        Example::
+
+            response = api.offers.submit_offer_package(
+                offers_dict={
+                    "OfferPackage": {
+                        "-xmlns": "clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration",
+                        "-xmlns:x": "http://schemas.microsoft.com/winfx/2006/xaml",
+                        "-Name": "Nom fichier offres",
+                        "-PurgeAndReplace": "false",
+                        "-PackageType": "StockAndPrice",
+                        "OfferPackage.Offers": {
+                            "OfferCollection": {
+                                "-Capacity": "1",
+                                "Offer": {
+                                    "-SellerProductId": "S53262149036",
+                                    "-ProductEan": "9153262149367",
+                                    "-Price": "19.95",
+                                    "-Stock": "10"
+                                }
+                            }
+                        },
+                        "OfferPackage.OfferPublicationList": {
+                            "OfferPublicationList": {
+                                "-Capacity": "2",
+                                "PublicationPool": [
+                                    { "-Id": "1" },
+                                    { "-Id": "16" }
+                                ]
+                            }
+                        }
+                    }
+                },
+                url="path_to_upload.com"
+            )
         """
         # Get url.
         package_url = generate_package_url(offers_dict, url)
