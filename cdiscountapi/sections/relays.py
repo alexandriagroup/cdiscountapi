@@ -11,6 +11,7 @@
 
 from zeep.helpers import serialize_object
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class Relays(BaseSection):
@@ -21,12 +22,14 @@ class Relays(BaseSection):
     Operations are included in the Relays API section.
     (https://dev.cdiscount.com/marketplace/?page_id=108)
     """
+    @auto_refresh_token
     def get_parcel_shop_list(self):
         response = self.api.client.service.GetParcelShopList(
             headerMessage=self.api.header,
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def submit_relays_file(self, **relays_file_request):
         """
         Send information about relays in a file
@@ -55,6 +58,7 @@ class Relays(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_relays_file_submission_result(self, **relays_file_filter):
         """
         Get the state of progress of the relays file submission.

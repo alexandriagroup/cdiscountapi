@@ -11,6 +11,7 @@
 
 from zeep.helpers import serialize_object
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class Fulfillment(BaseSection):
@@ -20,6 +21,7 @@ class Fulfillment(BaseSection):
     Operations are included in the Fulfillment API section
     (https://dev.cdiscount.com/marketplace/?page_id=2222)
     """
+    @auto_refresh_token
     def submit_fulfillment_supply_order(self, request):
         response = self.api.client.service.SubmitFulfilmentSupplyOrder(
             headerMessage=self.api.header,
@@ -27,6 +29,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def submit_fulfillment_on_demand_supply_order(self, order_list):
         """
         :param order_list: list of dict as
@@ -40,6 +43,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_fulfillment_supply_order_report_list(self, **request):
         """
         To search supply order reports.
@@ -74,6 +78,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_fulfillment_delivery_document(self, deposit_id):
         """
         :param deposit_id: Unique identification number of the supply order request
@@ -86,6 +91,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_fulfillment_supply_order(self, **request):
         """
         :param request: The keywords used to filter the supply order reports:
@@ -119,6 +125,7 @@ class Fulfillment(BaseSection):
         return serialize_object(response, dict)
 
     # TODO Make this method more robust
+    @auto_refresh_token
     def submit_fulfillment_activation(self, request):
         """
         To ask for products activation (or deactivation)
@@ -135,6 +142,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_fulfillment_activation_report_list(self, **request):
         """
         :param request:
@@ -149,6 +157,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_fulfillment_order_list_to_supply(self, **request):
         """
         :param request:
@@ -164,6 +173,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def submit_offer_state_action(self, **request):
         """
         To set an offer online or offline
@@ -180,6 +190,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def create_external_order(self, order):
         """
         create an order from another marketplace.
@@ -212,6 +223,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_external_order_status(self, **request):
         response = self.api.client.service.GetExternalOrderStatus(
             headerMessage=self.api.header,
@@ -222,6 +234,7 @@ class Fulfillment(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_product_stock_list(self, **request):
         """
 
