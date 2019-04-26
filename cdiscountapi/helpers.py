@@ -168,7 +168,7 @@ def get_motive_id(label):
 
 class XmlGenerator(object):
     """
-    Generate an offers to upload
+    Generate offers or products to upload
 
     Usage::
 
@@ -216,58 +216,28 @@ class XmlGenerator(object):
         self.offers = []
 
     def add_offers(self, offers):
-        self.offers.append([self.create_offer(offer) for offer in offers])
+        self.offers.append([self.validate_offer(offer) for offer in offers])
 
-    def create_offer(self, **kwargs):
-        self.check_list_types(
-            kwargs,
-            {'DiscountList': 'DiscountComponent',
-             'ShippingInformationList': 'ShippingInformation',
-             'OfferPoolList': 'OfferPool'},
-        )
+    def validate_offer(self, **kwargs):
+        new_kwargs = kwargs.copy()
 
-        new_kwargs = self.update_types(
-            kwargs,
-            {'DiscountList': 'ArrayOfDiscountComponent',
-             'ShippingInformationList': 'ArrayOfShippingInformation',
-             'OfferPoolList': 'ArrayOfOfferPool'},
-        )
+        # We check the types of the lists in Offer
+        if 'DiscountList' in kwargs:
+            new_kwargs['DiscountList'] = self.factory.ArrayOfDiscountComponent([
+                self.factory.DiscountComponent(x) for x in new_kwargs['DiscountList']
+            ])
+
+        if 'ShippingInformationList' in kwargs:
+            new_kwargs['ShippingInformationList'] = self.factory.ArrayOfShippingInformation([
+                self.factory.ShippingInformation(x) for x in new_kwargs['ShippingInformationList']
+            ])
+
+        if 'OfferPoolList' in kwargs:
+            new_kwargs['OfferPoolList'] = self.factory.ArrayOfOfferPool([
+                self.factory.OfferPool(x) for x in new_kwargs['OfferPoolList']
+            ])
+
         return self.factory.Offer(**new_kwargs)
-
-    def check_list_types(self, record, keys_to_check):
-        """
-        Check that the values of the specified keys are really a list of the
-        expected type
-
-        ::
-
-            check_list_types({'DiscountList': [{'DiscountValue': 1, 'Type': 1}]},
-                {'DiscountList': 'DiscountComponent'}
-            )
-
-        :raises: TypeError if one of the parameters in the record[key_to_check] is invalid.
-
-        """
-        for key, expected_type_name in keys_to_check.items():
-            if key in record:
-                for sub_record in record[key]:
-                    expected_type = getattr(self.factory, expected_type_name)
-                    expected_type(**sub_record)
-
-    def update_types(self, record, keys_to_cast):
-        """
-        ::
-
-            new_record = self.update_types({'DiscountList': [1, 2, 3]},
-                {'DiscountList': 'ArrayOfDiscountComponent'}
-            )
-        """
-        new_record = record.copy()
-        for key, type_name in keys_to_cast.items():
-            if key in new_record:
-                new_type = getattr(self.factory, type_name)
-                new_record[key] = new_type(new_record[key])
-        return new_record
 
     def save(self):
         pass

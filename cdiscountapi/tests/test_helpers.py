@@ -117,7 +117,7 @@ def test_check_element_with_invalid_element(api):
 
 # XmlGenerator
 @pytest.mark.vcr()
-def test_check_list_types():
+def test_validate_offer():
     generator = XmlGenerator()
     discount_component = {
         'DiscountValue': 5, 'Type': 1,
@@ -136,16 +136,11 @@ def test_check_list_types():
         'DiscountList': [discount_component],
         'ShippingInformationList': [shipping_info1, shipping_info2]
     }
+    generator.validate_offer(**offer)
 
-    # All the keys in discount_component, shipping_info1 and shipping_info2 are
-    # valid. No exception should be raised
-    generator.check_list_types(offer,
-                               {'DiscountList': 'DiscountComponent',
-                                'ShippingInformationList': 'ShippingInformation',
-                                'OfferPoolList': 'OfferPool'})
 
 @pytest.mark.vcr()
-def test_check_list_types_with_invalid_key():
+def test_validate_offer_with_invalid_key():
     generator = XmlGenerator()
     discount_component = {
         'DiscountValue': 5, 'Type': 1,
@@ -166,7 +161,4 @@ def test_check_list_types_with_invalid_key():
     }
 
     # A TypeError should be raised because shipping_info2 has an invalid key
-    pytest.raises(TypeError, generator.check_list_types, offer,
-                  {'DiscountList': 'DiscountComponent',
-                   'ShippingInformationList': 'ShippingInformation',
-                   'OfferPoolList': 'OfferPool'})
+    pytest.raises(TypeError, generator.validate_offer, offer)
