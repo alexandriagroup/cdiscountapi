@@ -300,6 +300,41 @@ It is used to add new offers to the Cdiscount marketplace or to modify/update of
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">submit_offer_package</span><span class="p">(</span>
+    <span class="n">offers_dict</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;OfferPackage&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;-xmlns&quot;</span><span class="p">:</span> <span class="s2">&quot;clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;-xmlns:x&quot;</span><span class="p">:</span> <span class="s2">&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;-Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Nom fichier offres&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;-PurgeAndReplace&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;-PackageType&quot;</span><span class="p">:</span> <span class="s2">&quot;StockAndPrice&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;OfferPackage.Offers&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;OfferCollection&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;-Capacity&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Offer&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;-SellerProductId&quot;</span><span class="p">:</span> <span class="s2">&quot;S53262149036&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;-ProductEan&quot;</span><span class="p">:</span> <span class="s2">&quot;9153262149367&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;-Price&quot;</span><span class="p">:</span> <span class="s2">&quot;19.95&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;-Stock&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;OfferPackage.OfferPublicationList&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;OfferPublicationList&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;-Capacity&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;PublicationPool&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span> <span class="s2">&quot;-Id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span> <span class="p">},</span>
+                        <span class="p">{</span> <span class="s2">&quot;-Id&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span> <span class="p">}</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;path_to_upload.com&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -681,6 +716,10 @@ structure than the one required for the request.</p>
 <dt id="cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree">
 <code class="descname">get_all_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>All categories.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_all_allowed_category_tree</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>tree of the categories leaves of which are authorized for the integration of products and/or offers</p>
@@ -694,7 +733,15 @@ structure than the one required for the request.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_all_model_list">
 <code class="descname">get_all_model_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_model_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Model categories opened on marketplace.</p>
+<dd><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Doesn’t work at the moment.</p>
+</div>
+<p>Model categories opened on marketplace.
+Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_all_model_list</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>models and mandatory model properties</p>
@@ -709,6 +756,10 @@ structure than the one required for the request.</p>
 <dt id="cdiscountapi.cdiscountapi.Products.get_allowed_category_tree">
 <code class="descname">get_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Categories which are accessible to the seller.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_allowed_category_tree</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>tree of the categories leaves of which are authorized for the integration of products and/or offers</p>
@@ -722,25 +773,54 @@ structure than the one required for the request.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_brand_list">
 <code class="descname">get_brand_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_brand_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Complete list of the brands
-:return: all brands
-:rtype: dict</p>
+<dd><p>Complete list of the brands</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_brand_list</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>all brands</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_model_list">
 <code class="descname">get_model_list</code><span class="sig-paren">(</span><em>category=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_model_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Model categories allocated to the seller.
-:param category: category code to filter results
-:type category: str
-:return: models and mandatory model properties
-:rtype: dict</p>
+<dd><p>Model categories allocated to the seller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>category</strong> (<em>str</em>) – category code to filter results</p>
+</dd>
+</dl>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_model_list</span><span class="p">()</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_model_list</span><span class="p">(</span><span class="s2">&quot;13380D0501&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>models and mandatory model properties</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_list">
 <code class="descname">get_product_list</code><span class="sig-paren">(</span><em>category_code</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search products in the reference frame</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_product_list</span><span class="p">(</span><span class="s2">&quot;13380D0501&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>category_code</strong> (<em>str</em>) – code to filter products by category</p>
@@ -816,11 +896,97 @@ structure than the one required for the request.</p>
 <li><p><strong>url</strong> (<em>str</em>) – url to upload offers package</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the id of package or -1</p>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">submit_product_package</span><span class="p">(</span>
+    <span class="n">products_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Product&quot;</span><span class="p">:</span>
+      <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;-BrandName&quot;</span><span class="p">:</span> <span class="s2">&quot;Deeluxe&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-SellerProductFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;SOJ50874&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-SellerProductColorName&quot;</span><span class="p">:</span> <span class="s2">&quot;Bleu Délavé&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-Size&quot;</span><span class="p">:</span> <span class="s2">&quot;38/36&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe Droite Homme, Couleur Bleu Délavé, 100% Coton , Taille 38&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-LongLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Nudie Average Joe organic vacation worn Jeans&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-Model&quot;</span><span class="p">:</span> <span class="s2">&quot;SOUMISSION CREATION PRODUITS_MK&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-ProductKind&quot;</span><span class="p">:</span> <span class="s2">&quot;Variant&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-CategoryCode&quot;</span><span class="p">:</span> <span class="s2">&quot;0R050A01&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-SellerProductId&quot;</span><span class="p">:</span> <span class="s2">&quot;120905783&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-ShortLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Jeans Deeluxe Tanner Snow Bleu&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-EncodedMarketingDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Product.EanList&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;ProductEan&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;-Ean&quot;</span><span class="p">:</span> <span class="s2">&quot;3606918243767&quot;</span> <span class="p">}</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;Product.ModelProperties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;x:String&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Genre&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Homme - Garçon&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Type de public&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Adulte&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;Product.Pictures&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;ProductImage&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg&quot;</span> <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="s2">&quot;-BrandName&quot;</span><span class="p">:</span> <span class="s2">&quot;Deeluxe&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-SellerProductFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;SOJ50874&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-SellerProductColorName&quot;</span><span class="p">:</span> <span class="s2">&quot;Bleu Délavé&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-Size&quot;</span><span class="p">:</span> <span class="s2">&quot;36/34&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Nudie Average Joe organic vacation worn Jeans Droite Homme 100% Organic&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-LongLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Jeans Deeluxe Tanner Snow Bleu&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-Model&quot;</span><span class="p">:</span> <span class="s2">&quot;SOUMISSION CREATION PRODUITS_MK&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-ProductKind&quot;</span><span class="p">:</span> <span class="s2">&quot;Variant&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-CategoryCode&quot;</span><span class="p">:</span> <span class="s2">&quot;0R050A01&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-SellerProductId&quot;</span><span class="p">:</span> <span class="s2">&quot;120905784&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-ShortLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Jeans Deeluxe Tanner Snow Bleu&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;-EncodedMarketingDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Product.EanList&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;ProductEan&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;-Ean&quot;</span><span class="p">:</span> <span class="s2">&quot;3606918243774&quot;</span> <span class="p">}</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;Product.ModelProperties&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;x:String&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Genre&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Homme - Garçon&quot;</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Type de public&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Adulte&quot;</span>
+              <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;Product.Pictures&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;ProductImage&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg&quot;</span> <span class="p">},</span>
+              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg&quot;</span> <span class="p">}</span>
+            <span class="p">]</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;path_to_upload.com&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the id of package or -1</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>int</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </dd></dl>

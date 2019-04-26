@@ -37,10 +37,8 @@ Accept the order
 Refuse the shipment of an order
 -------------------------------
 
-After the order is accepted, if for some reason, you can't ship it to your
-customer, you can refuse the shipment.
-
-::
+After the order is accepted if, for some reason, you can't ship it to your
+customer, you can refuse the shipment::
 
     shipment_refused_by_seller = {'OrderNumber': 'ORDER_NUMBER',
                                   'OrderState': 'ShipmentRefusedBySeller',
@@ -51,3 +49,27 @@ customer, you can refuse the shipment.
 
     validations = api.orders.prepare_validations([shipment_refused_by_seller])
     response = api.orders.validate_order_list(**validations)
+
+
+Refund the customer
+-------------------
+
+::
+    
+    response = api.orders.create_refund_voucher(
+        OrderNumber='ORDER_NUMBER',
+        SellerRefundList={'Mode': 'Claim', 'Motive': 'ClientClaim',
+            'RefundOrderLine': {'Ean': None, 'SellerProductId': 'SKU'
+                                'RefundShippingCharges': False}}
+    )
+
+A commercial gesture is also possible by adding the keyword ``CommercialGestureList``::
+
+    response = api.orders.create_refund_voucher(
+        OrderNumber='ORDER_NUMBER',
+        CommercialGestureList=[{'Amount': 10, 'MotiveId': 'late_delivery'}],
+        SellerRefundList={'Mode': 'Claim', 'Motive': 'ClientClaim',
+            'RefundOrderLine': {'Ean': None, 'SellerProductId': 'SKU',
+                                'RefundShippingCharges': False}}
+    )
+

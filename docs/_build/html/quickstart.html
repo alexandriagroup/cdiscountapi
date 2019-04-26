@@ -68,9 +68,26 @@ the attribute <code class="docutils literal notranslate"><span class="pre">token
 </div>
 <div class="section" id="validate-an-order">
 <h2>Validate an order<a class="headerlink" href="#validate-an-order" title="Permalink to this headline">¶</a></h2>
-<p>In order to validate an order, you have to provide the information
-- about each item in the order (order line) and the corresponding AcceptationState,
-- about the order and the OrderState.</p>
+<p>In order to validate an order, you have to provide the information:</p>
+<ul class="simple">
+<li><p>about each item in the order (order line) and the corresponding AcceptationState,</p></li>
+<li><p>about the order and the OrderState.</p></li>
+</ul>
+</div>
+<div class="section" id="validate-the-shipment">
+<h2>Validate the shipment<a class="headerlink" href="#validate-the-shipment" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shipped</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;CarrierName&#39;</span><span class="p">:</span> <span class="s1">&#39;Colissimo&#39;</span><span class="p">,</span> <span class="s1">&#39;OrderNumber&#39;</span><span class="p">:</span> <span class="s1">&#39;1904241640CLE8Z&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;OrderState&#39;</span><span class="p">:</span> <span class="s1">&#39;Shipped&#39;</span><span class="p">,</span> <span class="s1">&#39;TrackingNumber&#39;</span><span class="p">:</span> <span class="s1">&#39;TN1&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;TrackingUrl&#39;</span><span class="p">:</span><span class="s1">&#39;http://www.colissimo.fr/portail_colissimo/suivre.do?language=fr_FR&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;OrderLineList&#39;</span><span class="p">:</span> <span class="p">[</span>
+           <span class="p">{</span><span class="s1">&#39;AcceptationState&#39;</span><span class="p">:</span> <span class="s1">&#39;ShippedBySeller&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="s1">&#39;PRES1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ProductCondition&#39;</span><span class="p">:</span> <span class="s1">&#39;AverageState&#39;</span><span class="p">}]}</span>
+
+<span class="n">validations</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">prepare_validations</span><span class="p">([</span><span class="n">shipped</span><span class="p">])</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">validate_order_list</span><span class="p">(</span><span class="o">**</span><span class="n">validations</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -86,6 +103,7 @@ the attribute <code class="docutils literal notranslate"><span class="pre">token
 <li><a class="reference internal" href="#create-a-connection-to-the-server">Create a connection to the server</a></li>
 <li><a class="reference internal" href="#retrieve-information-about-your-seller-account">Retrieve information about your seller account</a></li>
 <li><a class="reference internal" href="#validate-an-order">Validate an order</a></li>
+<li><a class="reference internal" href="#validate-the-shipment">Validate the shipment</a></li>
 </ul>
 </li>
 </ul>

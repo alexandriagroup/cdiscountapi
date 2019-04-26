@@ -54,3 +54,32 @@ For example:
    ``None`` for all the other fields.
     
 .. _HeaderMessage: https://dev.cdiscount.com/marketplace/?page_id=212
+
+
+Available states for the seller
+-------------------------------
+
+(cf https://dev.cdiscount.com/marketplace/?page_id=134 for the complete list.)
+
+-------------------
+States for an order
+-------------------
+
+* AcceptedBySeller
+* Shipped
+* RefusedBySeller
+* ShipmentRefusedBySeller
+* AvailableOnStore
+
+
+------------------
+Acceptation states
+------------------
+
+* AcceptedBySeller
+* ShippedBySeller
+* RefusedBySeller
+* ShipmentRefusedBySeller
+* CancelledBeforeNotificationByCustomer
+* CancelledBeforePaymentByCustomer
+* CancellationRequestPending

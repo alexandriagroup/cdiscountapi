@@ -16,6 +16,7 @@ from shutil import (
 )
 from tempfile import gettempdir
 from dicttoxml import dicttoxml
+from zeep import Client
 
 
 def generate_package(package_type, tempdir, offer_dict):
@@ -163,3 +164,81 @@ def get_motive_id(label):
             list(label_to_motive_id))
         )
     return label_to_motive_id[label]
+
+
+class XmlGenerator(object):
+    """
+    Generate offers or products to upload
+
+    Usage::
+
+        shipping_info = {'ShippingCharges': 1,
+        'AdditionalShippingCharges': 1, 'MinLeadTime': 1, 'MaxLeadTime': 1,
+        'DeliveryMode': 1}
+
+        discount_component = {
+        'DiscountValue': 1,
+        'EndDate': 1,
+        'Price': 1,
+        'StartDate': 1,
+        'Type': 1
+        }
+
+        offer_pool = {'Id': 1, 'Published': True}
+
+        offer = {'CreationDate': 1, 'LastUpdateDate': 1, 'Price': 1,
+                 'ProductEan': 1, 'ProductId': 1, 'SellerProductId': 1,
+                 'Stock': 1, 'VatRate': 0.19,
+                 'DiscountList': [discount_component],
+                 'OfferPoolList': [offer_pool],
+                 'ShippingInformationList': [shipping_info],
+                 'PriceMustBeAligned': 'DontAlign',
+                 'ProductPackagingUnit': 'Kilogram',
+                 'OfferState': 'Active',
+                 'ProductCondition': 'New'
+                 }
+
+        generator = XmlGenerator()
+        generator.add_offers([offer])
+        generator.save()
+
+    """
+    def __init__(self, preprod=False):
+        self.preprod = preprod
+        if self.preprod:
+            domain = 'preprod-cdiscount.com'
+        else:
+            domain = 'cdiscount.com'
+
+        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
+        self.client = Client(self.wsdl)
+        self.factory = self.client.type_factory('http://www.cdiscount.com')
+        self.offers = []
+
+    def add_offers(self, offers):
+        self.offers.append([self.validate_offer(offer) for offer in offers])
+
+    def validate_offer(self, **kwargs):
+        new_kwargs = kwargs.copy()
+
+        # We check the types of the lists in Offer
+        if 'DiscountList' in kwargs:
+            new_kwargs['DiscountList'] = self.factory.ArrayOfDiscountComponent([
+                self.factory.DiscountComponent(x) for x in new_kwargs['DiscountList']
+            ])
+
+        if 'ShippingInformationList' in kwargs:
+            new_kwargs['ShippingInformationList'] = self.factory.ArrayOfShippingInformation([
+                self.factory.ShippingInformation(x) for x in new_kwargs['ShippingInformationList']
+            ])
+
+        if 'OfferPoolList' in kwargs:
+            new_kwargs['OfferPoolList'] = self.factory.ArrayOfOfferPool([
+                self.factory.OfferPool(x) for x in new_kwargs['OfferPoolList']
+            ])
+
+        return self.factory.Offer(**new_kwargs)
+
+    def save(self):
+        pass
+
