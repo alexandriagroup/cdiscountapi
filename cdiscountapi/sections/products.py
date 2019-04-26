@@ -8,7 +8,7 @@
     :copyright: © 2019 Alexandria
 """
 
-
+from cdiscountapi.helpers import generate_package_url
 from zeep.helpers import serialize_object
 from .base import BaseSection
 
@@ -24,6 +24,10 @@ class Products(BaseSection):
         """
         Categories which are accessible to the seller.
 
+        Example::
+
+            response = api.products.get_allowed_category_tree()
+
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
         """
@@ -35,6 +39,10 @@ class Products(BaseSection):
     def get_all_allowed_category_tree(self):
         """
         All categories.
+
+        Example::
+
+            response = api.products.get_all_allowed_category_tree()
 
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         :rtype: dict
@@ -50,8 +58,13 @@ class Products(BaseSection):
         """
         Search products in the reference frame
 
+        Example::
+
+            response = api.products.get_product_list("13380D0501")
+
         :param category_code: code to filter products by category
         :type category_code: str
+
         :return: products corresponding to research
         :rtype: dict
         """
@@ -66,8 +79,16 @@ class Products(BaseSection):
     def get_model_list(self, category=None):
         """
         Model categories allocated to the seller.
+
         :param category: category code to filter results
         :type category: str
+
+        Examples::
+
+            response = api.products.get_model_list()
+
+            response = api.products.get_model_list("13380D0501")
+
         :return: models and mandatory model properties
         :rtype: dict
         """
@@ -80,7 +101,13 @@ class Products(BaseSection):
     # TODO find a way to call it.
     def get_all_model_list(self):
         """
+        .. warning::
+            Doesn't work at the moment.
+
         Model categories opened on marketplace.
+        Example::
+
+            response = api.products.get_all_model_list()
 
         :return: models and mandatory model properties
         :rtype: dict
@@ -95,6 +122,11 @@ class Products(BaseSection):
     def get_brand_list(self):
         """
         Complete list of the brands
+
+        Example::
+
+            response = api.products.get_brand_list()
+
         :return: all brands
         :rtype: dict
         """
@@ -109,8 +141,95 @@ class Products(BaseSection):
 
         :param products_dict: products as you can see on tests/samples/products/products_to_submit.json
         :type products_dict: dict
+
         :param url: url to upload offers package
         :type url: str
+
+
+        Example::
+
+            response = api.products.submit_product_package(
+                products_dict={"Product":
+                  [
+                    {
+                      "-BrandName": "Deeluxe",
+                      "-SellerProductFamily": "SOJ50874",
+                      "-SellerProductColorName": "Bleu Délavé",
+                      "-Size": "38/36",
+                      "-Description": "Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe Droite Homme, Couleur Bleu Délavé, 100% Coton , Taille 38",
+                      "-LongLabel": "Nudie Average Joe organic vacation worn Jeans",
+                      "-Model": "SOUMISSION CREATION PRODUITS_MK",
+                      "-ProductKind": "Variant",
+                      "-CategoryCode": "0R050A01",
+                      "-SellerProductId": "120905783",
+                      "-ShortLabel": "Jeans Deeluxe Tanner Snow Bleu",
+                      "-EncodedMarketingDescription": "RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==",
+                      "Product.EanList": {
+                        "ProductEan": { "-Ean": "3606918243767" }
+                      },
+                      "Product.ModelProperties": {
+                        "x:String": [
+                          {
+                            "-x:Key": "Genre",
+                            "#text": "Homme - Garçon"
+                          },
+                          {
+                            "-x:Key": "Type de public",
+                            "#text": "Adulte"
+                          }
+                        ]
+                      },
+                      "Product.Pictures": {
+                        "ProductImage": [
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg" },
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg" },
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg" },
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg" }
+                        ]
+                      }
+                    },
+                    {
+                      "-BrandName": "Deeluxe",
+                      "-SellerProductFamily": "SOJ50874",
+                      "-SellerProductColorName": "Bleu Délavé",
+                      "-Size": "36/34",
+                      "-Description": "Nudie Average Joe organic vacation worn Jeans Droite Homme 100% Organic",
+                      "-LongLabel": "Jeans Deeluxe Tanner Snow Bleu",
+                      "-Model": "SOUMISSION CREATION PRODUITS_MK",
+                      "-ProductKind": "Variant",
+                      "-CategoryCode": "0R050A01",
+                      "-SellerProductId": "120905784",
+                      "-ShortLabel": "Jeans Deeluxe Tanner Snow Bleu",
+                      "-EncodedMarketingDescription": "RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==",
+                      "Product.EanList": {
+                        "ProductEan": { "-Ean": "3606918243774" }
+                      },
+                      "Product.ModelProperties": {
+                        "x:String": [
+                          {
+                            "-x:Key": "Genre",
+                            "#text": "Homme - Garçon"
+                          },
+                          {
+                            "-x:Key": "Type de public",
+                            "#text": "Adulte"
+                          }
+                        ]
+                      },
+                      "Product.Pictures": {
+                        "ProductImage": [
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg" },
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg" },
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg" },
+                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg" }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                url="path_to_upload.com"
+            )
+
         :return: the id of package or -1
         :rtype: int
         """
