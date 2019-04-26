@@ -16,6 +16,7 @@ from shutil import (
 )
 from tempfile import gettempdir
 from dicttoxml import dicttoxml
+from zeep import Client
 
 
 def generate_package(package_type, tempdir, offer_dict):
@@ -167,20 +168,37 @@ def get_motive_id(label):
 
 class XmlGenerator(object):
     """
-    Generate an offer to upload
+    Generate an offers to upload
 
     Usage::
 
+        shipping_info = {'ShippingCharges': 1,
+        'AdditionalShippingCharges': 1, 'MinLeadTime': 1, 'MaxLeadTime': 1,
+        'DeliveryMode': 1}
+
+        discount_component = {
+        'DiscountValue': 1,
+        'EndDate': 1,
+        'Price': 1,
+        'StartDate': 1,
+        'Type': 1
+        }
+
+        offer_pool = {'Id': 1, 'Published': True}
+
+        offer = {'CreationDate': 1, 'LastUpdateDate': 1, 'Price': 1,
+                 'ProductEan': 1, 'ProductId': 1, 'SellerProductId': 1,
+                 'Stock': 1, 'VatRate': 0.19,
+                 'DiscountList': [discount_component],
+                 'OfferPoolList': [offer_pool],
+                 'ShippingInformationList': [shipping_info],
+                 'PriceMustBeAligned': 'DontAlign',
+                 'ProductPackagingUnit': 'Kilogram',
+                 'OfferState': 'Active',
+                 'ProductCondition': 'New'
+                 }
+
         generator = XmlGenerator()
-        ship_info1 = generator.ShippingInformation(DeliveryMode='')
-        ship_info2 = generator.ShippingInformation(DeliveryMode='')
-        discount_component = generator.DiscountComponent(DiscountValue='', Type='')
-
-        offer = generator.Offer(Price=100,
-            ShippingInformationList=[ship_info1, ship_info2],
-            DiscountList=[discount_component]
-            )
-
         generator.add_offers([offer])
         generator.save()
 
@@ -193,9 +211,20 @@ class XmlGenerator(object):
             domain = 'cdiscount.com'
 
         self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
+        self.client = Client(self.wsdl)
         self.factory = self.client.type_factory('http://www.cdiscount.com')
+        self.offers = []
 
-    def Offer(self, **kwargs):
+    def add_offers(self, offers):
+        self.offers.append([self.create_offer(offer) for offer in offers])
+
+    def create_offer(self, **kwargs):
+        self.check_list_types(
+            kwargs,
+            {'DiscountList': 'DiscountComponent',
+             'ShippingInformationList': 'ShippingInformation',
+             'OfferPoolList': 'OfferPool'},
+        )
 
         new_kwargs = self.update_types(
             kwargs,
@@ -203,17 +232,27 @@ class XmlGenerator(object):
              'ShippingInformationList': 'ArrayOfShippingInformation',
              'OfferPoolList': 'ArrayOfOfferPool'},
         )
-
         return self.factory.Offer(**new_kwargs)
 
-    def ShippingInformation(self, **kwargs):
-        return self.factory.ShippingInformation(**kwargs)
+    def check_list_types(self, record, keys_to_check):
+        """
+        Check that the values of the specified keys are really a list of the
+        expected type
 
-    def DiscountComponent(self, **kwargs):
-        pass
+        ::
 
-    def save(self):
-        pass
+            check_list_types({'DiscountList': [{'DiscountValue': 1, 'Type': 1}]},
+                {'DiscountList': 'DiscountComponent'}
+            )
+
+        :raises: TypeError if one of the parameters in the record[key_to_check] is invalid.
+
+        """
+        for key, expected_type_name in keys_to_check.items():
+            if key in record:
+                for sub_record in record[key]:
+                    expected_type = getattr(self.factory, expected_type_name)
+                    expected_type(**sub_record)
 
     def update_types(self, record, keys_to_cast):
         """
@@ -230,4 +269,6 @@ class XmlGenerator(object):
                 new_record[key] = new_type(new_record[key])
         return new_record
 
+    def save(self):
+        pass
 

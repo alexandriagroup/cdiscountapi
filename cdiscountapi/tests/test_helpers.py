@@ -4,8 +4,10 @@ import pytest
 from shutil import rmtree
 from tempfile import gettempdir
 from cdiscountapi.helpers import (
-    check_element, generate_offer_package, generate_product_package
+    check_element, generate_offer_package, generate_product_package,
+    XmlGenerator
 )
+import datetime
 
 
 @pytest.mark.vcr()
@@ -111,3 +113,60 @@ def test_check_element_with_invalid_element(api):
     valid_elements = [x[0] for x in dynamic_type.elements]
     assert 'INVALID_ELEMENT' not in valid_elements
     pytest.raises(TypeError, check_element, 'INVALID_ELEMENT', dynamic_type)
+
+
+# XmlGenerator
+@pytest.mark.vcr()
+def test_check_list_types():
+    generator = XmlGenerator()
+    discount_component = {
+        'DiscountValue': 5, 'Type': 1,
+        'StartDate': datetime.datetime(2019, 4, 15),
+        'EndDate': datetime.datetime(2019, 5, 15)
+    }
+    shipping_info1 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'DeliveryMode': 'Standard'
+    }
+    shipping_info2 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'DeliveryMode': 'Tracked'
+    }
+    offer = {
+        'DiscountList': [discount_component],
+        'ShippingInformationList': [shipping_info1, shipping_info2]
+    }
+
+    # All the keys in discount_component, shipping_info1 and shipping_info2 are
+    # valid. No exception should be raised
+    generator.check_list_types(offer,
+                               {'DiscountList': 'DiscountComponent',
+                                'ShippingInformationList': 'ShippingInformation',
+                                'OfferPoolList': 'OfferPool'})
+
+@pytest.mark.vcr()
+def test_check_list_types_with_invalid_key():
+    generator = XmlGenerator()
+    discount_component = {
+        'DiscountValue': 5, 'Type': 1,
+        'StartDate': datetime.datetime(2019, 4, 15),
+        'EndDate': datetime.datetime(2019, 5, 15)
+    }
+    shipping_info1 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'DeliveryMode': 'Standard'
+    }
+    shipping_info2 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'InvalidKey': 'Unknown'
+    }
+    offer = {
+        'DiscountList': [discount_component],
+        'ShippingInformationList': [shipping_info1, shipping_info2]
+    }
+
+    # A TypeError should be raised because shipping_info2 has an invalid key
+    pytest.raises(TypeError, generator.check_list_types, offer,
+                  {'DiscountList': 'DiscountComponent',
+                   'ShippingInformationList': 'ShippingInformation',
+                   'OfferPoolList': 'OfferPool'})
