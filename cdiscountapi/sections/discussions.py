@@ -11,6 +11,7 @@
 
 from zeep.helpers import serialize_object
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class Discussions(BaseSection):
@@ -26,6 +27,7 @@ class Discussions(BaseSection):
     Operations are included in the Discussions API section.
     (https://dev.cdiscount.com/marketplace/?page_id=148)
     """
+    @auto_refresh_token
     def get_order_claim_list(self, **order_claim_filter):
         """
         Return the list of order claims
@@ -39,6 +41,7 @@ class Discussions(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_offer_question_list(self, **offer_question_filter):
         """
         Return the list of questions about offers with the specified criteria
@@ -77,6 +80,7 @@ class Discussions(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_order_question_list(self, **order_question_filter):
         """
         Return the list of questions about orders with the specified criteria
@@ -115,6 +119,7 @@ class Discussions(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def close_discussion_list(self, discussion_ids):
         """
         Close a discussion list

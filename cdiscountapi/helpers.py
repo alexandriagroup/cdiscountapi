@@ -16,7 +16,8 @@ from shutil import (
 )
 from tempfile import gettempdir
 from dicttoxml import dicttoxml
-from zeep import Client
+import zeep
+from functools import wraps
 
 
 def generate_package(package_type, tempdir, offer_dict):
@@ -166,6 +167,25 @@ def get_motive_id(label):
     return label_to_motive_id[label]
 
 
+# TODO Make sure the exceptions is well chosen for an outdated token
+def auto_refresh_token(func):
+    """
+    Refresh the token when it's outdated and resend the request
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        self = args[0]
+        try:
+            return func(*args, **kwargs)
+        except zeep.exceptions.Fault:
+            print('Refreshing token...')
+            self.api.token = self.api.get_token()
+            self.api.header['Security']['TokenId'] = self.api.token
+            print('Resending request...')
+            return func(*args, **kwargs)
+    return wrapper
+
+
 class XmlGenerator(object):
     """
     Generate offers or products to upload
@@ -235,7 +255,7 @@ class XmlGenerator(object):
             domain = 'cdiscount.com'
 
         self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
-        self.client = Client(self.wsdl)
+        self.client = zeep.Client(self.wsdl)
         self.factory = self.client.type_factory('http://www.cdiscount.com')
         self.offers = []
 
@@ -265,4 +285,3 @@ class XmlGenerator(object):
 
     def save(self):
         pass
-

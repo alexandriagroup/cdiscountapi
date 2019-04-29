@@ -11,6 +11,7 @@
 from cdiscountapi.helpers import generate_package_url
 from zeep.helpers import serialize_object
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class Offers(BaseSection):
@@ -21,6 +22,7 @@ class Offers(BaseSection):
     (https://dev.cdiscount.com/marketplace/?page_id=84)
     """
 
+    @auto_refresh_token
     def get_offer_list(self, **filters):
         """
         To search offers.
@@ -49,6 +51,7 @@ class Offers(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_offer_list_paginated(self, **filters):
         """
         Recovery of the offers page by page.
@@ -90,6 +93,7 @@ class Offers(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def submit_offer_package(self, offers_dict, url):
         """
         To import offers.
@@ -151,6 +155,7 @@ class Offers(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_offer_package_submission_result(self, package_id):
         """
         This operation makes it possible to know the progress report of the offers import.

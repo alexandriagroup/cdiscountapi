@@ -11,6 +11,7 @@
 
 from zeep.helpers import serialize_object
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class Seller(BaseSection):
@@ -21,6 +22,7 @@ class Seller(BaseSection):
     Operations are included in the Seller API section.
     (https://dev.cdiscount.com/marketplace/?page_id=36)
     """
+    @auto_refresh_token
     def get_seller_info(self):
         """
         Seller Information.
@@ -33,6 +35,7 @@ class Seller(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_seller_indicators(self):
         """
         Seller performance indicators.

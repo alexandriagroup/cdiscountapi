@@ -11,6 +11,7 @@
 from cdiscountapi.helpers import generate_package_url
 from zeep.helpers import serialize_object
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class Products(BaseSection):
@@ -20,6 +21,7 @@ class Products(BaseSection):
     Operations are included in the Products API section.
     (https://dev.cdiscount.com/marketplace/?page_id=220)
     """
+    @auto_refresh_token
     def get_allowed_category_tree(self):
         """
         Categories which are accessible to the seller.
@@ -36,6 +38,7 @@ class Products(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_all_allowed_category_tree(self):
         """
         All categories.
@@ -54,6 +57,7 @@ class Products(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_product_list(self, category_code):
         """
         Search products in the reference frame
@@ -76,6 +80,7 @@ class Products(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_model_list(self, category=None):
         """
         Model categories allocated to the seller.
@@ -99,6 +104,7 @@ class Products(BaseSection):
         return serialize_object(response, dict)
 
     # TODO find a way to call it.
+    @auto_refresh_token
     def get_all_model_list(self):
         """
         .. warning::
@@ -119,6 +125,7 @@ class Products(BaseSection):
         # return serialize_object(response, dict)
         pass
 
+    @auto_refresh_token
     def get_brand_list(self):
         """
         Complete list of the brands
@@ -135,6 +142,7 @@ class Products(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def submit_product_package(self, products_dict, url):
         """
         To ask for the creation of products.
@@ -247,6 +255,7 @@ class Products(BaseSection):
         return serialize_object(response, dict)
 
     # TODO find why it doesn't work.
+    @auto_refresh_token
     def get_product_package_submission_result(self, filters={}):
         """
         Progress status of a product import.
@@ -262,6 +271,7 @@ class Products(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_product_package_product_matching_file_data(self, package_id):
         """
         Information of the created products.
@@ -278,6 +288,7 @@ class Products(BaseSection):
             )
             return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_product_list_by_identifier(self, ean_list=[]):
         """
         Obtain details for a list of products

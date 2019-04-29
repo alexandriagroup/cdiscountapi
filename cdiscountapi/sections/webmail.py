@@ -11,6 +11,7 @@
 
 from zeep.helpers import serialize_object
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class WebMail(BaseSection):
@@ -21,6 +22,7 @@ class WebMail(BaseSection):
     Operations are included in the WebMail API section.
     (https://dev.cdiscount.com/marketplace/?page_id=167)
     """
+    @auto_refresh_token
     def generate_discussion_mail_guid(self, scopus_id=None):
         """
         Obtain an encrypted mail address.
@@ -39,6 +41,7 @@ class WebMail(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_discussion_mail_list(self, discussion_ids):
         """
         Obtain an encrypted mail address about a discussion.

@@ -1,5 +1,8 @@
-from ..sections.base import BaseSection
+import re
+import os
 import pytest
+
+from ..sections.base import BaseSection
 
 
 @pytest.mark.vcr()

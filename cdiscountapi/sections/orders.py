@@ -12,6 +12,7 @@
 from zeep.helpers import serialize_object
 from cdiscountapi.helpers import check_element, get_motive_id
 from .base import BaseSection
+from ..helpers import auto_refresh_token
 
 
 class Orders(BaseSection):
@@ -21,6 +22,7 @@ class Orders(BaseSection):
     Operations are included in the Orders API section.
     (https://dev.cdiscount.com/marketplace/?page_id=128)
     """
+    @auto_refresh_token
     def get_order_list(self, **order_filter):
         """
         To search orders.
@@ -132,6 +134,7 @@ class Orders(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def get_global_configuration(self):
         """
         Get cdiscount settings. This method allows to get a list of several
@@ -211,6 +214,7 @@ class Orders(BaseSection):
         }
 
     # TODO Use for accept_orders
+    @auto_refresh_token
     def validate_order_list(self, **validate_order_list_message):
         """
         Validate a list of orders
@@ -274,6 +278,7 @@ class Orders(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def create_refund_voucher(self, **request):
         """
         This method still allows refunding lines of an order whose state is
@@ -329,6 +334,7 @@ class Orders(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @auto_refresh_token
     def manage_parcel(self, parcel_actions_list=None, scopus_id=None):
         """
         Ask for investigation or ask for delivery certification.
