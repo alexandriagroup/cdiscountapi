@@ -45,7 +45,7 @@ def generate_package(package_type, tempdir, offer_dict):
 
     # Add Products.xml from product_dict.
     with open(f"{package}/Content/{xml_filename}", "wb") as f:
-        f.write(dicttoxml(offer_dict))
+        f.write(XmlGenerator(offer_dict))
 
     # Make a zip from package.
     zip_package = make_archive(path, 'zip', path)
@@ -172,26 +172,50 @@ class XmlGenerator(object):
 
     Usage::
 
-        shipping_info = {'ShippingCharges': 1,
-        'AdditionalShippingCharges': 1, 'MinLeadTime': 1, 'MaxLeadTime': 1,
-        'DeliveryMode': 1}
+        shipping_info =
 
-        discount_component = {
+        discount_component = [{
         'DiscountValue': 1,
         'EndDate': 1,
         'Price': 1,
         'StartDate': 1,
         'Type': 1
-        }
+        }]
 
-        offer_pool = {'Id': 1, 'Published': True}
+        offer_pool = [
+            {
+                'Id': 1,
+                'Published': True
+            },
+            {
+                'Id': 16
+            }
+        ]
 
-        offer = {'CreationDate': 1, 'LastUpdateDate': 1, 'Price': 1,
-                 'ProductEan': 1, 'ProductId': 1, 'SellerProductId': 1,
-                 'Stock': 1, 'VatRate': 0.19,
-                 'DiscountList': [discount_component],
-                 'OfferPoolList': [offer_pool],
-                 'ShippingInformationList': [shipping_info],
+        offer = {
+            'CreationDate': 1,
+            'LastUpdateDate': 1,
+            'Price': 1,
+            'ProductEan': 1,
+            'ProductId': 1,
+            'SellerProductId': 1,
+            'Stock': 1, 'VatRate': 0.19,
+            'DiscountList': discount_component,
+                 'OfferPoolList': offer_pool,
+                 'ShippingInformationList': [
+                    {
+                        'AdditionalShippingCharges': 1,
+                        'DeliveryMode': 'RelaisColis',
+                        'MaxLeadTime': 1,
+                        'MinLeadTime': 1,
+                        'ShippingCharges': 1,
+                    },
+                    {
+                        'AdditionalShippingCharges': 5.95,
+                        'DeliveryMode': 'Tracked',
+                        'ShippingCharges': 2.95
+                    }
+                ]
                  'PriceMustBeAligned': 'DontAlign',
                  'ProductPackagingUnit': 'Kilogram',
                  'OfferState': 'Active',
