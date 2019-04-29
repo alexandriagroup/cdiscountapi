@@ -23,35 +23,42 @@ class WebMail(BaseSection):
     (https://dev.cdiscount.com/marketplace/?page_id=167)
     """
     @auto_refresh_token
-    def generate_discussion_mail_guid(self, scopus_id=None):
+    def generate_discussion_mail_guid(self, order_id):
         """
-        Obtain an encrypted mail address.
+        Generate an encrypted mail address from an order.
 
         This operation allows getting an encrypted mail address to contact a
-        customer about an order.
+        customer.
+
+        :param order_id: Order id for which an e-mail is to be sent.
+        :type order_id: str
 
         Usage::
 
-            response = api.generate_discussion_mail_guid(scopus_id)
+            response = api.generate_discussion_mail_guid(order_id)
 
         """
         response = self.api.client.service.GenerateDiscussionMailGuid(
             headerMessage=self.api.header,
-            request={'ScopusId': scopus_id}
+            request={'ScopusId': order_id}
         )
         return serialize_object(response, dict)
 
     @auto_refresh_token
     def get_discussion_mail_list(self, discussion_ids):
         """
-        Obtain an encrypted mail address about a discussion.
+        Get encrypted mail addresses from discussions.
+
 
         This operation allows getting an encrypted mail address to contact a
-        customer about a discussion (claim, retraction, questions).
+        customer.
 
-        Usage::
+        Usages::
+            id = 113163877
+            response = api.webmail.get_discussion_mail_list(id)
 
-            response = api.webmail.generate_discussion_mail_guid(discussion_ids)
+            ids = [113163877, 224274988]
+            response = api.webmail.get_discussion_mail_list(ids)
 
         """
         request = self.api.factory.GetDiscussionMailListRequest(
