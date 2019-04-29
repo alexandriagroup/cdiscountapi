@@ -59,9 +59,6 @@
 <dt id="cdiscountapi.cdiscountapi.Connection">
 <em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>login</em>, <em>password</em>, <em>preprod=False</em>, <em>header_message={}</em>, <em>config=''</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class to manage the interaction with the CdiscountMarketplace API</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">preprod</span><span class="p">,</span> <span class="n">header_message</span><span class="o">=</span><span class="n">header_message</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
-</pre></div>
-</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -74,6 +71,10 @@
 </ul>
 </dd>
 </dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">preprod</span><span class="p">,</span> <span class="n">header_message</span><span class="o">=</span><span class="n">header_message</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="attribute">
 <dt id="cdiscountapi.cdiscountapi.Connection.last_request">
 <code class="descname">last_request</code><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection.last_request" title="Permalink to this definition">¶</a></dt>
@@ -716,7 +717,7 @@ structure than the one required for the request.</p>
 <dt id="cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree">
 <code class="descname">get_all_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>All categories.</p>
-<p>Example:</p>
+<p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_all_allowed_category_tree</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -737,8 +738,8 @@ structure than the one required for the request.</p>
 <p class="admonition-title">Warning</p>
 <p>Doesn’t work at the moment.</p>
 </div>
-<p>Model categories opened on marketplace.
-Example:</p>
+<p>Model categories opened on marketplace.</p>
+<p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_all_model_list</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -756,7 +757,7 @@ Example:</p>
 <dt id="cdiscountapi.cdiscountapi.Products.get_allowed_category_tree">
 <code class="descname">get_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Categories which are accessible to the seller.</p>
-<p>Example:</p>
+<p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_allowed_category_tree</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -774,7 +775,7 @@ Example:</p>
 <dt id="cdiscountapi.cdiscountapi.Products.get_brand_list">
 <code class="descname">get_brand_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_brand_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Complete list of the brands</p>
-<p>Example:</p>
+<p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_brand_list</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -797,7 +798,7 @@ Example:</p>
 <dd class="field-odd"><p><strong>category</strong> (<em>str</em>) – category code to filter results</p>
 </dd>
 </dl>
-<p>Examples:</p>
+<p>Usages:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_model_list</span><span class="p">()</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_model_list</span><span class="p">(</span><span class="s2">&quot;13380D0501&quot;</span><span class="p">)</span>
@@ -816,20 +817,22 @@ Example:</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_list">
 <code class="descname">get_product_list</code><span class="sig-paren">(</span><em>category_code</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search products in the reference frame</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_product_list</span><span class="p">(</span><span class="s2">&quot;13380D0501&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
+<dd><p>Search products in the reference frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>category_code</strong> (<em>str</em>) – code to filter products by category</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>products corresponding to research</p>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_product_list</span><span class="p">(</span><span class="s2">&quot;13380D0501&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>products corresponding to research</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1045,6 +1048,11 @@ new ones.</p>
 <dt id="cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result">
 <code class="descname">get_relays_file_submission_result</code><span class="sig-paren">(</span><em>**relays_file_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the state of progress of the relays file submission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>relays_file_filter</strong> (<em>dict</em>) – The dictionary containing the ID referencing the relays file submitted.</p>
+</dd>
+</dl>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_relays_file_submission_result</span><span class="p">(</span>
     <span class="n">relays_file_filter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileId&#39;</span><span class="p">:</span> <span class="n">relays_file_id</span><span class="p">}</span>
@@ -1054,11 +1062,8 @@ new ones.</p>
 <p>where <code class="docutils literal notranslate"><span class="pre">relays_file_id</span></code> is the value of RelaysFileId returned by
 <a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=112">SubmitRelaysFile</a>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>relays_file_filter</strong> – The dictionary containing the ID referencing the relays file submitted.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The response with the information about the integration of the relays specified.</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The response with the information about the integration of the relays specified.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1067,19 +1072,19 @@ new ones.</p>
 <dt id="cdiscountapi.cdiscountapi.Relays.submit_relays_file">
 <code class="descname">submit_relays_file</code><span class="sig-paren">(</span><em>**relays_file_request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.submit_relays_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send information about relays in a file</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">submit_relays_file</span><span class="p">(</span>
-    <span class="n">relays_file_request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileURI&#39;</span><span class="p">:</span> <span class="n">relays_file_uri</span><span class="p">}</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>where relays_file_uri is the URI to a XLSX file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>relays_file_request</strong> (<em>dict</em>) – A dictionary pointing to a XLSX file</p>
 </dd>
 </dl>
 <p>with information about relays</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">submit_relays_file</span><span class="p">(</span>
+    <span class="n">relays_file_request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileURI&#39;</span><span class="p">:</span> <span class="n">relays_file_uri</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>where relays_file_uri is the URI to a XLSX file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>The response with the RelaysFileId for the file.</p>
@@ -1398,7 +1403,7 @@ Discussion id, you cannot close a discussion without having answered</p>
 <dd class="field-odd"><p><strong>discussion_ids</strong> (<em>list</em>) – The list of discussion_ids to close</p>
 </dd>
 </dl>
-<p>Example:</p>
+<p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">discussions</span><span class="o">.</span><span class="n">close_discussion_list</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">159</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1556,12 +1561,17 @@ contact a customer</p>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid">
-<code class="descname">generate_discussion_mail_guid</code><span class="sig-paren">(</span><em>scopus_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtain an encrypted mail address.</p>
+<code class="descname">generate_discussion_mail_guid</code><span class="sig-paren">(</span><em>order_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an encrypted mail address from an order.</p>
 <p>This operation allows getting an encrypted mail address to contact a
-customer about an order.</p>
+customer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>order_id</strong> (<em>str</em>) – Order id for which an e-mail is to be sent.</p>
+</dd>
+</dl>
 <p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">scopus_id</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1569,13 +1579,16 @@ customer about an order.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.WebMail.get_discussion_mail_list">
 <code class="descname">get_discussion_mail_list</code><span class="sig-paren">(</span><em>discussion_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.get_discussion_mail_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtain an encrypted mail address about a discussion.</p>
+<dd><p>Get encrypted mail addresses from discussions.</p>
 <p>This operation allows getting an encrypted mail address to contact a
-customer about a discussion (claim, retraction, questions).</p>
-<p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">webmail</span><span class="o">.</span><span class="n">generate_discussion_mail_guid</span><span class="p">(</span><span class="n">discussion_ids</span><span class="p">)</span>
-</pre></div>
-</div>
+customer.</p>
+<dl>
+<dt>Usages::</dt><dd><p>id = 113163877
+response = api.webmail.get_discussion_mail_list(id)</p>
+<p>ids = [113163877, 224274988]
+response = api.webmail.get_discussion_mail_list(ids)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">

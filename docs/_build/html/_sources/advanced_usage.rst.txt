@@ -4,14 +4,14 @@
 Advanced usage
 ==============
 
-Get the latest request and response
+Get the last request and response
 -----------------------------------
 
 ::
     
   >>> api.seller.get_seller_information()
-  >>> api.latest_request
-  >>> api.latest_response
+  >>> api.last_request
+  >>> api.last_response
 
 
 Use a configuration file
