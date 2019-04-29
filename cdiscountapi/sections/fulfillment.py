@@ -81,8 +81,7 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def get_fulfillment_delivery_document(self, deposit_id):
         """
-        :param deposit_id: Unique identification number of the supply order request
-        :type deposit_id: int
+        :param int deposit_id: Unique identification number of the supply order request
         :return: data for printing PDF documents, in the form of a Base64-encoded string.
         """
         response = self.api.client.service.GetFulfilmentDeliveryDocument(

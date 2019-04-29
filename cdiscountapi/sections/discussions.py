@@ -126,7 +126,7 @@ class Discussions(BaseSection):
 
         :param list discussion_ids: The list of discussion_ids to close
 
-        Example::
+        Usage::
 
             response = api.discussions.close_discussion_list([31, 4, 159])
 

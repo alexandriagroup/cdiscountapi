@@ -34,17 +34,16 @@ class Relays(BaseSection):
         """
         Send information about relays in a file
 
-        Example::
+        :param dict relays_file_request: A dictionary pointing to a XLSX file
+        with information about relays
+
+        Usage::
 
             response = api.relays.submit_relays_file(
                 relays_file_request={'RelaysFileURI': relays_file_uri}
             )
 
         where relays_file_uri is the URI to a XLSX file
-
-        :type relays_file_request: dict
-        :param relays_file_request: A dictionary pointing to a XLSX file
-        with information about relays
 
         :returns: The response with the RelaysFileId for the file.
 
@@ -63,6 +62,8 @@ class Relays(BaseSection):
         """
         Get the state of progress of the relays file submission.
 
+        :param dict relays_file_filter: The dictionary containing the ID referencing the relays file submitted.
+
         Usage::
 
             response = api.get_relays_file_submission_result(
@@ -72,7 +73,6 @@ class Relays(BaseSection):
         where ``relays_file_id`` is the value of RelaysFileId returned by
         `SubmitRelaysFile <https://dev.cdiscount.com/marketplace/?page_id=112>`_.
 
-        :param relays_file_filter: The dictionary containing the ID referencing the relays file submitted.
         :returns: The response with the information about the integration of the relays specified.
 
         """

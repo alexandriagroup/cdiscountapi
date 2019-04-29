@@ -30,12 +30,12 @@ class WebMail(BaseSection):
         This operation allows getting an encrypted mail address to contact a
         customer.
 
-        :param order_id: Order id for which an e-mail is to be sent.
-        :type order_id: str
+        :param str order_id: Order id for which an e-mail is to be sent.
 
         Usage::
 
             response = api.generate_discussion_mail_guid(order_id)
+
 
         """
         response = self.api.client.service.GenerateDiscussionMailGuid(

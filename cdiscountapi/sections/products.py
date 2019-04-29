@@ -26,7 +26,7 @@ class Products(BaseSection):
         """
         Categories which are accessible to the seller.
 
-        Example::
+        Usage::
 
             response = api.products.get_allowed_category_tree()
 
@@ -43,7 +43,7 @@ class Products(BaseSection):
         """
         All categories.
 
-        Example::
+        Usage::
 
             response = api.products.get_all_allowed_category_tree()
 
@@ -60,14 +60,13 @@ class Products(BaseSection):
     @auto_refresh_token
     def get_product_list(self, category_code):
         """
-        Search products in the reference frame
+        Search products in the reference frame.
 
-        Example::
+        :param str category_code: code to filter products by category
+
+        Usage::
 
             response = api.products.get_product_list("13380D0501")
-
-        :param category_code: code to filter products by category
-        :type category_code: str
 
         :return: products corresponding to research
         :rtype: dict
@@ -85,10 +84,9 @@ class Products(BaseSection):
         """
         Model categories allocated to the seller.
 
-        :param category: category code to filter results
-        :type category: str
+        :param str category: category code to filter results
 
-        Examples::
+        Usages::
 
             response = api.products.get_model_list()
 
@@ -111,7 +109,8 @@ class Products(BaseSection):
             Doesn't work at the moment.
 
         Model categories opened on marketplace.
-        Example::
+
+        Usage::
 
             response = api.products.get_all_model_list()
 
@@ -130,7 +129,7 @@ class Products(BaseSection):
         """
         Complete list of the brands
 
-        Example::
+        Usage::
 
             response = api.products.get_brand_list()
 
@@ -147,11 +146,9 @@ class Products(BaseSection):
         """
         To ask for the creation of products.
 
-        :param products_dict: products as you can see on tests/samples/products/products_to_submit.json
-        :type products_dict: dict
+        :param dict products_dict: products as you can see on tests/samples/products/products_to_submit.json
 
-        :param url: url to upload offers package
-        :type url: str
+        :param str url: url to upload offers package
 
 
         Example::
@@ -260,8 +257,7 @@ class Products(BaseSection):
         """
         Progress status of a product import.
 
-        :param filters: (ex: package id)
-        :type filters: dict
+        :param dict filters: (ex: package id)
         :return: partial or complete report of package integration
         :rtype: dict
         """
@@ -276,8 +272,7 @@ class Products(BaseSection):
         """
         Information of the created products.
 
-        :param package_id: package id to filter results
-        :type package_id: str
+        :param str package_id: package id to filter results
         :return: information of the created products
         :rtype: dict
         """
@@ -293,8 +288,7 @@ class Products(BaseSection):
         """
         Obtain details for a list of products
 
-        :param ean_list: list of EAN to filter
-        :type ean_list: list
+        :param list ean_list: list of EAN to filter
         :return: complete list of products
         :rtype: dict
         """

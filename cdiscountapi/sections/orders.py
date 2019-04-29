@@ -150,8 +150,7 @@ class Orders(BaseSection):
         """
         Return the validation data for an order.
 
-        :type data: dict
-        :param data: The information about the order to validate. (cf
+        :param dict data: The information about the order to validate. (cf
         `Seller.prepare_validations`)
         """
         data = data.copy()
@@ -181,8 +180,7 @@ class Orders(BaseSection):
         validate the orders by letting the user provide a more intuitive data
         structure than the one required for the request.
 
-        :type data: list
-        :param data: The validation data for the orders. A list of dictionaries with the following structure:
+        :param list data: The validation data for the orders. A list of dictionaries with the following structure:
 
 
         .. code-block:: python

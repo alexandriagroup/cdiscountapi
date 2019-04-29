@@ -24,14 +24,12 @@ def generate_package(package_type, tempdir, offer_dict):
     """
     Generate a zip package for the offers or the products
 
-    :param package_type: 'offer' or 'product'
-    :type package_type: str
-    :param tempdir:  directory to create temporary files
-    :type tempdir: str
-    :param offer_dict: offers as you can see on
+    :param str package_type: 'offer' or 'product'
+    :param str tempdir:  directory to create temporary files
+    :param dict offer_dict: offers as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
-    :type offer_dict: dict
+
     :rtype: str
     """
     if package_type not in ('offer', 'product'):
@@ -59,10 +57,10 @@ def generate_package(package_type, tempdir, offer_dict):
 def upload_and_get_url(package, url):
     """
     Upload package and get url to download it.
-    :param package: way to find zip package
-    :type package: str
-    :param url: where to upload zip package
-    :type url: str
+
+    :param str package: way to find zip package
+    :param str url: where to upload zip package
+
     :return: where to download zip package
     :rtype: str
     """
@@ -73,10 +71,10 @@ def upload_and_get_url(package, url):
 def generate_offer_package(tempdir, offer_dict):
     """
     Generate a zip offers package as cdiscount wanted.
-    :param tempdir:  directory to create temporary files
-    :type tempdir: str
-    :param offer_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
-    :type offer_dict: dict
+
+    :param str tempdir:  directory to create temporary files
+    :param dict offer_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
+
     :return: zip package
     :rtype: str
     """
@@ -86,10 +84,10 @@ def generate_offer_package(tempdir, offer_dict):
 def generate_product_package(tempdir, product_dict):
     """
     Generate a zip product package as cdiscount wanted.
-    :param tempdir: directory to create temporary files
-    :type tempdir: str
-    :param product_dict: products as you can see on tests/samples/products/products_to_submit.json
-    :type product_dict: dict
+
+    :param str tempdir: directory to create temporary files
+    :param dict product_dict: products as you can see on tests/samples/products/products_to_submit.json
+
     :return: zip package
     :rtype: str
     """
@@ -100,11 +98,8 @@ def generate_package_url(content_dict, url):
     """
     Generate and upload package and return the url
 
-    :param content_dict: products or offers as you can see on tests/samples/products/products_to_submit.json
-    :type content_dict: dict
-
-    :param url: url to upload package
-    :type url: str
+    :param dict content_dict: products or offers as you can see on tests/samples/products/products_to_submit.json
+    :param str url: url to upload package
 
     :return: url to find it
     :rtype: str

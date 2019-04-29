@@ -100,10 +100,8 @@ class Offers(BaseSection):
         It is used to add new offers to the Cdiscount marketplace or to modify/update offers taht already exists.
 
 
-        :param offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
-        :type offers_dict: dict
-        :param url: url to upload offers package
-        :type url: str
+        :param dict offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
+        :param str url: url to upload offers package
         :return: the id of package or -1
         :rtype: int
 
@@ -160,8 +158,7 @@ class Offers(BaseSection):
         """
         This operation makes it possible to know the progress report of the offers import.
 
-        :param package_id: id of package we want to know the progress
-        :type package_id: long
+        :param long package_id: id of package we want to know the progress
         :return: Offer report logs
         :rtype: dict
         """

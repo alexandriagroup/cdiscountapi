@@ -36,16 +36,16 @@ DEFAULT_VERSION = '1.0'
 class Connection(object):
     """A class to manage the interaction with the CdiscountMarketplace API
 
-    ::
-
-        api = Connection(login, password, preprod, header_message=header_message, config=config)
-
     :param str login: The login
     :param str password: The password
     :param bool preprod: Whether we use the preprod (True) or the production environment (False)
                          (default value: False)
     :param dict header_message: The header message
     :param str config: The path to a YAML config file
+
+    Usage::
+
+        api = Connection(login, password, preprod, header_message=header_message, config=config)
 
     """
 
