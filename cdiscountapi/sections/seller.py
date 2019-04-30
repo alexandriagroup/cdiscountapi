@@ -25,10 +25,21 @@ class Seller(BaseSection):
     @auto_refresh_token
     def get_seller_info(self):
         """
-        Seller Information.
+        To get seller info as:
+            - Delivery Modes
+            - Offer Pool
+            - Email
+            - Login
+            - Phone Number
+            - Adress
+            - Name
+            - Relays
+            - Shop Name/Url
+            - SIRET
+            - Seller Availability
+            - Account State
 
         :return: Information of the authenticated seller.
-        :rtype: dict
         """
         response = self.api.client.service.GetSellerInformation(
             headerMessage=self.api.header
@@ -38,10 +49,14 @@ class Seller(BaseSection):
     @auto_refresh_token
     def get_seller_indicators(self):
         """
-        Seller performance indicators.
+        To get all rates about seller as:
+            - Order Acceptation
+            - Product Shipping
+            - Order with claim
+            - Order with refund
+            - Preparation Deadline respected
 
         :return: a dict with the data of the user
-        :rtype: dict
         """
         response = self.api.client.service.GetSellerIndicators(
             headerMessage=self.api.header

@@ -104,19 +104,26 @@ and their performance indicator.</p>
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Seller.get_seller_indicators">
 <code class="descname">get_seller_indicators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_indicators" title="Permalink to this definition">¶</a></dt>
-<dd><p>Seller performance indicators.</p>
+<dd><dl class="simple">
+<dt>To get all rates about seller as:</dt><dd><ul class="simple">
+<li><p>Order Acceptation</p></li>
+<li><p>Product Shipping</p></li>
+<li><p>Order with claim</p></li>
+<li><p>Order with refund</p></li>
+<li><p>Preparation Deadline respected</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>a dict with the data of the user</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -124,13 +131,26 @@ and their performance indicator.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Seller.get_seller_info">
 <code class="descname">get_seller_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Seller Information.</p>
+<dd><dl class="simple">
+<dt>To get seller info as:</dt><dd><ul class="simple">
+<li><p>Delivery Modes</p></li>
+<li><p>Offer Pool</p></li>
+<li><p>Email</p></li>
+<li><p>Login</p></li>
+<li><p>Phone Number</p></li>
+<li><p>Adress</p></li>
+<li><p>Name</p></li>
+<li><p>Relays</p></li>
+<li><p>Shop Name/Url</p></li>
+<li><p>SIRET</p></li>
+<li><p>Seller Availability</p></li>
+<li><p>Account State</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Information of the authenticated seller.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -181,7 +201,8 @@ and their performance indicator.</p>
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
@@ -384,7 +405,8 @@ It is used to add new offers to the Cdiscount marketplace or to modify/update of
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
@@ -710,7 +732,8 @@ structure than the one required for the request.</p>
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
@@ -1041,7 +1064,8 @@ new ones.</p>
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
@@ -1138,7 +1162,8 @@ new ones.</p>
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
@@ -1391,7 +1416,8 @@ Discussion id, you cannot close a discussion without having answered</p>
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
@@ -1556,7 +1582,8 @@ contact a customer</p>
 <code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
-(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)</p>
+(cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
+(cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
 <dl class="method">
