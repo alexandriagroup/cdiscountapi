@@ -32,10 +32,9 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def submit_fulfillment_on_demand_supply_order(self, order_list):
         """
-        :param order_list: list of dict as
-        [{'OrderReference': 1703182124BNXCO,
-        'ProductEan': 2009854780777}]
-        :return:
+        :param order_list: list of dict as:
+            [{'OrderReference': 1703182124BNXCO,'ProductEan': 2009854780777}]
+
         """
         response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
             headerMessage=self.api.header,

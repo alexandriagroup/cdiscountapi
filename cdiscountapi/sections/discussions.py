@@ -47,6 +47,7 @@ class Discussions(BaseSection):
         Return the list of questions about offers with the specified criteria
 
         :param offer_question_filter: The keywords for the filter
+
         ``offerQuestionFilter``:
 
         - BeginCreationDate
@@ -86,6 +87,7 @@ class Discussions(BaseSection):
         Return the list of questions about orders with the specified criteria
 
         :param order_question_filter: The keywords for the filter
+
         ``orderQuestionFilter``:
 
         - BeginCreationDate

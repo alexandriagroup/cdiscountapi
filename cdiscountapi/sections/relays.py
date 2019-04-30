@@ -34,8 +34,7 @@ class Relays(BaseSection):
         """
         Send information about relays in a file
 
-        :param dict relays_file_request: A dictionary pointing to a XLSX file
-        with information about relays
+        :param dict relays_file_request: A dictionary pointing to a XLSX file with information about relays
 
         Usage::
 
