@@ -20,12 +20,14 @@ class BaseSection(object):
                 'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
         )
 
+    # TODO voir avec Damien pour le lien
     def array_of(self, type_name, sequence):
         """
         Cast the sequence into an array of the given type.
 
         The arrays are defined in the XSD file
         (cf http://schemas.microsoft.com/2003/10/Serialization/Arrays)
+        (cf https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19) ?
         """
         valid_type_names = ('int', 'string', 'long',
                             'KeyValueOfstringArrayOfstringty7Ep6D1',
