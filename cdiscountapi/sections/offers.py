@@ -30,8 +30,8 @@ class Offers(BaseSection):
         This operation seeks offers according to the
         following criteria:
 
-        - SellerProductIdList is a list of seller product references
-        - OfferPoolId is
+        - SellerProductIdList: list of seller product references
+        - OfferPoolId (int) is the distribution website Id
 
         Example::
 
@@ -57,16 +57,16 @@ class Offers(BaseSection):
         Recovery of the offers page by page.
 
         - PageNumber (int) [mandatory]
-        - OfferFilterCriterion:
+        - OfferFilterCriterion (str):
             - 'NewOffersOnly'
             - 'UsedOffersOnly'
         - OfferPoolId (int) is the distribution website Id
-        - OfferSortOrder:
+        - OfferSortOrder (str):
             - ByPriceAscending
             - ByPriceDescending
             - BySoldQuantityDescending
             - ByCreationDateDescending
-        - OfferStateFilter:
+        - OfferStateFilter (str):
             - WaitingForProductActivation
             - Active
             - Inactive
@@ -97,7 +97,7 @@ class Offers(BaseSection):
     def submit_offer_package(self, offers_dict, url):
         """
         To import offers.
-        It is used to add new offers to the Cdiscount marketplace or to modify/update offers taht already exists.
+        It is used to add new offers to the Cdiscount marketplace or to modify/update offers that already exists.
 
 
         :param dict offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
@@ -160,7 +160,6 @@ class Offers(BaseSection):
 
         :param long package_id: id of package we want to know the progress
         :return: Offer report logs
-        :rtype: dict
         """
         package = self.api.factory.PackageFilter(package_id)
         response = self.api.client.service.GetOfferPackageSubmissionResult(

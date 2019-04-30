@@ -212,8 +212,8 @@ and their performance indicator.</p>
 <p>This operation seeks offers according to the
 following criteria:</p>
 <ul class="simple">
-<li><p>SellerProductIdList is a list of seller product references</p></li>
-<li><p>OfferPoolId is</p></li>
+<li><p>SellerProductIdList: list of seller product references</p></li>
+<li><p>OfferPoolId (int) is the distribution website Id</p></li>
 </ul>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">get_offer_list</span><span class="p">(</span>
@@ -236,7 +236,7 @@ following criteria:</p>
 <ul class="simple">
 <li><p>PageNumber (int) [mandatory]</p></li>
 <li><dl class="simple">
-<dt>OfferFilterCriterion:</dt><dd><ul>
+<dt>OfferFilterCriterion (str):</dt><dd><ul>
 <li><p>‘NewOffersOnly’</p></li>
 <li><p>‘UsedOffersOnly’</p></li>
 </ul>
@@ -245,7 +245,7 @@ following criteria:</p>
 </li>
 <li><p>OfferPoolId (int) is the distribution website Id</p></li>
 <li><dl class="simple">
-<dt>OfferSortOrder:</dt><dd><ul>
+<dt>OfferSortOrder (str):</dt><dd><ul>
 <li><p>ByPriceAscending</p></li>
 <li><p>ByPriceDescending</p></li>
 <li><p>BySoldQuantityDescending</p></li>
@@ -255,7 +255,7 @@ following criteria:</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>OfferStateFilter:</dt><dd><ul>
+<dt>OfferStateFilter (str):</dt><dd><ul>
 <li><p>WaitingForProductActivation</p></li>
 <li><p>Active</p></li>
 <li><p>Inactive</p></li>
@@ -297,9 +297,6 @@ following criteria:</p>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Offer report logs</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -307,7 +304,7 @@ following criteria:</p>
 <dt id="cdiscountapi.cdiscountapi.Offers.submit_offer_package">
 <code class="descname">submit_offer_package</code><span class="sig-paren">(</span><em>offers_dict</em>, <em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.submit_offer_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>To import offers.
-It is used to add new offers to the Cdiscount marketplace or to modify/update offers taht already exists.</p>
+It is used to add new offers to the Cdiscount marketplace or to modify/update offers that already exists.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1098,10 +1095,9 @@ new ones.</p>
 <dd><p>Send information about relays in a file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>relays_file_request</strong> (<em>dict</em>) – A dictionary pointing to a XLSX file</p>
+<dd class="field-odd"><p><strong>relays_file_request</strong> (<em>dict</em>) – A dictionary pointing to a XLSX file with information about relays</p>
 </dd>
 </dl>
-<p>with information about relays</p>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">submit_relays_file</span><span class="p">(</span>
     <span class="n">relays_file_request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileURI&#39;</span><span class="p">:</span> <span class="n">relays_file_uri</span><span class="p">}</span>
@@ -1342,12 +1338,10 @@ new ones.</p>
 <code class="descname">submit_fulfillment_on_demand_supply_order</code><span class="sig-paren">(</span><em>order_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_on_demand_supply_order" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>order_list</strong> – list of dict as</p>
+<dd class="field-odd"><p><strong>order_list</strong> – list of dict as:
+[{‘OrderReference’: 1703182124BNXCO,’ProductEan’: 2009854780777}]</p>
 </dd>
 </dl>
-<p>[{‘OrderReference’: 1703182124BNXCO,
-‘ProductEan’: 2009854780777}]
-:return:</p>
 </dd></dl>
 
 <dl class="method">
