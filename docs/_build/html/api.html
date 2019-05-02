@@ -413,16 +413,84 @@ It is used to add new offers to the Cdiscount marketplace or to modify/update of
 “ShippedBySeller”.</p>
 <p>An additional feature allows to make a commercial gesture on an order
 MKPCDS before and after shipping and on an order MKPFBC after shipping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CommercialGestureList</strong> (<em>list</em>) – <ul>
+<li><p>Amount <em>(decimal)</em></p></li>
+<li><p>Sku <em>(str)</em>: The product number</p></li>
+<li><dl class="simple">
+<dt>MotiveId <em>(int)</em>:</dt><dd><ul>
+<li><p>131: ‘Compensation on missing stock’,</p></li>
+<li><p>132: ‘Product / Accessory delivered damaged or missing’,</p></li>
+<li><p>133: ‘Error of reference, color, size’,</p></li>
+<li><p>134: ‘Fees unduly charged to the customer’,</p></li>
+<li><p>135: ‘Late delivery’,</p></li>
+<li><p>136: ‘Product return fees’,</p></li>
+<li><p>137: ‘Shipping fees’,</p></li>
+<li><p>138: ‘Warranty period or rights of with drawal passed’,</p></li>
+<li><p>139: ‘Others’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>OrderNumber</strong> (<em>str</em>) – </p></li>
+<li><p><strong>SellerRefundList</strong> (<em>list</em>) – <ul>
+<li><dl class="simple">
+<dt>Mode <em>(str)</em>:</dt><dd><ul>
+<li><p>’Claim’</p></li>
+<li><p>’Retraction’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Motive <em>(str)</em>:</dt><dd><ul>
+<li><p>’VendorRejection’,</p></li>
+<li><p>’ClientCancellation’,</p></li>
+<li><p>’VendorRejectionAndClientCancellation’,</p></li>
+<li><p>’ClientClaim’,</p></li>
+<li><p>’VendorInitiatedRefund’,</p></li>
+<li><p>’ClientRetraction’,</p></li>
+<li><p>’NoClientWithDrawal’,</p></li>
+<li><p>’ProductStockUnavailable’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>SellerRefundOrderLine:</dt><dd><ul>
+<li><p>EAN <em>(str)</em></p></li>
+<li><p>RefundShippingChanges <em>(bool)</em></p></li>
+<li><p>SellerProductId <em>(str)</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">create_refund_voucher</span><span class="p">(</span>
-<span class="n">CommercialGestureList</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;Amount&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;MotiveId&#39;</span><span class="p">:</span> <span class="s1">&#39;late_delivery&#39;</span><span class="p">}],</span>
-<span class="n">OrderNumber</span><span class="o">=</span><span class="s1">&#39;ORDER_NUMBER_1&#39;</span><span class="p">,</span>
-<span class="n">SellerRefundList</span><span class="o">=</span><span class="p">{</span>
-    <span class="s1">&#39;Mode&#39;</span><span class="p">:</span> <span class="s1">&#39;Claim&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Motive&#39;</span><span class="p">:</span> <span class="s1">&#39;ClientClaim&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;RefundOrderLine&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Ean&#39;</span><span class="p">:</span> <span class="s1">&#39;4005274238223&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="s1">&#39;42382235&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;RefundShippingCharges&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+    <span class="n">CommercialGestureList</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;Amount&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s1">&#39;MotiveId&#39;</span><span class="p">:</span> <span class="mi">135</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="n">OrderNumber</span><span class="o">=</span><span class="s1">&#39;ORDER_NUMBER_1&#39;</span><span class="p">,</span>
+    <span class="n">SellerRefundList</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;Mode&#39;</span><span class="p">:</span> <span class="s1">&#39;Claim&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Motive&#39;</span><span class="p">:</span> <span class="s1">&#39;ClientClaim&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;RefundOrderLine&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;Ean&#39;</span><span class="p">:</span> <span class="s1">&#39;4005274238223&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;RefundShippingCharges&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="s1">&#39;42382235&#39;</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">)</span>
 </pre></div>
@@ -433,8 +501,10 @@ MKPCDS before and after shipping and on an order MKPFBC after shipping.</p>
 <dt id="cdiscountapi.cdiscountapi.Orders.get_global_configuration">
 <code class="descname">get_global_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.get_global_configuration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get cdiscount settings. This method allows to get a list of several
-settings:
-- Carrier list</p>
+settings:</p>
+<ul class="simple">
+<li><p>Carrier list</p></li>
+</ul>
 </dd></dl>
 
 <dl class="method">
@@ -443,6 +513,10 @@ settings:
 <dd><p>To search orders.</p>
 <p>This operation makes it possible to seek orders according to the
 following criteria:</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">get_order_list</span><span class="p">()</span>
+</pre></div>
+</div>
 <ul class="simple">
 <li><dl class="simple">
 <dt>The order state:</dt><dd><ul>

@@ -133,12 +133,14 @@ def check_element(element_name, dynamic_type):
     """
     valid_elements = [x[0] for x in dynamic_type.elements]
     if element_name not in valid_elements:
-        raise TypeError('{0} is not a valid element of {1}.'
-                         ' Valid elements are {2}'.format(
-                             element_name, dynamic_type.name, valid_elements)
-                         )
+        raise TypeError(
+            f'{element_name} is not a valid element of {dynamic_type.name}.'
+            f' Valid elements are {valid_elements}'
+        )
 
 
+# TODO Damien: voir car l'utilisateur peut écrire
+#  "Shipping Fees" ou "ShippingFees" au lieu de "shipping_fees"
 def get_motive_id(label):
     label_to_motive_id = {
         'compensation_on_missing_stock': 131,

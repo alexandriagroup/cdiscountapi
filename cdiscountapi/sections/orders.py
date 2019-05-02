@@ -30,6 +30,10 @@ class Orders(BaseSection):
         This operation makes it possible to seek orders according to the
         following criteria:
 
+        Example::
+
+            response = api.orders.get_order_list()
+
         - The order state:
             - CancelledByCustomer
             - WaitingForSellerAcceptation
@@ -139,6 +143,7 @@ class Orders(BaseSection):
         """
         Get cdiscount settings. This method allows to get a list of several
         settings:
+
         - Carrier list
         """
         response = self.api.client.service.GetGlobalConfiguration(
@@ -285,17 +290,59 @@ class Orders(BaseSection):
         An additional feature allows to make a commercial gesture on an order
         MKPCDS before and after shipping and on an order MKPFBC after shipping.
 
+        :param list CommercialGestureList:
+
+            - Amount *(decimal)*
+            - Sku *(str)*: The product number
+            - MotiveId *(int)*:
+                - 131: 'Compensation on missing stock',
+                - 132: 'Product / Accessory delivered damaged or missing',
+                - 133: 'Error of reference, color, size',
+                - 134: 'Fees unduly charged to the customer',
+                - 135: 'Late delivery',
+                - 136: 'Product return fees',
+                - 137: 'Shipping fees',
+                - 138: 'Warranty period or rights of with drawal passed',
+                - 139: 'Others'
+
+        :param str OrderNumber:
+
+        :param list SellerRefundList:
+            - Mode *(str)*:
+                - 'Claim'
+                - 'Retraction'
+            - Motive *(str)*:
+                - 'VendorRejection',
+                - 'ClientCancellation',
+                - 'VendorRejectionAndClientCancellation',
+                - 'ClientClaim',
+                - 'VendorInitiatedRefund',
+                - 'ClientRetraction',
+                - 'NoClientWithDrawal',
+                - 'ProductStockUnavailable'
+            - SellerRefundOrderLine:
+                - EAN *(str)*
+                - RefundShippingChanges *(bool)*
+                - SellerProductId *(str)*
+
         Example::
 
             response = api.orders.create_refund_voucher(
-            CommercialGestureList=[{'Amount': 10, 'MotiveId': 'late_delivery'}],
-            OrderNumber='ORDER_NUMBER_1',
-            SellerRefundList={
-                'Mode': 'Claim',
-                'Motive': 'ClientClaim',
-                'RefundOrderLine': {'Ean': '4005274238223',
-                                    'SellerProductId': '42382235',
-                                    'RefundShippingCharges': True}
+                CommercialGestureList=[
+                    {
+                        'Amount': 10,
+                        'MotiveId': 135
+                    }
+                ],
+                OrderNumber='ORDER_NUMBER_1',
+                SellerRefundList={
+                    'Mode': 'Claim',
+                    'Motive': 'ClientClaim',
+                    'RefundOrderLine': {
+                        'Ean': '4005274238223',
+                        'RefundShippingCharges': True,
+                        'SellerProductId': '42382235'
+                    }
                 }
             )
 
@@ -309,10 +356,11 @@ class Orders(BaseSection):
             for commercial_gesture in commercial_gestures:
                 motive_id = commercial_gesture.get('MotiveId')
                 # MotiveId is a label
-                if not isinstance(motive_id, int):
-                    motive_id = get_motive_id(motive_id)
-
-                commercial_gesture['MotiveId'] = motive_id
+                # if not isinstance(motive_id, int):
+                #     motive_id = get_motive_id(motive_id)
+                # TODO Damien: voir pour obligation d'int
+                if isinstance(motive_id, int):
+                    commercial_gesture['MotiveId'] = motive_id
         else:
             commercial_gestures = None
 
