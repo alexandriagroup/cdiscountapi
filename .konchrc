@@ -43,7 +43,6 @@ def load_cassette(cassette_name):
 
     :param cassette_name: The name of the cassette
     :type cassette_name: str
-    :rtype: dict
     :return: the data contained in the cassette
     """
     fname = Path("cdiscountapi/tests/cassettes").joinpath(cassette_name)

@@ -31,7 +31,6 @@ class Products(BaseSection):
             response = api.products.get_allowed_category_tree()
 
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
-        :rtype: dict
         """
         response = self.api.client.service.GetAllowedCategoryTree(
             headerMessage=self.api.header
@@ -48,7 +47,6 @@ class Products(BaseSection):
             response = api.products.get_all_allowed_category_tree()
 
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
-        :rtype: dict
         """
         from ..cdiscountapi import Connection
         api_all = Connection('AllData', 'pa$$word', header_message=self.header)
@@ -69,7 +67,6 @@ class Products(BaseSection):
             response = api.products.get_product_list("13380D0501")
 
         :return: products corresponding to research
-        :rtype: dict
         """
         filters = self.api.factory.ProductFilter(category_code)
 
@@ -93,7 +90,6 @@ class Products(BaseSection):
             response = api.products.get_model_list("13380D0501")
 
         :return: models and mandatory model properties
-        :rtype: dict
         """
         response = self.api.client.service.GetModelList(
             headerMessage=self.api.header,
@@ -115,7 +111,6 @@ class Products(BaseSection):
             response = api.products.get_all_model_list()
 
         :return: models and mandatory model properties
-        :rtype: dict
         """
         # api_all = Connection('AllData', 'pa$$word')
         # response = api_all.client.service.GetAllModelList(
@@ -134,7 +129,6 @@ class Products(BaseSection):
             response = api.products.get_brand_list()
 
         :return: all brands
-        :rtype: dict
         """
         response = self.api.client.service.GetBrandList(
             headerMessage=self.api.header,
@@ -145,6 +139,7 @@ class Products(BaseSection):
     def submit_product_package(self, products_dict, url):
         """
         To ask for the creation of products.
+        It could included between 10K and 20K products by package.
 
         :param dict products_dict: products as you can see on tests/samples/products/products_to_submit.json
 
@@ -236,7 +231,6 @@ class Products(BaseSection):
             )
 
         :return: the id of package or -1
-        :rtype: int
         """
         # get url.
         package_url = generate_package_url(products_dict, url)
@@ -253,14 +247,19 @@ class Products(BaseSection):
 
     # TODO find why it doesn't work.
     @auto_refresh_token
-    def get_product_package_submission_result(self, filters={}):
+    def get_product_package_submission_result(self, package_ids=None):
         """
         Progress status of a product import.
 
-        :param dict filters: (ex: package id)
+        :param long package_ids: PackageID
+
+        Usage::
+
+            response = api.products.get_product_package_submission_result(2154894)
+
         :return: partial or complete report of package integration
-        :rtype: dict
         """
+        filters = self.api.factory.PackageFilter(package_ids)
         response = self.api.client.service.GetProductPackageSubmissionResult(
             headerMessage=self.api.header,
             productPackageFilter=filters
@@ -272,9 +271,13 @@ class Products(BaseSection):
         """
         Information of the created products.
 
-        :param str package_id: package id to filter results
+        :param long package_id: package id to filter results
+
+        Usage::
+
+            response = api.products.get_product_package_product_matching_file_data(21454894)
+
         :return: information of the created products
-        :rtype: dict
         """
         if package_id:
             response = self.api.client.service.GetProductPackageProductMatchingFileData(
@@ -289,8 +292,12 @@ class Products(BaseSection):
         Obtain details for a list of products
 
         :param list ean_list: list of EAN to filter
+
+        Usage::
+
+            response = api.products.get_product_list_by_identifier('2009863600561')
+
         :return: complete list of products
-        :rtype: dict
         """
         request = {'IdentifierType': 'EAN', 'ValueList': ean_list}
         response = self.api.client.service.GetProductListByIdentifier(

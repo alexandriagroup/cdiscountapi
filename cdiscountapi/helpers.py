@@ -29,8 +29,6 @@ def generate_package(package_type, tempdir, offer_dict):
     :param dict offer_dict: offers as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
-
-    :rtype: str
     """
     if package_type not in ('offer', 'product'):
         raise ValueError('package_type must be either "offer" or "product".')
@@ -62,7 +60,6 @@ def upload_and_get_url(package, url):
     :param str url: where to upload zip package
 
     :return: where to download zip package
-    :rtype: str
     """
 
     return url + package
@@ -76,7 +73,6 @@ def generate_offer_package(tempdir, offer_dict):
     :param dict offer_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
 
     :return: zip package
-    :rtype: str
     """
     return generate_package('offer', tempdir, offer_dict)
 
@@ -89,7 +85,6 @@ def generate_product_package(tempdir, product_dict):
     :param dict product_dict: products as you can see on tests/samples/products/products_to_submit.json
 
     :return: zip package
-    :rtype: str
     """
     return generate_package('product', tempdir, product_dict)
 
@@ -102,7 +97,6 @@ def generate_package_url(content_dict, url):
     :param str url: url to upload package
 
     :return: url to find it
-    :rtype: str
     """
     # Create a temporary package.
     tempdir = gettempdir()

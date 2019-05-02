@@ -207,7 +207,6 @@ class Orders(BaseSection):
                 ]
             }
 
-        :rtype dict:
         :returns: The ``validate_order_list_message`` dictionary created with ``data``
         """
         return {

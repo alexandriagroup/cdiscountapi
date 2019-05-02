@@ -176,11 +176,8 @@ and their performance indicator.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -280,9 +277,6 @@ following criteria:</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>offers answering the search criterion</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -314,9 +308,6 @@ It is used to add new offers to the Cdiscount marketplace or to modify/update of
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the id of package or -1</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 <p>Example:</p>
@@ -377,11 +368,8 @@ It is used to add new offers to the Cdiscount marketplace or to modify/update of
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -690,10 +678,8 @@ structure than the one required for the request.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Rtype dict</dt>
-<dd class="field-odd"><p></p></dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The <code class="docutils literal notranslate"><span class="pre">validate_order_list_message</span></code> dictionary created with <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The <code class="docutils literal notranslate"><span class="pre">validate_order_list_message</span></code> dictionary created with <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -719,11 +705,8 @@ structure than the one required for the request.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -819,9 +802,6 @@ structure than the one required for the request.</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>tree of the categories leaves of which are authorized for the integration of products and/or offers</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -841,9 +821,6 @@ structure than the one required for the request.</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>models and mandatory model properties</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -859,9 +836,6 @@ structure than the one required for the request.</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>tree of the categories leaves of which are authorized for the integration of products and/or offers</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -876,9 +850,6 @@ structure than the one required for the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>all brands</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -902,9 +873,6 @@ structure than the one required for the request.</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>models and mandatory model properties</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -925,9 +893,6 @@ structure than the one required for the request.</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>products corresponding to research</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>dict</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -939,11 +904,14 @@ structure than the one required for the request.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>ean_list</strong> (<em>list</em>) – list of EAN to filter</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>complete list of products</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_product_list_by_identifier</span><span class="p">(</span><span class="s1">&#39;2009863600561&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>complete list of products</p>
 </dd>
 </dl>
 </dd></dl>
@@ -954,30 +922,36 @@ structure than the one required for the request.</p>
 <dd><p>Information of the created products.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>package_id</strong> (<em>str</em>) – package id to filter results</p>
+<dd class="field-odd"><p><strong>package_id</strong> (<em>long</em>) – package id to filter results</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>information of the created products</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_product_package_product_matching_file_data</span><span class="p">(</span><span class="mi">21454894</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>information of the created products</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_package_submission_result">
-<code class="descname">get_product_package_submission_result</code><span class="sig-paren">(</span><em>filters={}</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_submission_result" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_product_package_submission_result</code><span class="sig-paren">(</span><em>package_ids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Progress status of a product import.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filters</strong> (<em>dict</em>) – (ex: package id)</p>
+<dd class="field-odd"><p><strong>package_ids</strong> (<em>long</em>) – PackageID</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>partial or complete report of package integration</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_product_package_submission_result</span><span class="p">(</span><span class="mi">2154894</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>partial or complete report of package integration</p>
 </dd>
 </dl>
 </dd></dl>
@@ -985,7 +959,8 @@ structure than the one required for the request.</p>
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Products.submit_product_package">
 <code class="descname">submit_product_package</code><span class="sig-paren">(</span><em>products_dict</em>, <em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.submit_product_package" title="Permalink to this definition">¶</a></dt>
-<dd><p>To ask for the creation of products.</p>
+<dd><p>To ask for the creation of products.
+It could included between 10K and 20K products by package.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1082,9 +1057,6 @@ structure than the one required for the request.</p>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>the id of package or -1</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>int</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -1109,11 +1081,8 @@ structure than the one required for the request.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1207,11 +1176,8 @@ new ones.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1454,11 +1420,8 @@ new ones.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1624,11 +1587,8 @@ Discussion id, you cannot close a discussion without having answered</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1707,11 +1667,8 @@ response = api.webmail.get_discussion_mail_list(ids)</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The updated dictionary with the valid array type</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The updated dictionary with the valid array type</p>
 </dd>
 </dl>
 </dd></dl>

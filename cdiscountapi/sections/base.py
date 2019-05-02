@@ -55,7 +55,6 @@ class BaseSection(object):
                 {'DepositIdList': 'int'}
             )
 
-        :rtype: dict
         :returns: The updated dictionary with the valid array type
 
         """

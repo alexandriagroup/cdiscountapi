@@ -84,7 +84,6 @@ class Offers(BaseSection):
             )
 
         :return: offers answering the search criterion
-        :rtype: dict
         """
         offer_filter = self.api.factory.OfferFilterPaginated(**filters)
         response = self.api.client.service.GetOfferListPaginated(
@@ -103,7 +102,6 @@ class Offers(BaseSection):
         :param dict offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
         :param str url: url to upload offers package
         :return: the id of package or -1
-        :rtype: int
 
         Example::
 
