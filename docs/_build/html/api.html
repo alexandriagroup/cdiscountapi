@@ -1109,41 +1109,49 @@ new ones.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Relays.get_parcel_shop_list">
+<code class="descname">get_parcel_shop_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_parcel_shop_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>To get a list of relays known.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">get_parcel_shop_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result">
-<code class="descname">get_relays_file_submission_result</code><span class="sig-paren">(</span><em>**relays_file_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_relays_file_submission_result</code><span class="sig-paren">(</span><em>relays_file_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the state of progress of the relays file submission.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>relays_file_filter</strong> (<em>dict</em>) – The dictionary containing the ID referencing the relays file submitted.</p>
+<dd class="field-odd"><p><strong>relays_file_ids</strong> (<em>list</em>) – IDs referencing the relays file submitted.</p>
 </dd>
 </dl>
 <p>Usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_relays_file_submission_result</span><span class="p">(</span>
-    <span class="n">relays_file_filter</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileId&#39;</span><span class="p">:</span> <span class="n">relays_file_id</span><span class="p">}</span>
-<span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_relays_file_submission_result</span><span class="p">([</span><span class="mi">15645</span><span class="p">,</span><span class="mi">52486</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">relays_file_id</span></code> is the value of RelaysFileId returned by
 <a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=112">SubmitRelaysFile</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The response with the information about the integration of the relays specified.</p>
+<dd class="field-odd"><p>The response with the information about the integration of the specified relays.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Relays.submit_relays_file">
-<code class="descname">submit_relays_file</code><span class="sig-paren">(</span><em>**relays_file_request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.submit_relays_file" title="Permalink to this definition">¶</a></dt>
+<code class="descname">submit_relays_file</code><span class="sig-paren">(</span><em>relays_file_uri</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.submit_relays_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send information about relays in a file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>relays_file_request</strong> (<em>dict</em>) – A dictionary pointing to a XLSX file with information about relays</p>
+<dd class="field-odd"><p><strong>relays_file_uri</strong> (<em>str</em>) – A link pointing to a XLSX file with information about relays</p>
 </dd>
 </dl>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">submit_relays_file</span><span class="p">(</span>
-    <span class="n">relays_file_request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;RelaysFileURI&#39;</span><span class="p">:</span> <span class="n">relays_file_uri</span><span class="p">}</span>
+    <span class="s1">&#39;http://spreadsheetpage.com/downloads/xl/worksheet</span><span class="si">%20f</span><span class="s1">unctions.xlsx&#39;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
