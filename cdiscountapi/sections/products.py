@@ -12,6 +12,9 @@ from cdiscountapi.helpers import generate_package_url
 from zeep.helpers import serialize_object
 from .base import BaseSection
 from ..helpers import auto_refresh_token
+from cdiscountapi.helpers import generate_package
+from tempfile import gettempdir
+from shutil import make_archive
 
 
 class Products(BaseSection):
@@ -135,16 +138,12 @@ class Products(BaseSection):
         )
         return serialize_object(response, dict)
 
-    @auto_refresh_token
-    def submit_product_package(self, products_dict, url):
+    @staticmethod
+    def generate_product_package(products_dict):
         """
-        To ask for the creation of products.
-        It could included between 10K and 20K products by package.
+        Generate a zip product package as cdiscount wanted.
 
         :param dict products_dict: products as you can see on tests/samples/products/products_to_submit.json
-
-        :param str url: url to upload offers package
-
 
         Example::
 
@@ -228,20 +227,45 @@ class Products(BaseSection):
                   ]
                 },
                 url="path_to_upload.com"
-            )
+
+        """
+        # Create a temporary package.
+        tempdir = gettempdir()
+
+        package = generate_package('product', tempdir, products_dict)
+
+        return make_archive(package, 'zip', package)
+
+    @auto_refresh_token
+    def submit_product_package(self, url):
+        """
+        To ask for the creation of products.
+        It could included between 10K and 20K products by package.
+
+        There is 2 ways to use it.
+
+        1. You can generate a zip package with:
+            api.products.generate_product_package(products_dict)
+
+        2. You can generate the package yourself before uploading.
+
+        Then you'll have to get an url to download zip package
+        Finally, you can use submit_product_package(url)
+
+
+        Examples::
+
+            api.products.submit_product_package(url)
 
         :return: the id of package or -1
-        """
-        # get url.
-        package_url = generate_package_url(products_dict, url)
 
-        # Create request attribute.
-        product_package = {'ZipFileFullPath': package_url}
+        """
+        product_package = self.api.factory.ProductPackageRequest(url)
 
         # Send request.
         response = self.api.client.service.SubmitProductPackage(
             headerMessage=self.api.header,
-            productPackageRequest=product_package
+            offerPackageRequest=product_package,
         )
         return serialize_object(response, dict)
 
