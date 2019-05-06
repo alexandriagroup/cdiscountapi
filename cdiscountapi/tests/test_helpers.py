@@ -5,9 +5,11 @@ import json
 import datetime
 from tempfile import gettempdir
 from shutil import rmtree
+from copy import deepcopy
 
 # Third-party imports
 import pytest
+import zeep
 
 # Project imports
 from cdiscountapi.cdiscountapi import Connection
@@ -18,6 +20,7 @@ from cdiscountapi.helpers import (
 from . import assert_response_succeeded
 
 
+@pytest.mark.skip(reason='Stand by')
 @pytest.mark.vcr()
 def test_generate_product_package():
     path = gettempdir()
@@ -133,13 +136,15 @@ def valid_offer():
     }
     shipping_info1 = {
         'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
-        'DeliveryMode': 'Standard'
+        'DeliveryMode': {'Name': 'Standard'}
     }
     shipping_info2 = {
         'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
-        'DeliveryMode': 'Tracked'
+        'DeliveryMode': {'Name': 'Tracked'}
     }
     offer = {
+        'Price': 10,
+        'SellerProductId': 'MY_SKU1',
         'DiscountList': [discount_component],
         'ShippingInformationList': [shipping_info1, shipping_info2]
     }
@@ -148,8 +153,12 @@ def valid_offer():
 
 @pytest.mark.vcr()
 def test_validate_offer(valid_offer):
+    """
+    XmlGenerator.validate_offer should return a `zeep.objects.Offer`
+    """
     generator = XmlGenerator()
-    generator.validate_offer(**valid_offer)
+    offer = generator.validate_offer(**valid_offer)
+    assert offer.__class__.__name__ == 'Offer'
 
 
 @pytest.mark.vcr()
@@ -162,7 +171,7 @@ def test_validate_offer_with_invalid_key():
     }
     shipping_info1 = {
         'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
-        'DeliveryMode': 'Standard'
+        'DeliveryMode': {'Name': 'Standard'}
     }
     shipping_info2 = {
         'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
@@ -177,12 +186,56 @@ def test_validate_offer_with_invalid_key():
     pytest.raises(TypeError, generator.validate_offer, offer)
 
 
-@pytest.mark.skip(reason='Stand by')
 @pytest.mark.vcr()
-def test_add_offers():
-    raise AssertionError
+def test_add_offers(valid_offer):
+    """
+    XmlGenerator.add_offers should append the unique valid offers in the attribute `XmlGenerator.offers`
+    """
+    xml_generator = XmlGenerator()
+    assert len(xml_generator.offers) == 0
+
+    xml_generator.add_offers([valid_offer, valid_offer])
+
+    # The should be only 1 valid offer (we added 2 times the same offer)
+    assert len(xml_generator.offers) == 1
+
+    # We create a new valid offer with a different DiscountValue
+    valid_offer1 = deepcopy(valid_offer)
+    valid_offer1['DiscountList'][0]['DiscountValue'] = 10
+    xml_generator.add_offers([valid_offer1])
+
+    # The should be 2 valid offers
+    assert len(xml_generator.offers) == 2
 
 
+@pytest.mark.vcr()
+def test_add_offers_with_invalid_offer(valid_offer):
+    """
+    XmlGenerator.add_offers should raise a TypeError when the offer is invalid
+    """
+    invalid_offer = {'invalid_offer': True}
+    xml_generator = XmlGenerator()
+    pytest.raises(TypeError, xml_generator.add_offers, [valid_offer, invalid_offer])
+
+
+@pytest.mark.vcr()
+def test_render_offers(valid_offer):
+    """
+    XmlGenerator.render_offers should return the content of Offers.xml
+    """
+    valid_offer1 = deepcopy(valid_offer)
+    valid_offer1['Price'] = 20
+    valid_offer1['SellerProductId'] = 'MY_SKU2'
+    xml_generator = XmlGenerator()
+    xml_generator.add_offers([valid_offer, valid_offer1])
+    content = xml_generator.render_offers()
+
+    with open('cdiscountapi/tests/samples/Offers.xml') as f:
+        expected_content = f.read()
+    assert content.strip() == expected_content.strip()
+
+
+# auto_refresh_token
 @pytest.mark.vcr()
 def test_auto_refresh_token():
     # We get rid of the fixture 'api' that has a cache because we want to do a
