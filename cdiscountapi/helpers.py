@@ -212,26 +212,26 @@ class XmlGenerator(object):
             'SellerProductId': 1,
             'Stock': 1, 'VatRate': 0.19,
             'DiscountList': discount_component,
-                 'OfferPoolList': offer_pool,
-                 'ShippingInformationList': [
-                    {
-                        'AdditionalShippingCharges': 1,
-                        'DeliveryMode': 'RelaisColis',
-                        'MaxLeadTime': 1,
-                        'MinLeadTime': 1,
-                        'ShippingCharges': 1,
-                    },
-                    {
-                        'AdditionalShippingCharges': 5.95,
-                        'DeliveryMode': 'Tracked',
-                        'ShippingCharges': 2.95
-                    }
-                ]
-                 'PriceMustBeAligned': 'DontAlign',
-                 'ProductPackagingUnit': 'Kilogram',
-                 'OfferState': 'Active',
-                 'ProductCondition': 'New'
-                 }
+            'OfferPoolList': offer_pool,
+            'ShippingInformationList': [
+               {
+                   'AdditionalShippingCharges': 1,
+                   'DeliveryMode': 'RelaisColis',
+                   'MaxLeadTime': 1,
+                   'MinLeadTime': 1,
+                   'ShippingCharges': 1,
+               },
+               {
+                   'AdditionalShippingCharges': 5.95,
+                   'DeliveryMode': 'Tracked',
+                   'ShippingCharges': 2.95
+               }
+            ],
+           'PriceMustBeAligned': 'DontAlign',
+           'ProductPackagingUnit': 'Kilogram',
+           'OfferState': 'Active',
+           'ProductCondition': 'New'
+           }
 
         generator = XmlGenerator()
         generator.add_offers([offer])
