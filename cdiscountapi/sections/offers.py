@@ -8,10 +8,12 @@
     :copyright: © 2019 Alexandria
 """
 
-from cdiscountapi.helpers import generate_package_url
+from cdiscountapi.helpers import generate_package
 from zeep.helpers import serialize_object
 from .base import BaseSection
 from ..helpers import auto_refresh_token
+from tempfile import gettempdir
+from shutil import make_archive
 
 
 class Offers(BaseSection):
@@ -92,9 +94,62 @@ class Offers(BaseSection):
         )
         return serialize_object(response, dict)
 
+    @staticmethod
+    def generate_offer_package(offers_dict):
+        """
+        Generate a zip offers package as cdiscount wanted.
+
+        :param dict offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
+
+        Example::
+
+            response = api.offers.submit_offer_package(
+                offers_dict={
+                    "OfferPackage": {
+                        "-xmlns": "clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration",
+                        "-xmlns:x": "http://schemas.microsoft.com/winfx/2006/xaml",
+                        "-Name": "Nom fichier offres",
+                        "-PurgeAndReplace": "false",
+                        "-PackageType": "StockAndPrice",
+                        "OfferPackage.Offers": {
+                            "OfferCollection": {
+                                "-Capacity": "1",
+                                "Offer": {
+                                    "-SellerProductId": "S53262149036",
+                                    "-ProductEan": "9153262149367",
+                                    "-Price": "19.95",
+                                    "-Stock": "10"
+                                }
+                            }
+                        },
+                        "OfferPackage.OfferPublicationList": {
+                            "OfferPublicationList": {
+                                "-Capacity": "2",
+                                "PublicationPool": [
+                                    { "-Id": "1" },
+                                    { "-Id": "16" }
+                                ]
+                            }
+                        }
+                    }
+                },
+            )
+        :return: the id of package or -1
+        """
+        # Create a temporary package.
+        tempdir = gettempdir()
+
+        package = generate_package('offer', tempdir, offers_dict)
+
+        return make_archive(package, 'zip', package)
+
     @auto_refresh_token
     def submit_offer_package(self, url):
         """
+        To import offers.
+        It is used to add new offers to the Cdiscount marketplace
+        Or to modify/update offers that already exists.
+
         There is 2 ways to use it.
 
         1. You can generate a zip package with:
@@ -110,6 +165,7 @@ class Offers(BaseSection):
 
             api.offers.submit_offer_package(url)
 
+        :return: the id of package or -1
         """
         offer_package = self.api.factory.OfferPackageRequest(url)
 
