@@ -154,7 +154,7 @@ def test_get_fulfillment_activation_report_list(api):
 @skip('not authorized to access')
 @pytest.mark.vcr()
 def test_get_fulfillment_order_list_to_supply(api):
-    response = api.fulfillment.get_fulfillment_order_list_to_supply(ProductEan=3515338039204)
+    response = api.fulfillment.get_fulfillment_order_list_to_supply(ProductEan=2009863600561)
     assert_response_succeeded(response)
     assert 'FulfilmentActivationReportList' in response.keys()
 

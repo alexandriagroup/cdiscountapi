@@ -47,12 +47,11 @@ class Fulfillment(BaseSection):
         """
         To search supply order reports.
 
-        :param request: The keywords used to filter the supply order reports:
-
-        - PageSize (int) [mandatory]
-        - BeginCreationDate, EndCreationDate (date)
-        - PageNumber (int)
-        - DepositIdList (list of ints)
+        :param int PageSize: [mandatory]
+        :param date BeginCreationDate:
+        :param date EndCreationDate:
+        :param int PageNumber:
+        :param list DepositIdList: list of ints
 
         Examples::
 
@@ -80,7 +79,14 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def get_fulfillment_delivery_document(self, deposit_id):
         """
+        To get pdf document data for a supply order delivery, in the form of a Base64-encoded string.
+
         :param int deposit_id: Unique identification number of the supply order request
+
+        Usage::
+
+            response = api.fulfillment.get_fulfillment_delivery_document(233575)
+
         :return: data for printing PDF documents, in the form of a Base64-encoded string.
         """
         response = self.api.client.service.GetFulfilmentDeliveryDocument(
@@ -92,12 +98,11 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def get_fulfillment_supply_order(self, **request):
         """
-        :param request: The keywords used to filter the supply order reports:
-
-        - PageSize (int) [mandatory]
-        - BeginCreationDate, EndCreationDate (date)
-        - PageNumber (int)
-        - SupplyOrderNumberList (list of strings)
+        :param int PageSize: [mandatory]
+        :param date BeginModificationDate:
+        :param date EndModificationDate:
+        :param int PageNumber:
+        :param list SupplyOrderNumberList: list of strings
 
         Examples::
 
@@ -108,7 +113,8 @@ class Fulfillment(BaseSection):
             )
 
             response = api.fulfillment.get_fulfillment_supply_order_report_list(
-                PageSize=10, SupplyOrderNumberList=['X', 'Y', 'Z']
+                PageSize=10,
+                SupplyOrderNumberList=['X', 'Y', 'Z']
             )
 
         :return: supply orders
@@ -128,9 +134,38 @@ class Fulfillment(BaseSection):
         """
         To ask for products activation (or deactivation)
 
-        :param request:
+        :param list ProductList:
 
-        'ProductList': ProductActivationData list
+            - Action *(str)*:
+                - 'Activation'
+                - 'Deactivation'
+            - Length *(double/float64)*:
+            - Width *(double/float64)*:
+            - Height *(double/float64)*:
+            - Weight *(double/float64)*:
+            - ProductEAN *(str)*:
+            - SellerProductReference *(str)*: [optional]
+
+        Example::
+
+            api.fulfillment.submit_fulfillment_activation(
+                product_list = [
+                    {
+                        'Action': 'Activation',
+                        'Height': 1,
+                        'Length': 20,
+                        'ProductEAN': '2009863600561'
+                        'Weight': 50,
+                        'Width': 10
+                    },
+                    {
+                        'Action': 'Activation',
+                        'Height': 1,
+                        'Length': 20,
+                        'ProductEAN': 'BZ34567891234',
+                        'Weight': 20,
+                        'Width': 10
+            )
 
         :return: deposit id
         """
@@ -143,10 +178,18 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def get_fulfillment_activation_report_list(self, **request):
         """
-        :param request:
-            'BeginDate': date,
-            'DepositIdList': int list,
-            'EndDate': date
+        To get status and details about fulfillment products activation.
+
+        :param str BeginDate:
+        :param list DepositIdList: int list
+        :param str EndDate:
+
+        Usage::
+
+            response = api.fulfillment.get_fulfillment_activation_report_list(
+                BeginDate='2019-04-26T09:54:38:72'
+            )
+
         """
         activation_report_request = self.api.factory.FulfilmentActivationReportRequest(**request)
         response = self.api.client.service.GetFulfilmentActivationReportList(
@@ -158,11 +201,19 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def get_fulfillment_order_list_to_supply(self, **request):
         """
-        :param request:
-            'OrderReference': str,
-            'ProductEan': str,
-            'Warehouse': str
-        :return:
+        To ask for fulfillment on demand order lines to supply.
+
+        :param str OrderReference:
+        :param str ProductEan:
+        :param str Warehouse:
+
+        Example::
+
+            response = api.fulfillment.get_fulfillment_order_list_to_supply(
+                ProductEan='2009863600561'
+            )
+
+        :return: fulfillment on demand order lines to supply answering the search criterion.
         """
         references = self.api.factory.FulfilmentOnDemandOrderLineFilter(**request)
         response = self.api.client.service.GetFulfilmentActivationReportList(
@@ -195,8 +246,9 @@ class Fulfillment(BaseSection):
 
         :param order: A dictionary with the structure:
 
-        .. code-block:: python
+        Example::
 
+            response = api.fufillment.create_external_order(
             {
                 'Comments': str,
                 'Corporation': str (ex:FNAC),
@@ -235,10 +287,22 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def get_product_stock_list(self, **request):
         """
+        List seller product
 
-        :param request:
-            "BarCodeList": str list
-            "FulfilmentReferencement"
+        :param list BarCodeList:
+        :param str FulfilmentReferencement:
+        :param str ShippableStock:
+        :param str BlockedStock:
+        :param str SoldOut:
+
+        Example::
+
+            response = api.fulfillment.get_product_stock_list(
+                FulfilmentReferencement='All',
+                ShippableStock='All',
+                BlockedStock='All',
+                SoldOut='All'
+            )
         :return:
         """
         response = self.api.client.service.GetProductStockList(
