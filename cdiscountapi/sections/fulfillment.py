@@ -303,6 +303,7 @@ class Fulfillment(BaseSection):
                 BlockedStock='All',
                 SoldOut='All'
             )
+
         :return:
         """
         response = self.api.client.service.GetProductStockList(
