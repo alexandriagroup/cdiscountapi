@@ -61,10 +61,10 @@ def test_get_brand_list(api):
 @pytest.mark.skip(reason='Stand by')
 @pytest.mark.vcr()
 def test_generate_product_package():
-    path = gettempdir()
+    output_dir = gettempdir()
     # Check uploading_package doesn't exists yet.
-    assert 'uploading_package' not in os.listdir(path)
-    assert os.path.isfile(f'{path}/uploading_package.zip') is False
+    assert 'uploading_package' not in os.listdir(output_dir)
+    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is False
 
     # Get product_dict from json file.
     filename = 'cdiscountapi/tests/samples/products/products_to_submit.json'
@@ -72,11 +72,11 @@ def test_generate_product_package():
         product_dict = json.load(f)
 
     # Generate packages.
-    Products.generate_product_package(output_dir product_dict)
+    Products.generate_product_package(output_dir, product_dict)
 
     # Check uploading_package exists now.
-    assert 'uploading_package' in os.listdir(path)
-    assert os.path.isfile(f'{path}/uploading_package.zip') is True
+    assert 'uploading_package' in os.listdir(output_dir)
+    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is True
 
     # Get expected Products.xml.
     filename = 'cdiscountapi/tests/samples/products/Products.xml'
@@ -84,7 +84,7 @@ def test_generate_product_package():
         expected = f.read()
 
     # Get created Products.xml.
-    filename = f'{path}/uploading_package/Content/Products.xml'
+    filename = f'{output_dir}/uploading_package/Content/Products.xml'
     with open(filename, 'r') as f:
         created = f.read()
 
@@ -92,10 +92,10 @@ def test_generate_product_package():
     assert created == expected
 
     # Remove temporary files.
-    rmtree(f'{path}/uploading_package')
-    os.remove(f'{path}/uploading_package.zip')
-    assert 'uploading_package' not in os.listdir(path)
-    assert os.path.isfile(f'{path}/uploading_package.zip') is False
+    rmtree(f'{output_dir}/uploading_package')
+    os.remove(f'{output_dir}/uploading_package.zip')
+    assert 'uploading_package' not in os.listdir(output_dir)
+    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is False
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_product_package not ready')
