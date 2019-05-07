@@ -96,12 +96,14 @@ class Offers(BaseSection):
         return serialize_object(response, dict)
 
     @staticmethod
-    def generate_offer_package(path, offers_dict):
+    def generate_offer_package(output_dir, offers_list, pool_list=[], purge_and_replace=False):
         """
         Generate a zip offers package as cdiscount wanted.
 
-        :param dict offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
-        :param str path: path to generate package
+        :param dict offers_list: [mandatory] offers as you can see on tests/samples/offers/offers_to_submit.json
+        :param str output_dir: [mandatory] path to generate package
+        :param list pool_list: [optional]
+        :param bool purge_and_replace: [optional]
 
         Example::
 
@@ -139,8 +141,17 @@ class Offers(BaseSection):
 
         :return: the id of package or -1
         """
+        data = {
+            'Data': offers_list,
+            'PoolList': pool_list,
+            'PurgeAndReplace': purge_and_replace
+        }
 
-        zip_package = generate_package('offer', path, offers_dict)
+        zip_package = generate_package(
+            'offer',
+            output_dir,
+            data,
+        )
 
         return zip_package
 

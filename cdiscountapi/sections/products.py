@@ -140,12 +140,12 @@ class Products(BaseSection):
         return serialize_object(response, dict)
 
     @staticmethod
-    def generate_product_package(path, products_dict):
+    def generate_product_package(output_dir, products_list):
         """
         Generate a zip product package as cdiscount wanted.
 
-        :param dict products_dict: products as you can see on tests/samples/products/products_to_submit.json
-        :param str path: path to generate package
+        :param dict products_list: products as you can see on tests/samples/products/products_to_submit.json
+        :param str output_dir: path to generate package
 
         Example::
 
@@ -231,8 +231,12 @@ class Products(BaseSection):
                 url="path_to_upload.com"
 
         """
-
-        zip_package = generate_package('product', path, products_dict)
+        data = {'Data': products_list}
+        zip_package = generate_package(
+            'product',
+            output_dir,
+            data,
+        )
 
         return zip_package
 
