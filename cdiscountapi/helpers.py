@@ -9,7 +9,6 @@
 """
 
 
-from copy import deepcopy
 from functools import wraps
 from shutil import (
     copytree,
@@ -17,19 +16,31 @@ from shutil import (
 )
 
 import zeep
-from jinja2 import (
-    Environment,
-    FileSystemLoader,
-)
+from cdiscountapi.packages import OfferPackage, ProductPackage
 
 
+# TODO Remove package_type. Determine package_type from the keys in data 
 def generate_package(package_type, output_dir, data):
     """
     Generate a zip package for the offers or the products
 
+    Usage::
+
+        generate_package(package_type, output_dir, data)
+
+    Example::
+
+        # Generate Offer package:
+        generate_package('offer', output_dir, {'OfferCollection': offers,
+                                               'OfferPublicationList': offer_publications,
+                                               'PurgeAndReplace': purge_and_replace})
+
+        # Generate Product package:
+        generate_package('product', output_dir, {'Products': products})
+
     :param str package_type: 'offer' or 'product'
     :param str output_dir:  directory to create temporary files
-    :param list data: offers or products as you can see on
+    :param dict data: offers or products as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
     """
@@ -47,7 +58,7 @@ def generate_package(package_type, output_dir, data):
     # Add Products.xml from product_dict.
     with open(f"{package}/Content/{xml_filename}", "wb") as f:
         xml_generator = XmlGenerator(data)
-        f.write(xml_generator.generate_offers())
+        f.write(xml_generator.render())
 
     # Make a zip from package.
     zip_package = make_archive(output_dir, 'zip', path)
@@ -152,18 +163,18 @@ class XmlGenerator(object):
             'DiscountList': discount_component,
             'OfferPoolList': offer_pool,
             'ShippingInformationList': [
-               {
-                   'AdditionalShippingCharges': 1,
-                   'DeliveryMode': 'RelaisColis',
-                   'MaxLeadTime': 1,
-                   'MinLeadTime': 1,
-                   'ShippingCharges': 1,
-               },
-               {
-                   'AdditionalShippingCharges': 5.95,
-                   'DeliveryMode': 'Tracked',
-                   'ShippingCharges': 2.95
-               }
+                 {
+                     'AdditionalShippingCharges': 1,
+                     'DeliveryMode': 'RelaisColis',
+                     'MaxLeadTime': 1,
+                     'MinLeadTime': 1,
+                     'ShippingCharges': 1,
+                 },
+                 {
+                     'AdditionalShippingCharges': 5.95,
+                     'DeliveryMode': 'Tracked',
+                     'ShippingCharges': 2.95
+                 }
            ],
            'PriceMustBeAligned': 'DontAlign',
            'ProductPackagingUnit': 'Kilogram',
@@ -171,106 +182,21 @@ class XmlGenerator(object):
            'ProductCondition': 'New'
            }
 
-        xml_generator = XmlGenerator()
-        xml_generator.add_offers([offer])
-        content = xml_generator.generate_offers()
+
+        xml_generator = XmlGenerator(data1, preprod=preprod)
+        content = xml_generator.render()
 
     """
-    def __init__(self, offers=[], preprod=False):
-        self.preprod = preprod
-        if self.preprod:
-            domain = 'preprod-cdiscount.com'
+    def __init__(self, data, preprod=False):
+        if OfferPackage.has_required_keys(data):
+            self.package = OfferPackage(data, preprod)
+        elif ProductPackage.has_required_keys(data):
+            self.package = ProductPackage(data, preprod)
         else:
-            domain = 'cdiscount.com'
+            raise ValueError("package_type should be 'Offers.xml' or 'Products.xml'.")
 
-        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
-        self.client = zeep.Client(self.wsdl)
-        self.factory = self.client.type_factory('http://www.cdiscount.com')
-        self.offers = []
-        if offers:
-            self.add_offers(offers)
+    def add(self, data):
+        self.package.add(data)
 
-    def add_offers(self, offers):
-        """
-        Add unique valid offers
-        """
-        for offer in offers:
-            valid_offer = self.validate_offer(**offer)
-            if valid_offer not in self.offers:
-                self.offers.append(valid_offer)
-
-    def validate_offer(self, **kwargs):
-        """
-        Return the valid offer as a `zeep.objects.Offer`
-
-        Usage::
-
-            xml_generator.validate_offer(offer)
-
-        """
-        new_kwargs = kwargs.copy()
-
-        # We check the types of the lists in Offer
-        if 'DiscountList' in kwargs:
-            new_kwargs['DiscountList'] = self.factory.ArrayOfDiscountComponent([
-                self.factory.DiscountComponent(**x) for x in new_kwargs['DiscountList']
-            ])
-
-        if 'ShippingInformationList' in kwargs:
-            new_kwargs['ShippingInformationList'] = self.factory.ArrayOfShippingInformation([
-                self.factory.ShippingInformation(**x) for x in new_kwargs['ShippingInformationList']
-            ])
-
-        if 'OfferPoolList' in kwargs:
-            new_kwargs['OfferPoolList'] = self.factory.ArrayOfOfferPool([
-                self.factory.OfferPool(**x) for x in new_kwargs['OfferPoolList']
-            ])
-
-        return self.factory.Offer(**new_kwargs)
-
-    def extract_from_offer(self, offer, attr1, attr2):
-        """
-        Extract the elements of a list in Offer
-
-        (ex: the ShippingInformation elements in ShippingInformationList,
-        the DiscountComponent elements in DiscountList...)
-        """
-        if attr1 in offer:
-            sub_record = getattr(offer, attr1, None)
-            if sub_record:
-                datum = sub_record[attr2]
-                del offer[attr1]
-                return datum
-            else:
-                return []
-        else:
-            return []
-
-    def render_offers(self):
-        loader = FileSystemLoader('cdiscountapi/templates')
-        # env = Environment(loader=loader, autoescape=select_autoescape(['xml']))
-        env = Environment(loader=loader)
-        template = env.get_template('Offers.xml')
-        offers = deepcopy(self.offers)
-        extraction_mapping = {
-            'shipping_information_list': ('ShippingInformationList', 'ShippingInformation'),
-            'discount_list': ('DiscountList', 'DiscountComponent'),
-            'offer_pool_list': ('OfferPoolList', 'OfferPool'),
-        }
-
-        offers_data = []
-        for offer in offers:
-            offers_datum = {}
-            for key, (attr1, attr2) in extraction_mapping.items():
-                if key not in offers_datum:
-                    offers_datum[key] = []
-                offers_datum[key].extend(self.extract_from_offer(offer, attr1, attr2))
-
-            if 'attributes' not in offers_datum:
-                offers_datum['attributes'] = ''
-
-            # We keep only key:value pairs whose values are not None
-            offers_datum['attributes'] += " ".join('{}="{}"'.format(k, v) for k, v in
-                                                   offer.__values__.items() if v is not None)
-            offers_data.append(offers_datum)
-        return template.render(offers=offers_data)
+    def render(self):
+        return self.package.render()

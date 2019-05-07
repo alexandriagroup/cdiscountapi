@@ -40,63 +40,13 @@ def test_check_element_with_invalid_element(api):
 
 
 # XmlGenerator
-@pytest.fixture
-def valid_offer():
-    discount_component = {
-        'DiscountValue': 5, 'Type': 1,
-        'StartDate': datetime.datetime(2019, 4, 15),
-        'EndDate': datetime.datetime(2019, 5, 15)
-    }
-    shipping_info1 = {
-        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
-        'DeliveryMode': {'Name': 'Standard'}
-    }
-    shipping_info2 = {
-        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
-        'DeliveryMode': {'Name': 'Tracked'}
-    }
-    offer = {
-        'Price': 10,
-        'SellerProductId': 'MY_SKU1',
-        'DiscountList': [discount_component],
-        'ShippingInformationList': [shipping_info1, shipping_info2]
-    }
-    return offer
-
-
-@pytest.mark.vcr()
-def test_validate_offer(valid_offer):
+def test_XmlGenerator_constructor():
     """
-    XmlGenerator.validate_offer should return a `zeep.objects.Offer`
+    XmlGenerator should raise a ValueError if the package_type is not 'Offers.xml' or 'products.xml'
     """
-    generator = XmlGenerator()
-    offer = generator.validate_offer(**valid_offer)
-    assert offer.__class__.__name__ == 'Offer'
-
-
-@pytest.mark.vcr()
-def test_validate_offer_with_invalid_key():
-    generator = XmlGenerator()
-    discount_component = {
-        'DiscountValue': 5, 'Type': 1,
-        'StartDate': datetime.datetime(2019, 4, 15),
-        'EndDate': datetime.datetime(2019, 5, 15)
-    }
-    shipping_info1 = {
-        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
-        'DeliveryMode': {'Name': 'Standard'}
-    }
-    shipping_info2 = {
-        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
-        'InvalidKey': 'Unknown'
-    }
-    offer = {
-        'DiscountList': [discount_component],
-        'ShippingInformationList': [shipping_info1, shipping_info2]
-    }
-
-    # A TypeError should be raised because shipping_info2 has an invalid key
-    pytest.raises(TypeError, generator.validate_offer, offer)
+    XmlGenerator('Offers.xml')
+    XmlGenerator('Products.xml')
+    pytest.raises(ValueError, XmlGenerator, 'other.xml')
 
 
 @pytest.mark.vcr()
@@ -146,7 +96,6 @@ def test_render_offers(valid_offer):
     with open('cdiscountapi/tests/samples/Offers.xml') as f:
         expected_content = f.read()
     assert content.strip() == expected_content.strip()
-
 
 # auto_refresh_token
 @pytest.mark.vcr()
