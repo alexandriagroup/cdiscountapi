@@ -204,47 +204,23 @@ and their performance indicator.</p>
 
 <dl class="staticmethod">
 <dt id="cdiscountapi.cdiscountapi.Offers.generate_offer_package">
-<em class="property">static </em><code class="descname">generate_offer_package</code><span class="sig-paren">(</span><em>path</em>, <em>offers_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.generate_offer_package" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">generate_offer_package</code><span class="sig-paren">(</span><em>output_dir</em>, <em>offers_list</em>, <em>pool_list=[]</em>, <em>purge_and_replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.generate_offer_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a zip offers package as cdiscount wanted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>offers_dict</strong> (<em>dict</em>) – offers as you can see on tests/samples/offers/offers_to_submit.json</p></li>
-<li><p><strong>path</strong> (<em>str</em>) – path to generate package</p></li>
+<li><p><strong>offers_list</strong> (<em>dict</em>) – [mandatory] offers as you can see on tests/samples/offers/offers_to_submit.json</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – [mandatory] path to generate package</p></li>
+<li><p><strong>pool_list</strong> (<em>list</em>) – [optional]</p></li>
+<li><p><strong>purge_and_replace</strong> (<em>bool</em>) – [optional]</p></li>
 </ul>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">submit_offer_package</span><span class="p">(</span>
-    <span class="n">offers_dict</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;OfferPackage&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;-xmlns&quot;</span><span class="p">:</span> <span class="s2">&quot;clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;-xmlns:x&quot;</span><span class="p">:</span> <span class="s2">&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;-Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Nom fichier offres&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;-PurgeAndReplace&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;-PackageType&quot;</span><span class="p">:</span> <span class="s2">&quot;StockAndPrice&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;OfferPackage.Offers&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;OfferCollection&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;-Capacity&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;Offer&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s2">&quot;-SellerProductId&quot;</span><span class="p">:</span> <span class="s2">&quot;S53262149036&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;-ProductEan&quot;</span><span class="p">:</span> <span class="s2">&quot;9153262149367&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;-Price&quot;</span><span class="p">:</span> <span class="s2">&quot;19.95&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;-Stock&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">},</span>
-            <span class="s2">&quot;OfferPackage.OfferPublicationList&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;OfferPublicationList&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;-Capacity&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;PublicationPool&quot;</span><span class="p">:</span> <span class="p">[</span>
-                        <span class="p">{</span> <span class="s2">&quot;-Id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span> <span class="p">},</span>
-                        <span class="p">{</span> <span class="s2">&quot;-Id&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span> <span class="p">}</span>
-                    <span class="p">]</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">generate_offer_package</span><span class="p">(</span>
+    <span class="n">offers_list</span><span class="p">,</span>
+    <span class="n">pool_list</span><span class="o">=</span><span class="n">pool_list</span><span class="p">,</span>
+    <span class="n">purge_and_replace</span><span class="o">=</span><span class="n">purge_and_replace</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -820,96 +796,19 @@ structure than the one required for the request.</p>
 
 <dl class="staticmethod">
 <dt id="cdiscountapi.cdiscountapi.Products.generate_product_package">
-<em class="property">static </em><code class="descname">generate_product_package</code><span class="sig-paren">(</span><em>path</em>, <em>products_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">generate_product_package</code><span class="sig-paren">(</span><em>output_dir</em>, <em>products_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a zip product package as cdiscount wanted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>products_dict</strong> (<em>dict</em>) – products as you can see on tests/samples/products/products_to_submit.json</p></li>
-<li><p><strong>path</strong> (<em>str</em>) – path to generate package</p></li>
+<li><p><strong>products_list</strong> (<em>dict</em>) – products as you can see on tests/samples/products/products_to_submit.json</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – path to generate package</p></li>
 </ul>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">submit_product_package</span><span class="p">(</span>
-    <span class="n">products_dict</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Product&quot;</span><span class="p">:</span>
-      <span class="p">[</span>
-        <span class="p">{</span>
-          <span class="s2">&quot;-BrandName&quot;</span><span class="p">:</span> <span class="s2">&quot;Deeluxe&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-SellerProductFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;SOJ50874&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-SellerProductColorName&quot;</span><span class="p">:</span> <span class="s2">&quot;Bleu Délavé&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-Size&quot;</span><span class="p">:</span> <span class="s2">&quot;38/36&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe Droite Homme, Couleur Bleu Délavé, 100% Coton , Taille 38&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-LongLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Nudie Average Joe organic vacation worn Jeans&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-Model&quot;</span><span class="p">:</span> <span class="s2">&quot;SOUMISSION CREATION PRODUITS_MK&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-ProductKind&quot;</span><span class="p">:</span> <span class="s2">&quot;Variant&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-CategoryCode&quot;</span><span class="p">:</span> <span class="s2">&quot;0R050A01&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-SellerProductId&quot;</span><span class="p">:</span> <span class="s2">&quot;120905783&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-ShortLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Jeans Deeluxe Tanner Snow Bleu&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-EncodedMarketingDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Product.EanList&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;ProductEan&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;-Ean&quot;</span><span class="p">:</span> <span class="s2">&quot;3606918243767&quot;</span> <span class="p">}</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Product.ModelProperties&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;x:String&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="p">{</span>
-                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Genre&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Homme - Garçon&quot;</span>
-              <span class="p">},</span>
-              <span class="p">{</span>
-                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Type de public&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Adulte&quot;</span>
-              <span class="p">}</span>
-            <span class="p">]</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Product.Pictures&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;ProductImage&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg&quot;</span> <span class="p">},</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg&quot;</span> <span class="p">},</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg&quot;</span> <span class="p">},</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg&quot;</span> <span class="p">}</span>
-            <span class="p">]</span>
-          <span class="p">}</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-          <span class="s2">&quot;-BrandName&quot;</span><span class="p">:</span> <span class="s2">&quot;Deeluxe&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-SellerProductFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;SOJ50874&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-SellerProductColorName&quot;</span><span class="p">:</span> <span class="s2">&quot;Bleu Délavé&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-Size&quot;</span><span class="p">:</span> <span class="s2">&quot;36/34&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Nudie Average Joe organic vacation worn Jeans Droite Homme 100% Organic&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-LongLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Jeans Deeluxe Tanner Snow Bleu&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-Model&quot;</span><span class="p">:</span> <span class="s2">&quot;SOUMISSION CREATION PRODUITS_MK&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-ProductKind&quot;</span><span class="p">:</span> <span class="s2">&quot;Variant&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-CategoryCode&quot;</span><span class="p">:</span> <span class="s2">&quot;0R050A01&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-SellerProductId&quot;</span><span class="p">:</span> <span class="s2">&quot;120905784&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-ShortLabel&quot;</span><span class="p">:</span> <span class="s2">&quot;Jeans Deeluxe Tanner Snow Bleu&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;-EncodedMarketingDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Product.EanList&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;ProductEan&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;-Ean&quot;</span><span class="p">:</span> <span class="s2">&quot;3606918243774&quot;</span> <span class="p">}</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Product.ModelProperties&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;x:String&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="p">{</span>
-                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Genre&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Homme - Garçon&quot;</span>
-              <span class="p">},</span>
-              <span class="p">{</span>
-                <span class="s2">&quot;-x:Key&quot;</span><span class="p">:</span> <span class="s2">&quot;Type de public&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Adulte&quot;</span>
-              <span class="p">}</span>
-            <span class="p">]</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Product.Pictures&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;ProductImage&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg&quot;</span> <span class="p">},</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg&quot;</span> <span class="p">},</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg&quot;</span> <span class="p">},</span>
-              <span class="p">{</span> <span class="s2">&quot;-Uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg&quot;</span> <span class="p">}</span>
-            <span class="p">]</span>
-          <span class="p">}</span>
-        <span class="p">}</span>
-      <span class="p">]</span>
-    <span class="p">},</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">generate_product_package</span><span class="p">(</span>
+    <span class="n">products_list</span><span class="p">,</span>
     <span class="n">url</span><span class="o">=</span><span class="s2">&quot;path_to_upload.com&quot;</span>
 </pre></div>
 </div>
