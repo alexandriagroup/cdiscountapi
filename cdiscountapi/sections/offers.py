@@ -107,53 +107,19 @@ class Offers(BaseSection):
 
         Example::
 
-            response = api.offers.submit_offer_package(
-                offers_dict={
-                    "OfferPackage": {
-                        "-xmlns": "clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration",
-                        "-xmlns:x": "http://schemas.microsoft.com/winfx/2006/xaml",
-                        "-Name": "Nom fichier offres",
-                        "-PurgeAndReplace": "false",
-                        "-PackageType": "StockAndPrice",
-                        "OfferPackage.Offers": {
-                            "OfferCollection": {
-                                "-Capacity": "1",
-                                "Offer": {
-                                    "-SellerProductId": "S53262149036",
-                                    "-ProductEan": "9153262149367",
-                                    "-Price": "19.95",
-                                    "-Stock": "10"
-                                }
-                            }
-                        },
-                        "OfferPackage.OfferPublicationList": {
-                            "OfferPublicationList": {
-                                "-Capacity": "2",
-                                "PublicationPool": [
-                                    { "-Id": "1" },
-                                    { "-Id": "16" }
-                                ]
-                            }
-                        }
-                    }
-                },
+            response = api.offers.generate_offer_package(
+                offers_list,
+                pool_list=pool_list,
+                purge_and_replace=purge_and_replace
             )
 
         :return: the id of package or -1
         """
-        data = {
-            'Data': offers_list,
-            'PoolList': pool_list,
+        return generate_package('offer', output_dir, {
+            'OfferCollection': offers_list,
+            'OfferPublicationList': pool_list,
             'PurgeAndReplace': purge_and_replace
-        }
-
-        zip_package = generate_package(
-            'offer',
-            output_dir,
-            data,
-        )
-
-        return zip_package
+        })
 
     @auto_refresh_token
     def submit_offer_package(self, url):
@@ -171,7 +137,6 @@ class Offers(BaseSection):
 
         Then you'll have to get an url to download zip package
         Finally, you can use submit_offer_package(url)
-
 
         Examples::
 
