@@ -2,10 +2,18 @@
 #
 # Copyright © 2019 Alexandria
 
+import json
 import os
+from shutil import rmtree
+from tempfile import gettempdir
+
 import pytest
-from ..cdiscountapi import Connection
-from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
+
+from . import (
+    CDISCOUNT_WITHOUT_DATA,
+    assert_response_succeeded,
+)
+from ..sections.offers import Offers
 
 
 @pytest.mark.skip(reason='timeout error unresolve by cdiscount')
@@ -21,6 +29,45 @@ def test_get_offer_list_paginated(api):
     response = api.offers.get_offer_list_paginated(PageNumber=2)
     assert_response_succeeded(response)
     assert 'OfferList' in response.keys()
+
+
+@pytest.mark.vcr()
+def test_generate_offer_package():
+    path = gettempdir()
+    # Check uploading_package doesn't exists yet.
+    assert 'uploading_package' not in os.listdir(path)
+    assert os.path.isfile(f'{path}/uploading_package.zip') is False
+
+    # Get offer_dict from json file.
+    filename = 'cdiscountapi/tests/samples/offers/offers_to_submit.json'
+    with open(filename, 'r') as f:
+        offer_dict = json.load(f)
+
+    # Generate packages.
+    Offers.generate_offer_package(path, offer_dict)
+
+    # Check uploading_package exists now.
+    assert 'uploading_package' in os.listdir(path)
+    assert os.path.isfile(f'{path}/uploading_package.zip') is True
+
+    # Get expected Offers.xml.
+    filename = 'cdiscountapi/tests/samples/offers/Offers.xml'
+    with open(filename, 'r') as f:
+        expected = f.read()
+
+    # Get created Offers.xml.
+    filename = f'{path}/uploading_package/Content/Offers.xml'
+    with open(filename, 'r') as f:
+        created = f.read()
+
+    # Check Offers.xml is ok.
+    assert created == expected
+
+    # Remove temporary files.
+    rmtree(f'{path}/uploading_package')
+    os.remove(f'{path}/uploading_package.zip')
+    assert 'uploading_package' not in os.listdir(path)
+    assert os.path.isfile(f'{path}/uploading_package.zip') is False
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_offer_package not ready')
