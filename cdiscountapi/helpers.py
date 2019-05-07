@@ -9,26 +9,27 @@
 """
 
 
-from shutil import (
-    make_archive,
-    rmtree,
-    copytree
-)
-from tempfile import gettempdir
-from dicttoxml import dicttoxml
-import zeep
-from functools import wraps
-from jinja2 import FileSystemLoader, Environment
 from copy import deepcopy
+from functools import wraps
+from shutil import (
+    copytree,
+    make_archive,
+)
+
+import zeep
+from jinja2 import (
+    Environment,
+    FileSystemLoader,
+)
 
 
-def generate_package(package_type, tempdir, offer_dict):
+def generate_package(package_type, path, data):
     """
     Generate a zip package for the offers or the products
 
     :param str package_type: 'offer' or 'product'
-    :param str tempdir:  directory to create temporary files
-    :param dict offer_dict: offers as you can see on
+    :param str path:  directory to create temporary files
+    :param dict data: offers or products as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
     """
@@ -36,7 +37,7 @@ def generate_package(package_type, tempdir, offer_dict):
         raise ValueError('package_type must be either "offer" or "product".')
 
     # Create path.
-    path = f'{tempdir}/uploading_package'
+    path = f'{path}/uploading_package'
 
     # Copy tree package.
     package = copytree(f'{package_type}_package', path)
@@ -45,7 +46,7 @@ def generate_package(package_type, tempdir, offer_dict):
     # TODO Fix offer_dict
     # Add Products.xml from product_dict.
     with open(f"{package}/Content/{xml_filename}", "wb") as f:
-        xml_generator = XmlGenerator(offer_dict)
+        xml_generator = XmlGenerator(data)
         f.write(xml_generator.generate_offers())
 
     # Make a zip from package.
