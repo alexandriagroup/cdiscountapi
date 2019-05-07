@@ -23,13 +23,13 @@ from jinja2 import (
 )
 
 
-def generate_package(package_type, path, data):
+def generate_package(package_type, output_dir, data):
     """
     Generate a zip package for the offers or the products
 
     :param str package_type: 'offer' or 'product'
-    :param str path:  directory to create temporary files
-    :param dict data: offers or products as you can see on
+    :param str output_dir:  directory to create temporary files
+    :param list data: offers or products as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
     """
@@ -37,7 +37,7 @@ def generate_package(package_type, path, data):
         raise ValueError('package_type must be either "offer" or "product".')
 
     # Create path.
-    path = f'{path}/uploading_package'
+    path = f'{output_dir}/uploading_package'
 
     # Copy tree package.
     package = copytree(f'{package_type}_package', path)
@@ -50,7 +50,7 @@ def generate_package(package_type, path, data):
         f.write(xml_generator.generate_offers())
 
     # Make a zip from package.
-    zip_package = make_archive(path, 'zip', path)
+    zip_package = make_archive(output_dir, 'zip', path)
 
     # Remove unzipped package.
     return zip_package
