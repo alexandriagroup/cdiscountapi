@@ -8,13 +8,14 @@
     :copyright: © 2019 Alexandria
 """
 
-from cdiscountapi.helpers import generate_package_url
+from shutil import make_archive
+from tempfile import gettempdir
+
 from zeep.helpers import serialize_object
+
+from cdiscountapi.helpers import generate_package
 from .base import BaseSection
 from ..helpers import auto_refresh_token
-from cdiscountapi.helpers import generate_package
-from tempfile import gettempdir
-from shutil import make_archive
 
 
 class Products(BaseSection):
@@ -139,11 +140,12 @@ class Products(BaseSection):
         return serialize_object(response, dict)
 
     @staticmethod
-    def generate_product_package(products_dict):
+    def generate_product_package(path, products_dict):
         """
         Generate a zip product package as cdiscount wanted.
 
         :param dict products_dict: products as you can see on tests/samples/products/products_to_submit.json
+        :param str path: path to generate package
 
         Example::
 
@@ -229,12 +231,10 @@ class Products(BaseSection):
                 url="path_to_upload.com"
 
         """
-        # Create a temporary package.
-        tempdir = gettempdir()
 
-        package = generate_package('product', tempdir, products_dict)
+        zip_package = generate_package('product', path, products_dict)
 
-        return make_archive(package, 'zip', package)
+        return zip_package
 
     @auto_refresh_token
     def submit_product_package(self, url):
