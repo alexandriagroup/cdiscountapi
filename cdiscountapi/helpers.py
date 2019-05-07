@@ -18,6 +18,8 @@ from tempfile import gettempdir
 from dicttoxml import dicttoxml
 import zeep
 from functools import wraps
+from jinja2 import FileSystemLoader, Environment
+from copy import deepcopy
 
 
 def generate_package(package_type, tempdir, offer_dict):
@@ -40,82 +42,17 @@ def generate_package(package_type, tempdir, offer_dict):
     package = copytree(f'{package_type}_package', path)
     xml_filename = package_type.capitalize() + 's.xml'
 
+    # TODO Fix offer_dict
     # Add Products.xml from product_dict.
     with open(f"{package}/Content/{xml_filename}", "wb") as f:
-        f.write(XmlGenerator(offer_dict))
+        xml_generator = XmlGenerator(offer_dict)
+        f.write(xml_generator.generate_offers())
 
     # Make a zip from package.
     zip_package = make_archive(path, 'zip', path)
 
     # Remove unzipped package.
     return zip_package
-
-
-# TODO find a way to upload package et get url
-def upload_and_get_url(package, url):
-    """
-    Upload package and get url to download it.
-
-    :param str package: way to find zip package
-    :param str url: where to upload zip package
-
-    :return: where to download zip package
-    """
-
-    return url + package
-
-
-def generate_offer_package(tempdir, offer_dict):
-    """
-    Generate a zip offers package as cdiscount wanted.
-
-    :param str tempdir:  directory to create temporary files
-    :param dict offer_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
-
-    :return: zip package
-    """
-    return generate_package('offer', tempdir, offer_dict)
-
-
-def generate_product_package(tempdir, product_dict):
-    """
-    Generate a zip product package as cdiscount wanted.
-
-    :param str tempdir: directory to create temporary files
-    :param dict product_dict: products as you can see on tests/samples/products/products_to_submit.json
-
-    :return: zip package
-    """
-    return generate_package('product', tempdir, product_dict)
-
-
-def generate_package_url(content_dict, url):
-    """
-    Generate and upload package and return the url
-
-    :param dict content_dict: products or offers as you can see on tests/samples/products/products_to_submit.json
-    :param str url: url to upload package
-
-    :return: url to find it
-    """
-    # Create a temporary package.
-    tempdir = gettempdir()
-
-    # Generate package according to content type.
-    if 'Product' in content_dict.keys():
-        package = generate_product_package(tempdir, content_dict)
-    elif 'Offer' in content_dict.keys():
-        package = generate_offer_package(tempdir, content_dict)
-
-    # Generate zip package.
-    zip_package = make_archive(package, 'zip', package)
-
-    # Upload package and get url to download it.
-    package_url = upload_and_get_url(zip_package, url)
-
-    # Remove temporary package.
-    rmtree(tempdir + '/uploading_package')
-    return package_url
 
 
 def check_element(element_name, dynamic_type):
@@ -212,33 +149,33 @@ class XmlGenerator(object):
             'SellerProductId': 1,
             'Stock': 1, 'VatRate': 0.19,
             'DiscountList': discount_component,
-                 'OfferPoolList': offer_pool,
-                 'ShippingInformationList': [
-                    {
-                        'AdditionalShippingCharges': 1,
-                        'DeliveryMode': 'RelaisColis',
-                        'MaxLeadTime': 1,
-                        'MinLeadTime': 1,
-                        'ShippingCharges': 1,
-                    },
-                    {
-                        'AdditionalShippingCharges': 5.95,
-                        'DeliveryMode': 'Tracked',
-                        'ShippingCharges': 2.95
-                    }
-                ]
-                 'PriceMustBeAligned': 'DontAlign',
-                 'ProductPackagingUnit': 'Kilogram',
-                 'OfferState': 'Active',
-                 'ProductCondition': 'New'
-                 }
+            'OfferPoolList': offer_pool,
+            'ShippingInformationList': [
+               {
+                   'AdditionalShippingCharges': 1,
+                   'DeliveryMode': 'RelaisColis',
+                   'MaxLeadTime': 1,
+                   'MinLeadTime': 1,
+                   'ShippingCharges': 1,
+               },
+               {
+                   'AdditionalShippingCharges': 5.95,
+                   'DeliveryMode': 'Tracked',
+                   'ShippingCharges': 2.95
+               }
+           ],
+           'PriceMustBeAligned': 'DontAlign',
+           'ProductPackagingUnit': 'Kilogram',
+           'OfferState': 'Active',
+           'ProductCondition': 'New'
+           }
 
-        generator = XmlGenerator()
-        generator.add_offers([offer])
-        generator.save()
+        xml_generator = XmlGenerator()
+        xml_generator.add_offers([offer])
+        content = xml_generator.generate_offers()
 
     """
-    def __init__(self, preprod=False):
+    def __init__(self, offers=[], preprod=False):
         self.preprod = preprod
         if self.preprod:
             domain = 'preprod-cdiscount.com'
@@ -249,30 +186,90 @@ class XmlGenerator(object):
         self.client = zeep.Client(self.wsdl)
         self.factory = self.client.type_factory('http://www.cdiscount.com')
         self.offers = []
+        if offers:
+            self.add_offers(offers)
 
     def add_offers(self, offers):
-        self.offers.append([self.validate_offer(offer) for offer in offers])
+        """
+        Add unique valid offers
+        """
+        for offer in offers:
+            valid_offer = self.validate_offer(**offer)
+            if valid_offer not in self.offers:
+                self.offers.append(valid_offer)
 
     def validate_offer(self, **kwargs):
+        """
+        Return the valid offer as a `zeep.objects.Offer`
+
+        Usage::
+
+            xml_generator.validate_offer(offer)
+
+        """
         new_kwargs = kwargs.copy()
 
         # We check the types of the lists in Offer
         if 'DiscountList' in kwargs:
             new_kwargs['DiscountList'] = self.factory.ArrayOfDiscountComponent([
-                self.factory.DiscountComponent(x) for x in new_kwargs['DiscountList']
+                self.factory.DiscountComponent(**x) for x in new_kwargs['DiscountList']
             ])
 
         if 'ShippingInformationList' in kwargs:
             new_kwargs['ShippingInformationList'] = self.factory.ArrayOfShippingInformation([
-                self.factory.ShippingInformation(x) for x in new_kwargs['ShippingInformationList']
+                self.factory.ShippingInformation(**x) for x in new_kwargs['ShippingInformationList']
             ])
 
         if 'OfferPoolList' in kwargs:
             new_kwargs['OfferPoolList'] = self.factory.ArrayOfOfferPool([
-                self.factory.OfferPool(x) for x in new_kwargs['OfferPoolList']
+                self.factory.OfferPool(**x) for x in new_kwargs['OfferPoolList']
             ])
 
         return self.factory.Offer(**new_kwargs)
 
-    def save(self):
-        pass
+    def extract_from_offer(self, offer, attr1, attr2):
+        """
+        Extract the elements of a list in Offer
+
+        (ex: the ShippingInformation elements in ShippingInformationList,
+        the DiscountComponent elements in DiscountList...)
+        """
+        if attr1 in offer:
+            sub_record = getattr(offer, attr1, None)
+            if sub_record:
+                datum = sub_record[attr2]
+                del offer[attr1]
+                return datum
+            else:
+                return []
+        else:
+            return []
+
+    def render_offers(self):
+        loader = FileSystemLoader('cdiscountapi/templates')
+        # env = Environment(loader=loader, autoescape=select_autoescape(['xml']))
+        env = Environment(loader=loader)
+        template = env.get_template('Offers.xml')
+        offers = deepcopy(self.offers)
+        extraction_mapping = {
+            'shipping_information_list': ('ShippingInformationList', 'ShippingInformation'),
+            'discount_list': ('DiscountList', 'DiscountComponent'),
+            'offer_pool_list': ('OfferPoolList', 'OfferPool'),
+        }
+
+        offers_data = []
+        for offer in offers:
+            offers_datum = {}
+            for key, (attr1, attr2) in extraction_mapping.items():
+                if key not in offers_datum:
+                    offers_datum[key] = []
+                offers_datum[key].extend(self.extract_from_offer(offer, attr1, attr2))
+
+            if 'attributes' not in offers_datum:
+                offers_datum['attributes'] = ''
+
+            # We keep only key:value pairs whose values are not None
+            offers_datum['attributes'] += " ".join('{}="{}"'.format(k, v) for k, v in
+                                                   offer.__values__.items() if v is not None)
+            offers_data.append(offers_datum)
+        return template.render(offers=offers_data)

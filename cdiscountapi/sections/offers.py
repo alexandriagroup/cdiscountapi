@@ -8,10 +8,12 @@
     :copyright: © 2019 Alexandria
 """
 
-from cdiscountapi.helpers import generate_package_url
+from cdiscountapi.helpers import generate_package
 from zeep.helpers import serialize_object
 from .base import BaseSection
 from ..helpers import auto_refresh_token
+from tempfile import gettempdir
+from shutil import make_archive
 
 
 class Offers(BaseSection):
@@ -92,16 +94,12 @@ class Offers(BaseSection):
         )
         return serialize_object(response, dict)
 
-    @auto_refresh_token
-    def submit_offer_package(self, offers_dict, url):
+    @staticmethod
+    def generate_offer_package(offers_dict):
         """
-        To import offers.
-        It is used to add new offers to the Cdiscount marketplace or to modify/update offers that already exists.
-
+        Generate a zip offers package as cdiscount wanted.
 
         :param dict offers_dict: offers as you can see on tests/samples/offers/offers_to_submit.json
-        :param str url: url to upload offers package
-        :return: the id of package or -1
 
         Example::
 
@@ -135,14 +133,41 @@ class Offers(BaseSection):
                         }
                     }
                 },
-                url="path_to_upload.com"
             )
+        :return: the id of package or -1
         """
-        # Get url.
-        package_url = generate_package_url(offers_dict, url)
+        # Create a temporary package.
+        tempdir = gettempdir()
 
-        # Create request attribute.
-        offer_package = {'ZipFileFullPath': package_url}
+        package = generate_package('offer', tempdir, offers_dict)
+
+        return make_archive(package, 'zip', package)
+
+    @auto_refresh_token
+    def submit_offer_package(self, url):
+        """
+        To import offers.
+        It is used to add new offers to the Cdiscount marketplace
+        Or to modify/update offers that already exists.
+
+        There is 2 ways to use it.
+
+        1. You can generate a zip package with:
+            api.offers.generate_offer_package(offer_list)
+
+        2. You can generate the package yourself before uploading.
+
+        Then you'll have to get an url to download zip package
+        Finally, you can use submit_offer_package(url)
+
+
+        Examples::
+
+            api.offers.submit_offer_package(url)
+
+        :return: the id of package or -1
+        """
+        offer_package = self.api.factory.OfferPackageRequest(url)
 
         # Send request.
         response = self.api.client.service.SubmitOfferPackage(

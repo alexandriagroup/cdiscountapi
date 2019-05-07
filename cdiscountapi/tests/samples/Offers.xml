@@ -1,0 +1,43 @@
+<OfferPackage Name="Nom fichier offres" PurgeAndReplace="false" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <OfferPackage.Offers>
+    <OfferCollection Capacity="1">
+        
+        <Offer Price="10" SellerProductId="MY_SKU1">
+        <Offer.ShippingInformationList>
+            <ShippingInformationList Capacity="2">
+            
+            <ShippingInformation AdditionalShippingCharges="4" DeliveryMode="Standard" ShippingCharges="2" />
+            
+            <ShippingInformation AdditionalShippingCharges="4" DeliveryMode="Tracked" ShippingCharges="2" />
+            
+          </ShippingInformationList>
+        </Offer.ShippingInformationList>
+
+        <Offer.PriceAndDiscountList>
+            <DiscountComponentList Capacity="1">
+            
+            <DiscountComponent DiscountUnit="1" DiscountValue="5" EndDate="2019-05-15 00:00:00" StartDate="2019-04-15 00:00:00" Type="1" />
+            
+          </DiscountComponentList>
+        </Offer.PriceAndDiscountList>
+      </Offer>
+      
+        <Offer Price="20" SellerProductId="MY_SKU2">
+        <Offer.ShippingInformationList>
+            <ShippingInformationList Capacity="2">
+            
+            <ShippingInformation AdditionalShippingCharges="4" DeliveryMode="Standard" ShippingCharges="2" />
+            
+            <ShippingInformation AdditionalShippingCharges="4" DeliveryMode="Tracked" ShippingCharges="2" />
+            
+          </ShippingInformationList>
+        </Offer.ShippingInformationList>
+
+        <Offer.PriceAndDiscountList>
+            <DiscountComponentList Capacity="1">
+            
+            <DiscountComponent DiscountUnit="1" DiscountValue="5" EndDate="2019-05-15 00:00:00" StartDate="2019-04-15 00:00:00" Type="1" />
+            
+          </DiscountComponentList>
+        </Offer.PriceAndDiscountList>
+      </Offer>
