@@ -72,7 +72,7 @@ def test_generate_product_package():
         product_dict = json.load(f)
 
     # Generate packages.
-    Products.generate_product_package(path, product_dict)
+    Products.generate_product_package(output_dir product_dict)
 
     # Check uploading_package exists now.
     assert 'uploading_package' in os.listdir(path)

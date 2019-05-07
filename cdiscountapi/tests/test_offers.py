@@ -44,7 +44,7 @@ def test_generate_offer_package():
         offer_dict = json.load(f)
 
     # Generate packages.
-    Offers.generate_offer_package(path, offer_dict)
+    Offers.generate_offer_package(output_dir offer_dict)
 
     # Check uploading_package exists now.
     assert 'uploading_package' in os.listdir(path)
