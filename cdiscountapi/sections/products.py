@@ -147,16 +147,18 @@ class Products(BaseSection):
         :param str output_dir: path to generate package
         :param list products_list:
 
-            - Mandatory:
+            - Mandatory attributes:
                 - BrandName *(str)*
                 - Description *(str)*
                 - LongLabel *(str)*
                 - Model *(str)*
                 - Navigation *(str)*
                 - ProductKind *(str)*
+                    - 'Variant'
+                    - 'Standart'
                 - SellerProductId *(str)*
                 - ShortLabel *(str)*
-            - Optional:
+            - Optional attributes:
                 - Width *(byte)*
                 - Weight *(byte)*
                 - Length *(byte)*

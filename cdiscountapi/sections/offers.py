@@ -105,37 +105,39 @@ class Offers(BaseSection):
         :param bool purge_and_replace: [optional]
         :param list offers_list:
 
-            - ProductEan *(str)*
-            - SellerProductId *(str)*
-            - ProductCondition *(int)*:
-                - 1: 'LikeNew',
-                - 2: 'VeryGoodState',
-                - 3: 'GoodState',
-                - 4: 'AverageState',
-                - 5: 'Refurbished',
-                - 6: 'New',
-            - Price *(float)*
-            - EcoPart *(float)*
-            - Vat *(float)*
-            - DeaTax *(float)*
-            - Stock *(int)*
-            - Comment *(str)*
-            - StrikedPrice *(float)*
-            - PriceMustBeAligned *(int)*:
-                - 1: 'Empty',
-                - 2: 'Unknown',
-                - 3: 'Align',
-                - 4: 'DontAlign',
-            - MinimumPriceForPriceAlignment *(float)*
-            - ProductPackagingUnit *(str)*:
-                - 'None',
-                - 'Liter',
-                - 'Kilogram',
-                - 'SquareMeter',
-                - 'CubicMeter'
-            - 'ProductPackagingValue' *(float)*
-            - 'PreparationTime' *(byte)*
-            - 'BluffDeliveryMax' *(int)*
+            - Mandatory attributes:
+                - ProductEan *(str)*
+                - SellerProductId *(str)*
+                - ProductCondition *(int)*:
+                    - 1: 'LikeNew',
+                    - 2: 'VeryGoodState',
+                    - 3: 'GoodState',
+                    - 4: 'AverageState',
+                    - 5: 'Refurbished',
+                    - 6: 'New',
+                - Price *(float)*
+                - EcoPart *(float)*
+                - Vat *(float)*
+                - DeaTax *(float)*
+                - Stock *(int)*
+                - PreparationTime *(byte)*
+            - Optional attributes:
+                - Comment *(str)*
+                - StrikedPrice *(float)*
+                - PriceMustBeAligned *(int)*:
+                    - 1: 'Empty',
+                    - 2: 'Unknown',
+                    - 3: 'Align',
+                    - 4: 'DontAlign',
+                - MinimumPriceForPriceAlignment *(float)*
+                - ProductPackagingUnit *(str)*:
+                    - 'None',
+                    - 'Liter',
+                    - 'Kilogram',
+                    - 'SquareMeter',
+                    - 'CubicMeter'
+                - ProductPackagingValue *(float)*
+                - BluffDeliveryMax *(int)*
 
         Example::
 
