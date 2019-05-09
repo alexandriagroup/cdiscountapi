@@ -144,8 +144,31 @@ class Products(BaseSection):
         """
         Generate a zip product package as cdiscount wanted.
 
-        :param dict products_list: products as you can see on tests/samples/products/products_to_submit.json
         :param str output_dir: path to generate package
+        :param list products_list:
+
+            - Mandatory attributes:
+                - BrandName *(str)*
+                - Description *(str)*
+                - LongLabel *(str)*
+                - Model *(str)*
+                - Navigation *(str)*
+                - ProductKind *(str)*
+                    - 'Variant'
+                    - 'Standart'
+                - SellerProductId *(str)*
+                - ShortLabel *(str)*
+            - Optional attributes:
+                - Width *(byte)*
+                - Weight *(byte)*
+                - Length *(byte)*
+                - Height *(byte)*
+                - Size *(str)*
+                - SellerProductFamily *(str)*
+                - SellerProductColorName *(str)*
+                - ManufacturerPartNumber *(str)*
+                - ISBN *(str)*
+                - EncodedMarketingDescription *(str)*
 
         Example::
 

@@ -106,6 +106,49 @@ class OfferPackage(BasePackage):
         else:
             return []
 
+    @staticmethod
+    def validate_offer(data):
+        mandatory_attributes = [
+            'ProductEan',
+            'SellerProductId',
+            'ProductCondition',
+            'Price',
+            'EcoPart',
+            'Vat',
+            'DeaTax',
+            'Stock',
+            'PreparationTime',
+        ]
+
+        optional_attributes = [
+            'Comment',
+            'StrikedPrice',
+            'PriceMustBeAligned',
+            'MinimumPriceForPriceAlignment',
+            'ProductPackagingUnit',
+            'ProductPackagingValue',
+            'BluffDeliveryMax'
+        ]
+
+        offer = {}
+        # Get all mandatory values or raises.
+        for attribute in mandatory_attributes:
+            try:
+                offer[attribute] = data[attribute]
+            except KeyError:
+                raise KeyError(f'Missing element {attribute}')
+
+        # Add optional values if exists.
+        offer.update(
+            {
+                attr: data[attr]
+                for attr in optional_attributes
+                if attr in data.keys()
+            }
+        )
+
+        return offer
+
     def validate(self, **kwargs):
         """
         Return the valid offer as a `zeep.objects.Offer`
@@ -133,7 +176,7 @@ class OfferPackage(BasePackage):
                 self.factory.OfferPool(**x) for x in new_kwargs['OfferPoolList']
             ])
 
-        return self.factory.Offer(**new_kwargs)
+        return self.validate_offer(new_kwargs)
 
     def render(self):
         loader = FileSystemLoader('cdiscountapi/templates')
@@ -173,6 +216,48 @@ class ProductPackage(BasePackage):
 
     def add(self, data):
         pass
+
+    @staticmethod
+    def validate_product(data):
+        mandatory_attributes = [
+            'BrandName',
+            'Description',
+            'LongLabel',
+            'Model',
+            'Navigation',
+            'ProductKind',
+            'SellerProductId',
+            'ShortLabel'
+        ]
+        optional_attributes = [
+            'Width',
+            'Weight',
+            'Length',
+            'Height',
+            'Size',
+            'SellerProductFamily',
+            'SellerProductColorName',
+            'ManufacturerPartNumber',
+            'ISBN',
+            'EncodedMarketingDescription'
+        ]
+
+        product = {}
+        # Get all mandatory values or raises.
+        for attribute in mandatory_attributes:
+            try:
+                product[attribute] = data[attribute]
+            except KeyError:
+                raise KeyError(f'Missing element {attribute}')
+
+        # Add optional values or set None.
+        product.update(
+            {
+                attribute: data.get(attribute, None)
+                for attribute in optional_attributes
+            }
+        )
+        return product
 
     def validate(self, **kwargs):
         pass

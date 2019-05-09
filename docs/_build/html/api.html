@@ -209,10 +209,70 @@ and their performance indicator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>offers_list</strong> (<em>dict</em>) – [mandatory] offers as you can see on tests/samples/offers/offers_to_submit.json</p></li>
 <li><p><strong>output_dir</strong> (<em>str</em>) – [mandatory] path to generate package</p></li>
 <li><p><strong>pool_list</strong> (<em>list</em>) – [optional]</p></li>
 <li><p><strong>purge_and_replace</strong> (<em>bool</em>) – [optional]</p></li>
+<li><p><strong>offers_list</strong> (<em>list</em>) – <ul>
+<li><dl class="simple">
+<dt>Mandatory attributes:</dt><dd><ul>
+<li><p>ProductEan <em>(str)</em></p></li>
+<li><p>SellerProductId <em>(str)</em></p></li>
+<li><dl class="simple">
+<dt>ProductCondition <em>(int)</em>:</dt><dd><ul>
+<li><p>1: ‘LikeNew’,</p></li>
+<li><p>2: ‘VeryGoodState’,</p></li>
+<li><p>3: ‘GoodState’,</p></li>
+<li><p>4: ‘AverageState’,</p></li>
+<li><p>5: ‘Refurbished’,</p></li>
+<li><p>6: ‘New’,</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Price <em>(float)</em></p></li>
+<li><p>EcoPart <em>(float)</em></p></li>
+<li><p>Vat <em>(float)</em></p></li>
+<li><p>DeaTax <em>(float)</em></p></li>
+<li><p>Stock <em>(int)</em></p></li>
+<li><p>PreparationTime <em>(byte)</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Optional attributes:</dt><dd><ul>
+<li><p>Comment <em>(str)</em></p></li>
+<li><p>StrikedPrice <em>(float)</em></p></li>
+<li><dl class="simple">
+<dt>PriceMustBeAligned <em>(int)</em>:</dt><dd><ul>
+<li><p>1: ‘Empty’,</p></li>
+<li><p>2: ‘Unknown’,</p></li>
+<li><p>3: ‘Align’,</p></li>
+<li><p>4: ‘DontAlign’,</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>MinimumPriceForPriceAlignment <em>(float)</em></p></li>
+<li><dl class="simple">
+<dt>ProductPackagingUnit <em>(str)</em>:</dt><dd><ul>
+<li><p>’None’,</p></li>
+<li><p>’Liter’,</p></li>
+<li><p>’Kilogram’,</p></li>
+<li><p>’SquareMeter’,</p></li>
+<li><p>’CubicMeter’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>ProductPackagingValue <em>(float)</em></p></li>
+<li><p>BluffDeliveryMax <em>(int)</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
 </ul>
 </dd>
 </dl>
@@ -328,16 +388,12 @@ following criteria:</p>
 <code class="descname">submit_offer_package</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.submit_offer_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>To import offers.
 It is used to add new offers to the Cdiscount marketplace
-Or to modify/update offers that already exists.</p>
-<p>There is 2 ways to use it.</p>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt>You can generate a zip package with:</dt><dd><p>api.offers.generate_offer_package(offer_list)</p>
-</dd>
-</dl>
-</li>
-<li><p>You can generate the package yourself before uploading.</p></li>
-</ol>
+or to modify/update offers that already exists.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The wanted zip package could be generate by calling</p>
+<p><code class="docutils literal notranslate"><span class="pre">api.offers.generate_offer_package(offer_list)</span></code></p>
+</div>
 <p>Then you’ll have to get an url to download zip package
 Finally, you can use submit_offer_package(url)</p>
 <p>Examples:</p>
@@ -801,8 +857,47 @@ structure than the one required for the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>products_list</strong> (<em>dict</em>) – products as you can see on tests/samples/products/products_to_submit.json</p></li>
 <li><p><strong>output_dir</strong> (<em>str</em>) – path to generate package</p></li>
+<li><p><strong>products_list</strong> (<em>list</em>) – <ul>
+<li><dl class="simple">
+<dt>Mandatory attributes:</dt><dd><ul>
+<li><p>BrandName <em>(str)</em></p></li>
+<li><p>Description <em>(str)</em></p></li>
+<li><p>LongLabel <em>(str)</em></p></li>
+<li><p>Model <em>(str)</em></p></li>
+<li><p>Navigation <em>(str)</em></p></li>
+<li><dl class="simple">
+<dt>ProductKind <em>(str)</em></dt><dd><ul>
+<li><p>’Variant’</p></li>
+<li><p>’Standart’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>SellerProductId <em>(str)</em></p></li>
+<li><p>ShortLabel <em>(str)</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Optional attributes:</dt><dd><ul>
+<li><p>Width <em>(byte)</em></p></li>
+<li><p>Weight <em>(byte)</em></p></li>
+<li><p>Length <em>(byte)</em></p></li>
+<li><p>Height <em>(byte)</em></p></li>
+<li><p>Size <em>(str)</em></p></li>
+<li><p>SellerProductFamily <em>(str)</em></p></li>
+<li><p>SellerProductColorName <em>(str)</em></p></li>
+<li><p>ManufacturerPartNumber <em>(str)</em></p></li>
+<li><p>ISBN <em>(str)</em></p></li>
+<li><p>EncodedMarketingDescription <em>(str)</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
 </ul>
 </dd>
 </dl>

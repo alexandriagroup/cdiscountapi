@@ -100,10 +100,64 @@ class Offers(BaseSection):
         """
         Generate a zip offers package as cdiscount wanted.
 
-        :param dict offers_list: [mandatory] offers as you can see on tests/samples/offers/offers_to_submit.json
         :param str output_dir: [mandatory] path to generate package
         :param list pool_list: [optional]
         :param bool purge_and_replace: [optional]
+        :param list offers_list: list of dict [{offer, shipping}, ...]
+            -Offer
+                - Mandatory attributes:
+                    - ProductEan *(str)*
+                    - SellerProductId *(str)*
+                    - ProductCondition *(int)*:
+                        - 1: 'LikeNew',
+                        - 2: 'VeryGoodState',
+                        - 3: 'GoodState',
+                        - 4: 'AverageState',
+                        - 5: 'Refurbished',
+                        - 6: 'New',
+                    - Price *(float)*
+                    - EcoPart *(float)*
+                    - Vat *(float)*
+                    - DeaTax *(float)*
+                    - Stock *(int)*
+                    - PreparationTime *(byte)*
+                - Optional attributes:
+                    - Comment *(str)*
+                    - StrikedPrice *(float)*
+                    - PriceMustBeAligned *(int)*:
+                        - 1: 'Empty',
+                        - 2: 'Unknown',
+                        - 3: 'Align',
+                        - 4: 'DontAlign',
+                    - MinimumPriceForPriceAlignment *(float)*
+                    - ProductPackagingUnit *(str)*:
+                        - 'None',
+                        - 'Liter',
+                        - 'Kilogram',
+                        - 'SquareMeter',
+                        - 'CubicMeter'
+                    - ProductPackagingValue *(float)*
+                    - BluffDeliveryMax *(int)*
+            - ShippingInformation:
+                - AdditionalShippingCharges *(float)*
+                - DeliveryMode *(DeliveryModeInformation)*
+                    - 'STD' ('Standart')
+                    - 'TRK' ('Tracking')
+                    - 'REG' ('Registered')
+                    - 'COL' ('Collissimo')
+                    - 'RCO' ('Relay Colis')
+                    - 'REL' ('Mondial Relay')
+                    - 'SO1' ('So Colissimo')
+                    - 'MAG' ('in shop')
+                    - 'LV1'
+                    - 'LV2'
+                    - 'LV'
+                    - 'FST'
+                    - 'EXP'
+                    - 'RIM'
+                - MaxLeadTime *(int)*
+                - MinLeadTime *(int)*
+                - ShippingCharges *(float)*
 
         Example::
 
@@ -126,14 +180,13 @@ class Offers(BaseSection):
         """
         To import offers.
         It is used to add new offers to the Cdiscount marketplace
-        Or to modify/update offers that already exists.
+        or to modify/update offers that already exists.
 
-        There is 2 ways to use it.
+        .. note::
 
-        1. You can generate a zip package with:
-            api.offers.generate_offer_package(offer_list)
+            The wanted zip package could be generate by calling
 
-        2. You can generate the package yourself before uploading.
+            ``api.offers.generate_offer_package(offer_list)``
 
         Then you'll have to get an url to download zip package
         Finally, you can use submit_offer_package(url)
