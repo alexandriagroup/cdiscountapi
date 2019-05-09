@@ -106,6 +106,38 @@ class OfferPackage(BasePackage):
         else:
             return []
 
+    @staticmethod
+    def validate_offer(data):
+        offer_attributes = {
+            'ProductEan': 'Mandatory',
+            'SellerProductId': 'Mandatory',
+            'ProductCondition': 'Mandatory',
+            'Price': 'Mandatory',
+            'EcoPart': 'Mandatory',
+            'Vat': 'Mandatory',
+            'DeaTax': 'Mandatory',
+            'Stock': 'Mandatory',
+            'PreparationTime': 'Mandatory',
+            'Comment': 'Optional',
+            'StrikedPrice': 'Optional',
+            'PriceMustBeAligned': 'Optional',
+            'MinimumPriceForPriceAlignment': 'Optional',
+            'ProductPackagingUnit': 'Optional',
+            'ProductPackagingValue': 'Optional',
+            'BluffDeliveryMax': 'Optional'
+        }
+        offer = {}
+        for attr in offer_attributes.keys():
+            if offer_attributes[attr] == 'Mandatory':
+                try:
+                    offer[attr] = data[attr]
+                except KeyError:
+                    raise KeyError(f'Missing element {attr}')
+            if offer_attributes[attr] == 'Optional':
+                offer[attr] = data.get(attr, None)
+
+        return offer
+
     def validate(self, **kwargs):
         """
         Return the valid offer as a `zeep.objects.Offer`
@@ -133,7 +165,7 @@ class OfferPackage(BasePackage):
                 self.factory.OfferPool(**x) for x in new_kwargs['OfferPoolList']
             ])
 
-        return self.factory.Offer(**new_kwargs)
+        return self.validate_offer(**new_kwargs)
 
     def render(self):
         loader = FileSystemLoader('cdiscountapi/templates')
