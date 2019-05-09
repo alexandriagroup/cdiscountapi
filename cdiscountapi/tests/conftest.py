@@ -113,6 +113,13 @@ def valid_offer():
         'Price': 10,
         'SellerProductId': 'MY_SKU1',
         'DiscountList': [discount_component],
-        'ShippingInformationList': [shipping_info1, shipping_info2]
+        'ShippingInformationList': [shipping_info1, shipping_info2],
+        'ProductEan': 'BestEAN01',
+        'ProductCondition': 4,
+        'EcoPart': 0.10,
+        'Vat': 19.36,
+        'DeaTax': 3.14,
+        'Stock': 1,
+        'PreparationTime': 1
     }
     return offer
