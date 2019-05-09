@@ -206,6 +206,40 @@ class ProductPackage(BasePackage):
     def add(self, data):
         pass
 
+    @staticmethod
+    def validate_product(data):
+        product_attributes = {
+            'BrandName': 'Mandatory',
+            'Description': 'Mandatory',
+            'LongLabel': 'Mandatory',
+            'Model': 'Mandatory',
+            'Navigation': 'Mandatory',
+            'ProductKind': 'Mandatory',
+            'SellerProductId': 'Mandatory',
+            'ShortLabel': 'Mandatory',
+            'Width': 'Optional',
+            'Weight': 'Optional',
+            'Length': 'Optional',
+            'Height': 'Optional',
+            'Size': 'Optional',
+            'SellerProductFamily': 'Optional',
+            'SellerProductColorName': 'Optional',
+            'ManufacturerPartNumber': 'Optional',
+            'ISBN': 'Optional',
+            'EncodedMarketingDescription': 'Optional'
+        }
+        product = {}
+        for attr in product_attributes.keys():
+            if product_attributes[attr] == 'Mandatory':
+                try:
+                    product[attr] = data[attr]
+                except KeyError:
+                    raise KeyError(f'Missing element {attr}')
+            if product_attributes[attr] == 'Optional':
+                product[attr] = data.get(attr, None)
+
+        return product
+
     def validate(self, **kwargs):
         pass
 
