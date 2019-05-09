@@ -149,96 +149,12 @@ class Products(BaseSection):
 
         Example::
 
-            response = api.products.submit_product_package(
-                products_dict={"Product":
-                  [
-                    {
-                      "-BrandName": "Deeluxe",
-                      "-SellerProductFamily": "SOJ50874",
-                      "-SellerProductColorName": "Bleu Délavé",
-                      "-Size": "38/36",
-                      "-Description": "Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe Droite Homme, Couleur Bleu Délavé, 100% Coton , Taille 38",
-                      "-LongLabel": "Nudie Average Joe organic vacation worn Jeans",
-                      "-Model": "SOUMISSION CREATION PRODUITS_MK",
-                      "-ProductKind": "Variant",
-                      "-CategoryCode": "0R050A01",
-                      "-SellerProductId": "120905783",
-                      "-ShortLabel": "Jeans Deeluxe Tanner Snow Bleu",
-                      "-EncodedMarketingDescription": "RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==",
-                      "Product.EanList": {
-                        "ProductEan": { "-Ean": "3606918243767" }
-                      },
-                      "Product.ModelProperties": {
-                        "x:String": [
-                          {
-                            "-x:Key": "Genre",
-                            "#text": "Homme - Garçon"
-                          },
-                          {
-                            "-x:Key": "Type de public",
-                            "#text": "Adulte"
-                          }
-                        ]
-                      },
-                      "Product.Pictures": {
-                        "ProductImage": [
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg" },
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg" },
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg" },
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg" }
-                        ]
-                      }
-                    },
-                    {
-                      "-BrandName": "Deeluxe",
-                      "-SellerProductFamily": "SOJ50874",
-                      "-SellerProductColorName": "Bleu Délavé",
-                      "-Size": "36/34",
-                      "-Description": "Nudie Average Joe organic vacation worn Jeans Droite Homme 100% Organic",
-                      "-LongLabel": "Jeans Deeluxe Tanner Snow Bleu",
-                      "-Model": "SOUMISSION CREATION PRODUITS_MK",
-                      "-ProductKind": "Variant",
-                      "-CategoryCode": "0R050A01",
-                      "-SellerProductId": "120905784",
-                      "-ShortLabel": "Jeans Deeluxe Tanner Snow Bleu",
-                      "-EncodedMarketingDescription": "RGVzY3JpcHRpb24gcXVpIGNvbnRpZW50IGR1IDxzdHJvbmc+SFRNTDwvc3Ryb25nPg==",
-                      "Product.EanList": {
-                        "ProductEan": { "-Ean": "3606918243774" }
-                      },
-                      "Product.ModelProperties": {
-                        "x:String": [
-                          {
-                            "-x:Key": "Genre",
-                            "#text": "Homme - Garçon"
-                          },
-                          {
-                            "-x:Key": "Type de public",
-                            "#text": "Adulte"
-                          }
-                        ]
-                      },
-                      "Product.Pictures": {
-                        "ProductImage": [
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg" },
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg" },
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg" },
-                          { "-Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg" }
-                        ]
-                      }
-                    }
-                  ]
-                },
+            response = api.products.generate_product_package(
+                products_list,
                 url="path_to_upload.com"
 
         """
-        data = {'Data': products_list}
-        zip_package = generate_package(
-            'product',
-            output_dir,
-            data,
-        )
-
-        return zip_package
+        return generate_package('product', output_dir, {'Products': products_list})
 
     @auto_refresh_token
     def submit_product_package(self, url):

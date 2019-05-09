@@ -3,6 +3,7 @@
 from pathlib import Path
 import os
 import re
+import datetime
 import pytest
 from functools import lru_cache
 from ..cdiscountapi import Connection
@@ -91,3 +92,27 @@ def api():
                           },
                           'Version': '1.0',
                       })
+
+
+@pytest.fixture
+def valid_offer():
+    discount_component = {
+        'DiscountValue': 5, 'Type': 1,
+        'StartDate': datetime.datetime(2019, 4, 15),
+        'EndDate': datetime.datetime(2019, 5, 15)
+    }
+    shipping_info1 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'DeliveryMode': {'Name': 'Standard'}
+    }
+    shipping_info2 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'DeliveryMode': {'Name': 'Tracked'}
+    }
+    offer = {
+        'Price': 10,
+        'SellerProductId': 'MY_SKU1',
+        'DiscountList': [discount_component],
+        'ShippingInformationList': [shipping_info1, shipping_info2]
+    }
+    return offer
