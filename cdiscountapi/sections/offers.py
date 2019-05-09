@@ -100,10 +100,42 @@ class Offers(BaseSection):
         """
         Generate a zip offers package as cdiscount wanted.
 
-        :param dict offers_list: [mandatory] offers as you can see on tests/samples/offers/offers_to_submit.json
         :param str output_dir: [mandatory] path to generate package
         :param list pool_list: [optional]
         :param bool purge_and_replace: [optional]
+        :param list offers_list:
+
+            - ProductEan *(str)*
+            - SellerProductId *(str)*
+            - ProductCondition *(int)*:
+                - 1: 'LikeNew',
+                - 2: 'VeryGoodState',
+                - 3: 'GoodState',
+                - 4: 'AverageState',
+                - 5: 'Refurbished',
+                - 6: 'New',
+            - Price *(float)*
+            - EcoPart *(float)*
+            - Vat *(float)*
+            - DeaTax *(float)*
+            - Stock *(int)*
+            - Comment *(str)*
+            - StrikedPrice *(float)*
+            - PriceMustBeAligned *(int)*:
+                - 1: 'Empty',
+                - 2: 'Unknown',
+                - 3: 'Align',
+                - 4: 'DontAlign',
+            - MinimumPriceForPriceAlignment *(float)*
+            - ProductPackagingUnit *(str)*:
+                - 'None',
+                - 'Liter',
+                - 'Kilogram',
+                - 'SquareMeter',
+                - 'CubicMeter'
+            - 'ProductPackagingValue' *(float)*
+            - 'PreparationTime' *(byte)*
+            - 'BluffDeliveryMax' *(int)*
 
         Example::
 
