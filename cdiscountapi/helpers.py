@@ -132,59 +132,63 @@ class XmlGenerator(object):
 
     Usage::
 
-        shipping_info =
+        xml_generator = XmlGenerator(data, preprod=preprod)
+        content = xml_generator.render()
 
-        discount_component = [{
-        'DiscountValue': 1,
-        'EndDate': 1,
-        'Price': 1,
-        'StartDate': 1,
-        'Type': 1
-        }]
+    Example::
 
-        offer_pool = [
-            {
-                'Id': 1,
-                'Published': True
-            },
-            {
-                'Id': 16
-            }
-        ]
+        # Render the content of Offers.xml
+        shipping_info1 = {
+            'AdditionalShippingCharges': 1,
+            'DeliveryMode': 'RelaisColis',
+            'MaxLeadTime': 1,
+            'MinLeadTime': 1,
+            'ShippingCharges': 1,
+         }
+
+        shipping_info2 = {
+            'AdditionalShippingCharges': 5.95,
+            'DeliveryMode': 'Tracked',
+            'ShippingCharges': 2.95
+        }
+
+        discount_component = {
+            'StartDate': datetime.datetime(2019, 11, 23),
+            'EndDate': datetime.datetime(2019, 11, 25),
+            'Price': 85,
+            'DiscountValue': 1,
+            'Type': 1
+        }
 
         offer = {
-            'CreationDate': 1,
-            'LastUpdateDate': 1,
-            'Price': 1,
             'ProductEan': 1,
-            'ProductId': 1,
             'SellerProductId': 1,
-            'Stock': 1, 'VatRate': 0.19,
-            'DiscountList': discount_component,
-            'OfferPoolList': offer_pool,
-            'ShippingInformationList': [
-                 {
-                     'AdditionalShippingCharges': 1,
-                     'DeliveryMode': 'RelaisColis',
-                     'MaxLeadTime': 1,
-                     'MinLeadTime': 1,
-                     'ShippingCharges': 1,
-                 },
-                 {
-                     'AdditionalShippingCharges': 5.95,
-                     'DeliveryMode': 'Tracked',
-                     'ShippingCharges': 2.95
-                 }
-           ],
-           'PriceMustBeAligned': 'DontAlign',
-           'ProductPackagingUnit': 'Kilogram',
-           'OfferState': 'Active',
-           'ProductCondition': 'New'
+            'ProductCondition': '6'
+            'Price': 100,
+            'EcoPart': 0,
+            'Vat': 0.19,
+            'DeaTax': 0,
+            'Stock': 1,
+            'Comment': 'Offer with discount Tracked or RelaisColis'
+            'PreparationTime': 1,
+            'PriceMustBeAligned': 'Align',
+            'ProductPackagingUnit': 'Kilogram',
+            'ProductPackagingValue': 1,
+            'MinimumPriceForPriceAlignment': 80,
+            'StrikedPrice': 150,
+            'DiscountList': [discount_component],
+            'ShippingInformationList': [shipping_info1, shipping_info2]
            }
 
+        offers_xml = XmlGenerator({'OfferCollection': [offer],
+                                      'PurgeAndReplace': False,
+                                      'OfferPublicationList': [1, 16]},
+                                     preprod=preprod)
+        content = offers_xml.render()
 
-        xml_generator = XmlGenerator(data1, preprod=preprod)
-        content = xml_generator.render()
+        # Render the content of Products.xml
+        products_xml = XmlGenerator({'Products': [product]}, preprod=preprod)
+        content = products_xml.render()
 
     """
     def __init__(self, data, preprod=False):
