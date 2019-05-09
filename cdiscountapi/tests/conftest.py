@@ -110,8 +110,15 @@ def valid_offer():
         'DeliveryMode': {'Name': 'Tracked'}
     }
     offer = {
-        'Price': 10,
+        'ProductEan': '978-1593274351',
         'SellerProductId': 'MY_SKU1',
+        'ProductCondition': "6",
+        'Price': 10,
+        'EcoPart': 0,
+        'Vat': 19.6,
+        'DeaTax': 0,
+        'Stock': 1,
+        'PreparationTime': 1,
         'DiscountList': [discount_component],
         'ShippingInformationList': [shipping_info1, shipping_info2]
     }
