@@ -21,6 +21,8 @@ from jinja2 import (
 
 
 class BasePackage(object):
+    required_keys = []
+
     def __init__(self, preprod=False):
         self.preprod = preprod
         if self.preprod:
@@ -39,15 +41,20 @@ class BasePackage(object):
     def render(self):
         raise NotImplementedError
 
-    @staticmethod
-    def has_required_keys(data):
+    @classmethod
+    def has_required_keys(cls, data):
         """
         Return True if the data passed to the package have the required keys
         """
-        raise NotImplementedError
+        for required_key in cls.required_keys:
+            if required_key not in data.keys():
+                return False
+        return True
 
 
 class OfferPackage(BasePackage):
+    required_keys = ['OfferCollection']
+
     def __init__(self, data, preprod=False):
         super().__init__(preprod=preprod)
         self.check_offer_publication_list(data.get('OfferPublicationList'))
@@ -80,10 +87,6 @@ class OfferPackage(BasePackage):
             valid_offer = self.validate(**offer)
             if valid_offer not in self.data:
                 self.data.append(valid_offer)
-
-    @staticmethod
-    def has_required_keys(data):
-        return bool(data.get('OfferCollection'))
 
     def extract_from(self, offer, attr1, attr2):
         """
@@ -162,9 +165,14 @@ class OfferPackage(BasePackage):
 
 
 class ProductPackage(BasePackage):
-    @staticmethod
-    def has_required_keys(data):
-        return bool(data.get('Products'))
+    required_keys = ['Products']
+
+    def __init__(self, data, preprod=False):
+        super().__init__(preprod=preprod)
+        self.add(data['Products'])
+
+    def add(self, data):
+        pass
 
     def validate(self, **kwargs):
         pass
