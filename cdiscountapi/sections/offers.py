@@ -126,14 +126,13 @@ class Offers(BaseSection):
         """
         To import offers.
         It is used to add new offers to the Cdiscount marketplace
-        Or to modify/update offers that already exists.
+        or to modify/update offers that already exists.
 
-        There is 2 ways to use it.
+        .. note::
 
-        1. You can generate a zip package with:
-            api.offers.generate_offer_package(offer_list)
+            The wanted zip package could be generate by calling
 
-        2. You can generate the package yourself before uploading.
+            ``api.offers.generate_offer_package(offer_list)``
 
         Then you'll have to get an url to download zip package
         Finally, you can use submit_offer_package(url)
