@@ -108,33 +108,41 @@ class OfferPackage(BasePackage):
 
     @staticmethod
     def validate_offer(data):
-        offer_attributes = {
-            'ProductEan': 'Mandatory',
-            'SellerProductId': 'Mandatory',
-            'ProductCondition': 'Mandatory',
-            'Price': 'Mandatory',
-            'EcoPart': 'Mandatory',
-            'Vat': 'Mandatory',
-            'DeaTax': 'Mandatory',
-            'Stock': 'Mandatory',
-            'PreparationTime': 'Mandatory',
-            'Comment': 'Optional',
-            'StrikedPrice': 'Optional',
-            'PriceMustBeAligned': 'Optional',
-            'MinimumPriceForPriceAlignment': 'Optional',
-            'ProductPackagingUnit': 'Optional',
-            'ProductPackagingValue': 'Optional',
-            'BluffDeliveryMax': 'Optional'
-        }
+        mandatory_attributes = [
+            'ProductEan',
+            'SellerProductId',
+            'ProductCondition',
+            'Price',
+            'EcoPart',
+            'Vat',
+            'DeaTax',
+            'Stock',
+            'PreparationTime',
+        ]
+        optional_attributes = [
+            'Comment',
+            'StrikedPrice',
+            'PriceMustBeAligned',
+            'MinimumPriceForPriceAlignment',
+            'ProductPackagingUnit',
+            'ProductPackagingValue',
+            'BluffDeliveryMax'
+        ]
         offer = {}
-        for attr in offer_attributes.keys():
-            if offer_attributes[attr] == 'Mandatory':
-                try:
-                    offer[attr] = data[attr]
-                except KeyError:
-                    raise KeyError(f'Missing element {attr}')
-            if offer_attributes[attr] == 'Optional':
-                offer[attr] = data.get(attr, None)
+        # Get all mandatory values or raises.
+        for attribute in mandatory_attributes:
+            try:
+                offer[attribute] = data[attribute]
+            except KeyError:
+                raise KeyError(f'Missing element {attribute}')
+
+        # Add optional values or set None.
+        offer.update(
+            {
+                attribute: data.get(attribute, None)
+                for attribute in optional_attributes
+            }
+        )
 
         return offer
 
@@ -208,36 +216,44 @@ class ProductPackage(BasePackage):
 
     @staticmethod
     def validate_product(data):
-        product_attributes = {
-            'BrandName': 'Mandatory',
-            'Description': 'Mandatory',
-            'LongLabel': 'Mandatory',
-            'Model': 'Mandatory',
-            'Navigation': 'Mandatory',
-            'ProductKind': 'Mandatory',
-            'SellerProductId': 'Mandatory',
-            'ShortLabel': 'Mandatory',
-            'Width': 'Optional',
-            'Weight': 'Optional',
-            'Length': 'Optional',
-            'Height': 'Optional',
-            'Size': 'Optional',
-            'SellerProductFamily': 'Optional',
-            'SellerProductColorName': 'Optional',
-            'ManufacturerPartNumber': 'Optional',
-            'ISBN': 'Optional',
-            'EncodedMarketingDescription': 'Optional'
-        }
-        product = {}
-        for attr in product_attributes.keys():
-            if product_attributes[attr] == 'Mandatory':
-                try:
-                    product[attr] = data[attr]
-                except KeyError:
-                    raise KeyError(f'Missing element {attr}')
-            if product_attributes[attr] == 'Optional':
-                product[attr] = data.get(attr, None)
+        mandatory_attributes = [
+            'BrandName',
+            'Description',
+            'LongLabel',
+            'Model',
+            'Navigation',
+            'ProductKind',
+            'SellerProductId',
+            'ShortLabel'
+        ]
+        optional_attributes = [
+            'Width',
+            'Weight',
+            'Length',
+            'Height',
+            'Size',
+            'SellerProductFamily',
+            'SellerProductColorName',
+            'ManufacturerPartNumber',
+            'ISBN',
+            'EncodedMarketingDescription'
+        ]
 
+        product = {}
+        # Get all mandatory values or raises.
+        for attribute in mandatory_attributes:
+            try:
+                product[attribute] = data[attribute]
+            except KeyError:
+                raise KeyError(f'Missing element {attribute}')
+
+        # Add optional values or set None.
+        product.update(
+            {
+                attribute: data.get(attribute, None)
+                for attribute in optional_attributes
+            }
+        )
         return product
 
     def validate(self, **kwargs):
