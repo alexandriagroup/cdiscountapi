@@ -193,7 +193,13 @@ class XmlGenerator(object):
         elif ProductPackage.has_required_keys(data):
             self.package = ProductPackage(data, preprod)
         else:
-            raise ValueError("package_type should be 'Offers.xml' or 'Products.xml'.")
+            msg = ("The data should be a dictionary with the keys {offers} for"
+                   "Offers.xml and {products} for Products.xml".format(
+                       offers=OfferPackage.required_keys,
+                       products=ProductPackage.required_keys))
+            raise ValueError(msg)
+
+        self.data = self.package.data
 
     def add(self, data):
         self.package.add(data)

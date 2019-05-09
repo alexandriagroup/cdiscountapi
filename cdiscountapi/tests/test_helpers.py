@@ -40,62 +40,66 @@ def test_check_element_with_invalid_element(api):
 
 
 # XmlGenerator
-def test_XmlGenerator_constructor():
+@pytest.mark.vcr()
+def test_XmlGenerator_constructor(valid_offer):
     """
-    XmlGenerator should raise a ValueError if the package_type is not 'Offers.xml' or 'products.xml'
+    XmlGenerator should raise a ValueError if `data` isn't a dictionary with the key
+    'OfferCollection' for Offers.xml and 'Products' for Products.xml
     """
-    XmlGenerator('Offers.xml')
-    XmlGenerator('Products.xml')
-    pytest.raises(ValueError, XmlGenerator, 'other.xml')
+    XmlGenerator({'OfferCollection': [valid_offer]})
+    XmlGenerator({'Products': []})
+    pytest.raises(ValueError, XmlGenerator, {'InvalidKey': [valid_offer]})
 
 
 @pytest.mark.vcr()
 def test_add_offers(valid_offer):
     """
-    XmlGenerator.add_offers should append the unique valid offers in the attribute `XmlGenerator.offers`
+    XmlGenerator.add should append the unique valid offers in the
+    attribute `XmlGenerator.data`
     """
-    xml_generator = XmlGenerator()
-    assert len(xml_generator.offers) == 0
+    xml_generator = XmlGenerator({'OfferCollection': [valid_offer]})
+    assert len(xml_generator.data) == 1
 
-    xml_generator.add_offers([valid_offer, valid_offer])
+    xml_generator.add([valid_offer])
 
     # The should be only 1 valid offer (we added 2 times the same offer)
-    assert len(xml_generator.offers) == 1
+    assert len(xml_generator.data) == 1
 
     # We create a new valid offer with a different DiscountValue
     valid_offer1 = deepcopy(valid_offer)
     valid_offer1['DiscountList'][0]['DiscountValue'] = 10
-    xml_generator.add_offers([valid_offer1])
+    xml_generator.add([valid_offer1])
 
-    # The should be 2 valid offers
-    assert len(xml_generator.offers) == 2
+    # There should be 2 valid offers
+    assert len(xml_generator.data) == 2
 
 
 @pytest.mark.vcr()
 def test_add_offers_with_invalid_offer(valid_offer):
     """
-    XmlGenerator.add_offers should raise a TypeError when the offer is invalid
+    XmlGenerator.add should raise a TypeError when the offer is invalid
     """
+    xml_generator = XmlGenerator({'OfferCollection': [valid_offer]})
     invalid_offer = {'invalid_offer': True}
-    xml_generator = XmlGenerator()
-    pytest.raises(TypeError, xml_generator.add_offers, [valid_offer, invalid_offer])
+    pytest.raises(TypeError, xml_generator.add, [valid_offer, invalid_offer])
 
 
 @pytest.mark.vcr()
 def test_render_offers(valid_offer):
     """
-    XmlGenerator.render_offers should return the content of Offers.xml
+    XmlGenerator.render should return the content of Offers.xml
     """
     valid_offer1 = deepcopy(valid_offer)
     valid_offer1['Price'] = 20
     valid_offer1['SellerProductId'] = 'MY_SKU2'
-    xml_generator = XmlGenerator()
-    xml_generator.add_offers([valid_offer, valid_offer1])
-    content = xml_generator.render_offers()
+    xml_generator = XmlGenerator({'OfferCollection': [valid_offer]})
+    xml_generator.add([valid_offer, valid_offer1])
+    content = xml_generator.render()
 
     with open('cdiscountapi/tests/samples/Offers.xml') as f:
         expected_content = f.read()
     assert content.strip() == expected_content.strip()
+
 
 # auto_refresh_token
 @pytest.mark.vcr()
