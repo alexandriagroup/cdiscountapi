@@ -1,29 +1,66 @@
-{
-  "OfferPackage": {
-    "-xmlns": "clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration",
-    "-xmlns:x": "http://schemas.microsoft.com/winfx/2006/xaml",
-    "-Name": "Nom fichier offres",
-    "-PurgeAndReplace": "false",
-    "-PackageType": "StockAndPrice",
-    "OfferPackage.Offers": {
-      "OfferCollection": {
-        "-Capacity": "1",
+[
+    {
         "Offer": {
-          "-SellerProductId": "S53262149036",
-          "-ProductEan": "9153262149367",
-          "-Price": "19.95",
-          "-Stock": "10"
-        }
-      }
-    },
-    "OfferPackage.OfferPublicationList": {
-      "OfferPublicationList": {
-        "-Capacity": "2",
-        "PublicationPool": [
-          { "-Id": "1" },
-          { "-Id": "16" }
+            "SellerProductId": "32427220",
+            "ProductEan": "0080605625006",
+            "ProductCondition": "6",
+            "Price": "1989.19",
+            "EcoPart": "0.10",
+            "DeaTax": "3.14",
+            "Vat": "19.6",
+            "Stock": "10",
+            "StrikedPrice": "39.95",
+            "Comment": "Offre avec tous les modes de livraisons possibles",
+            "PreparationTime": 1
+        },
+        "ShippingInformation": [
+            {
+                "AdditionalShippingCharges":  "0.95",
+                "DeliveryMode": "Standart",
+                "ShippingCharges": "1.0"
+            },
+            {
+                "AdditionalShippingCharges":  "1.95",
+                "DeliveryMode": "Tracked",
+                "ShippingCharges": "2.0"
+            },
+            {
+                "AdditionalShippingCharges":  "2.95",
+                "DeliveryMode": "Registered",
+                "ShippingCharges": "3.0"
+            }
         ]
-      }
+    },
+    {
+        "Offer": {
+            "SellerProductId": "32427220",
+            "ProductEan": "0080605625006",
+            "ProductCondition": "6",
+            "Price": "19.95",
+            "EcoPart": "0.10",
+            "DeaTax": "3.14",
+            "Vat": "19.6",
+            "Stock": "10",
+            "StrikedPrice": "39.95",
+            "Comment": "Offre avec tous les modes de livraisons possibles",
+            "PreparationTime": 2
+        },
+        "ShippingInformation": [
+            {
+                "AdditionalShippingCharges":  "1.95",
+                "DeliveryMode": "BigParcelEco",
+                "ShippingCharges": "3.0"
+            },
+            {
+                "AdditionalShippingCharges":  "2.95",
+                "DeliveryMode": "BigParcelStandard",
+                "ShippingCharges": "3.0"
+            },
+            {
+                "AdditionalShippingCharges":  "2.95",
+                "DeliveryMode": "BigParcelComfort",
+                "ShippingCharges": "3.0"
+            }
+        ]
     }
-  }
-}
+]
