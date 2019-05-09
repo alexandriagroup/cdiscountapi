@@ -119,6 +119,7 @@ class OfferPackage(BasePackage):
             'Stock',
             'PreparationTime',
         ]
+
         optional_attributes = [
             'Comment',
             'StrikedPrice',
@@ -128,6 +129,7 @@ class OfferPackage(BasePackage):
             'ProductPackagingValue',
             'BluffDeliveryMax'
         ]
+
         offer = {}
         # Get all mandatory values or raises.
         for attribute in mandatory_attributes:
@@ -136,11 +138,12 @@ class OfferPackage(BasePackage):
             except KeyError:
                 raise KeyError(f'Missing element {attribute}')
 
-        # Add optional values or set None.
+        # Add optional values if exists.
         offer.update(
             {
-                attribute: data.get(attribute, None)
-                for attribute in optional_attributes
+                attr: data[attr]
+                for attr in optional_attributes
+                if attr in data.keys()
             }
         )
 
@@ -173,7 +176,7 @@ class OfferPackage(BasePackage):
                 self.factory.OfferPool(**x) for x in new_kwargs['OfferPoolList']
             ])
 
-        return self.validate_offer(**new_kwargs)
+        return self.validate_offer(new_kwargs)
 
     def render(self):
         loader = FileSystemLoader('cdiscountapi/templates')
