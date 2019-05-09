@@ -116,3 +116,29 @@ def valid_offer():
         'ShippingInformationList': [shipping_info1, shipping_info2]
     }
     return offer
+
+
+@pytest.fixture
+def valid_product():
+    return {
+        "BrandName": "BRAND",
+        "SellerProductFamily": "SOJ50874",
+        "SellerProductColorName": "Bleu Délavé",
+        "Size": "38/34",
+        "Description": ("Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe"
+                        " Droite Homme, Couleur Bleu Délavé, 100% Coton , Taille 28"),
+        "LongLabel": "Nudie Average Joe organic vacation worn Jeans",
+        "Model": "SOUMISSION CREATION PRODUITS_MK",
+        'ProductKind': "Variant",
+        "CategoryCode": "0R050A01",
+        "SellerProductId": "120905783",
+        "ShortLabel": "Jeans Deeluxe Tanner Snow Bleu",
+        "Product.EanList": ["3606918243767"],
+        "Product.ModelProperties": [{"Genre": "Homme - Garcon"}, {"Type de public": "Adulte"}],
+        "Product.Pictures": [
+            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg",
+            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg",
+            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg",
+            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg",
+        ]
+    }
