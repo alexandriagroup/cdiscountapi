@@ -6,15 +6,14 @@
         <Offer.ShippingInformationList>
             <ShippingInformationList Capacity="{{ offer['shipping_information_list']|length }}">
             {% for shipping_info in offer['shipping_information_list'] %}
-            <ShippingInformation AdditionalShippingCharges="{{ shipping_info.AdditionalShippingCharges }}" DeliveryMode="{{ shipping_info.DeliveryMode.Name }}" ShippingCharges="{{ shipping_info.ShippingCharges }}" />
+            <ShippingInformation AdditionalShippingCharges="{{ shipping_info['AdditionalShippingCharges'] }}" DeliveryMode="{{ shipping_info['DeliveryMode'] }}" ShippingCharges="{{ shipping_info['ShippingCharges'] }}" />
             {% endfor %}
           </ShippingInformationList>
         </Offer.ShippingInformationList>
-
         <Offer.PriceAndDiscountList>
             <DiscountComponentList Capacity="{{ offer['discount_list']|length }}">
             {% for discount_component in offer['discount_list'] %}
-            <DiscountComponent DiscountUnit="1" DiscountValue="{{ discount_component.DiscountValue }}" EndDate="{{ discount_component.EndDate }}" StartDate="{{ discount_component.StartDate }}" Type="{{ discount_component.Type }}" />
+            <DiscountComponent DiscountUnit="1" DiscountValue="{{ discount_component['DiscountValue'] }}" EndDate="{{ discount_component['EndDate'] }}" StartDate="{{ discount_component['StartDate'] }}" Type="{{ discount_component['Type'] }}" />
             {% endfor %}
           </DiscountComponentList>
         </Offer.PriceAndDiscountList>

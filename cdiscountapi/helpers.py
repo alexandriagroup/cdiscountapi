@@ -141,8 +141,6 @@ class XmlGenerator(object):
         shipping_info1 = {
             'AdditionalShippingCharges': 1,
             'DeliveryMode': 'RelaisColis',
-            'MaxLeadTime': 1,
-            'MinLeadTime': 1,
             'ShippingCharges': 1,
          }
 
@@ -176,14 +174,14 @@ class XmlGenerator(object):
             'ProductPackagingValue': 1,
             'MinimumPriceForPriceAlignment': 80,
             'StrikedPrice': 150,
-            'DiscountList': [discount_component],
-            'ShippingInformationList': [shipping_info1, shipping_info2]
+            'DiscountList': {'DiscountComponent': [discount_component]},
+            'ShippingInformationList': {'ShippingInformation': [shipping_info1, shipping_info2]}
            }
 
         offers_xml = XmlGenerator({'OfferCollection': [offer],
-                                      'PurgeAndReplace': False,
-                                      'OfferPublicationList': [1, 16]},
-                                     preprod=preprod)
+                                   'PurgeAndReplace': False,
+                                   'OfferPublicationList': [1, 16]},
+                                   preprod=preprod)
         content = offers_xml.render()
 
         # Render the content of Products.xml

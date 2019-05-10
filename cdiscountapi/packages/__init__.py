@@ -102,7 +102,7 @@ class OfferPackage(BasePackage):
         the DiscountComponent elements in DiscountList...)
         """
         if attr1 in offer:
-            sub_record = getattr(offer, attr1, None)
+            sub_record = offer.get(attr1, None)
             if sub_record:
                 datum = sub_record[attr2]
                 del offer[attr1]
@@ -125,20 +125,22 @@ class OfferPackage(BasePackage):
 
         # We validate the lists in Offer
         if 'DiscountList' in kwargs:
-            new_kwargs['DiscountList'] = {'DiscountComponent': [
-                DiscountComponentValidator.validate(x) for x in new_kwargs['DiscountList']
+            new_kwargs['DiscountList'] = {
+                'DiscountComponent': [DiscountComponentValidator.validate(x) for x in
+                new_kwargs['DiscountList']['DiscountComponent']
             ]}
 
         if 'ShippingInformationList' in kwargs:
-            new_kwargs['ShippingInformationList'] = {'ShippingInformation': [
-                ShippingInformationValidator.validate(x) for x in new_kwargs['ShippingInformationList']
+            new_kwargs['ShippingInformationList'] = {
+                'ShippingInformation': [ShippingInformationValidator.validate(x) for x in
+                new_kwargs['ShippingInformationList']['ShippingInformation']
             ]}
 
         return OfferValidator.validate(new_kwargs)
 
     def render(self):
         loader = FileSystemLoader('cdiscountapi/templates')
-        env = Environment(loader=loader)
+        env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template('Offers.xml')
         offers = deepcopy(self.data)
         extraction_mapping = {
@@ -185,6 +187,6 @@ class ProductPackage(BasePackage):
 
     def render(self):
         loader = FileSystemLoader('cdiscountapi/templates')
-        env = Environment(loader=loader)
+        env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template('Products.xml')
         products = deepcopy(self.data)
