@@ -8,8 +8,6 @@
     :copyright: © 2019 Alexandria
 """
 
-from shutil import make_archive
-
 from zeep.helpers import serialize_object
 
 from cdiscountapi.helpers import generate_package
@@ -115,12 +113,12 @@ class Offers(BaseSection):
                         - 4: 'AverageState',
                         - 5: 'Refurbished',
                         - 6: 'New',
-                    - Price *(float)*
+                    - Price *(int)*
                     - EcoPart *(float)*
                     - Vat *(float)*
                     - DeaTax *(float)*
                     - Stock *(int)*
-                    - PreparationTime *(byte)*
+                    - PreparationTime *(int)*
                 - Optional attributes:
                     - Comment *(str)*
                     - StrikedPrice *(float)*
@@ -155,8 +153,6 @@ class Offers(BaseSection):
                     - 'FST'
                     - 'EXP'
                     - 'RIM'
-                - MaxLeadTime *(int)*
-                - MinLeadTime *(int)*
                 - ShippingCharges *(float)*
 
         Example::
