@@ -1,1 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?><root><OfferPackage type="dict"><key name="-xmlns" type="str">clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration</key><key name="-xmlns:x" type="str">http://schemas.microsoft.com/winfx/2006/xaml</key><key name="-Name" type="str">Nom fichier offres</key><key name="-PurgeAndReplace" type="str">false</key><key name="-PackageType" type="str">StockAndPrice</key><OfferPackage.Offers type="dict"><OfferCollection type="dict"><key name="-Capacity" type="str">1</key><Offer type="dict"><key name="-SellerProductId" type="str">S53262149036</key><key name="-ProductEan" type="str">9153262149367</key><key name="-Price" type="str">19.95</key><key name="-Stock" type="str">10</key></Offer></OfferCollection></OfferPackage.Offers><OfferPackage.OfferPublicationList type="dict"><OfferPublicationList type="dict"><key name="-Capacity" type="str">2</key><PublicationPool type="list"><item type="dict"><key name="-Id" type="str">1</key></item><item type="dict"><key name="-Id" type="str">16</key></item></PublicationPool></OfferPublicationList></OfferPackage.OfferPublicationList></OfferPackage></root>
+<OfferPackage Name="Nom fichier offres" PurgeAndReplace="false" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <OfferPackage.Offers>
+    <OfferCollection Capacity="1">
+        <Offer SellerProductId="32427220" ProductEan="0080605625006" ProductCondition="6" Price="1989.19" EcoPart="0.10" DeaTax="3.14" Vat="19.6" Stock="10" StrikedPrice="39.95" Comment="Offre avec tous les modes de livraisons possibles" PreparationTime="1">
+        <Offer.ShippingInformationList>
+            <ShippingInformationList Capacity="3">
+            <ShippingInformation AdditionalShippingCharges="0.95" DeliveryMode="Standart" ShippingCharges="1.0" />
+            <ShippingInformation AdditionalShippingCharges="1.95" DeliveryMode="Tracked" ShippingCharges="2.0" />
+            <ShippingInformation AdditionalShippingCharges="2.95" DeliveryMode="Registered" ShippingCharges="3.0" />
+          </ShippingInformationList>
+        </Offer.ShippingInformationList>
+        <Offer.PriceAndDiscountList>
+            <DiscountComponentList Capacity="0">
+          </DiscountComponentList>
+        </Offer.PriceAndDiscountList>
+      </Offer>
+        <Offer SellerProductId="32427220" ProductEan="0080605625006" ProductCondition="6" Price="19.95" EcoPart="0.10" DeaTax="3.14" Vat="19.6" Stock="10" StrikedPrice="39.95" Comment="Offre avec tous les modes de livraisons possibles" PreparationTime="2">
+        <Offer.ShippingInformationList>
+            <ShippingInformationList Capacity="3">
+            <ShippingInformation AdditionalShippingCharges="1.95" DeliveryMode="BigParcelEco" ShippingCharges="3.0" />
+            <ShippingInformation AdditionalShippingCharges="2.95" DeliveryMode="BigParcelStandard" ShippingCharges="3.0" />
+            <ShippingInformation AdditionalShippingCharges="2.95" DeliveryMode="BigParcelComfort" ShippingCharges="3.0" />
+          </ShippingInformationList>
+        </Offer.ShippingInformationList>
+        <Offer.PriceAndDiscountList>
+            <DiscountComponentList Capacity="0">
+          </DiscountComponentList>
+        </Offer.PriceAndDiscountList>
+      </Offer>
