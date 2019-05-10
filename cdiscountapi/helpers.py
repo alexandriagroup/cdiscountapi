@@ -58,10 +58,10 @@ def generate_package(package_type, output_dir, data):
     # Add Products.xml from product_dict.
     with open(f"{package}/Content/{xml_filename}", "wb") as f:
         xml_generator = XmlGenerator(data)
-        f.write(xml_generator.render())
+        f.write(xml_generator.render().encode('utf8'))
 
     # Make a zip from package.
-    zip_package = make_archive(output_dir, 'zip', path)
+    zip_package = make_archive(path, 'zip', output_dir)
 
     # Remove unzipped package.
     return zip_package
