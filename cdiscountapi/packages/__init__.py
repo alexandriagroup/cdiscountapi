@@ -19,6 +19,12 @@ from jinja2 import (
     FileSystemLoader,
 )
 
+from cdiscountapi.packages.validator import (
+    OfferValidator,
+    DiscountComponentValidator,
+    ShippingInformationValidator
+)
+
 
 class BasePackage(object):
     required_keys = []
@@ -106,49 +112,6 @@ class OfferPackage(BasePackage):
         else:
             return []
 
-    @staticmethod
-    def validate_offer(data):
-        mandatory_attributes = [
-            'ProductEan',
-            'SellerProductId',
-            'ProductCondition',
-            'Price',
-            'EcoPart',
-            'Vat',
-            'DeaTax',
-            'Stock',
-            'PreparationTime',
-        ]
-
-        optional_attributes = [
-            'Comment',
-            'StrikedPrice',
-            'PriceMustBeAligned',
-            'MinimumPriceForPriceAlignment',
-            'ProductPackagingUnit',
-            'ProductPackagingValue',
-            'BluffDeliveryMax'
-        ]
-
-        offer = {}
-        # Get all mandatory values or raises.
-        for attribute in mandatory_attributes:
-            try:
-                offer[attribute] = data[attribute]
-            except KeyError:
-                raise KeyError(f'Missing element {attribute}')
-
-        # Add optional values if exists.
-        offer.update(
-            {
-                attr: data[attr]
-                for attr in optional_attributes
-                if attr in data.keys()
-            }
-        )
-
-        return offer
-
     def validate(self, **kwargs):
         """
         Return the valid offer as a `zeep.objects.Offer`
@@ -160,23 +123,18 @@ class OfferPackage(BasePackage):
         """
         new_kwargs = kwargs.copy()
 
-        # We check the types of the lists in Offer
+        # We validate the lists in Offer
         if 'DiscountList' in kwargs:
-            new_kwargs['DiscountList'] = self.factory.ArrayOfDiscountComponent([
-                self.factory.DiscountComponent(**x) for x in new_kwargs['DiscountList']
-            ])
+            new_kwargs['DiscountList'] = {'DiscountComponent': [
+                DiscountComponentValidator.validate(x) for x in new_kwargs['DiscountList']
+            ]}
 
         if 'ShippingInformationList' in kwargs:
-            new_kwargs['ShippingInformationList'] = self.factory.ArrayOfShippingInformation([
-                self.factory.ShippingInformation(**x) for x in new_kwargs['ShippingInformationList']
-            ])
+            new_kwargs['ShippingInformationList'] = {'ShippingInformation': [
+                ShippingInformationValidator.validate(x) for x in new_kwargs['ShippingInformationList']
+            ]}
 
-        if 'OfferPoolList' in kwargs:
-            new_kwargs['OfferPoolList'] = self.factory.ArrayOfOfferPool([
-                self.factory.OfferPool(**x) for x in new_kwargs['OfferPoolList']
-            ])
-
-        return self.validate_offer(new_kwargs)
+        return OfferValidator.validate(new_kwargs)
 
     def render(self):
         loader = FileSystemLoader('cdiscountapi/templates')
@@ -186,8 +144,10 @@ class OfferPackage(BasePackage):
         extraction_mapping = {
             'shipping_information_list': ('ShippingInformationList', 'ShippingInformation'),
             'discount_list': ('DiscountList', 'DiscountComponent'),
-            'offer_pool_list': ('OfferPoolList', 'OfferPool'),
         }
+
+        # TODO Handle OfferPublicationList
+        # 'offer_publication_list': ('OfferPublicationList', 'PublicationPool'),
 
         offers_data = []
         for offer in offers:
@@ -202,7 +162,7 @@ class OfferPackage(BasePackage):
 
             # We keep only key:value pairs whose values are not None
             offers_datum['attributes'] += " ".join('{}="{}"'.format(k, v) for k, v in
-                                                   offer.__values__.items() if v is not None)
+                                                   offer.items() if v is not None)
             offers_data.append(offers_datum)
         return template.render(offers=offers_data)
 
@@ -214,51 +174,17 @@ class ProductPackage(BasePackage):
         super().__init__(preprod=preprod)
         self.add(data['Products'])
 
-    def add(self, data):
-        pass
-
-    @staticmethod
-    def validate_product(data):
-        mandatory_attributes = [
-            'BrandName',
-            'Description',
-            'LongLabel',
-            'Model',
-            'Navigation',
-            'ProductKind',
-            'SellerProductId',
-            'ShortLabel'
-        ]
-        optional_attributes = [
-            'Width',
-            'Weight',
-            'Length',
-            'Height',
-            'Size',
-            'SellerProductFamily',
-            'SellerProductColorName',
-            'ManufacturerPartNumber',
-            'ISBN',
-            'EncodedMarketingDescription'
-        ]
-
-        product = {}
-        # Get all mandatory values or raises.
-        for attribute in mandatory_attributes:
-            try:
-                product[attribute] = data[attribute]
-            except KeyError:
-                raise KeyError(f'Missing element {attribute}')
-
-        # Add optional values or set None.
-        product.update(
-            {
-                attribute: data.get(attribute, None)
-                for attribute in optional_attributes
-            }
-        )
-        return product
+    def add(self, products):
+        for product in products:
+            valid_product = self.validate(**product)
+            if valid_product not in self.data:
+                self.data.append(valid_product)
 
     def validate(self, **kwargs):
-        pass
+        return kwargs
 
+    def render(self):
+        loader = FileSystemLoader('cdiscountapi/templates')
+        env = Environment(loader=loader)
+        template = env.get_template('Products.xml')
+        products = deepcopy(self.data)
