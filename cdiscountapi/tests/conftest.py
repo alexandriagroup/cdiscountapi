@@ -114,11 +114,40 @@ def valid_offer():
         'SellerProductId': 'MY_SKU1',
         'ProductCondition': "6",
         'Price': 10,
-        'EcoPart': 0,
-        'Vat': 19.6,
-        'DeaTax': 0,
+        'DiscountList': [discount_component],
+        'ShippingInformationList': [shipping_info1, shipping_info2],
+        'ProductCondition': 4,
+        'EcoTax': 0.10,
+        'VatRate': 19.36,
+        'DeaTax': 3.14,
         'Stock': 1,
-        'PreparationTime': 1,
+    }
+    return offer
+
+
+@pytest.fixture
+def valid_offer_for_package():
+    """
+    Valid information to create an offer in an offer package
+    """
+    discount_component = {
+        'DiscountValue': 5, 'Type': 1,
+        'StartDate': datetime.datetime(2019, 4, 15),
+        'EndDate': datetime.datetime(2019, 5, 15)
+    }
+    shipping_info1 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'DeliveryMode': 'Standard'
+    }
+    shipping_info2 = {
+        'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
+        'DeliveryMode': 'Tracked'
+    }
+    offer_for_package = {
+        'ProductEan': '978-1593274351',
+        'SellerProductId': 'MY_SKU1',
+        'ProductCondition': "6",
+        'Price': 10,
         'DiscountList': [discount_component],
         'ShippingInformationList': [shipping_info1, shipping_info2],
         'ProductEan': 'BestEAN01',
@@ -129,7 +158,7 @@ def valid_offer():
         'Stock': 1,
         'PreparationTime': 1
     }
-    return offer
+    return offer_for_package
 
 
 @pytest.fixture
