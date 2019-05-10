@@ -7,21 +7,25 @@ class BaseValidator(object):
     optional = set()
 
     @classmethod
-    def validate(self, data):
+    def package_type(cls):
+        return cls.__name__.split('Validator')[0]
+
+    @classmethod
+    def validate(cls, data):
         """
         Return the data if the keys are valid attributes
         """
         provided = set(data.keys())
-        missing_required = self.required - provided
+        missing_required = cls.required - provided
         if len(missing_required) > 0:
-            raise ValidationError("Missing required attributes: {}".format(
-                missing_required))
+            raise ValidationError("Missing required attributes for {}: {}".format(
+                cls.package_type(), missing_required))
 
-        invalid_attributes = provided - self.required - self.optional
+        invalid_attributes = provided - cls.required - cls.optional
         if len(invalid_attributes) > 0:
             raise ValidationError("These attributes are not valid: {}."
                                   " Please use only the following ones if necessary: {}".format(
-                invalid_attributes, self.optional))
+                invalid_attributes, cls.optional))
         return data
 
 
