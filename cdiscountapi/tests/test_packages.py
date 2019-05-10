@@ -1,31 +1,30 @@
-# Python imports
-import datetime
-
 # Third-party imports
 import pytest
-import zeep
 
 # Project imports
-from cdiscountapi.packages import OfferPackage
+from cdiscountapi.packages import OfferPackage, ProductPackage
+from cdiscountapi.exceptions import ValidationError
 
 
 # OfferPackage
 @pytest.mark.vcr()
-def test_OfferPackage(valid_offer):
-    package = OfferPackage({'OfferCollection': [valid_offer]})
+def test_OfferPackage(valid_offer_for_package):
+    package = OfferPackage({'OfferCollection': [valid_offer_for_package]})
     assert len(package.data) == 1
-    offer = package.data[0]
-    assert offer.Price == valid_offer['Price']
-    assert offer.SellerProductId == valid_offer['SellerProductId']
-    assert offer.DiscountList == valid_offer['SellerProductId']
+    offer_for_package = package.data[0]
+    assert offer_for_package['Price'] == valid_offer_for_package['Price']
+    assert offer_for_package['SellerProductId'] == valid_offer_for_package['SellerProductId']
+    assert offer_for_package['DiscountList'] == {'DiscountComponent': valid_offer_for_package['DiscountList']}
 
 
 @pytest.mark.vcr()
-def test_OfferPackage_with_invalid_key(valid_offer):
-    invalid_offer = valid_offer
-    invalid_offer['InvalidKey'] = 'Unknown'
-    # A TypeError should be raised because shipping_info2 has an invalid key
-    pytest.raises(TypeError, OfferPackage, {'OfferCollection': [invalid_offer]})
+def test_OfferPackage_with_invalid_key(valid_offer_for_package):
+    invalid_offer_for_package = valid_offer_for_package
+    invalid_offer_for_package['InvalidKey'] = 'Unknown'
+    # A ValidationError should be raised because InvalidKey is neither required
+    # or optional
+    pytest.raises(ValidationError, OfferPackage, {'OfferCollection':
+                                                  [invalid_offer_for_package]})
 
 
 # ProductPackage
