@@ -28,3 +28,8 @@ class CdiscountApiOrderError(CdiscountApiException):
     """
     Raised when there's an error in the order
     """
+
+class ValidationError(Exception):
+    """
+    Raised when the parameters to create the Offers.xml or Products.xml are not valid
+    """
