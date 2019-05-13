@@ -14,39 +14,19 @@ VCR_CASSETTE_DIR = Path(__file__).parent.joinpath('cassettes')
 
 def scrub_strings():
     def before_record_response(response):
-        response['body']['string'] = re.sub(b'<ZipCode>.+</ZipCode>',
-                                            b'<ZipCode>ZIP_CODE</ZipCode>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<SiretNumber>.+</SiretNumber>',
-                                            b'<SiretNumber>SIRET_NUMBER</SiretNumber>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<Email>.+</Email>',
-                                            b'<Email>EMAIL</Email>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<Login>.+</Login>',
-                                            b'<Login>LOGIN</Login>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<MobileNumber>.+</MobileNumber>',
-                                            b'<MobileNumber>MOBILE_NUMBER</MobileNumber>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<PhoneNumber>.+</PhoneNumber>',
-                                            b'<PhoneNumber>PHONE_NUMBER</PhoneNumber>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<Address1>.+</Address1>',
-                                            b'<Address1>ADDRESS1</Address1>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<Address2>.+</Address2>',
-                                            b'<Address2>ADDRESS2</Address2>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<TokenId>.+</TokenId>',
-                                            b'<TokenId>TOKEN_ID</TokenId>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<ShopName>.+</ShopName>',
-                                            b'<ShopName>SHOP_NAME</ShopName>',
-                                            response['body']['string'])
-        response['body']['string'] = re.sub(b'<SellerLogin>.+</SellerLogin>',
-                                            b'<SellerLogin>SELLER_LOGIN</SellerLogin>',
-                                            response['body']['string'])
+        substitutions = ['ZipCode', 'SiretNumber', 'Email', 'Login',
+                         'MobilePhone', 'MobileNumber', 'PhoneNumber',
+                         'Address1', 'Address2', 'Building', 'City', 'Country',
+                         'FirstName', 'LastName', 'Street', 'TokenId',
+                         'ShopName', 'SellerLogin', 'Civility',
+                         'ShippingLastName', 'ShippingFirstName', 'Sender']
+
+        for substitution in substitutions:
+            pattern = '<{0}>.+?</{0}>'.format(substitution)
+            new_value = '<{0}>{1}</{0}>'.format(substitution, substitution.upper())
+            response['body']['string'] = re.sub(pattern.encode('utf8'),
+                                                new_value.encode('utf8'),
+                                                response['body']['string'])
         return response
     return before_record_response
 
@@ -175,12 +155,12 @@ def valid_product():
         "CategoryCode": "0R050A01",
         "SellerProductId": "120905783",
         "ShortLabel": "Jeans Deeluxe Tanner Snow Bleu",
-        "Product.EanList": ["3606918243767"],
-        "Product.ModelProperties": [{"Genre": "Homme - Garcon"}, {"Type de public": "Adulte"}],
-        "Product.Pictures": [
-            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg",
-            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg",
-            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg",
-            "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg",
-        ]
+        "EanList": {'ProductEan': [{"Ean": "3606918243767"}]},
+        "ModelProperties": [{"Genre": "Homme - Garcon"}, {"Type de public": "Adulte"}],
+        "Pictures": {"ProductImage": [
+            {"Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg"},
+            {"Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg"},
+            {"Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg"},
+            {"Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg"},
+        ]}
     }
