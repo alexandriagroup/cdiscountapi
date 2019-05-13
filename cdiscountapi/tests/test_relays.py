@@ -35,7 +35,7 @@ def test_get_relays_file_submission_result_without_relays_file(api):
     should return an invalid response when any RelaysFileId is specified
     """
     response = api.relays.get_relays_file_submission_result(
-        RelaysFileId='http://endertromb.com/chunky.xlsx'
+        relays_file_ids=[15645, 52486]
     )
     assert_response_failed(response)
     assert response['RelaysFileIntegrationStatus'] is None

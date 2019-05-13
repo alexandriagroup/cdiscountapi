@@ -12,18 +12,10 @@ def test_generate_mail_discussion_guid(api):
 
 
 @pytest.mark.vcr()
-def test_generate_discussion_mail_guid_with_invalid_scopus_id(api):
-    response = api.webmail.generate_discussion_mail_guid('INVALID_SCOPUS_ID')
+def test_generate_discussion_mail_guid_with_invalid_order_id(api):
+    response = api.webmail.generate_discussion_mail_guid('INVALID_ORDER_ID')
     assert response['ErrorMessage'] is None
     assert response['MailGuid'] is None
-
-
-@pytest.mark.vcr()
-def test_generate_mail_discussion_guid_without_scopus_id(api):
-    response = api.webmail.generate_discussion_mail_guid()
-    assert_response_failed(response)
-    assert response['MailGuid'] is None
-    assert response['ErrorMessage'] is not None
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Waiting for offers')

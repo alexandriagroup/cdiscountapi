@@ -8,7 +8,6 @@
     :copyright: © 2019 Alexandria
 """
 
-from shutil import make_archive
 from tempfile import gettempdir
 
 from zeep.helpers import serialize_object

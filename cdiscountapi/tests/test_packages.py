@@ -14,7 +14,7 @@ def test_OfferPackage(valid_offer_for_package):
     offer_for_package = package.data[0]
     assert offer_for_package['Price'] == valid_offer_for_package['Price']
     assert offer_for_package['SellerProductId'] == valid_offer_for_package['SellerProductId']
-    assert offer_for_package['DiscountList'] == {'DiscountComponent': valid_offer_for_package['DiscountList']}
+    assert offer_for_package['DiscountList'] == valid_offer_for_package['DiscountList']
 
 
 @pytest.mark.vcr()
