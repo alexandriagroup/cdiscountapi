@@ -11,7 +11,7 @@
 
 from zeep.helpers import serialize_object
 from .base import BaseSection
-from ..helpers import auto_refresh_token
+from ..helpers import auto_refresh_token, check_element
 
 
 class Fulfillment(BaseSection):
@@ -22,10 +22,49 @@ class Fulfillment(BaseSection):
     (https://dev.cdiscount.com/marketplace/?page_id=2222)
     """
     @auto_refresh_token
-    def submit_fulfillment_supply_order(self, request):
+    def submit_fulfillment_supply_order(self, prod_desc_list):
+        """
+        This operation create a deposit that will asynchronously triggered supply order creation.
+
+        :param prod_desc_list: list of FulfilmentProductDescription:
+
+            - ProductEAN *(str)*: [Mandatory]
+            - Warehouse *(str)*: [Mandatory]
+                - "CEM"
+                - "ANZ"
+                - "SMD"
+            - Quantity *(int)*: [Mandatory]
+            - ExtSupplyOrderID *(str)*: Seller external supply order reference
+            - WarehouseReceptionMinDate *(date)*
+            - SellerProductReference *(str)*
+
+        Example::
+
+            response =  api.fulfillment.submit_fulfillment_supply_order(
+                [
+                    {
+                        'ProductEAN': '1051248556517',
+                        'Warehouse': 'SMD'
+                        'Quantity': 3,
+                    },
+                    {
+                        'ProductEAN': '1234567891234',
+                        'Warehouse': 'ANZ',
+                        'Quantity': 122,
+                        'SellerProductReference': '154'
+                    }
+                ]
+            )
+
+
+        :return:
+        """
+        for desc in prod_desc_list:
+            check_element(desc, self.api.factory.FulfilmentProductDescription)
+
         response = self.api.client.service.SubmitFulfilmentSupplyOrder(
             headerMessage=self.api.header,
-            request=request
+            request=prod_desc_list
         )
         return serialize_object(response, dict)
 
@@ -35,7 +74,24 @@ class Fulfillment(BaseSection):
         :param order_list: list of dict as:
             [{'OrderReference': 1703182124BNXCO,'ProductEan': 2009854780777}]
 
+        Example::
+
+            response = api.fulfillment.submit_fulfillment_on_demand_supply_order(
+                order_list= [
+                    {
+                        'OrderReference': '1703182124BNXCO',
+                        'ProductEan': 2009854780777
+                    },
+                    {
+                        'OrderReference': '2813182124AMYBP',
+                        'ProductEan': '3009854780789'
+                    }
+                ]
+
+
         """
+        for order in order_list:
+            check_element(order, self.api.factory.FulfilmentOrderLineRequest)
         response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
             headerMessage=self.api.header,
             request={'OrderLineList': order_list}
@@ -47,11 +103,11 @@ class Fulfillment(BaseSection):
         """
         To search supply order reports.
 
-        :param int PageSize: [mandatory]
         :param date BeginCreationDate:
+        :param list DepositIdList: list of ints
         :param date EndCreationDate:
         :param int PageNumber:
-        :param list DepositIdList: list of ints
+        :param int PageSize:
 
         Examples::
 
@@ -98,7 +154,7 @@ class Fulfillment(BaseSection):
     @auto_refresh_token
     def get_fulfillment_supply_order(self, **request):
         """
-        :param int PageSize: [mandatory]
+        :param int PageSize:
         :param date BeginModificationDate:
         :param date EndModificationDate:
         :param int PageNumber:
@@ -106,14 +162,13 @@ class Fulfillment(BaseSection):
 
         Examples::
 
-            response = api.fulfillment.get_fulfillment_supply_order_report_list(
+            response = api.fulfillment.get_fulfillment_supply_order(
                 PageSize=10,
                 BeginCreationDate=datetime.datetime(2019, 1, 1),
                 EndCreationDate=datetime.datetime(2019, 1, 2),
             )
 
-            response = api.fulfillment.get_fulfillment_supply_order_report_list(
-                PageSize=10,
+            response = api.fulfillment.get_fulfillment_supply_order(
                 SupplyOrderNumberList=['X', 'Y', 'Z']
             )
 
@@ -180,11 +235,11 @@ class Fulfillment(BaseSection):
         """
         To get status and details about fulfillment products activation.
 
-        :param str BeginDate:
+        :param str BeginDate: date
         :param list DepositIdList: int list
-        :param str EndDate:
+        :param str EndDate: date
 
-        Usage::
+        Example::
 
             response = api.fulfillment.get_fulfillment_activation_report_list(
                 BeginDate='2019-04-26T09:54:38:72'
@@ -205,7 +260,10 @@ class Fulfillment(BaseSection):
 
         :param str OrderReference:
         :param str ProductEan:
-        :param str Warehouse:
+        :param str Warehouse: name of warehouses where products are stored:
+            - 'CEM'
+            - 'ANZ'
+            - 'SMD'
 
         Example::
 
@@ -227,9 +285,16 @@ class Fulfillment(BaseSection):
         """
         To set an offer online or offline
 
-        :param request:
-            'Action': 'Publish' or 'Unpublish'
-            'SellerProductId': str
+        :param str Action: 'Publish' or 'Unpublish'
+        :param str SellerProductId:
+
+        Usage::
+
+            response = api.fulfillment.submit_offer_state_action(
+                Action='Unpublish',
+                SellerProductId='11504'
+            )
+
         :return:
         """
         seller_action = self.api.factory.OfferStateActionRequest(**request)
@@ -240,29 +305,29 @@ class Fulfillment(BaseSection):
         return serialize_object(response, dict)
 
     @auto_refresh_token
-    def create_external_order(self, order):
+    def create_external_order(self, **order):
         """
         create an order from another marketplace.
 
-        :param order: A dictionary with the structure:
+        :param order:
+            -
 
         Example::
 
             response = api.fufillment.create_external_order(
-            {
-                'Comments': str,
-                'Corporation': str (ex:FNAC),
-                'Customer': customer info dict,
-                'CustomerOrderNumber': str,
-                'OrderDate': date,
-                'OrderLineList': {
+                Comments: str,
+                Corporation: str (ex:FNAC),
+                Customer: customer info dict,
+                CustomerOrderNumber: str,
+                OrderDate: date,
+                ShippingMode: str,
+                OrderLineList: [
                     'ExternalOrderLine': {
                         'ProductEan': str,
                         'ProductReference': str,
                         'Quantity': int
                     }
-                },
-                'ShippingMode': str,
+                ],
             }
 
         :return: The response
@@ -275,6 +340,22 @@ class Fulfillment(BaseSection):
 
     @auto_refresh_token
     def get_external_order_status(self, **request):
+        """
+        to get order integration status
+
+        :param str Corporation: website from which the order comes.
+        :param str CustomerOrderNumber:
+
+        Usage::
+
+            response = api.fufillment.get_external_order_status(
+                Corporation='FNAC',
+                CustomerOrderNumber='100-00110101-10011100'
+            )
+
+
+        :return: Status ("OK", "Pending", "KO")
+        """
         response = self.api.client.service.GetExternalOrderStatus(
             headerMessage=self.api.header,
             request={
@@ -289,22 +370,39 @@ class Fulfillment(BaseSection):
         """
         List seller product
 
-        :param list BarCodeList:
+        :param list BarCodeList: list of EAN
         :param str FulfilmentReferencement:
+            - 'All'
+            - 'OnlyReferenced'
+            - 'OnlyNotReferenced'
         :param str ShippableStock:
+            - 'All'
+            - 'WithStock'
+            - 'WithoutStock'
+            - 'ShippableStock'
         :param str BlockedStock:
+            - 'All'
+            - 'WithStock'
+            - 'WithoutStock'
+            - 'BlockedStock'
         :param str SoldOut:
+            - 'None'
+            - 'All'
+            - 'InSoldOut'
+            - 'InSoldOutFiveDays'
+            - 'InSoldOutFifteenDays'
+            - 'SoldOut'
 
         Example::
 
             response = api.fulfillment.get_product_stock_list(
-                FulfilmentReferencement='All',
-                ShippableStock='All',
+                FulfilmentReferencement='OnlyReferenced',
+                ShippableStock='WithStock',
                 BlockedStock='All',
-                SoldOut='All'
+                SoldOut='InSoldOut'
             )
 
-        :return:
+        :return: ProductStockList, Status ("OK", "NoData", "KO") and TotalProductCount
         """
         response = self.api.client.service.GetProductStockList(
             headerMessage=self.api.header,
