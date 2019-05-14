@@ -101,18 +101,19 @@ class Offers(BaseSection):
         :param str output_dir: [mandatory] path to generate package
         :param list pool_list: [optional]
         :param bool purge_and_replace: [optional]
-        :param list offers_list: list of dict [{offer, shipping}, ...]
+        :param list offers_list: list of dict [{offer, shipping}, ...]:
+
             -Offer
                 - Mandatory attributes:
                     - ProductEan *(str)*
                     - SellerProductId *(str)*
                     - ProductCondition *(int)*:
-                        - 1: 'LikeNew',
-                        - 2: 'VeryGoodState',
-                        - 3: 'GoodState',
-                        - 4: 'AverageState',
-                        - 5: 'Refurbished',
-                        - 6: 'New',
+                        - 'LikeNew',
+                        - 'VeryGoodState',
+                        - 'GoodState',
+                        - 'AverageState',
+                        - 'Refurbished',
+                        - 'New',
                     - Price *(int)*
                     - EcoPart *(float)*
                     - Vat *(float)*
@@ -122,11 +123,11 @@ class Offers(BaseSection):
                 - Optional attributes:
                     - Comment *(str)*
                     - StrikedPrice *(float)*
-                    - PriceMustBeAligned *(int)*:
-                        - 1: 'Empty',
-                        - 2: 'Unknown',
-                        - 3: 'Align',
-                        - 4: 'DontAlign',
+                    - PriceMustBeAligned *(str)*:
+                        - 'Empty',
+                        - 'Unknown',
+                        - 'Align',
+                        - 'DontAlign',
                     - MinimumPriceForPriceAlignment *(float)*
                     - ProductPackagingUnit *(str)*:
                         - 'None',
@@ -136,6 +137,7 @@ class Offers(BaseSection):
                         - 'CubicMeter'
                     - ProductPackagingValue *(float)*
                     - BluffDeliveryMax *(int)*
+
             - ShippingInformation:
                 - AdditionalShippingCharges *(float)*
                 - DeliveryMode *(DeliveryModeInformation)*
