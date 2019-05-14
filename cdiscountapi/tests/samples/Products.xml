@@ -1,0 +1,36 @@
+<ProductPackage Name="test_Greg_DemandeDecreaProduit_API_Variant_SOJ144731" xmlns="clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;assembly=Cdiscount.Service.ProductIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ProductPackage.Products>
+    <ProductCollection Capacity="8">
+      <Product   BrandName="Deeluxe" SellerProductFamily ="SOJ50874" SellerProductColorName = "Bleu Délavé" Size ="38/34" Description="Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe Droite Homme"   LongLabel="Nudie Average Joe organic vacation worn Jeans" Model="SOUMISSION CREATION PRODUITS_MK"  ProductKind="Variant" CategoryCode="0R050A01" SellerProductId="120905783"  ShortLabel="Jeans Deeluxe Tanner Snow Bleu">
+        <Product.EanList>
+          <ProductEan Ean="3606918243767"/>
+        </Product.EanList>
+        <Product.ModelProperties>
+          <x:String x:Key="Genre">Homme - Garçon</x:String>
+          <x:String x:Key="Type de public">Adulte</x:String>
+        </Product.ModelProperties>
+        <Product.Pictures>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg"/>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg"/>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg"/>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg"/>
+        </Product.Pictures>
+      </Product>
+	  <Product   BrandName="Deeluxe" SellerProductFamily ="SOJ50874" SellerProductColorName = "Bleu Délavé" Size ="36/34"   Description="Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe Droite Homme"  LongLabel="Nudie Average Joe organic vacation worn Jeans" Model="SOUMISSION CREATION PRODUITS_MK"  ProductKind="Variant" CategoryCode="0R050A01" SellerProductId="120905784"  ShortLabel="Jeans Deeluxe Tanner Snow Bleu">
+        <Product.EanList>
+          <ProductEan Ean="3606918243774"/>
+        </Product.EanList>
+        <Product.ModelProperties>
+          <x:String x:Key="Genre">Homme - Garçon</x:String>
+		  <x:String x:Key="Type de public">Adulte</x:String>
+        </Product.ModelProperties>
+        <Product.Pictures>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg"/>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg"/>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-3.jpg"/>
+          <ProductImage Uri="http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg"/>
+        </Product.Pictures>
+      </Product>
+	  </ProductCollection>
+  </ProductPackage.Products>
+</ProductPackage>

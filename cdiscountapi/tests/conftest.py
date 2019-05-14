@@ -19,7 +19,7 @@ def scrub_strings():
                          'Address1', 'Address2', 'Building', 'City', 'Country',
                          'FirstName', 'LastName', 'Street', 'TokenId',
                          'ShopName', 'SellerLogin', 'Civility',
-                         'ShippingLastName', 'ShippingFirstName', 'Sender']
+                         'ShippingLastName', 'ShippingFirstName', 'Sender', 'Content']
 
         for substitution in substitutions:
             pattern = '<{0}>.+?</{0}>'.format(substitution)
@@ -141,14 +141,13 @@ def valid_offer_for_package():
 
 
 @pytest.fixture
-def valid_product():
+def valid_product_for_package():
     return {
-        "BrandName": "BRAND",
+        "BrandName": "Deeluxe",
         "SellerProductFamily": "SOJ50874",
         "SellerProductColorName": "Bleu Délavé",
         "Size": "38/34",
-        "Description": ("Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe"
-                        " Droite Homme, Couleur Bleu Délavé, 100% Coton , Taille 28"),
+        "Description": "Marque Deeluxe, Modèle Tanner Snow Bleu, Jeans Coupe Droite Homme",
         "LongLabel": "Nudie Average Joe organic vacation worn Jeans",
         "Model": "SOUMISSION CREATION PRODUITS_MK",
         'ProductKind': "Variant",
@@ -156,7 +155,7 @@ def valid_product():
         "SellerProductId": "120905783",
         "ShortLabel": "Jeans Deeluxe Tanner Snow Bleu",
         "EanList": {'ProductEan': [{"Ean": "3606918243767"}]},
-        "ModelProperties": [{"Genre": "Homme - Garcon"}, {"Type de public": "Adulte"}],
+        "ModelProperties": [{"Genre": "Homme - Garçon"}, {"Type de public": "Adulte"}],
         "Pictures": {"ProductImage": [
             {"Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-1.jpg"},
             {"Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-2.jpg"},

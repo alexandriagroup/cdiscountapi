@@ -19,7 +19,7 @@ import zeep
 from cdiscountapi.packages import OfferPackage, ProductPackage
 
 
-# TODO Remove package_type. Determine package_type from the keys in data 
+# TODO Remove package_type. Determine package_type from the keys in data
 def generate_package(package_type, output_dir, data):
     """
     Generate a zip package for the offers or the products
