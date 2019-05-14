@@ -47,7 +47,7 @@ def test_get_offer_question_list_by_status(api):
     )
     assert_response_succeeded(response)
     # If there are closed questions, OfferQuestionList should not be None
-    assert response['OfferQuestionList'] is not None
+    assert 'OfferQuestionList' in response
 
 
 @pytest.mark.vcr()
@@ -84,15 +84,15 @@ def test_get_offer_question_list_by_date(api):
 def test_get_offer_question_list_by_eans(api):
     response = api.discussions.get_offer_question_list(ProductEANList=['2009863600561'])
     assert_response_succeeded(response)
-    assert response['OfferQuestionList'] is not None
+    assert 'OfferQuestionList' in response
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
 @pytest.mark.vcr()
-def test_get_offer_question_list_by_seller_refrences(api):
+def test_get_offer_question_list_by_seller_references(api):
     response = api.discussions.get_offer_question_list(ProductSellerReferenceList=['PRES1'])
     assert_response_succeeded(response)
-    assert response['OfferQuestionList'] is not None
+    assert 'OfferQuestionList' in response
 
 
 # order_question
@@ -131,16 +131,12 @@ def test_get_order_question_list_by_date(api):
         assert response['OrderQuestionList'] is None
 
 
-@pytest.mark.vcr()
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
-def test_get_order_question_list_by_eans(api):
-    pass
-
-
-@pytest.mark.vcr()
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='Stand by')
-def test_get_order_question_list_by_seller_refrences(api):
-    pass
+def test_get_order_question_list_by_order_number(api):
+    response = api.discussions.get_order_question_list(
+        OrderNumberList=['ORDER_NUMBER_1', 'ORDER_NUMBER_2']
+    )
+    assert_response_succeeded(response)
+    assert 'OrderQuestionList' in response
 
 
 # get_order_claim_list

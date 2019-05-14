@@ -100,8 +100,6 @@ class Discussions(BaseSection):
                 - Open
                 - Closed
                 - NotProcessed
-        - ProductEANList
-        - ProductSellerReferenceList
 
         Example::
 
