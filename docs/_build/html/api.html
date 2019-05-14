@@ -212,29 +212,32 @@ and their performance indicator.</p>
 <li><p><strong>output_dir</strong> (<em>str</em>) – [mandatory] path to generate package</p></li>
 <li><p><strong>pool_list</strong> (<em>list</em>) – [optional]</p></li>
 <li><p><strong>purge_and_replace</strong> (<em>bool</em>) – [optional]</p></li>
-<li><p><strong>offers_list</strong> (<em>list</em>) – <ul>
+<li><p><strong>offers_list</strong> (<em>list</em>) – <p>list of dict [{offer, shipping}, …]:</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-O<var>ffer</var></span></kbd></dt>
+<dd><ul>
 <li><dl class="simple">
 <dt>Mandatory attributes:</dt><dd><ul>
 <li><p>ProductEan <em>(str)</em></p></li>
 <li><p>SellerProductId <em>(str)</em></p></li>
 <li><dl class="simple">
 <dt>ProductCondition <em>(int)</em>:</dt><dd><ul>
-<li><p>1: ‘LikeNew’,</p></li>
-<li><p>2: ‘VeryGoodState’,</p></li>
-<li><p>3: ‘GoodState’,</p></li>
-<li><p>4: ‘AverageState’,</p></li>
-<li><p>5: ‘Refurbished’,</p></li>
-<li><p>6: ‘New’,</p></li>
+<li><p>’LikeNew’,</p></li>
+<li><p>’VeryGoodState’,</p></li>
+<li><p>’GoodState’,</p></li>
+<li><p>’AverageState’,</p></li>
+<li><p>’Refurbished’,</p></li>
+<li><p>’New’,</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p>Price <em>(float)</em></p></li>
+<li><p>Price <em>(int)</em></p></li>
 <li><p>EcoPart <em>(float)</em></p></li>
 <li><p>Vat <em>(float)</em></p></li>
 <li><p>DeaTax <em>(float)</em></p></li>
 <li><p>Stock <em>(int)</em></p></li>
-<li><p>PreparationTime <em>(byte)</em></p></li>
+<li><p>PreparationTime <em>(int)</em></p></li>
 </ul>
 </dd>
 </dl>
@@ -244,11 +247,11 @@ and their performance indicator.</p>
 <li><p>Comment <em>(str)</em></p></li>
 <li><p>StrikedPrice <em>(float)</em></p></li>
 <li><dl class="simple">
-<dt>PriceMustBeAligned <em>(int)</em>:</dt><dd><ul>
-<li><p>1: ‘Empty’,</p></li>
-<li><p>2: ‘Unknown’,</p></li>
-<li><p>3: ‘Align’,</p></li>
-<li><p>4: ‘DontAlign’,</p></li>
+<dt>PriceMustBeAligned <em>(str)</em>:</dt><dd><ul>
+<li><p>’Empty’,</p></li>
+<li><p>’Unknown’,</p></li>
+<li><p>’Align’,</p></li>
+<li><p>’DontAlign’,</p></li>
 </ul>
 </dd>
 </dl>
@@ -267,6 +270,38 @@ and their performance indicator.</p>
 </li>
 <li><p>ProductPackagingValue <em>(float)</em></p></li>
 <li><p>BluffDeliveryMax <em>(int)</em></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><dl class="simple">
+<dt>ShippingInformation:</dt><dd><ul>
+<li><p>AdditionalShippingCharges <em>(float)</em></p></li>
+<li><dl class="simple">
+<dt>DeliveryMode <em>(DeliveryModeInformation)</em></dt><dd><ul>
+<li><p>’STD’ (‘Standart’)</p></li>
+<li><p>’TRK’ (‘Tracking’)</p></li>
+<li><p>’REG’ (‘Registered’)</p></li>
+<li><p>’COL’ (‘Collissimo’)</p></li>
+<li><p>’RCO’ (‘Relay Colis’)</p></li>
+<li><p>’REL’ (‘Mondial Relay’)</p></li>
+<li><p>’SO1’ (‘So Colissimo’)</p></li>
+<li><p>’MAG’ (‘in shop’)</p></li>
+<li><p>’LV1’</p></li>
+<li><p>’LV2’</p></li>
+<li><p>’LV’</p></li>
+<li><p>’FST’</p></li>
+<li><p>’EXP’</p></li>
+<li><p>’RIM’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>ShippingCharges <em>(float)</em></p></li>
 </ul>
 </dd>
 </dl>
@@ -1254,29 +1289,31 @@ new ones.</p>
 
 <dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.create_external_order">
-<code class="descname">create_external_order</code><span class="sig-paren">(</span><em>order</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.create_external_order" title="Permalink to this definition">¶</a></dt>
+<code class="descname">create_external_order</code><span class="sig-paren">(</span><em>**order</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.create_external_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>create an order from another marketplace.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>order</strong> – A dictionary with the structure:</p>
+<dd class="field-odd"><p><strong>order</strong> – <ul class="simple">
+<li></li>
+</ul>
+</p>
 </dd>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fufillment</span><span class="o">.</span><span class="n">create_external_order</span><span class="p">(</span>
-<span class="p">{</span>
-    <span class="s1">&#39;Comments&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="s1">&#39;Corporation&#39;</span><span class="p">:</span> <span class="nb">str</span> <span class="p">(</span><span class="n">ex</span><span class="p">:</span><span class="n">FNAC</span><span class="p">),</span>
-    <span class="s1">&#39;Customer&#39;</span><span class="p">:</span> <span class="n">customer</span> <span class="n">info</span> <span class="nb">dict</span><span class="p">,</span>
-    <span class="s1">&#39;CustomerOrderNumber&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="s1">&#39;OrderDate&#39;</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
-    <span class="s1">&#39;OrderLineList&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">Comments</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">Corporation</span><span class="p">:</span> <span class="nb">str</span> <span class="p">(</span><span class="n">ex</span><span class="p">:</span><span class="n">FNAC</span><span class="p">),</span>
+    <span class="n">Customer</span><span class="p">:</span> <span class="n">customer</span> <span class="n">info</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">CustomerOrderNumber</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">OrderDate</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+    <span class="n">ShippingMode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">OrderLineList</span><span class="p">:</span> <span class="p">[</span>
         <span class="s1">&#39;ExternalOrderLine&#39;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;ProductEan&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="s1">&#39;ProductReference&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
             <span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="nb">int</span>
         <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="s1">&#39;ShippingMode&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">],</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1288,19 +1325,45 @@ new ones.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.get_external_order_status">
+<code class="descname">get_external_order_status</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_external_order_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>to get order integration status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Corporation</strong> (<em>str</em>) – website from which the order comes.</p></li>
+<li><p><strong>CustomerOrderNumber</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fufillment</span><span class="o">.</span><span class="n">get_external_order_status</span><span class="p">(</span>
+    <span class="n">Corporation</span><span class="o">=</span><span class="s1">&#39;FNAC&#39;</span><span class="p">,</span>
+    <span class="n">CustomerOrderNumber</span><span class="o">=</span><span class="s1">&#39;100-00110101-10011100&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Status (“OK”, “Pending”, “KO”)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_activation_report_list">
 <code class="descname">get_fulfillment_activation_report_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_activation_report_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>To get status and details about fulfillment products activation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>BeginDate</strong> (<em>str</em>) – </p></li>
+<li><p><strong>BeginDate</strong> (<em>str</em>) – date</p></li>
 <li><p><strong>DepositIdList</strong> (<em>list</em>) – int list</p></li>
-<li><p><strong>EndDate</strong> (<em>str</em>) – </p></li>
+<li><p><strong>EndDate</strong> (<em>str</em>) – date</p></li>
 </ul>
 </dd>
 </dl>
-<p>Usage:</p>
+<p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_activation_report_list</span><span class="p">(</span>
     <span class="n">BeginDate</span><span class="o">=</span><span class="s1">&#39;2019-04-26T09:54:38:72&#39;</span>
 <span class="p">)</span>
@@ -1337,7 +1400,10 @@ new ones.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>OrderReference</strong> (<em>str</em>) – </p></li>
 <li><p><strong>ProductEan</strong> (<em>str</em>) – </p></li>
-<li><p><strong>Warehouse</strong> (<em>str</em>) – </p></li>
+<li><p><strong>Warehouse</strong> (<em>str</em>) – name of warehouses where products are stored:
+- ‘CEM’
+- ‘ANZ’
+- ‘SMD’</p></li>
 </ul>
 </dd>
 </dl>
@@ -1360,7 +1426,7 @@ new ones.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>PageSize</strong> (<em>int</em>) – [mandatory]</p></li>
+<li><p><strong>PageSize</strong> (<em>int</em>) – </p></li>
 <li><p><strong>BeginModificationDate</strong> (<em>date</em>) – </p></li>
 <li><p><strong>EndModificationDate</strong> (<em>date</em>) – </p></li>
 <li><p><strong>PageNumber</strong> (<em>int</em>) – </p></li>
@@ -1369,14 +1435,13 @@ new ones.</p>
 </dd>
 </dl>
 <p>Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order_report_list</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order</span><span class="p">(</span>
     <span class="n">PageSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">BeginCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">EndCreationDate</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
 <span class="p">)</span>
 
-<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order_report_list</span><span class="p">(</span>
-    <span class="n">PageSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_fulfillment_supply_order</span><span class="p">(</span>
     <span class="n">SupplyOrderNumberList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
@@ -1395,11 +1460,11 @@ new ones.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>PageSize</strong> (<em>int</em>) – [mandatory]</p></li>
 <li><p><strong>BeginCreationDate</strong> (<em>date</em>) – </p></li>
+<li><p><strong>DepositIdList</strong> (<em>list</em>) – list of ints</p></li>
 <li><p><strong>EndCreationDate</strong> (<em>date</em>) – </p></li>
 <li><p><strong>PageNumber</strong> (<em>int</em>) – </p></li>
-<li><p><strong>DepositIdList</strong> (<em>list</em>) – list of ints</p></li>
+<li><p><strong>PageSize</strong> (<em>int</em>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -1429,26 +1494,51 @@ new ones.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>BarCodeList</strong> (<em>list</em>) – </p></li>
-<li><p><strong>FulfilmentReferencement</strong> (<em>str</em>) – </p></li>
-<li><p><strong>ShippableStock</strong> (<em>str</em>) – </p></li>
-<li><p><strong>BlockedStock</strong> (<em>str</em>) – </p></li>
-<li><p><strong>SoldOut</strong> (<em>str</em>) – </p></li>
+<li><p><strong>BarCodeList</strong> (<em>list</em>) – list of EAN</p></li>
+<li><p><strong>FulfilmentReferencement</strong> (<em>str</em>) – <ul>
+<li><p>‘All’</p></li>
+<li><p>’OnlyReferenced’</p></li>
+<li><p>’OnlyNotReferenced’</p></li>
+</ul>
+</p></li>
+<li><p><strong>ShippableStock</strong> (<em>str</em>) – <ul>
+<li><p>‘All’</p></li>
+<li><p>’WithStock’</p></li>
+<li><p>’WithoutStock’</p></li>
+<li><p>’ShippableStock’</p></li>
+</ul>
+</p></li>
+<li><p><strong>BlockedStock</strong> (<em>str</em>) – <ul>
+<li><p>‘All’</p></li>
+<li><p>’WithStock’</p></li>
+<li><p>’WithoutStock’</p></li>
+<li><p>’BlockedStock’</p></li>
+</ul>
+</p></li>
+<li><p><strong>SoldOut</strong> (<em>str</em>) – <ul>
+<li><p>‘None’</p></li>
+<li><p>’All’</p></li>
+<li><p>’InSoldOut’</p></li>
+<li><p>’InSoldOutFiveDays’</p></li>
+<li><p>’InSoldOutFifteenDays’</p></li>
+<li><p>’SoldOut’</p></li>
+</ul>
+</p></li>
 </ul>
 </dd>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">get_product_stock_list</span><span class="p">(</span>
-    <span class="n">FulfilmentReferencement</span><span class="o">=</span><span class="s1">&#39;All&#39;</span><span class="p">,</span>
-    <span class="n">ShippableStock</span><span class="o">=</span><span class="s1">&#39;All&#39;</span><span class="p">,</span>
+    <span class="n">FulfilmentReferencement</span><span class="o">=</span><span class="s1">&#39;OnlyReferenced&#39;</span><span class="p">,</span>
+    <span class="n">ShippableStock</span><span class="o">=</span><span class="s1">&#39;WithStock&#39;</span><span class="p">,</span>
     <span class="n">BlockedStock</span><span class="o">=</span><span class="s1">&#39;All&#39;</span><span class="p">,</span>
-    <span class="n">SoldOut</span><span class="o">=</span><span class="s1">&#39;All&#39;</span>
+    <span class="n">SoldOut</span><span class="o">=</span><span class="s1">&#39;InSoldOut&#39;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dd class="field-odd"><p>ProductStockList, Status (“OK”, “NoData”, “KO”) and TotalProductCount</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1515,6 +1605,71 @@ new ones.</p>
 [{‘OrderReference’: 1703182124BNXCO,’ProductEan’: 2009854780777}]</p>
 </dd>
 </dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">submit_fulfillment_on_demand_supply_order</span><span class="p">(</span>
+    <span class="n">order_list</span><span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;OrderReference&#39;</span><span class="p">:</span> <span class="s1">&#39;1703182124BNXCO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ProductEan&#39;</span><span class="p">:</span> <span class="mi">2009854780777</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;OrderReference&#39;</span><span class="p">:</span> <span class="s1">&#39;2813182124AMYBP&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ProductEan&#39;</span><span class="p">:</span> <span class="s1">&#39;3009854780789&#39;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_supply_order">
+<code class="descname">submit_fulfillment_supply_order</code><span class="sig-paren">(</span><em>prod_desc_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_supply_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>This operation create a deposit that will asynchronously triggered supply order creation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prod_desc_list</strong> – <p>list of FulfilmentProductDescription:</p>
+<ul class="simple">
+<li><p>ProductEAN <em>(str)</em>: [Mandatory]</p></li>
+<li><dl class="simple">
+<dt>Warehouse <em>(str)</em>: [Mandatory]</dt><dd><ul>
+<li><p>”CEM”</p></li>
+<li><p>”ANZ”</p></li>
+<li><p>”SMD”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Quantity <em>(int)</em>: [Mandatory]</p></li>
+<li><p>ExtSupplyOrderID <em>(str)</em>: Seller external supply order reference</p></li>
+<li><p>WarehouseReceptionMinDate <em>(date)</em></p></li>
+<li><p>SellerProductReference <em>(str)</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span>  <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">submit_fulfillment_supply_order</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;ProductEAN&#39;</span><span class="p">:</span> <span class="s1">&#39;1051248556517&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Warehouse&#39;</span><span class="p">:</span> <span class="s1">&#39;SMD&#39;</span>
+            <span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;ProductEAN&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567891234&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Warehouse&#39;</span><span class="p">:</span> <span class="s1">&#39;ANZ&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="mi">122</span><span class="p">,</span>
+            <span class="s1">&#39;SellerProductReference&#39;</span><span class="p">:</span> <span class="s1">&#39;154&#39;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -1523,11 +1678,22 @@ new ones.</p>
 <dd><p>To set an offer online or offline</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> – ‘Action’: ‘Publish’ or ‘Unpublish’
-‘SellerProductId’: str</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Action</strong> (<em>str</em>) – ‘Publish’ or ‘Unpublish’</p></li>
+<li><p><strong>SellerProductId</strong> (<em>str</em>) – </p></li>
+</ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+</dl>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">fulfillment</span><span class="o">.</span><span class="n">submit_offer_state_action</span><span class="p">(</span>
+    <span class="n">Action</span><span class="o">=</span><span class="s1">&#39;Unpublish&#39;</span><span class="p">,</span>
+    <span class="n">SellerProductId</span><span class="o">=</span><span class="s1">&#39;11504&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
 </dd>
 </dl>
 </dd></dl>
