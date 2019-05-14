@@ -21,8 +21,11 @@ from jinja2 import (
 
 from cdiscountapi.packages.validator import (
     OfferValidator,
+    ProductValidator,
     DiscountComponentValidator,
-    ShippingInformationValidator
+    ShippingInformationValidator,
+    ProductEanValidator,
+    ProductImageValidator,
 )
 
 
@@ -114,7 +117,7 @@ class OfferPackage(BasePackage):
 
     def validate(self, **kwargs):
         """
-        Return the valid offer as a `zeep.objects.Offer`
+        Return the valid offer
 
         Usage::
 
@@ -182,11 +185,67 @@ class ProductPackage(BasePackage):
             if valid_product not in self.data:
                 self.data.append(valid_product)
 
+    def extract_from(self, product, attr1, attr2):
+        """
+        Extract the elements of a list from Offer
+
+        (ex: the ShippingInformation elements in ShippingInformationList,
+        the DiscountComponent elements in DiscountList...)
+        """
+        if attr1 in product:
+            sub_record = product.get(attr1, None)
+            if sub_record:
+                datum = sub_record[attr2]
+                del product[attr1]
+                return datum
+            else:
+                return []
+        else:
+            return []
+
     def validate(self, **kwargs):
-        return kwargs
+        new_kwargs = kwargs.copy()
+        if 'EanList' in kwargs:
+            new_kwargs['EanList'] = {
+                'ProductEan': [ProductEanValidator.validate(x) for x in
+                               new_kwargs['EanList']['ProductEan']]
+            }
+
+        if 'Pictures' in kwargs:
+            new_kwargs['Pictures'] = {
+                'ProductImage': [ProductImageValidator.validate(x) for x in
+                                 new_kwargs['Pictures']['ProductImage']]
+            }
+
+        return ProductValidator.validate(new_kwargs)
 
     def render(self):
         loader = FileSystemLoader('cdiscountapi/templates')
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template('Products.xml')
         products = deepcopy(self.data)
+        extraction_mapping = {
+            'EanList': ('EanList', 'ProductEan'),
+            'Pictures': ('Pictures', 'ProductImage'),
+        }
+
+        products_data = []
+        for product in products:
+            products_datum = {}
+            for key, (attr1, attr2) in extraction_mapping.items():
+                if key not in products_datum:
+                    products_datum[key] = []
+                products_datum[key].extend(self.extract_from(product, attr1, attr2))
+
+            if 'ModelProperties' in product:
+                products_datum['ModelProperties'] = product['ModelProperties']
+                del product['ModelProperties']
+
+            if 'attributes' not in products_datum:
+                products_datum['attributes'] = ''
+
+            # We keep only key:value pairs whose values are not None
+            products_datum['attributes'] += " ".join('{}="{}"'.format(k, v) for k, v in
+                                                     product.items() if v is not None)
+            products_data.append(products_datum)
+        return template.render(products=products_data)
