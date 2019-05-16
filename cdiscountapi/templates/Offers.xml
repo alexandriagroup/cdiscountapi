@@ -10,6 +10,7 @@
             {% endfor %}
           </ShippingInformationList>
         </Offer.ShippingInformationList>
+        {% if 'discount_list' in offer %}
         <Offer.PriceAndDiscountList>
             <DiscountComponentList Capacity="{{ offer['discount_list']|length }}">
             {% for discount_component in offer['discount_list'] %}
@@ -17,5 +18,18 @@
             {% endfor %}
           </DiscountComponentList>
         </Offer.PriceAndDiscountList>
+        {% endif %}
       </Offer>
       {% endfor %}
+    </OfferCollection>
+    </OfferPackage.Offers>
+  {% if 'offer_publication_list' in offer %}
+  <OfferPackage.OfferPublicationList>
+      <OfferPublicationList Capacity="{{ offer['offer_publication_list']|length }}">
+          {% for publication_pool in offer['offer_publication_list'] %}
+          <PublicationPool Id="{{ publication_pool['Id'] }}" />
+          {% endfor %}
+      </OfferPublicationList>
+  </OfferPackage.OfferPublicationList>
+  {% endif %}
+</OfferPackage>

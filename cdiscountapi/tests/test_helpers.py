@@ -28,6 +28,42 @@ def assert_xml_equal(result, expected, msg=''):
         assert result_dict[k] == expected_dict[k], error_msg
 
 
+def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_count, tags):
+    """
+    Raise an AssertionError if the content of the XML file doesn't match the expected content
+
+    :param result_content: The content of the XML file
+    :param expected_content: The content of the XML file that we expect
+    :param pkg_type: 'Offer' or 'Product'
+    :param expected_count: The number of offers or products we expected in the XML file
+    :param tags: The tags to check in the file
+    """
+    def pkg_type_xpath(xml, tag):
+        """
+        Extract the selected nodes from the offer package or the product package XML.
+        """
+        namespace = {
+            'Offer': ("clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;"
+                      "assembly=Cdiscount.Service.OfferIntegration"),
+            'Product': ('clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;'
+                        'assembly=Cdiscount.Service.ProductIntegration')
+        }
+        return xpath(xml, tag, namespace[pkg_type])
+
+    pkg_type_nodes = pkg_type_xpath(etree.XML(result_content), pkg_type)
+    expected_pkg_type_nodes = pkg_type_xpath(etree.XML(expected_content), pkg_type)
+    assert len(pkg_type_nodes) == len(expected_pkg_type_nodes) == expected_count
+
+    for i in range(expected_count):
+        assert_xml_equal(pkg_type_nodes[i], expected_pkg_type_nodes[i])
+        for tag in tags:
+            result = pkg_type_xpath(pkg_type_nodes[i], tag)
+            expected = pkg_type_xpath(expected_pkg_type_nodes[i], tag)
+            assert len(result) == len(expected)
+            for j in range(len(result)):
+                assert_xml_equal(result[j], expected[j], msg="Error in {}. ".format(tag))
+
+
 def xpath(xml, tag, namespace):
     return xml.xpath('.//ns:{}'.format(tag),
                      namespaces={'ns': namespace})
@@ -106,6 +142,12 @@ def test_render_offers(valid_offer_for_package):
     """
     XmlGenerator.render should return the content of Offers.xml
     """
+    def offer_xpath(xml, tag):
+        namespace = ("clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;"
+                     "assembly=Cdiscount.Service.OfferIntegration")
+        return xpath(xml, tag, namespace)
+
+    # We add a second offer in the package
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
     valid_offer_for_package1['Price'] = 20
     valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
@@ -115,7 +157,13 @@ def test_render_offers(valid_offer_for_package):
 
     with open('cdiscountapi/tests/samples/Offers.xml') as f:
         expected_content = f.read()
-    assert content.strip() == expected_content.strip()
+
+    assert_xml_files_equal(
+        content, expected_content,
+        'Offer', expected_count=2,
+        tags=('Offer.ShippingInformationList',
+              'Offer.PriceAndDiscountList')
+    )
 
 
 # ProductPackage
@@ -169,20 +217,12 @@ def test_render_products(valid_product_for_package):
     with open('cdiscountapi/tests/samples/Products.xml') as f:
         expected_content = f.read()
 
-    expected_xml = etree.XML(expected_content)
-    xml = etree.XML(content)
+    assert_xml_files_equal(
+        content, expected_content,
+        'Product', expected_count=2,
+        tags=('Product.EanList', 'Product.ModelProperties', 'Product.Pictures')
+    )
 
-    # There should be 2 products in the package
-    products_xml = product_xpath(xml, 'Product')
-    expected_products_xml = product_xpath(expected_xml, 'Product')
-
-    assert len(products_xml) == len(expected_products_xml) == 2
-    for i in range(2):
-        assert_xml_equal(products_xml[i], expected_products_xml[i])
-        for tag in ('Product.EanList', 'Product.ModelProperties', 'Product.Pictures'):
-            result = product_xpath(xml, tag)[i]
-            expected = product_xpath(expected_xml, tag)[i]
-            assert_xml_equal(result, expected, msg="Error in {}. ".format(tag))
 
 # auto_refresh_token
 @pytest.mark.vcr()
