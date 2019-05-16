@@ -47,7 +47,7 @@ class BasePackage(object):
     def validate(self, **kwargs):
         raise NotImplementedError
 
-    def render(self):
+    def generate(self):
         raise NotImplementedError
 
     @classmethod
@@ -89,7 +89,7 @@ class OfferPackage(BasePackage):
             if not isinstance(_id, int):
                 raise TypeError(msg)
 
-        self.offer_publication_list = ids
+        self.offer_publication_list = [{'Id': _id} for _id in ids]
 
     def add(self, offers):
         for offer in offers:
@@ -141,7 +141,7 @@ class OfferPackage(BasePackage):
 
         return OfferValidator.validate(new_kwargs)
 
-    def render(self):
+    def generate(self):
         loader = FileSystemLoader('cdiscountapi/templates')
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template('Offers.xml')
@@ -150,9 +150,6 @@ class OfferPackage(BasePackage):
             'shipping_information_list': ('ShippingInformationList', 'ShippingInformation'),
             'discount_list': ('DiscountList', 'DiscountComponent'),
         }
-
-        # TODO Handle OfferPublicationList
-        # 'offer_publication_list': ('OfferPublicationList', 'PublicationPool'),
 
         offers_data = []
         for offer in offers:
@@ -219,7 +216,7 @@ class ProductPackage(BasePackage):
 
         return ProductValidator.validate(new_kwargs)
 
-    def render(self):
+    def generate(self):
         loader = FileSystemLoader('cdiscountapi/templates')
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template('Products.xml')

@@ -58,7 +58,7 @@ def generate_package(package_type, output_dir, data):
     # Add Products.xml from product_dict.
     with open(f"{package}/Content/{xml_filename}", "wb") as f:
         xml_generator = XmlGenerator(data)
-        f.write(xml_generator.render().encode('utf8'))
+        f.write(xml_generator.generate().encode('utf8'))
 
     # Make a zip from package.
     zip_package = make_archive(path, 'zip', output_dir)
@@ -133,7 +133,7 @@ class XmlGenerator(object):
     Usage::
 
         xml_generator = XmlGenerator(data, preprod=preprod)
-        content = xml_generator.render()
+        content = xml_generator.generate()
 
     Example::
 
@@ -182,11 +182,11 @@ class XmlGenerator(object):
                                    'PurgeAndReplace': False,
                                    'OfferPublicationList': [1, 16]},
                                    preprod=preprod)
-        content = offers_xml.render()
+        content = offers_xml.generate()
 
         # Render the content of Products.xml
         products_xml = XmlGenerator({'Products': [product]}, preprod=preprod)
-        content = products_xml.render()
+        content = products_xml.generate()
 
     """
     def __init__(self, data, preprod=False):
@@ -206,5 +206,5 @@ class XmlGenerator(object):
     def add(self, data):
         self.package.add(data)
 
-    def render(self):
-        return self.package.render()
+    def generate(self):
+        return self.package.generate()

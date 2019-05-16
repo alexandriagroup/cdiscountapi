@@ -138,9 +138,9 @@ def test_add_offers_with_invalid_offer(valid_offer_for_package):
 
 
 @pytest.mark.vcr()
-def test_render_offers(valid_offer_for_package):
+def test_generate_offers(valid_offer_for_package):
     """
-    XmlGenerator.render should return the content of Offers.xml
+    XmlGenerator.generate should return the content of Offers.xml
     """
     def offer_xpath(xml, tag):
         namespace = ("clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;"
@@ -153,7 +153,7 @@ def test_render_offers(valid_offer_for_package):
     valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
     xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
-    content = xml_generator.render()
+    content = xml_generator.generate()
 
     with open('cdiscountapi/tests/samples/Offers.xml') as f:
         expected_content = f.read()
@@ -194,9 +194,9 @@ def test_add_products_with_invalid_product(valid_product_for_package):
 
 
 @pytest.mark.vcr()
-def test_render_products(valid_product_for_package):
+def test_generate_products(valid_product_for_package):
     """
-    XmlGenerator.render should return the content of Products.xml
+    XmlGenerator.generate should return the content of Products.xml
     """
     def product_xpath(xml, tag):
         namespace = ('clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;'
@@ -212,7 +212,7 @@ def test_render_products(valid_product_for_package):
     xml_generator = XmlGenerator({'Products': [valid_product_for_package,
                                                valid_product_for_package1]})
     xml_generator.add([valid_product_for_package])
-    content = xml_generator.render()
+    content = xml_generator.generate()
 
     with open('cdiscountapi/tests/samples/Products.xml') as f:
         expected_content = f.read()

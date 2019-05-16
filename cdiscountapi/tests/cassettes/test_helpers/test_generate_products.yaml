@@ -165,7 +165,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:06 GMT
+      - Thu, 16 May 2019 09:48:12 GMT
       ntCoent-Length:
       - '14163'
     status:
@@ -571,7 +571,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:06 GMT
+      - Thu, 16 May 2019 09:48:12 GMT
       ntCoent-Length:
       - '37260'
     status:
@@ -2026,10 +2026,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '141749'
       Date:
-      - Thu, 16 May 2019 09:48:06 GMT
+      - Thu, 16 May 2019 09:48:12 GMT
+      ntCoent-Length:
+      - '141749'
     status:
       code: 200
       message: OK
@@ -2382,7 +2382,7 @@ interactions:
       Cteonnt-Length:
       - '48866'
       Date:
-      - Thu, 16 May 2019 09:48:06 GMT
+      - Thu, 16 May 2019 09:48:13 GMT
     status:
       code: 200
       message: OK
@@ -2417,7 +2417,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:06 GMT
+      - Thu, 16 May 2019 09:48:13 GMT
     status:
       code: 200
       message: OK
@@ -2465,7 +2465,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:06 GMT
+      - Thu, 16 May 2019 09:48:12 GMT
       ntCoent-Length:
       - '2273'
     status:
@@ -2511,7 +2511,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:06 GMT
+      - Thu, 16 May 2019 09:48:13 GMT
       ntCoent-Length:
       - '2258'
     status:
@@ -2596,10 +2596,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 16 May 2019 09:48:07 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '6479'
+      Date:
+      - Thu, 16 May 2019 09:48:13 GMT
     status:
       code: 200
       message: OK
@@ -2644,7 +2644,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:07 GMT
+      - Thu, 16 May 2019 09:48:13 GMT
       ntCoent-Length:
       - '2214'
     status:
@@ -2679,10 +2679,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 16 May 2019 09:48:07 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '1271'
+      Date:
+      - Thu, 16 May 2019 09:48:14 GMT
     status:
       code: 200
       message: OK
@@ -2747,7 +2747,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:07 GMT
+      - Thu, 16 May 2019 09:48:14 GMT
       ntCoent-Length:
       - '3940'
     status:
@@ -2781,7 +2781,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:07 GMT
+      - Thu, 16 May 2019 09:48:13 GMT
     status:
       code: 200
       message: OK
@@ -2824,10 +2824,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 16 May 2019 09:48:07 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '2159'
+      Date:
+      - Thu, 16 May 2019 09:48:14 GMT
     status:
       code: 200
       message: OK
@@ -2853,12 +2853,14 @@ interactions:
         value="Fbc"/><xs:enumeration value="Ttd"/></xs:restriction></xs:simpleType><xs:element
         name="SupplyModeType" nillable="true" type="tns:SupplyModeType"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '649'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 09:48:07 GMT
+      - Thu, 16 May 2019 09:48:14 GMT
     status:
       code: 200
       message: OK
