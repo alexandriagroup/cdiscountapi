@@ -62,4 +62,130 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetGlobalConfiguration</wsa:Action><wsa:MessageID>urn:uuid:2e1eb646-ec4d-4c2f-b964-7b9b43527ae1</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetGlobalConfiguration
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>8fac9513539a4368b4055672baa76903</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage></ns0:GetGlobalConfiguration></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1586'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetGlobalConfiguration"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><GetGlobalConfigurationResponse
+        xmlns=\"http://www.cdiscount.com\"><GetGlobalConfigurationResult xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ErrorMessage
+        xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\"/><OperationSuccess
+        xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\">true</OperationSuccess><ErrorList/><SellerLogin>SELLERLOGIN</SellerLogin><TokenId>TOKENID</TokenId><CarrierList><Carrier><CarrierId>1</CarrierId><DefaultURL>https://www.relaiscolis.com/suivi-de-colis</DefaultURL><Name>Relais
+        Colis</Name></Carrier><Carrier><CarrierId>2</CarrierId><DefaultURL>https://www.ups.com/WebTracking/track?loc=fr_fr</DefaultURL><Name>UPS</Name></Carrier><Carrier><CarrierId>3</CarrierId><DefaultURL>http://www.tnt.fr/public/suivi_colis/recherche/index.do</DefaultURL><Name>TNT</Name></Carrier><Carrier><CarrierId>5</CarrierId><DefaultURL>http://postnl.post/tracktrace?language=fr</DefaultURL><Name>PostNL</Name></Carrier><Carrier><CarrierId>6</CarrierId><DefaultURL>http://www.mondialrelay.fr/suivi-de-colis</DefaultURL><Name>Mondial
+        Relay</Name></Carrier><Carrier><CarrierId>7</CarrierId><DefaultURL>https://www.laposte.fr/particulier/outils/suivre-vos-envois</DefaultURL><Name>La
+        Poste - Courrier</Name></Carrier><Carrier><CarrierId>8</CarrierId><DefaultURL>https://gls-group.eu/FR/fr/suivi-colis</DefaultURL><Name>GLS</Name></Carrier><Carrier><CarrierId>9</CarrierId><DefaultURL>https://www.aftership.com/couriers/dpd</DefaultURL><Name>DPD</Name></Carrier><Carrier><CarrierId>10</CarrierId><DefaultURL>\thttp://www.dhl.fr/fr/dhl_express/suivi_expedition.html</DefaultURL><Name>DHL
+        Express</Name></Carrier><Carrier><CarrierId>11</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers/dhl-germany</DefaultURL><Name>DHL
+        Deutsche Post</Name></Carrier><Carrier><CarrierId>12</CarrierId><DefaultURL>http://www.17track.net/fr</DefaultURL><Name>China
+        Post</Name></Carrier><Carrier><CarrierId>13</CarrierId><DefaultURL>http://www.chronopost.fr/fr/particulier/suivez-votre-colis</DefaultURL><Name>Chronopost</Name></Carrier><Carrier><CarrierId>14</CarrierId><DefaultURL>http://www.colissimo.fr/portail_colissimo/suivre.do?language=fr_FR</DefaultURL><Name>Colissimo</Name></Carrier><Carrier><CarrierId>15</CarrierId><DefaultURL>https://www.colisprive.fr</DefaultURL><Name>Colis
+        Priv\xE9</Name></Carrier><Carrier><CarrierId>16</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Bpost</Name></Carrier><Carrier><CarrierId>17</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>China
+        EMS (ePacket)</Name></Carrier><Carrier><CarrierId>18</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>FedEx</Name></Carrier><Carrier><CarrierId>19</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>SF
+        Express</Name></Carrier><Carrier><CarrierId>21</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Singapore
+        Post</Name></Carrier><Carrier><CarrierId>22</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>4PX</Name></Carrier><Carrier><CarrierId>23</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Malaysia
+        Post</Name></Carrier><Carrier><CarrierId>24</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Yanwen</Name></Carrier><Carrier><CarrierId>25</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>CNE
+        Express</Name></Carrier><Carrier><CarrierId>26</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>SFC
+        Service</Name></Carrier><Carrier><CarrierId>27</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>GEODIS</Name></Carrier><Carrier><CarrierId>29</CarrierId><DefaultURL>https://www.aftership.com/couriers/wishpost</DefaultURL><Name>WishPost</Name></Carrier><Carrier><CarrierId>30</CarrierId><DefaultURL>https://www.aftership.com/couriers/asendia-hk</DefaultURL><Name>Asendia
+        HK </Name></Carrier><Carrier><CarrierId>31</CarrierId><DefaultURL>https://www.aftership.com/couriers/dbschenker-se</DefaultURL><Name>DB
+        Schenker</Name></Carrier><Carrier><CarrierId>32</CarrierId><DefaultURL>https://webtrack.dhlglobalmail.com</DefaultURL><Name>DHL
+        ecommerce asia</Name></Carrier></CarrierList></GetGlobalConfigurationResult></GetGlobalConfigurationResponse></s:Body></s:Envelope>"
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Tue, 14 May 2019 08:31:33 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '4551'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Header
+      xmlns:wsa="http://www.w3.org/2005/08/addressing"><wsa:Action>http://www.cdiscount.com/IMarketplaceAPIService/GetGlobalConfiguration</wsa:Action><wsa:MessageID>urn:uuid:a74f49fe-24c3-4f52-a11d-adf299f6acaf</wsa:MessageID><wsa:To>https://wsvc.cdiscount.com/MarketplaceAPIService.svc</wsa:To></soap-env:Header><soap-env:Body><ns0:GetGlobalConfiguration
+      xmlns:ns0="http://www.cdiscount.com"><ns0:headerMessage><ns1:Context xmlns:ns1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns1:CatalogID>1</ns1:CatalogID><ns1:SiteID>100</ns1:SiteID></ns1:Context><ns2:Localization
+      xmlns:ns2="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns2:Country>Fr</ns2:Country></ns2:Localization><ns3:Security
+      xmlns:ns3="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"><ns3:DomainRightsList
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:IssuerID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:SessionID
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/><ns3:TokenId>c86b1d18efeb4058956125d8806df6e2</ns3:TokenId><ns3:UserName></ns3:UserName></ns3:Security><ns4:Version
+      xmlns:ns4="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages">1.0</ns4:Version></ns0:headerMessage></ns0:GetGlobalConfiguration></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1586'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://www.cdiscount.com/IMarketplaceAPIService/GetGlobalConfiguration"'
+      User-Agent:
+      - Zeep/3.3.1 (www.python-zeep.org)
+    method: POST
+    uri: https://wsvc.cdiscount.com/MarketplaceAPIService.svc
+  response:
+    body:
+      string: "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><GetGlobalConfigurationResponse
+        xmlns=\"http://www.cdiscount.com\"><GetGlobalConfigurationResult xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ErrorMessage
+        xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\"/><OperationSuccess
+        xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\">true</OperationSuccess><ErrorList/><SellerLogin>SELLERLOGIN</SellerLogin><TokenId>TOKENID</TokenId><CarrierList><Carrier><CarrierId>1</CarrierId><DefaultURL>https://www.relaiscolis.com/suivi-de-colis</DefaultURL><Name>Relais
+        Colis</Name></Carrier><Carrier><CarrierId>2</CarrierId><DefaultURL>https://www.ups.com/WebTracking/track?loc=fr_fr</DefaultURL><Name>UPS</Name></Carrier><Carrier><CarrierId>3</CarrierId><DefaultURL>http://www.tnt.fr/public/suivi_colis/recherche/index.do</DefaultURL><Name>TNT</Name></Carrier><Carrier><CarrierId>5</CarrierId><DefaultURL>http://postnl.post/tracktrace?language=fr</DefaultURL><Name>PostNL</Name></Carrier><Carrier><CarrierId>6</CarrierId><DefaultURL>http://www.mondialrelay.fr/suivi-de-colis</DefaultURL><Name>Mondial
+        Relay</Name></Carrier><Carrier><CarrierId>7</CarrierId><DefaultURL>https://www.laposte.fr/particulier/outils/suivre-vos-envois</DefaultURL><Name>La
+        Poste - Courrier</Name></Carrier><Carrier><CarrierId>8</CarrierId><DefaultURL>https://gls-group.eu/FR/fr/suivi-colis</DefaultURL><Name>GLS</Name></Carrier><Carrier><CarrierId>9</CarrierId><DefaultURL>https://www.aftership.com/couriers/dpd</DefaultURL><Name>DPD</Name></Carrier><Carrier><CarrierId>10</CarrierId><DefaultURL>\thttp://www.dhl.fr/fr/dhl_express/suivi_expedition.html</DefaultURL><Name>DHL
+        Express</Name></Carrier><Carrier><CarrierId>11</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers/dhl-germany</DefaultURL><Name>DHL
+        Deutsche Post</Name></Carrier><Carrier><CarrierId>12</CarrierId><DefaultURL>http://www.17track.net/fr</DefaultURL><Name>China
+        Post</Name></Carrier><Carrier><CarrierId>13</CarrierId><DefaultURL>http://www.chronopost.fr/fr/particulier/suivez-votre-colis</DefaultURL><Name>Chronopost</Name></Carrier><Carrier><CarrierId>14</CarrierId><DefaultURL>http://www.colissimo.fr/portail_colissimo/suivre.do?language=fr_FR</DefaultURL><Name>Colissimo</Name></Carrier><Carrier><CarrierId>15</CarrierId><DefaultURL>https://www.colisprive.fr</DefaultURL><Name>Colis
+        Priv\xE9</Name></Carrier><Carrier><CarrierId>16</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Bpost</Name></Carrier><Carrier><CarrierId>17</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>China
+        EMS (ePacket)</Name></Carrier><Carrier><CarrierId>18</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>FedEx</Name></Carrier><Carrier><CarrierId>19</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>SF
+        Express</Name></Carrier><Carrier><CarrierId>21</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Singapore
+        Post</Name></Carrier><Carrier><CarrierId>22</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>4PX</Name></Carrier><Carrier><CarrierId>23</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Malaysia
+        Post</Name></Carrier><Carrier><CarrierId>24</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>Yanwen</Name></Carrier><Carrier><CarrierId>25</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>CNE
+        Express</Name></Carrier><Carrier><CarrierId>26</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>SFC
+        Service</Name></Carrier><Carrier><CarrierId>27</CarrierId><DefaultURL>https://www.aftership.com/fr/couriers</DefaultURL><Name>GEODIS</Name></Carrier><Carrier><CarrierId>29</CarrierId><DefaultURL>https://www.aftership.com/couriers/wishpost</DefaultURL><Name>WishPost</Name></Carrier><Carrier><CarrierId>30</CarrierId><DefaultURL>https://www.aftership.com/couriers/asendia-hk</DefaultURL><Name>Asendia
+        HK </Name></Carrier><Carrier><CarrierId>31</CarrierId><DefaultURL>https://www.aftership.com/couriers/dbschenker-se</DefaultURL><Name>DB
+        Schenker</Name></Carrier><Carrier><CarrierId>32</CarrierId><DefaultURL>https://webtrack.dhlglobalmail.com</DefaultURL><Name>DHL
+        ecommerce asia</Name></Carrier></CarrierList></GetGlobalConfigurationResult></GetGlobalConfigurationResponse></s:Body></s:Envelope>"
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Thu, 16 May 2019 15:30:58 GMT
+      Vary:
+      - Accept-Encoding
+      content-length:
+      - '4551'
+    status:
+      code: 200
+      message: OK
 version: 1
