@@ -28,7 +28,7 @@ def assert_xml_equal(result, expected, msg=''):
         assert result_dict[k] == expected_dict[k], error_msg
 
 
-def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_count, tags):
+def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_count):
     """
     Raise an AssertionError if the content of the XML file doesn't match the expected content
 
@@ -50,18 +50,25 @@ def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_
         }
         return xpath(xml, tag, namespace[pkg_type])
 
+    tags = {'Offer': ('Offer.ShippingInformationList',
+                      'Offer.PriceAndDiscountList',
+                      'Offer.PublicationList'),
+            'Product': ('Product.EanList', 'Product.ModelProperties',
+                        'Product.Pictures')}
+
     pkg_type_nodes = pkg_type_xpath(etree.XML(result_content), pkg_type)
     expected_pkg_type_nodes = pkg_type_xpath(etree.XML(expected_content), pkg_type)
     assert len(pkg_type_nodes) == len(expected_pkg_type_nodes) == expected_count
 
     for i in range(expected_count):
         assert_xml_equal(pkg_type_nodes[i], expected_pkg_type_nodes[i])
-        for tag in tags:
+        for tag in tags[pkg_type]:
+            error_msg = "Error in {}. ".format(tag)
             result = pkg_type_xpath(pkg_type_nodes[i], tag)
             expected = pkg_type_xpath(expected_pkg_type_nodes[i], tag)
-            assert len(result) == len(expected)
+            assert len(result) == len(expected), error_msg
             for j in range(len(result)):
-                assert_xml_equal(result[j], expected[j], msg="Error in {}. ".format(tag))
+                assert_xml_equal(result[j], expected[j], msg=error_msg)
 
 
 def xpath(xml, tag, namespace):
@@ -142,10 +149,30 @@ def test_generate_offers(valid_offer_for_package):
     """
     XmlGenerator.generate should return the content of Offers.xml
     """
-    def offer_xpath(xml, tag):
-        namespace = ("clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;"
-                     "assembly=Cdiscount.Service.OfferIntegration")
-        return xpath(xml, tag, namespace)
+    # We add a second offer in the package
+    valid_offer_for_package1 = deepcopy(valid_offer_for_package)
+    valid_offer_for_package1['Price'] = 20
+    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
+    xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
+    xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
+    content = xml_generator.generate()
+
+    with open('cdiscountapi/tests/samples/offers/Offers.xml') as f:
+        expected_content = f.read()
+
+    assert_xml_files_equal(
+        content, expected_content,
+        'Offer', expected_count=2,
+    )
+
+
+@pytest.mark.vcr()
+def test_generate_offers_without_discount(valid_offer_for_package):
+    """
+    XmlGenerator.generate should return the content of Offers.xml
+    """
+    # We remove DiscountList
+    del valid_offer_for_package['DiscountList']
 
     # We add a second offer in the package
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
@@ -155,16 +182,38 @@ def test_generate_offers(valid_offer_for_package):
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/Offers.xml') as f:
+    with open('cdiscountapi/tests/samples/offers/Offers_without_discount.xml') as f:
         expected_content = f.read()
 
     assert_xml_files_equal(
         content, expected_content,
         'Offer', expected_count=2,
-        tags=('Offer.ShippingInformationList',
-              'Offer.PriceAndDiscountList')
     )
 
+
+@pytest.mark.vcr()
+def test_generate_offers_without_offer_publication_list(valid_offer_for_package):
+    """
+    XmlGenerator.generate should return the content of Offers.xml
+    """
+    # We remove DiscountList
+    del valid_offer_for_package['DiscountList']
+
+    # We add a second offer in the package
+    valid_offer_for_package1 = deepcopy(valid_offer_for_package)
+    valid_offer_for_package1['Price'] = 20
+    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
+    xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
+    xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
+    content = xml_generator.generate()
+
+    with open('cdiscountapi/tests/samples/offers/Offers_without_offer_publication_list.xml') as f:
+        expected_content = f.read()
+
+    assert_xml_files_equal(
+        content, expected_content,
+        'Offer', expected_count=2,
+    )
 
 # ProductPackage
 @pytest.mark.vcr()
@@ -198,11 +247,6 @@ def test_generate_products(valid_product_for_package):
     """
     XmlGenerator.generate should return the content of Products.xml
     """
-    def product_xpath(xml, tag):
-        namespace = ('clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;'
-                     'assembly=Cdiscount.Service.ProductIntegration')
-        return xpath(xml, tag, namespace)
-
     # We add a second product in the package
     valid_product_for_package1 = deepcopy(valid_product_for_package)
     valid_product_for_package1['EanList'] = {'ProductEan': [{"Ean": "3606918243774"}]}
@@ -214,13 +258,12 @@ def test_generate_products(valid_product_for_package):
     xml_generator.add([valid_product_for_package])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/Products.xml') as f:
+    with open('cdiscountapi/tests/samples/products/Products.xml') as f:
         expected_content = f.read()
 
     assert_xml_files_equal(
         content, expected_content,
         'Product', expected_count=2,
-        tags=('Product.EanList', 'Product.ModelProperties', 'Product.Pictures')
     )
 
 

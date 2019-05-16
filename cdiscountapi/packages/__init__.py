@@ -155,9 +155,11 @@ class OfferPackage(BasePackage):
         for offer in offers:
             offers_datum = {}
             for key, (attr1, attr2) in extraction_mapping.items():
-                if key not in offers_datum:
-                    offers_datum[key] = []
-                offers_datum[key].extend(self.extract_from(offer, attr1, attr2))
+                # Only add  if the user provided the attribute
+                if attr1 in offer:
+                    if key not in offers_datum and attr1 in offer:
+                        offers_datum[key] = []
+                    offers_datum[key].extend(self.extract_from(offer, attr1, attr2))
 
             if 'attributes' not in offers_datum:
                 offers_datum['attributes'] = ''
