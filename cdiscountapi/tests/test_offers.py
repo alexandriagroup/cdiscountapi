@@ -61,7 +61,7 @@ def test_generate_offer_package(valid_offer_package):
     # Check Offers.xml is ok.
     assert_xml_files_equal(
         created, expected,
-        'Offer', expected_count=2,
+        'Offer'
     )
 
 
@@ -97,7 +97,7 @@ def test_generate_offer_package_with_discount(valid_offer_package):
     # Check Offers.xml is ok.
     assert_xml_files_equal(
         created, expected,
-        'Offer', expected_count=2,
+        'Offer'
     )
 
 
@@ -135,7 +135,7 @@ def test_generate_offer_package_with_offer_publication_list(valid_offer_package)
     # Check Offers.xml is ok.
     assert_xml_files_equal(
         created, expected,
-        'Offer', expected_count=2,
+        'Offer'
     )
 
 
@@ -173,9 +173,8 @@ def test_generate_offer_package_with_purge_and_replace(valid_offer_package):
     # Check Offers.xml is ok.
     assert_xml_files_equal(
         created, expected,
-        'Offer', expected_count=2,
+        'Offer'
     )
-
 
 
 @pytest.mark.skip(reason='Standby')

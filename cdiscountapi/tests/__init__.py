@@ -1,6 +1,5 @@
 import os
 from lxml import etree
-import datetime
 
 
 # CONSTANTS
@@ -40,14 +39,13 @@ def assert_xml_equal(result, expected, msg=''):
         assert result_dict[k] == expected_dict[k], error_msg
 
 
-def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_count):
+def assert_xml_files_equal(result_content, expected_content, pkg_type):
     """
     Raise an AssertionError if the content of the XML file doesn't match the expected content
 
     :param result_content: The content of the XML file
     :param expected_content: The content of the XML file that we expect
     :param pkg_type: 'Offer' or 'Product'
-    :param expected_count: The number of offers or products we expected in the XML file
     :param tags: The tags to check in the file
     """
     def pkg_type_xpath(xml, tag):
@@ -70,9 +68,9 @@ def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_
 
     pkg_type_nodes = pkg_type_xpath(etree.XML(result_content), pkg_type)
     expected_pkg_type_nodes = pkg_type_xpath(etree.XML(expected_content), pkg_type)
-    assert len(pkg_type_nodes) == len(expected_pkg_type_nodes) == expected_count
+    assert len(pkg_type_nodes) == len(expected_pkg_type_nodes)
 
-    for i in range(expected_count):
+    for i in range(len(pkg_type_nodes)):
         assert_xml_equal(pkg_type_nodes[i], expected_pkg_type_nodes[i])
         for tag in tags[pkg_type]:
             error_msg = "Error in {}. ".format(tag)

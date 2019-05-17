@@ -107,7 +107,7 @@ def test_generate_offers(valid_offer_for_package):
 
     assert_xml_files_equal(
         content, expected_content,
-        'Offer', expected_count=2,
+        'Offer'
     )
 
 
@@ -132,7 +132,7 @@ def test_generate_offers_with_discount(valid_offer_for_package):
 
     assert_xml_files_equal(
         content, expected_content,
-        'Offer', expected_count=2,
+        'Offer'
     )
 
 
@@ -154,7 +154,7 @@ def test_generate_offers_with_offer_publication_list(valid_offer_for_package):
 
     assert_xml_files_equal(
         content, expected_content,
-        'Offer', expected_count=2,
+        'Offer'
     )
 
 # ProductPackage
@@ -205,7 +205,7 @@ def test_generate_products(valid_product_for_package):
 
     assert_xml_files_equal(
         content, expected_content,
-        'Product', expected_count=2,
+        'Product'
     )
 
 
