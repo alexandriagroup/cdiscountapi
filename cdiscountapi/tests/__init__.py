@@ -1,5 +1,6 @@
 import os
 from lxml import etree
+import datetime
 
 
 # CONSTANTS
@@ -82,3 +83,12 @@ def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_
                 assert_xml_equal(result[j], expected[j], msg=error_msg)
 
 
+def discount_component():
+    """
+    A simple exemple of DiscountComponent used in Offers.xml
+    """
+    return {
+        'DiscountValue': 5, 'Type': 1,
+        'StartDate': '2019-04-15T00:00',
+        'EndDate': '2019-05-15T00:00'
+    }

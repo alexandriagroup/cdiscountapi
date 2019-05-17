@@ -8,11 +8,6 @@
                         <ShippingInformation AdditionalShippingCharges="4" DeliveryMode="Tracked" ShippingCharges="2" />
                     </ShippingInformationList>
                 </Offer.ShippingInformationList>
-                <Offer.PriceAndDiscountList>
-                    <DiscountComponentList Capacity="1">
-                        <DiscountComponent DiscountUnit="1" DiscountValue="5" EndDate="2019-05-15 00:00:00" StartDate="2019-04-15 00:00:00" Type="1" />
-                    </DiscountComponentList>
-                </Offer.PriceAndDiscountList>
             </Offer>
             <Offer ProductEan="978-1593274351" SellerProductId="MY_SKU2" ProductCondition="4" Price="20" EcoPart="0.1" Vat="19.36" DeaTax="3.14" Stock="1" PreparationTime="1">
                 <Offer.ShippingInformationList>
@@ -21,22 +16,7 @@
                         <ShippingInformation AdditionalShippingCharges="4" DeliveryMode="Tracked" ShippingCharges="2" />
                     </ShippingInformationList>
                 </Offer.ShippingInformationList>
-                <Offer.PriceAndDiscountList>
-                    <DiscountComponentList Capacity="1">
-                        <DiscountComponent DiscountUnit="1" DiscountValue="5" EndDate="2019-05-15 00:00:00" StartDate="2019-04-15 00:00:00" Type="1" />
-                    </DiscountComponentList>
-                </Offer.PriceAndDiscountList>
             </Offer>
         </OfferCollection>
     </OfferPackage.Offers>
-    <!-- the OfferPublicationList element is optional and is utilized to specify on which website the updates must be done
-  by default updates are applied on Cdiscount only (Id=16 for Belgium)
-  -->
-  <OfferPackage.OfferPublicationList>
-      <OfferPublicationList Capacity="3">
-          <PublicationPool Id="1" />
-          <PublicationPool Id="16" />
-          <PublicationPool Id="42" />
-      </OfferPublicationList>
-  </OfferPackage.OfferPublicationList>
 </OfferPackage>

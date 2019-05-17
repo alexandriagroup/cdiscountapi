@@ -12,7 +12,10 @@ from cdiscountapi.helpers import (
     XmlGenerator,
     check_element,
 )
-from . import assert_response_succeeded, assert_xml_files_equal
+from . import (
+    assert_response_succeeded, assert_xml_files_equal,
+    discount_component
+)
 
 from cdiscountapi.exceptions import ValidationError
 
@@ -66,9 +69,9 @@ def test_add_offers(valid_offer_for_package):
     # The should be only 1 valid offer (we added 2 times the same offer)
     assert len(xml_generator.data) == 1
 
-    # We create a new valid offer with a different DiscountValue
+    # We create a new valid offer with a DiscountList
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
-    valid_offer_for_package1['DiscountList']['DiscountComponent'][0]['DiscountValue'] = 10
+    valid_offer_for_package1['DiscountList'] = {'DiscountComponent': [discount_component()]}
     xml_generator.add([valid_offer_for_package1])
 
     # There should be 2 valid offers
@@ -109,22 +112,22 @@ def test_generate_offers(valid_offer_for_package):
 
 
 @pytest.mark.vcr()
-def test_generate_offers_without_discount(valid_offer_for_package):
+def test_generate_offers_with_discount(valid_offer_for_package):
     """
     XmlGenerator.generate should return the content of Offers.xml
     """
-    # We remove DiscountList
-    del valid_offer_for_package['DiscountList']
-
     # We add a second offer in the package
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
     valid_offer_for_package1['Price'] = 20
     valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
+    # Only the first offer has a DiscountList
+    valid_offer_for_package['DiscountList'] = {'DiscountComponent': [discount_component()]}
+
     xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/offers/Offers_without_discount.xml') as f:
+    with open('cdiscountapi/tests/samples/offers/Offers_with_discount.xml') as f:
         expected_content = f.read()
 
     assert_xml_files_equal(
@@ -134,13 +137,10 @@ def test_generate_offers_without_discount(valid_offer_for_package):
 
 
 @pytest.mark.vcr()
-def test_generate_offers_without_offer_publication_list(valid_offer_for_package):
+def test_generate_offers_with_offer_publication_list(valid_offer_for_package):
     """
     XmlGenerator.generate should return the content of Offers.xml
     """
-    # We remove DiscountList
-    del valid_offer_for_package['DiscountList']
-
     # We add a second offer in the package
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
     valid_offer_for_package1['Price'] = 20
@@ -149,7 +149,7 @@ def test_generate_offers_without_offer_publication_list(valid_offer_for_package)
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/offers/Offers_without_offer_publication_list.xml') as f:
+    with open('cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml') as f:
         expected_content = f.read()
 
     assert_xml_files_equal(

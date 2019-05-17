@@ -162,14 +162,12 @@ interactions:
         name="MarketplaceAPIService"><wsdl:port name="BasicHttpBinding_IMarketplaceAPIService"
         binding="tns:BasicHttpBinding_IMarketplaceAPIService"><soap:address location="https://wsvc.cdiscount.com/MarketplaceAPIService.svc"/></wsdl:port></wsdl:service></wsdl:definitions>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '14163'
       Date:
-      - Thu, 16 May 2019 12:22:49 GMT
+      - Fri, 17 May 2019 13:57:35 GMT
+      ntCoent-Length:
+      - '14164'
     status:
       code: 200
       message: OK
@@ -572,14 +570,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
+      Cteonnt-Length:
+      - '37262'
       Date:
-      - Thu, 16 May 2019 12:22:49 GMT
-      ntCoent-Length:
-      - '37260'
-      set-cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        path=/
-      - ___utmvm=###########; path=/
+      - Fri, 17 May 2019 13:57:35 GMT
     status:
       code: 200
       message: OK
@@ -592,9 +586,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2036,7 +2027,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:48 GMT
+      - Fri, 17 May 2019 13:57:35 GMT
       ntCoent-Length:
       - '141749'
     status:
@@ -2051,9 +2042,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2389,10 +2377,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Thu, 16 May 2019 12:22:49 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '48866'
+      Date:
+      - Fri, 17 May 2019 13:57:36 GMT
     status:
       code: 200
       message: OK
@@ -2405,9 +2393,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2425,12 +2410,14 @@ interactions:
         minOccurs="0" name="VerticalAccuracy" type="xs:double"/></xs:sequence></xs:complexType><xs:element
         name="GeoCoordinate" nillable="true" type="tns:GeoCoordinate"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '882'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:49 GMT
+      - Fri, 17 May 2019 13:57:36 GMT
     status:
       code: 200
       message: OK
@@ -2443,9 +2430,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2481,7 +2465,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:49 GMT
+      - Fri, 17 May 2019 13:57:36 GMT
       ntCoent-Length:
       - '2273'
     status:
@@ -2496,9 +2480,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2530,7 +2511,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:49 GMT
+      - Fri, 17 May 2019 13:57:35 GMT
       ntCoent-Length:
       - '2258'
     status:
@@ -2545,9 +2526,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2619,7 +2597,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:49 GMT
+      - Fri, 17 May 2019 13:57:35 GMT
       ntCoent-Length:
       - '6479'
     status:
@@ -2634,9 +2612,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2669,7 +2644,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:49 GMT
+      - Fri, 17 May 2019 13:57:35 GMT
       ntCoent-Length:
       - '2214'
     status:
@@ -2684,9 +2659,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2705,14 +2677,12 @@ interactions:
         minOccurs="0" name="MailGuid" nillable="true" type="xs:string"/></xs:sequence></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="DiscussionMailGuidCreationResultMessage" nillable="true" type="tns:DiscussionMailGuidCreationResultMessage"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '1271'
       Date:
-      - Thu, 16 May 2019 12:22:50 GMT
+      - Fri, 17 May 2019 13:57:36 GMT
+      ntCoent-Length:
+      - '1271'
     status:
       code: 200
       message: OK
@@ -2725,9 +2695,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2780,7 +2747,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:50 GMT
+      - Fri, 17 May 2019 13:57:36 GMT
       ntCoent-Length:
       - '3940'
     status:
@@ -2795,9 +2762,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2817,7 +2781,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:51 GMT
+      - Fri, 17 May 2019 13:57:36 GMT
     status:
       code: 200
       message: OK
@@ -2830,9 +2794,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2864,7 +2825,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:51 GMT
+      - Fri, 17 May 2019 13:57:36 GMT
       ntCoent-Length:
       - '2159'
     status:
@@ -2879,9 +2840,6 @@ interactions:
       - gzip, deflate
       Connection:
       - keep-alive
-      Cookie:
-      - TBMCookie_6223335112164439712=913888001558009369SHbyVKvYUeybzen29Oul76Y7y4Q=;
-        ___utmvm=###########
       User-Agent:
       - Zeep/3.3.1 (www.python-zeep.org)
     method: GET
@@ -2900,7 +2858,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Thu, 16 May 2019 12:22:50 GMT
+      - Fri, 17 May 2019 13:57:36 GMT
     status:
       code: 200
       message: OK

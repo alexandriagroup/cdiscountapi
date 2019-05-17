@@ -19,4 +19,10 @@
             </Offer>
         </OfferCollection>
     </OfferPackage.Offers>
+  <OfferPackage.OfferPublicationList>
+    <OfferPublicationList Capacity="2">
+      <PublicationPool Id="1" />
+      <PublicationPool Id="16" />
+    </OfferPublicationList>
+  </OfferPackage.OfferPublicationList>
 </OfferPackage>

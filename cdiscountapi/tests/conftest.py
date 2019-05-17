@@ -113,11 +113,6 @@ def valid_offer_for_package():
     """
     Valid information to create an offer in an offer package
     """
-    discount_component = {
-        'DiscountValue': 5, 'Type': 1,
-        'StartDate': datetime.datetime(2019, 4, 15),
-        'EndDate': datetime.datetime(2019, 5, 15)
-    }
     shipping_info1 = {
         'ShippingCharges': 2, 'AdditionalShippingCharges': 4,
         'DeliveryMode': 'Standard'
@@ -131,7 +126,6 @@ def valid_offer_for_package():
         'SellerProductId': 'MY_SKU1',
         'ProductCondition': "6",
         'Price': 10,
-        'DiscountList': {'DiscountComponent': [discount_component]},
         'ShippingInformationList': {'ShippingInformation': [shipping_info1, shipping_info2]},
         'ProductCondition': 4,
         'EcoPart': 0.10,
@@ -191,6 +185,7 @@ def valid_offer_package(valid_offers_for_package):
 
     yield valid_offers_for_package
 
+    # tear down
     if os.path.exists(directory):
         rmtree(directory)
     if os.path.exists(zip_file):
