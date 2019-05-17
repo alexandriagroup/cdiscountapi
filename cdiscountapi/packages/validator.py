@@ -43,12 +43,12 @@ class OfferValidator(BaseValidator):
 class ProductValidator(BaseValidator):
     required = {'ShortLabel', 'SellerProductId', 'CategoryCode', 'ProductKind',
                 'Model', 'LongLabel', 'Description', 'BrandName',
-                'Product.EanList', 'Product.Pictures'}
+                'EanList', 'Pictures'}
 
     optional = {'Width', 'Weight', 'Size', 'SellerProductFamily',
                 'SellerProductColorName', 'ManufacturerPartNumber', 'Length',
                 'ISBN', 'Height', 'EncodedMarketingDescription',
-                'Product.ModelProperties', 'Navigation'}
+                'ModelProperties', 'Navigation'}
 
 
 class DiscountComponentValidator(BaseValidator):
@@ -57,3 +57,11 @@ class DiscountComponentValidator(BaseValidator):
 
 class ShippingInformationValidator(BaseValidator):
     required = {'ShippingCharges', 'AdditionalShippingCharges', 'DeliveryMode'}
+
+
+class ProductEanValidator(BaseValidator):
+    required = {"Ean"}
+
+
+class ProductImageValidator(BaseValidator):
+    required = {"Uri"}
