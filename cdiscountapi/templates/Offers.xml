@@ -1,4 +1,4 @@
-<OfferPackage Name="Nom fichier offres" PurgeAndReplace="false" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<OfferPackage Name="Nom fichier offres" PurgeAndReplace="{{ purge_and_replace }}" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <OfferPackage.Offers>
     <OfferCollection Capacity="1">
         {% for offer in offers %}
@@ -23,10 +23,10 @@
       {% endfor %}
     </OfferCollection>
     </OfferPackage.Offers>
-  {% if 'offer_publication_list' in offer %}
+  {% if offer_publication_list %}
   <OfferPackage.OfferPublicationList>
-      <OfferPublicationList Capacity="{{ offer['offer_publication_list']|length }}">
-          {% for publication_pool in offer['offer_publication_list'] %}
+      <OfferPublicationList Capacity="{{ offer_publication_list|length }}">
+          {% for publication_pool in offer_publication_list %}
           <PublicationPool Id="{{ publication_pool['Id'] }}" />
           {% endfor %}
       </OfferPublicationList>

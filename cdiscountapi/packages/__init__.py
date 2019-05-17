@@ -168,7 +168,11 @@ class OfferPackage(BasePackage):
             offers_datum['attributes'] += " ".join('{}="{}"'.format(k, v) for k, v in
                                                    offer.items() if v is not None)
             offers_data.append(offers_datum)
-        return template.render(offers=offers_data)
+        return template.render(
+            offers=offers_data,
+            offer_publication_list=self.offer_publication_list,
+            purge_and_replace=self.purge_and_replace
+        )
 
 
 class ProductPackage(BasePackage):

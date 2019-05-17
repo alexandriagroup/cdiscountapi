@@ -92,3 +92,10 @@ def discount_component():
         'StartDate': '2019-04-15T00:00',
         'EndDate': '2019-05-15T00:00'
     }
+
+
+def offer_publication_list():
+    """
+    A simple exemple of ids used in OfferPublicationList in Offers.xml
+    """
+    return [1, 16]
