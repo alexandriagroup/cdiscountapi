@@ -94,12 +94,12 @@ class Offers(BaseSection):
         return serialize_object(response, dict)
 
     @staticmethod
-    def generate_offer_package(output_dir, offers_list, pool_list=[], purge_and_replace=False):
+    def generate_offer_package(output_dir, offers_list, offer_publication_list=[], purge_and_replace=False):
         """
         Generate a zip offers package as cdiscount wanted.
 
         :param str output_dir: [mandatory] path to generate package
-        :param list pool_list: [optional]
+        :param list offer_publication_list: [optional]
         :param bool purge_and_replace: [optional]
         :param list offers_list: list of dict [{offer, shipping}, ...]:
 
@@ -161,7 +161,7 @@ class Offers(BaseSection):
 
             response = api.offers.generate_offer_package(
                 offers_list,
-                pool_list=pool_list,
+                offer_publication_list=offer_publication_list,
                 purge_and_replace=purge_and_replace
             )
 
@@ -169,7 +169,7 @@ class Offers(BaseSection):
         """
         return generate_package('offer', output_dir, {
             'OfferCollection': offers_list,
-            'OfferPublicationList': pool_list,
+            'OfferPublicationList': offer_publication_list,
             'PurgeAndReplace': purge_and_replace
         })
 
