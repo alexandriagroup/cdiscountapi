@@ -1,0 +1,24 @@
+{
+    "cdiscountapi/helpers.py": {
+        "type": "helpers",
+        "alternate": "cdiscountapi/tests/test_helpers.py"
+    },
+    "cdiscountapi/tests/test_helpers.py": {
+        "alternate": "cdiscountapi/helpers.py"
+    },
+    "cdiscountapi/sections/*.py": {
+        "type": "section",
+        "alternate": "cdiscountapi/tests/test_{}.py"
+    },
+    "cdiscountapi/tests/test_*.py": {
+        "type": "test",
+        "alternate": "cdiscountapi/sections/{}.py"
+    },
+    "cdiscountapi/packages/__init__.py": {
+        "type": "packages",
+        "alternate": "cdiscountapi/tests/test_packages.py"
+    },
+    "cdiscountapi/tests/test_packages.py": {
+        "alternate": "cdiscountapi/packages/__init__.py"
+    }
+}

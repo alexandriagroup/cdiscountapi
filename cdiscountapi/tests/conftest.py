@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from copy import deepcopy
 import os
 import re
 import datetime
 import pytest
+from tempfile import gettempdir
+from shutil import rmtree
 from functools import lru_cache
 from ..cdiscountapi import Connection
 
@@ -163,3 +166,32 @@ def valid_product_for_package():
             {"Uri": "http://cdn.sojeans.com/products/406x538/2710-jeans-deeluxe-tanner-4.jpg"},
         ]}
     }
+
+
+@pytest.fixture
+def valid_offers_for_package(valid_offer_for_package):
+    """
+    Valid information to create 2 offers in an offer package
+    """
+    valid_offer_for_package1 = deepcopy(valid_offer_for_package)
+    valid_offer_for_package1['Price'] = 20
+    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
+    return [valid_offer_for_package, valid_offer_for_package1]
+
+
+@pytest.fixture
+def valid_offer_package(valid_offers_for_package):
+    """
+    Return 2 valid offers to creae an offer package then remove 
+    /tmp/uploading_package and /tmp/uploading_package.zip
+    """
+    output_dir = gettempdir()
+    directory = '{}/uploading_package'.format(output_dir)
+    zip_file = '{}/uploading_package.zip'.format(output_dir)
+
+    yield valid_offers_for_package
+
+    if os.path.exists(directory):
+        rmtree(directory)
+    if os.path.exists(zip_file):
+        os.remove(zip_file)
