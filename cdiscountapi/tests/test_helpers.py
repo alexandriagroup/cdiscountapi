@@ -5,7 +5,6 @@ from copy import deepcopy
 
 # Third-party imports
 import pytest
-from lxml import etree
 
 # Project imports
 from cdiscountapi.cdiscountapi import Connection
@@ -13,67 +12,10 @@ from cdiscountapi.helpers import (
     XmlGenerator,
     check_element,
 )
-from . import assert_response_succeeded
+from . import assert_response_succeeded, assert_xml_files_equal
 
 from cdiscountapi.exceptions import ValidationError
 
-
-def assert_xml_equal(result, expected, msg=''):
-    result_dict = dict(result.items())
-    expected_dict = dict(expected.items())
-    assert set(result_dict.keys()) == set(expected_dict.keys())
-
-    for k in result_dict:
-        error_msg = msg + 'The key {} is not correct.'.format(k)
-        assert result_dict[k] == expected_dict[k], error_msg
-
-
-def assert_xml_files_equal(result_content, expected_content, pkg_type, expected_count):
-    """
-    Raise an AssertionError if the content of the XML file doesn't match the expected content
-
-    :param result_content: The content of the XML file
-    :param expected_content: The content of the XML file that we expect
-    :param pkg_type: 'Offer' or 'Product'
-    :param expected_count: The number of offers or products we expected in the XML file
-    :param tags: The tags to check in the file
-    """
-    def pkg_type_xpath(xml, tag):
-        """
-        Extract the selected nodes from the offer package or the product package XML.
-        """
-        namespace = {
-            'Offer': ("clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;"
-                      "assembly=Cdiscount.Service.OfferIntegration"),
-            'Product': ('clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;'
-                        'assembly=Cdiscount.Service.ProductIntegration')
-        }
-        return xpath(xml, tag, namespace[pkg_type])
-
-    tags = {'Offer': ('Offer.ShippingInformationList',
-                      'Offer.PriceAndDiscountList',
-                      'Offer.PublicationList'),
-            'Product': ('Product.EanList', 'Product.ModelProperties',
-                        'Product.Pictures')}
-
-    pkg_type_nodes = pkg_type_xpath(etree.XML(result_content), pkg_type)
-    expected_pkg_type_nodes = pkg_type_xpath(etree.XML(expected_content), pkg_type)
-    assert len(pkg_type_nodes) == len(expected_pkg_type_nodes) == expected_count
-
-    for i in range(expected_count):
-        assert_xml_equal(pkg_type_nodes[i], expected_pkg_type_nodes[i])
-        for tag in tags[pkg_type]:
-            error_msg = "Error in {}. ".format(tag)
-            result = pkg_type_xpath(pkg_type_nodes[i], tag)
-            expected = pkg_type_xpath(expected_pkg_type_nodes[i], tag)
-            assert len(result) == len(expected), error_msg
-            for j in range(len(result)):
-                assert_xml_equal(result[j], expected[j], msg=error_msg)
-
-
-def xpath(xml, tag, namespace):
-    return xml.xpath('.//ns:{}'.format(tag),
-                     namespaces={'ns': namespace})
 
 @pytest.mark.vcr()
 def test_check_element_with_valid_element(api):
