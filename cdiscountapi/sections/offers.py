@@ -108,12 +108,12 @@ class Offers(BaseSection):
                     - ProductEan *(str)*
                     - SellerProductId *(str)*
                     - ProductCondition *(int)*:
-                        - 'LikeNew',
-                        - 'VeryGoodState',
-                        - 'GoodState',
-                        - 'AverageState',
-                        - 'Refurbished',
-                        - 'New',
+                        - 1: 'LikeNew',
+                        - 2: 'VeryGoodState',
+                        - 3: 'GoodState',
+                        - 4: 'AverageState',
+                        - 5: 'Refurbished',
+                        - 6: 'New',
                     - Price *(int)*
                     - EcoPart *(float)*
                     - Vat *(float)*
