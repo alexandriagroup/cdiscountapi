@@ -103,7 +103,7 @@ class Offers(BaseSection):
         :param bool purge_and_replace: [optional]
         :param list offers_list: list of dict [{offer, shipping}, ...]:
 
-            -Offer
+            -Offer:
                 - Mandatory attributes:
                     - ProductEan *(str)*
                     - SellerProductId *(str)*
@@ -138,7 +138,7 @@ class Offers(BaseSection):
                     - ProductPackagingValue *(float)*
                     - BluffDeliveryMax *(int)*
 
-            - ShippingInformation:
+            -ShippingInformation:
                 - AdditionalShippingCharges *(float)*
                 - DeliveryMode *(DeliveryModeInformation)*
                     - 'STD' ('Standart')
