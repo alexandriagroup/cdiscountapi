@@ -9,15 +9,39 @@
 """
 
 
+import os
+import zipfile
 from functools import wraps
 from shutil import (
     copytree,
     make_archive,
 )
 
+import json
 import zeep
 from cdiscountapi.packages import OfferPackage, ProductPackage
+from pathlib import Path
 
+
+def check_package_type(package_type):
+    if package_type.lower() not in ('offer', 'product'):
+        raise ValueError('package_type must be either "offer" or "product".')
+
+
+# TODO Check the necessary files are present before adding them to the archive
+def make_package(package_type, path):
+    """
+    Insert the files necessary for the offer/product in a zip file
+    """
+    current_path = path.cwd()
+    check_package_type(package_type)
+    os.chdir(path)
+    files = ('Content/{}s.xml'.format(package_type.capitalize()),
+             '_rels/.rels', '[Content_Types].xml')
+    with zipfile.ZipFile(path.parent / (path.name + '.zip'), 'w') as zf:
+        for f in files:
+            zf.write(f, compress_type=zipfile.ZIP_DEFLATED)
+    os.chdir(current_path)
 
 # TODO Remove package_type. Determine package_type from the keys in data
 def generate_package(package_type, output_dir, data):
@@ -44,11 +68,16 @@ def generate_package(package_type, output_dir, data):
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
     """
-    if package_type not in ('offer', 'product'):
-        raise ValueError('package_type must be either "offer" or "product".')
+    check_package_type(package_type)
+
+    # # The path must exist
+    # if not os.path.exists(os.path.basename(package_name)):
+    #     raise FileNotFoundError('The directory {} must does not exist.')
+
+    # The package must not exist
 
     # Create path.
-    path = f'{output_dir}/uploading_package'
+    path = Path(f'{output_dir}/uploading_package')
 
     # Copy tree package.
     package = copytree(f'{package_type}_package', path)
@@ -60,11 +89,7 @@ def generate_package(package_type, output_dir, data):
         xml_generator = XmlGenerator(data)
         f.write(xml_generator.generate().encode('utf8'))
 
-    # Make a zip from package.
-    zip_package = make_archive(path, 'zip', output_dir)
-
-    # Remove unzipped package.
-    return zip_package
+    make_package(package_type, path)
 
 
 def check_element(element_name, dynamic_type):
