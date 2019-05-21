@@ -8,6 +8,7 @@ from shutil import rmtree
 from tempfile import gettempdir
 from copy import deepcopy
 import zipfile
+from pathlib import Path
 
 import pytest
 
@@ -47,26 +48,26 @@ def test_get_offer_list_paginated(api):
 @pytest.mark.vcr()
 def test_generate_offer_package(valid_offer_package):
     # ---- BEFORE ----
-    output_dir = gettempdir()
-    zip_file = f'{output_dir}/uploading_package.zip'
+    package_name = Path(gettempdir()) / 'uploading_package'
+    zip_file = package_name.with_suffix('.zip')
     # Check uploading_package doesn't exists yet.
-    assert 'uploading_package' not in os.listdir(output_dir)
-    assert os.path.isfile(zip_file) is False
+    assert not package_name.exists()
+    assert not zip_file.exists()
 
     # ---- PROCESS ----
     # valid_offer_package contains 2 valid offers for the offer package
-    Offers.generate_offer_package(output_dir, valid_offer_package)
+    Offers.generate_offer_package(package_name, valid_offer_package)
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert 'uploading_package' in os.listdir(output_dir)
-    assert os.path.isfile(zip_file) is True
+    assert package_name.exists()
+    assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
     with open('cdiscountapi/tests/samples/offers/Offers.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{output_dir}/uploading_package/Content/Offers.xml', 'r') as f:
+    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
         created = f.read()
 
     # Check Offers.xml is ok.
@@ -81,29 +82,27 @@ def test_generate_offer_package_with_discount(valid_offer_package):
     node DiscountList in Offers.xml
     """
     # ---- BEFORE ----
-    output_dir = gettempdir()
-    zip_file = f'{output_dir}/uploading_package.zip'
+    package_name = Path(gettempdir()) / 'uploading_package'
+    zip_file = package_name.with_suffix('.zip')
     # Check uploading_package doesn't exists yet.
-    assert 'uploading_package' not in os.listdir(output_dir)
-    # package_name = f'{output_dir}/uploading_package.zip'
-    # assert os.path.isfile(package_name) is False
-    assert os.path.isfile(zip_file) is False
+    assert not package_name.exists()
+    assert not zip_file.exists()
 
     # ---- PROCESS ----
     # We add the DiscountList in the first offer
     valid_offer_package[0]['DiscountList'] = {'DiscountComponent': [discount_component()]}
-    Offers.generate_offer_package(output_dir, valid_offer_package)
+    Offers.generate_offer_package(package_name, valid_offer_package)
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert 'uploading_package' in os.listdir(output_dir)
-    assert os.path.isfile(zip_file) is True
+    assert package_name.exists()
+    assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
     with open('cdiscountapi/tests/samples/offers/Offers_with_discount.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{output_dir}/uploading_package/Content/Offers.xml', 'r') as f:
+    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
         created = f.read()
 
     # Check Offers.xml is ok.
@@ -118,28 +117,27 @@ def test_generate_offer_package_with_offer_publication_list(valid_offer_package)
     node OfferPublicationList in Offers.xml
     """
     # ---- BEFORE ----
-    output_dir = gettempdir()
+    package_name = Path(gettempdir()) / 'uploading_package'
+    zip_file = package_name.with_suffix('.zip')
     # Check uploading_package doesn't exists yet.
-    assert 'uploading_package' not in os.listdir(output_dir)
-    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is False
+    assert not package_name.exists()
+    assert not zip_file.exists()
 
     # ---- PROCESS ----
-    # We specify offer_publication_list
     Offers.generate_offer_package(
-        output_dir, valid_offer_package,
-        offer_publication_list=offer_publication_list()
-    )
+        package_name, valid_offer_package,
+        offer_publication_list=offer_publication_list())
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert 'uploading_package' in os.listdir(output_dir)
-    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is True
+    assert package_name.exists()
+    assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
     with open('cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{output_dir}/uploading_package/Content/Offers.xml', 'r') as f:
+    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
         created = f.read()
 
     # Check Offers.xml is ok.
@@ -154,34 +152,31 @@ def test_generate_offer_package_with_purge_and_replace(valid_offer_package):
     PurgeAndReplace in the node OfferPackage to True in Offers.xml
     """
     # ---- BEFORE ----
-    output_dir = gettempdir()
+    package_name = Path(gettempdir()) / 'uploading_package'
+    zip_file = package_name.with_suffix('.zip')
     # Check uploading_package doesn't exists yet.
-    assert 'uploading_package' not in os.listdir(output_dir)
-    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is False
+    assert not package_name.exists()
+    assert not zip_file.exists()
 
     # ---- PROCESS ----
-    # We specify purge_and_replace
     Offers.generate_offer_package(
-        output_dir, valid_offer_package,
-        purge_and_replace=True
-    )
+        package_name, valid_offer_package,
+        purge_and_replace=True)
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert 'uploading_package' in os.listdir(output_dir)
-    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is True
+    assert package_name.exists()
+    assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
-    with open('cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml', 'r') as f:
+    with open('cdiscountapi/tests/samples/offers/Offers_with_purge_and_replace.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{output_dir}/uploading_package/Content/Offers.xml', 'r') as f:
+    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
         created = f.read()
 
     # Check Offers.xml is ok.
     assert_xml_files_equal(created, expected, 'Offer')
-
-
 @pytest.mark.skip(reason='Standby')
 # @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_offer_package not ready')
 @pytest.mark.vcr()

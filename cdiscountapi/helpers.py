@@ -44,26 +44,26 @@ def make_package(package_type, path):
     os.chdir(current_path)
 
 # TODO Remove package_type. Determine package_type from the keys in data
-def generate_package(package_type, output_dir, data):
+def generate_package(package_type, package_name, data):
     """
     Generate a zip package for the offers or the products
 
     Usage::
 
-        generate_package(package_type, output_dir, data)
+        generate_package(package_type, package_name, data)
 
     Example::
 
         # Generate Offer package:
-        generate_package('offer', output_dir, {'OfferCollection': offers,
+        generate_package('offer', package_name, {'OfferCollection': offers,
                                                'OfferPublicationList': offer_publications,
                                                'PurgeAndReplace': purge_and_replace})
 
         # Generate Product package:
-        generate_package('product', output_dir, {'Products': products})
+        generate_package('product', package_name, {'Products': products})
 
     :param str package_type: 'offer' or 'product'
-    :param str output_dir:  directory to create temporary files
+    :param str package_name: the full path to the package (without .zip)
     :param dict data: offers or products as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
@@ -77,10 +77,12 @@ def generate_package(package_type, output_dir, data):
     # The package must not exist
 
     # Create path.
-    path = Path(f'{output_dir}/uploading_package')
+    # path = Path(f'{output_dir}/uploading_package')
+    package_name = Path(package_name)
 
     # Copy tree package.
-    package = copytree(f'{package_type}_package', path)
+    package_template = f'{package_type}_package'
+    package = copytree(package_template, package_name)
     xml_filename = package_type.capitalize() + 's.xml'
 
     # TODO Fix offer_dict
@@ -89,7 +91,7 @@ def generate_package(package_type, output_dir, data):
         xml_generator = XmlGenerator(data)
         f.write(xml_generator.generate().encode('utf8'))
 
-    make_package(package_type, path)
+    make_package(package_type, package_name)
 
 
 def check_element(element_name, dynamic_type):
