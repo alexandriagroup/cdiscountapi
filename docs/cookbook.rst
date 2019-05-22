@@ -4,6 +4,100 @@
 Cookbook
 ========
 
+..  TODO Add a note on ProductCondition (int in the OfferPackage).
+
+------
+Offers
+------
+
+We'll assume we want to create an offer with the following parameters and values:
+
+================= ================
+Parameter          Value
+================= ================
+SellerProductId    SKU
+ProductCondition   AverageState
+ProductEan         978-1593274351
+Price              35
+Stock              10
+PreparationTime    1
+================= ================
+
+with 3 delivery modes: Standard, Tracked and Registered.
+
+.. note::
+
+    - cdiscount.com id: 1
+    - cdiscountpro.com id: 16
+
+
+Submit an offer package on cdiscount.com and cdiscountpro.com
+-------------------------------------------------------------
+
+Create the offer package with :py:meth:`Offers.generate_offer_package`::
+
+    offer = {
+        'ProductEan': '978-1593274351',
+        'SellerProductId': 'SKU',
+        'ProductCondition': 4,
+        'Price': 35,
+        'ShippingInformationList': {
+            'ShippingInformation': [
+                {'ShippingCharges': 2, 'DeliveryMode': 'Standard', 'AdditionalShippingCharges': 0},
+                {'ShippingCharges': 3, 'DeliveryMode': 'Registered', 'AdditionalShippingCharges': 0},
+                {'ShippingCharges': 4, 'DeliveryMode': 'Tracked', 'AdditionalShippingCharges': 0},
+                ]
+        },
+        'Stock': 10,
+        'PreparationTime': 1
+    }
+
+    offer_package_path = api.offers.generate_offer_package(
+        'books_offers',
+        [offer_package],
+        offer_publication_list=[1, 16]
+    )
+
+Upload the package *books_offers.zip* on a server then submit it with
+:py:meth:`Offers.submit_product_package` by specifying the url of the package::
+
+    response = api.offers.submit_product_package('http://www.myserver/books_offers.zip')
+
+
+Update an offer on cdiscount.com
+--------------------------------
+
+
+Purge the inventory for on cdiscount.com
+----------------------------------------
+
+.. 
+  To remove some offers from your inventory, use the keyword `purge_and_replace`
+  in :py:meth:`Offers.generate_offer_package`::
+
+      offer = {
+          'ProductEan': '978-1593274351',
+          'SellerProductId': 'SKU',
+          'ProductCondition': 4,
+          'Price': 35,
+          'ShippingInformationList': {
+              'ShippingInformation': [
+                  {'ShippingCharges': 2, 'DeliveryMode': 'Standard', 'AdditionalShippingCharges': 0},
+                  {'ShippingCharges': 3, 'DeliveryMode': 'Registered', 'AdditionalShippingCharges': 0},
+                  {'ShippingCharges': 4, 'DeliveryMode': 'Tracked', 'AdditionalShippingCharges': 0},
+                  ]
+          },
+          'Stock': 10,
+          'PreparationTime': 1
+      }
+
+      offer_package_path = api.offers.generate_offer_package(
+          'books_to_remove_from_offers',
+          [offer_package],
+          offer_publication_list=[1, 16]
+      )
+
+
 ------
 Orders
 ------

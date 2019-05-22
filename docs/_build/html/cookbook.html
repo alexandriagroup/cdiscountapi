@@ -51,6 +51,87 @@
             
   <div class="section" id="cookbook">
 <h1>Cookbook<a class="headerlink" href="#cookbook" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="offers">
+<h2>Offers<a class="headerlink" href="#offers" title="Permalink to this headline">¶</a></h2>
+<p>We’ll assume we want to create an offer with the following parameters and values:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SellerProductId</p></td>
+<td><p>SKU</p></td>
+</tr>
+<tr class="row-odd"><td><p>ProductCondition</p></td>
+<td><p>AverageState</p></td>
+</tr>
+<tr class="row-even"><td><p>ProductEan</p></td>
+<td><p>978-1593274351</p></td>
+</tr>
+<tr class="row-odd"><td><p>Price</p></td>
+<td><p>35</p></td>
+</tr>
+<tr class="row-even"><td><p>Stock</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>PreparationTime</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>with 3 delivery modes: Standard, Tracked and Registered.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>cdiscount.com id: 1</p></li>
+<li><p>cdiscountpro.com id: 16</p></li>
+</ul>
+</div>
+<div class="section" id="submit-an-offer-package-on-cdiscount-com-and-cdiscountpro-com">
+<h3>Submit an offer package on cdiscount.com and cdiscountpro.com<a class="headerlink" href="#submit-an-offer-package-on-cdiscount-com-and-cdiscountpro-com" title="Permalink to this headline">¶</a></h3>
+<p>Create the offer package with <code class="xref py py-meth docutils literal notranslate"><span class="pre">Offers.generate_offer_package()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offer</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ProductEan&#39;</span><span class="p">:</span> <span class="s1">&#39;978-1593274351&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SellerProductId&#39;</span><span class="p">:</span> <span class="s1">&#39;SKU&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ProductCondition&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+    <span class="s1">&#39;ShippingInformationList&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ShippingInformation&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;ShippingCharges&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;DeliveryMode&#39;</span><span class="p">:</span> <span class="s1">&#39;Standard&#39;</span><span class="p">,</span> <span class="s1">&#39;AdditionalShippingCharges&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+            <span class="p">{</span><span class="s1">&#39;ShippingCharges&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;DeliveryMode&#39;</span><span class="p">:</span> <span class="s1">&#39;Registered&#39;</span><span class="p">,</span> <span class="s1">&#39;AdditionalShippingCharges&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+            <span class="p">{</span><span class="s1">&#39;ShippingCharges&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;DeliveryMode&#39;</span><span class="p">:</span> <span class="s1">&#39;Tracked&#39;</span><span class="p">,</span> <span class="s1">&#39;AdditionalShippingCharges&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+            <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;Stock&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;PreparationTime&#39;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="n">offer_package_path</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">generate_offer_package</span><span class="p">(</span>
+    <span class="s1">&#39;books_offers&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">offer_package</span><span class="p">],</span>
+    <span class="n">offer_publication_list</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Upload the package <em>books_offers.zip</em> on a server then submit it with
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Offers.submit_product_package()</span></code> by specifying the url of the package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">submit_product_package</span><span class="p">(</span><span class="s1">&#39;http://www.myserver/books_offers.zip&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-an-offer-on-cdiscount-com">
+<h3>Update an offer on cdiscount.com<a class="headerlink" href="#update-an-offer-on-cdiscount-com" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="purge-the-inventory-for-on-cdiscount-com">
+<h3>Purge the inventory for on cdiscount.com<a class="headerlink" href="#purge-the-inventory-for-on-cdiscount-com" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 <div class="section" id="orders">
 <h2>Orders<a class="headerlink" href="#orders" title="Permalink to this headline">¶</a></h2>
 <p>We’ll assume there is an order with one order line with the following parameters and values:</p>
@@ -139,6 +220,12 @@ customer, you can refuse the shipment:</p>
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Cookbook</a><ul>
+<li><a class="reference internal" href="#offers">Offers</a><ul>
+<li><a class="reference internal" href="#submit-an-offer-package-on-cdiscount-com-and-cdiscountpro-com">Submit an offer package on cdiscount.com and cdiscountpro.com</a></li>
+<li><a class="reference internal" href="#update-an-offer-on-cdiscount-com">Update an offer on cdiscount.com</a></li>
+<li><a class="reference internal" href="#purge-the-inventory-for-on-cdiscount-com">Purge the inventory for on cdiscount.com</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#orders">Orders</a><ul>
 <li><a class="reference internal" href="#accept-the-order">Accept the order</a></li>
 <li><a class="reference internal" href="#refuse-the-shipment-of-an-order">Refuse the shipment of an order</a></li>
