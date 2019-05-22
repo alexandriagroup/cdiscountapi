@@ -213,9 +213,8 @@ and their performance indicator.</p>
 <li><p><strong>offer_publication_list</strong> (<em>list</em>) – [optional]</p></li>
 <li><p><strong>purge_and_replace</strong> (<em>bool</em>) – [optional]</p></li>
 <li><p><strong>offers_list</strong> (<em>list</em>) – <p>list of dict [{offer, shipping}, …]:</p>
-<dl class="option-list">
-<dt><kbd><span class="option">-O<var>ffer</var></span></kbd></dt>
-<dd><ul>
+<dl class="simple">
+<dt>-Offer:</dt><dd><ul>
 <li><dl class="simple">
 <dt>Mandatory attributes:</dt><dd><ul>
 <li><p>ProductEan <em>(str)</em></p></li>
@@ -276,10 +275,7 @@ and their performance indicator.</p>
 </li>
 </ul>
 </dd>
-</dl>
-<ul>
-<li><dl class="simple">
-<dt>ShippingInformation:</dt><dd><ul>
+<dt>-ShippingInformation:</dt><dd><ul>
 <li><p>AdditionalShippingCharges <em>(float)</em></p></li>
 <li><dl class="simple">
 <dt>DeliveryMode <em>(DeliveryModeInformation)</em></dt><dd><ul>
@@ -305,8 +301,6 @@ and their performance indicator.</p>
 </ul>
 </dd>
 </dl>
-</li>
-</ul>
 </p></li>
 </ul>
 </dd>
@@ -939,8 +933,8 @@ structure than the one required for the request.</p>
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">generate_product_package</span><span class="p">(</span>
-    <span class="n">products_list</span>
-<span class="p">)</span>
+    <span class="n">products_list</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;path_to_upload.com&quot;</span>
 </pre></div>
 </div>
 </dd></dl>
