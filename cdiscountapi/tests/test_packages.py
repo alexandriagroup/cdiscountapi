@@ -26,11 +26,19 @@ def test_OfferPackage_with_invalid_key(valid_offer_for_package):
 
 
 # ProductPackage
-@pytest.mark.skip(reason='Stand by')
-def test_validate_product():
-    raise AssertionError
+@pytest.mark.vcr()
+def test_ProductPackage(valid_product_for_package):
+    package = ProductPackage({'Products': [valid_product_for_package]})
+    assert len(package.data) == 1
+    product_for_package = package.data[0]
+    assert product_for_package == valid_product_for_package
 
 
-@pytest.mark.skip(reason='Stand by')
-def test_validate_product_with_invalid_key():
-    raise AssertionError
+@pytest.mark.vcr()
+def test_ProductPackage_with_invalid_key(valid_product_for_package):
+    invalid_product_for_package = valid_product_for_package
+    invalid_product_for_package['InvalidKey'] = 'Unknown'
+    # A ValidationError should be raised because InvalidKey is neither required
+    # or optional
+    pytest.raises(ValidationError, ProductPackage, {'Products':
+                                                    [invalid_product_for_package]})

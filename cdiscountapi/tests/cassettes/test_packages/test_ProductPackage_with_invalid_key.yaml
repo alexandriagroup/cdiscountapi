@@ -165,9 +165,9 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:30 GMT
+      - Wed, 22 May 2019 13:25:43 GMT
       ntCoent-Length:
-      - '14163'
+      - '14164'
     status:
       code: 200
       message: OK
@@ -571,9 +571,9 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:30 GMT
+      - Wed, 22 May 2019 13:25:43 GMT
       ntCoent-Length:
-      - '37260'
+      - '37262'
     status:
       code: 200
       message: OK
@@ -2024,12 +2024,14 @@ interactions:
         minOccurs="0" name="SupplyMode" type="q86:SupplyModeType" xmlns:q86="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Offer.Enum"/></xs:sequence></xs:complexType><xs:element
         name="OfferProduct" nillable="true" type="tns:OfferProduct"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Tue, 07 May 2019 13:23:30 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '141749'
+      Date:
+      - Wed, 22 May 2019 13:25:43 GMT
     status:
       code: 200
       message: OK
@@ -2377,10 +2379,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '48866'
       Date:
-      - Tue, 07 May 2019 13:23:30 GMT
+      - Wed, 22 May 2019 13:25:43 GMT
+      ntCoent-Length:
+      - '48866'
     status:
       code: 200
       message: OK
@@ -2415,7 +2417,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:31 GMT
+      - Wed, 22 May 2019 13:25:43 GMT
     status:
       code: 200
       message: OK
@@ -2460,14 +2462,12 @@ interactions:
         name="FactoryType" type="xs:QName"/><xs:attribute name="Id" type="xs:ID"/><xs:attribute
         name="Ref" type="xs:IDREF"/></xs:schema>
     headers:
-      Cache-Control:
-      - private
       Content-Type:
       - text/xml; charset=UTF-8
-      Cteonnt-Length:
-      - '2273'
       Date:
-      - Tue, 07 May 2019 13:23:31 GMT
+      - Wed, 22 May 2019 13:25:43 GMT
+      ntCoent-Length:
+      - '2273'
     status:
       code: 200
       message: OK
@@ -2510,10 +2510,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Tue, 07 May 2019 13:23:30 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '2258'
+      Date:
+      - Wed, 22 May 2019 13:25:43 GMT
     status:
       code: 200
       message: OK
@@ -2597,7 +2597,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:31 GMT
+      - Wed, 22 May 2019 13:25:44 GMT
       ntCoent-Length:
       - '6479'
     status:
@@ -2643,10 +2643,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Tue, 07 May 2019 13:23:31 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '2214'
+      Date:
+      - Wed, 22 May 2019 13:25:44 GMT
     status:
       code: 200
       message: OK
@@ -2680,7 +2680,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:31 GMT
+      - Wed, 22 May 2019 13:25:44 GMT
       ntCoent-Length:
       - '1271'
     status:
@@ -2746,10 +2746,10 @@ interactions:
     headers:
       Content-Type:
       - text/xml; charset=UTF-8
-      Date:
-      - Tue, 07 May 2019 13:23:31 GMT
-      ntCoent-Length:
+      Cteonnt-Length:
       - '3940'
+      Date:
+      - Wed, 22 May 2019 13:25:44 GMT
     status:
       code: 200
       message: OK
@@ -2776,12 +2776,14 @@ interactions:
         mixed="false"><xs:extension base="q1:ServiceBaseAPIMessage" xmlns:q1="http://www.cdiscount.com"><xs:sequence/></xs:extension></xs:complexContent></xs:complexType><xs:element
         name="OrderIntegrationMessage" nillable="true" type="tns:OrderIntegrationMessage"/></xs:schema>
     headers:
+      Cache-Control:
+      - private
       Content-Length:
       - '811'
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:31 GMT
+      - Wed, 22 May 2019 13:25:44 GMT
     status:
       code: 200
       message: OK
@@ -2825,7 +2827,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:31 GMT
+      - Wed, 22 May 2019 13:25:44 GMT
       ntCoent-Length:
       - '2159'
     status:
@@ -2858,7 +2860,7 @@ interactions:
       Content-Type:
       - text/xml; charset=UTF-8
       Date:
-      - Tue, 07 May 2019 13:23:31 GMT
+      - Wed, 22 May 2019 13:25:44 GMT
     status:
       code: 200
       message: OK
