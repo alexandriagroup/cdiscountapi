@@ -882,12 +882,12 @@ structure than the one required for the request.</p>
 
 <dl class="staticmethod">
 <dt id="cdiscountapi.cdiscountapi.Products.generate_product_package">
-<em class="property">static </em><code class="descname">generate_product_package</code><span class="sig-paren">(</span><em>output_dir</em>, <em>products_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">generate_product_package</code><span class="sig-paren">(</span><em>package_name</em>, <em>products_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a zip product package as cdiscount wanted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>output_dir</strong> (<em>str</em>) – path to generate package</p></li>
+<li><p><strong>package_name</strong> (<em>str</em>) – [mandatory] the full path to the offer package (without .zip)</p></li>
 <li><p><strong>products_list</strong> (<em>list</em>) – <ul>
 <li><dl class="simple">
 <dt>Mandatory attributes:</dt><dd><ul>
@@ -912,10 +912,10 @@ structure than the one required for the request.</p>
 </li>
 <li><dl class="simple">
 <dt>Optional attributes:</dt><dd><ul>
-<li><p>Width <em>(byte)</em></p></li>
-<li><p>Weight <em>(byte)</em></p></li>
-<li><p>Length <em>(byte)</em></p></li>
-<li><p>Height <em>(byte)</em></p></li>
+<li><p>Width <em>(int)</em></p></li>
+<li><p>Weight <em>(int)</em></p></li>
+<li><p>Length <em>(int)</em></p></li>
+<li><p>Height <em>(int)</em></p></li>
 <li><p>Size <em>(str)</em></p></li>
 <li><p>SellerProductFamily <em>(str)</em></p></li>
 <li><p>SellerProductColorName <em>(str)</em></p></li>
@@ -932,9 +932,7 @@ structure than the one required for the request.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">generate_product_package</span><span class="p">(</span>
-    <span class="n">products_list</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;path_to_upload.com&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">generate_product_package</span><span class="p">(</span><span class="n">products_list</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
