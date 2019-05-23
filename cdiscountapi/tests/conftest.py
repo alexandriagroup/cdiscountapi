@@ -77,6 +77,7 @@ def api():
                       })
 
 
+# Offers {{{1
 @pytest.fixture
 def valid_offer():
     discount_component = {
@@ -136,6 +137,37 @@ def valid_offer_for_package():
 
 
 @pytest.fixture
+def valid_offers_for_package(valid_offer_for_package):
+    """
+    Valid information to create 2 offers in an offer package
+    """
+    valid_offer_for_package1 = deepcopy(valid_offer_for_package)
+    valid_offer_for_package1['Price'] = 20
+    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
+    return [valid_offer_for_package, valid_offer_for_package1]
+
+
+@pytest.fixture
+def valid_offer_package(valid_offers_for_package):
+    """
+    Return 2 valid offers to creae an offer package then remove
+    /tmp/uploading_package and /tmp/uploading_package.zip
+    """
+    output_dir = gettempdir()
+    directory = '{}/uploading_package'.format(output_dir)
+    zip_file = '{}/uploading_package.zip'.format(output_dir)
+
+    yield valid_offers_for_package
+
+    # tear down
+    if os.path.exists(directory):
+        rmtree(directory)
+    if os.path.exists(zip_file):
+        os.remove(zip_file)
+
+
+# Products {{{1
+@pytest.fixture
 def valid_product_for_package():
     return {
         "BrandName": "Deeluxe",
@@ -161,18 +193,16 @@ def valid_product_for_package():
 
 
 @pytest.fixture
-def valid_offers_for_package(valid_offer_for_package):
-    """
-    Valid information to create 2 offers in an offer package
-    """
-    valid_offer_for_package1 = deepcopy(valid_offer_for_package)
-    valid_offer_for_package1['Price'] = 20
-    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
-    return [valid_offer_for_package, valid_offer_for_package1]
+def valid_products_for_package(valid_product_for_package):
+    valid_product_for_package1 = deepcopy(valid_product_for_package)
+    valid_product_for_package1['Size'] = '36/34'
+    valid_product_for_package1['SellerProductId'] = '120905784'
+    valid_product_for_package1['EanList']['ProductEan'][0]['Ean'] = '3606918243774'
+    return [valid_product_for_package, valid_product_for_package1]
 
 
 @pytest.fixture
-def valid_offer_package(valid_offers_for_package):
+def valid_product_package(valid_products_for_package):
     """
     Return 2 valid offers to creae an offer package then remove
     /tmp/uploading_package and /tmp/uploading_package.zip
@@ -181,7 +211,7 @@ def valid_offer_package(valid_offers_for_package):
     directory = '{}/uploading_package'.format(output_dir)
     zip_file = '{}/uploading_package.zip'.format(output_dir)
 
-    yield valid_offers_for_package
+    yield valid_products_for_package
 
     # tear down
     if os.path.exists(directory):

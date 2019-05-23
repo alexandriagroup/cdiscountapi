@@ -139,11 +139,11 @@ class Products(BaseSection):
         return serialize_object(response, dict)
 
     @staticmethod
-    def generate_product_package(output_dir, products_list):
+    def generate_product_package(package_name, products_list):
         """
         Generate a zip product package as cdiscount wanted.
 
-        :param str output_dir: path to generate package
+        :param str package_name: [mandatory] the full path to the offer package (without .zip)
         :param list products_list:
 
             - Mandatory attributes:
@@ -174,7 +174,7 @@ class Products(BaseSection):
             response = api.products.generate_product_package(products_list)
 
         """
-        return generate_package('product', output_dir, {'Products': products_list})
+        return generate_package('product', package_name, {'Products': products_list})
 
     @auto_refresh_token
     def submit_product_package(self, url):

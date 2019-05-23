@@ -6,12 +6,15 @@ import json
 import os
 from shutil import rmtree
 from tempfile import gettempdir, NamedTemporaryFile
+from pathlib import Path
+import zipfile
 
 import pytest
 
 from . import (
     CDISCOUNT_WITHOUT_DATA,
     assert_response_succeeded,
+    assert_xml_files_equal,
 )
 from ..sections.products import Products
 
@@ -58,44 +61,35 @@ def test_get_brand_list(api):
     assert 'BrandList' in response.keys()
 
 
-@pytest.mark.skip(reason='Stand by')
+# @pytest.mark.skip(reason='Stand by')
 @pytest.mark.vcr()
-def test_generate_product_package():
-    output_dir = gettempdir()
+def test_generate_product_package(valid_product_package):
+    # ---- BEFORE ----
+    package_name = Path(gettempdir()) / 'uploading_package'
+    zip_file = package_name.with_suffix('.zip')
     # Check uploading_package doesn't exists yet.
-    assert 'uploading_package' not in os.listdir(output_dir)
-    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is False
+    assert not package_name.exists()
+    assert not zip_file.exists()
 
-    # Get product_dict from json file.
-    filename = 'cdiscountapi/tests/samples/products/products_to_submit.json'
-    with open(filename, 'r') as f:
-        product_dict = json.load(f)
-
+    # ---- PROCESS ----
     # Generate packages.
-    Products.generate_product_package(output_dir, product_dict)
+    Products.generate_product_package(package_name, valid_product_package)
 
-    # Check uploading_package exists now.
-    assert 'uploading_package' in os.listdir(output_dir)
-    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is True
+    # ---- AFTER ----
+    # Check uploading_package.zip exists now.
+    assert not package_name.exists()
+    assert zip_file.exists()
 
     # Get expected Products.xml.
     filename = 'cdiscountapi/tests/samples/products/Products.xml'
     with open(filename, 'r') as f:
         expected = f.read()
 
-    # Get created Products.xml.
-    filename = f'{output_dir}/uploading_package/Content/Products.xml'
-    with open(filename, 'r') as f:
-        created = f.read()
+    with zipfile.ZipFile(zip_file) as zf:
+        created = zf.read('Content/Products.xml').decode()
 
     # Check Products.xml is ok.
-    assert created == expected
-
-    # Remove temporary files.
-    rmtree(f'{output_dir}/uploading_package')
-    os.remove(f'{output_dir}/uploading_package.zip')
-    assert 'uploading_package' not in os.listdir(output_dir)
-    assert os.path.isfile(f'{output_dir}/uploading_package.zip') is False
+    assert_xml_files_equal(created, expected, 'Product')
 
 
 def test_generate_product_package_with_nonexistent_directory(valid_product_for_package):
