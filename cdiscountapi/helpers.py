@@ -15,6 +15,7 @@ from functools import wraps
 from shutil import (
     copytree,
     make_archive,
+    rmtree
 )
 
 import json
@@ -53,6 +54,7 @@ def make_package(package_type, path):
             zf.write(f, compress_type=zipfile.ZIP_DEFLATED)
     os.chdir(current_path)
 
+
 # TODO Print the name of the package after its creation
 # TODO Remove package_type. Determine package_type from the keys in data
 def generate_package(package_type, package_name, data):
@@ -86,10 +88,8 @@ def generate_package(package_type, package_name, data):
     if not package_name.parent.exists():
         raise FileNotFoundError('The directory {} does not exist.'.format(package_name.parent))
 
-    # The package must not exist
-
-    # Create path.
-    # path = Path(f'{output_dir}/uploading_package')
+    if package_name.with_suffix('.zip').exists():
+        raise FileExistsError('The package_name {} already exist.'.format(package_name))
 
     # Copy tree package.
     package_template = f'{package_type}_package'
@@ -103,6 +103,8 @@ def generate_package(package_type, package_name, data):
         f.write(xml_generator.generate().encode('utf8'))
 
     make_package(package_type, package_name)
+    rmtree(package_name)
+    print('Successfully created {}.zip'.format(package_name))
 
 
 def check_element(element_name, dynamic_type):
