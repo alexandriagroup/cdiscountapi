@@ -4,6 +4,6 @@
 
 <Relationship Type="http://cdiscount.com/uri/document"
 
-Target="/Content/Products.xml" Id="Raa033fe51c984c6f" />
+Target="/Content/Products.xml" />
 
 </Relationships>
