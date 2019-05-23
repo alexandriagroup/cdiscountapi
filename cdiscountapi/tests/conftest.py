@@ -95,7 +95,6 @@ def valid_offer():
     offer = {
         'ProductEan': '978-1593274351',
         'SellerProductId': 'MY_SKU1',
-        'ProductCondition': "6",
         'Price': 10,
         'DiscountList': {'DiscountComponent': [discount_component]},
         'ShippingInformationList': {'ShippingInformation': [shipping_info1, shipping_info2]},
@@ -124,10 +123,9 @@ def valid_offer_for_package():
     offer_for_package = {
         'ProductEan': '978-1593274351',
         'SellerProductId': 'MY_SKU1',
-        'ProductCondition': "6",
+        'ProductCondition': 4,
         'Price': 10,
         'ShippingInformationList': {'ShippingInformation': [shipping_info1, shipping_info2]},
-        'ProductCondition': 4,
         'EcoPart': 0.10,
         'Vat': 19.36,
         'DeaTax': 3.14,
@@ -176,7 +174,7 @@ def valid_offers_for_package(valid_offer_for_package):
 @pytest.fixture
 def valid_offer_package(valid_offers_for_package):
     """
-    Return 2 valid offers to creae an offer package then remove 
+    Return 2 valid offers to creae an offer package then remove
     /tmp/uploading_package and /tmp/uploading_package.zip
     """
     output_dir = gettempdir()

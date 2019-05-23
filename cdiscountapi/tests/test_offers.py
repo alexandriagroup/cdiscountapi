@@ -5,7 +5,7 @@
 import json
 import os
 from shutil import rmtree
-from tempfile import gettempdir
+from tempfile import gettempdir, NamedTemporaryFile
 from copy import deepcopy
 import zipfile
 from pathlib import Path
@@ -72,6 +72,26 @@ def test_generate_offer_package(valid_offer_package):
 
     # Check Offers.xml is ok.
     assert_xml_files_equal(created, expected, 'Offer')
+
+
+def test_generate_offer_package_with_nonexistent_directory(valid_offer_for_package):
+    """
+    When the parent of the package_name does not exist a FileNotFoundError
+    Offers.generate_offer_package should raise a FileNotFoundError
+    """
+    package_name = '/nonexistent/dir/uploading_package'
+    pytest.raises(FileNotFoundError, Offers.generate_offer_package,
+                  package_name, valid_offer_for_package)
+
+
+def test_generate_offer_package_with_existing_package_name(valid_offer_for_package):
+    """
+    When the package_name already exists Offers.generate_offer_package should
+    raise a FileExistsError
+    """
+    with NamedTemporaryFile() as tmp_file:
+        pytest.raises(FileExistsError, Offers.generate_offer_package,
+                      tmp_file.name, valid_offer_for_package)
 
 
 @pytest.mark.vcr()
@@ -177,11 +197,15 @@ def test_generate_offer_package_with_purge_and_replace(valid_offer_package):
 
     # Check Offers.xml is ok.
     assert_xml_files_equal(created, expected, 'Offer')
+
+
 @pytest.mark.skip(reason='Standby')
-# @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_offer_package not ready')
+@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_offer_package not ready')
 @pytest.mark.vcr()
 def test_submit_offer_package(api):
-    response = api.offers.submit_offer_package()
+    response = api.offers.submit_offer_package(
+        url='https://www.myserver/uploading_package.zip'
+    )
     assert_response_succeeded(response)
     assert 'PackageId' in response.keys()
 

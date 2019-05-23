@@ -23,12 +23,22 @@ from cdiscountapi.packages import OfferPackage, ProductPackage
 from pathlib import Path
 
 
+PRODUCT_CONDITIONS = {
+    'LikeNew': 1,
+    'VeryGoodState': 2,
+    'GoodState': 3,
+    'AverageState': 4,
+    'Refurbished': 5,
+    'New': 6,
+}
+
+
 def check_package_type(package_type):
     if package_type.lower() not in ('offer', 'product'):
         raise ValueError('package_type must be either "offer" or "product".')
 
 
-# TODO Check the necessary files are present before adding them to the archive
+# TODO Check the necessary files are present before adding them to the archive
 def make_package(package_type, path):
     """
     Insert the files necessary for the offer/product in a zip file
@@ -43,6 +53,7 @@ def make_package(package_type, path):
             zf.write(f, compress_type=zipfile.ZIP_DEFLATED)
     os.chdir(current_path)
 
+# TODO Print the name of the package after its creation
 # TODO Remove package_type. Determine package_type from the keys in data
 def generate_package(package_type, package_name, data):
     """
@@ -69,16 +80,16 @@ def generate_package(package_type, package_name, data):
     tests/samples/offers/offers_to_submit.json
     """
     check_package_type(package_type)
+    package_name = Path(package_name)
 
-    # # The path must exist
-    # if not os.path.exists(os.path.basename(package_name)):
-    #     raise FileNotFoundError('The directory {} must does not exist.')
+    # The directory in which the package will be created must exist
+    if not package_name.parent.exists():
+        raise FileNotFoundError('The directory {} does not exist.'.format(package_name.parent))
 
     # The package must not exist
 
     # Create path.
     # path = Path(f'{output_dir}/uploading_package')
-    package_name = Path(package_name)
 
     # Copy tree package.
     package_template = f'{package_type}_package'
@@ -235,3 +246,26 @@ class XmlGenerator(object):
 
     def generate(self):
         return self.package.generate()
+
+
+def analyze_offer_report_property_log(response):
+    """
+    Return the meaning of the PropertyCode and PropertyError in the
+    node OfferReportPropertyLog returned by GetOfferPackageSubmissionResult
+    """
+    with open("cdiscountapi/codes/offer.json", "r") as f:
+        codes = json.load(f)
+
+    meanings = []
+    for offer_report_property_log in response['OfferLogList']['OfferReportLog']['PropertyList']:
+        meanings.append({
+            'PropertyCode': codes['property_codes'].get(
+                offer_report_property_log['PropertyCode'],
+                ''
+            ),
+            'PropertyError': codes['error_codes'].get(
+                offer_report_property_log['PropertyError'],
+                ''
+            ),
+        })
+    return meanings

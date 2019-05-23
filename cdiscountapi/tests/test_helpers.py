@@ -10,7 +10,7 @@ import pytest
 from cdiscountapi.cdiscountapi import Connection
 from cdiscountapi.helpers import (
     XmlGenerator,
-    check_element,
+    check_element
 )
 from . import (
     assert_response_succeeded, assert_xml_files_equal,

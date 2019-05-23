@@ -5,7 +5,7 @@
 import json
 import os
 from shutil import rmtree
-from tempfile import gettempdir
+from tempfile import gettempdir, NamedTemporaryFile
 
 import pytest
 
@@ -98,13 +98,31 @@ def test_generate_product_package():
     assert os.path.isfile(f'{output_dir}/uploading_package.zip') is False
 
 
+def test_generate_product_package_with_nonexistent_directory(valid_product_for_package):
+    """
+    When the parent of the package_name does not exist a FileNotFoundError
+    Products.generate_product_package should raise a FileNotFoundError
+    """
+    package_name = '/nonexistent/dir/uploading_package'
+    pytest.raises(FileNotFoundError, Products.generate_product_package,
+                  package_name, valid_product_for_package)
+
+
+def test_generate_product_package_with_existing_package_name(valid_product_for_package):
+    """
+    When the package_name already exists Products.generate_product_package should
+    raise a FileExistsError
+    """
+    with NamedTemporaryFile() as tmp_file:
+        pytest.raises(FileExistsError, Products.generate_product_package,
+                      tmp_file.name, valid_product_for_package)
+
+
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason='submit_product_package not ready')
 @pytest.mark.vcr()
 def test_submit_product_package(api):
-    with open('cdiscountapi/tests/samples/products/products_to_submit.json') as f:
-        products_dict = json.loads(f.read())
-    url = 'toto.html/'
-    response = api.products.submit_product_package(products_dict, url)
+    url = 'https://www.myserver/uploading_package.zip'
+    response = api.products.submit_product_package(url)
     assert_response_succeeded(response)
     assert 'PackageId' in response.keys()
 
