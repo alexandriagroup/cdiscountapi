@@ -2,11 +2,8 @@
 #
 # Copyright © 2019 Alexandria
 
-import json
-import os
-from shutil import rmtree, make_archive
-from tempfile import gettempdir, NamedTemporaryFile
-from copy import deepcopy
+from shutil import make_archive
+from tempfile import gettempdir
 import zipfile
 from pathlib import Path
 
