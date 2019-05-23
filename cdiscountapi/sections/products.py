@@ -158,10 +158,10 @@ class Products(BaseSection):
                 - SellerProductId *(str)*
                 - ShortLabel *(str)*
             - Optional attributes:
-                - Width *(byte)*
-                - Weight *(byte)*
-                - Length *(byte)*
-                - Height *(byte)*
+                - Width *(int)*
+                - Weight *(int)*
+                - Length *(int)*
+                - Height *(int)*
                 - Size *(str)*
                 - SellerProductFamily *(str)*
                 - SellerProductColorName *(str)*
@@ -171,9 +171,7 @@ class Products(BaseSection):
 
         Example::
 
-            response = api.products.generate_product_package(
-                products_list,
-                url="path_to_upload.com"
+            response = api.products.generate_product_package(products_list)
 
         """
         return generate_package('product', output_dir, {'Products': products_list})
@@ -207,7 +205,7 @@ class Products(BaseSection):
         # Send request.
         response = self.api.client.service.SubmitProductPackage(
             headerMessage=self.api.header,
-            offerPackageRequest=product_package,
+            productPackageRequest=product_package,
         )
         return serialize_object(response, dict)
 
@@ -271,6 +269,3 @@ class Products(BaseSection):
             identifierRequest=request
         )
         return serialize_object(response, dict)
-
-
-
