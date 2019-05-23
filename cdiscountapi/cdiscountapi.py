@@ -13,13 +13,17 @@ from zeep import Client
 from zeep.plugins import HistoryPlugin
 from zeep.helpers import serialize_object
 
-from cdiscountapi.exceptions import (
-    CdiscountApiConnectionError,
-)
+from cdiscountapi.exceptions import CdiscountApiConnectionError
 
 from cdiscountapi.sections import (
-    Seller, Offers, Products, Orders, Relays,
-    Fulfillment, WebMail, Discussions
+    Seller,
+    Offers,
+    Products,
+    Orders,
+    Relays,
+    Fulfillment,
+    WebMail,
+    Discussions,
 )
 
 from configparser import ConfigParser, ExtendedInterpolation
@@ -30,7 +34,7 @@ import yaml
 # CONSTANTS
 DEFAULT_SITE_ID = 100
 DEFAULT_CATALOG_ID = 1
-DEFAULT_VERSION = '1.0'
+DEFAULT_VERSION = "1.0"
 
 
 class Connection(object):
@@ -49,31 +53,31 @@ class Connection(object):
 
     """
 
-    def __init__(self, login, password, preprod=False, header_message={}, config=''):
+    def __init__(self, login, password, preprod=False, header_message={}, config=""):
         self.preprod = preprod
         if self.preprod:
-            domain = 'preprod-cdiscount.com'
+            domain = "preprod-cdiscount.com"
         else:
-            domain = 'cdiscount.com'
+            domain = "cdiscount.com"
 
-        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
-        self.auth_url = ('https://sts.{0}/users/httpIssue.svc/'
-                         '?realm=https://wsvc.{0}/MarketplaceAPIService.svc'.format(domain))
+        self.wsdl = "https://wsvc.{0}/MarketplaceAPIService.svc?wsdl".format(domain)
+        self.auth_url = (
+            "https://sts.{0}/users/httpIssue.svc/"
+            "?realm=https://wsvc.{0}/MarketplaceAPIService.svc".format(domain)
+        )
 
         self.login = login
         self.password = password
         self.history = HistoryPlugin()
         self.client = Client(self.wsdl, plugins=[self.history])
-        self.factory = self.client.type_factory('http://www.cdiscount.com')
+        self.factory = self.client.type_factory("http://www.cdiscount.com")
 
         if self.login is None or self.password is None:
-            raise CdiscountApiConnectionError(
-                'Please provide valid login and password'
-            )
+            raise CdiscountApiConnectionError("Please provide valid login and password")
 
         self.token = self.get_token()
 
-        if header_message != {} and config != '':
+        if header_message != {} and config != "":
             raise CdiscountApiConnectionError(
                 "You should provide header_message or config. Not both."
             )
@@ -90,7 +94,9 @@ class Connection(object):
                     "Can't find the configuration file {}".format(config)
                 )
         else:
-            raise CdiscountApiConnectionError("You must provide header_message or config.")
+            raise CdiscountApiConnectionError(
+                "You must provide header_message or config."
+            )
 
         # Instanciated sections.
         self.seller = Seller(self)
@@ -110,44 +116,45 @@ class Connection(object):
         if len(self.history._buffer) == 0:
             return error_msg
 
-        envelope = getattr(self.history, attr)['envelope']
-        return lxml.etree.tostring(envelope, pretty_print=True).decode('utf8')
+        envelope = getattr(self.history, attr)["envelope"]
+        return lxml.etree.tostring(envelope, pretty_print=True).decode("utf8")
 
     @property
     def last_request(self):
         """
         Return the last SOAP request
         """
-        return self._analyze_history('last_sent', 'No request sent.')
+        return self._analyze_history("last_sent", "No request sent.")
 
     @property
     def last_response(self):
         """
         Return the last SOAP response
         """
-        return self._analyze_history('last_received', 'No response received.')
+        return self._analyze_history("last_received", "No response received.")
 
     def create_header_message(self, data):
         messages_factory = self.client.type_factory(
-            'http://schemas.datacontract.org/2004/07/'
-            'Cdiscount.Framework.Core.Communication.Messages'
+            "http://schemas.datacontract.org/2004/07/"
+            "Cdiscount.Framework.Core.Communication.Messages"
         )
 
         # Set default values if they are not provided
-        if 'Context' in data:
-            data['Context'].setdefault('SiteID', DEFAULT_SITE_ID)
-            data['Context'].setdefault('CatalogID', DEFAULT_CATALOG_ID)
+        if "Context" in data:
+            data["Context"].setdefault("SiteID", DEFAULT_SITE_ID)
+            data["Context"].setdefault("CatalogID", DEFAULT_CATALOG_ID)
         else:
-            data['Context'] = {
-                'SiteID': DEFAULT_SITE_ID, 'CatalogID': DEFAULT_CATALOG_ID
+            data["Context"] = {
+                "SiteID": DEFAULT_SITE_ID,
+                "CatalogID": DEFAULT_CATALOG_ID,
             }
 
-        if 'Security' in data:
-            data['Security'].setdefault('TokenId', self.token)
+        if "Security" in data:
+            data["Security"].setdefault("TokenId", self.token)
         else:
-            data['Security'] = {'UserName': '', 'TokenId': self.token}
+            data["Security"] = {"UserName": "", "TokenId": self.token}
 
-        if 'Version' not in data:
-            data['Version'] = DEFAULT_VERSION
+        if "Version" not in data:
+            data["Version"] = DEFAULT_VERSION
 
         return serialize_object(messages_factory.HeaderMessage(**data), dict)

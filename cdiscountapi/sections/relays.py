@@ -22,6 +22,7 @@ class Relays(BaseSection):
     Operations are included in the Relays API section.
     (https://dev.cdiscount.com/marketplace/?page_id=108)
     """
+
     @auto_refresh_token
     def get_parcel_shop_list(self):
         """
@@ -33,7 +34,7 @@ class Relays(BaseSection):
 
         """
         response = self.api.client.service.GetParcelShopList(
-            headerMessage=self.api.header,
+            headerMessage=self.api.header
         )
         return serialize_object(response, dict)
 
@@ -55,10 +56,11 @@ class Relays(BaseSection):
         :returns: The response with the RelaysFileId for the file.
 
         """
-        relays_file_request = self.api.factory.RelaysFileIntegrationRequest(relays_file_uri)
+        relays_file_request = self.api.factory.RelaysFileIntegrationRequest(
+            relays_file_uri
+        )
         response = self.api.client.service.SubmitRelaysFile(
-            headerMessage=self.api.header,
-            relaysFileRequest=relays_file_request
+            headerMessage=self.api.header, relaysFileRequest=relays_file_request
         )
         return serialize_object(response, dict)
 
@@ -81,8 +83,6 @@ class Relays(BaseSection):
         """
         relays_file_filter = self.api.factory.RelaysFileFilter(relays_file_ids)
         response = self.api.client.service.GetRelaysFileSubmissionResult(
-            headerMessage=self.api.header,
-            relaysFileFilter=relays_file_filter
+            headerMessage=self.api.header, relaysFileFilter=relays_file_filter
         )
         return serialize_object(response, dict)
-

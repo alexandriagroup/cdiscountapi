@@ -43,12 +43,13 @@ class Offers(BaseSection):
 
         :return: offers answering the search criterion
         """
-        filters = self.update_with_valid_array_type(filters, {'SellerProductIdList': 'string'})
+        filters = self.update_with_valid_array_type(
+            filters, {"SellerProductIdList": "string"}
+        )
 
         offer_filter = self.api.factory.OfferFilter(**filters)
         response = self.api.client.service.GetOfferList(
-            headerMessage=self.api.header,
-            offerFilter=offer_filter,
+            headerMessage=self.api.header, offerFilter=offer_filter
         )
         return serialize_object(response, dict)
 
@@ -88,15 +89,14 @@ class Offers(BaseSection):
         """
         offer_filter = self.api.factory.OfferFilterPaginated(**filters)
         response = self.api.client.service.GetOfferListPaginated(
-            headerMessage=self.api.header,
-            offerFilter=offer_filter,
+            headerMessage=self.api.header, offerFilter=offer_filter
         )
         return serialize_object(response, dict)
 
     @staticmethod
-    def generate_offer_package(package_name, offers_list,
-                               offer_publication_list=[],
-                               purge_and_replace=False):
+    def generate_offer_package(
+        package_name, offers_list, offer_publication_list=[], purge_and_replace=False
+    ):
         """
         Generate a zip offers package as cdiscount wanted.
 
@@ -170,11 +170,15 @@ class Offers(BaseSection):
 
         :returns: None
         """
-        return generate_package('offer', package_name, {
-            'OfferCollection': offers_list,
-            'OfferPublicationList': offer_publication_list,
-            'PurgeAndReplace': purge_and_replace
-        })
+        return generate_package(
+            "offer",
+            package_name,
+            {
+                "OfferCollection": offers_list,
+                "OfferPublicationList": offer_publication_list,
+                "PurgeAndReplace": purge_and_replace,
+            },
+        )
 
     @auto_refresh_token
     def submit_offer_package(self, url):
@@ -202,8 +206,7 @@ class Offers(BaseSection):
 
         # Send request.
         response = self.api.client.service.SubmitOfferPackage(
-            headerMessage=self.api.header,
-            offerPackageRequest=offer_package,
+            headerMessage=self.api.header, offerPackageRequest=offer_package
         )
         return serialize_object(response, dict)
 
@@ -217,7 +220,6 @@ class Offers(BaseSection):
         """
         package = self.api.factory.PackageFilter(package_id)
         response = self.api.client.service.GetOfferPackageSubmissionResult(
-            headerMessage=self.api.header,
-            offerPackageFilter=package,
+            headerMessage=self.api.header, offerPackageFilter=package
         )
         return serialize_object(response, dict)

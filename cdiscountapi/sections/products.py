@@ -24,6 +24,7 @@ class Products(BaseSection):
     Operations are included in the Products API section.
     (https://dev.cdiscount.com/marketplace/?page_id=220)
     """
+
     @auto_refresh_token
     def get_allowed_category_tree(self):
         """
@@ -52,7 +53,8 @@ class Products(BaseSection):
         :return:  tree of the categories leaves of which are authorized for the integration of products and/or offers
         """
         from ..cdiscountapi import Connection
-        api_all = Connection('AllData', 'pa$$word', header_message=self.header)
+
+        api_all = Connection("AllData", "pa$$word", header_message=self.header)
         response = api_all.client.service.GetAllAllowedCategoryTree(
             headerMessage=api_all.header
         )
@@ -74,8 +76,7 @@ class Products(BaseSection):
         filters = self.api.factory.ProductFilter(category_code)
 
         response = self.api.client.service.GetProductList(
-            headerMessage=self.api.header,
-            productFilter=filters,
+            headerMessage=self.api.header, productFilter=filters
         )
         return serialize_object(response, dict)
 
@@ -95,8 +96,7 @@ class Products(BaseSection):
         :return: models and mandatory model properties
         """
         response = self.api.client.service.GetModelList(
-            headerMessage=self.api.header,
-            modelFilter=category
+            headerMessage=self.api.header, modelFilter=category
         )
         return serialize_object(response, dict)
 
@@ -133,9 +133,7 @@ class Products(BaseSection):
 
         :return: all brands
         """
-        response = self.api.client.service.GetBrandList(
-            headerMessage=self.api.header,
-        )
+        response = self.api.client.service.GetBrandList(headerMessage=self.api.header)
         return serialize_object(response, dict)
 
     @staticmethod
@@ -174,7 +172,7 @@ class Products(BaseSection):
             response = api.products.generate_product_package(products_list)
 
         """
-        return generate_package('product', package_name, {'Products': products_list})
+        return generate_package("product", package_name, {"Products": products_list})
 
     @auto_refresh_token
     def submit_product_package(self, url):
@@ -204,8 +202,7 @@ class Products(BaseSection):
 
         # Send request.
         response = self.api.client.service.SubmitProductPackage(
-            headerMessage=self.api.header,
-            productPackageRequest=product_package,
+            headerMessage=self.api.header, productPackageRequest=product_package
         )
         return serialize_object(response, dict)
 
@@ -225,8 +222,7 @@ class Products(BaseSection):
         """
         filters = self.api.factory.PackageFilter(package_ids)
         response = self.api.client.service.GetProductPackageSubmissionResult(
-            headerMessage=self.api.header,
-            productPackageFilter=filters
+            headerMessage=self.api.header, productPackageFilter=filters
         )
         return serialize_object(response, dict)
 
@@ -246,7 +242,7 @@ class Products(BaseSection):
         if package_id:
             response = self.api.client.service.GetProductPackageProductMatchingFileData(
                 headerMessage=self.api.header,
-                productPackageFilter={'PackageID': package_id}
+                productPackageFilter={"PackageID": package_id},
             )
             return serialize_object(response, dict)
 
@@ -263,9 +259,8 @@ class Products(BaseSection):
 
         :return: complete list of products
         """
-        request = {'IdentifierType': 'EAN', 'ValueList': ean_list}
+        request = {"IdentifierType": "EAN", "ValueList": ean_list}
         response = self.api.client.service.GetProductListByIdentifier(
-            headerMessage=self.api.header,
-            identifierRequest=request
+            headerMessage=self.api.header, identifierRequest=request
         )
         return serialize_object(response, dict)

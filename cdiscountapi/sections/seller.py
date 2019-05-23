@@ -22,6 +22,7 @@ class Seller(BaseSection):
     Operations are included in the Seller API section.
     (https://dev.cdiscount.com/marketplace/?page_id=36)
     """
+
     @auto_refresh_token
     def get_seller_info(self):
         """

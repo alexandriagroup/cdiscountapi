@@ -21,6 +21,7 @@ class Fulfillment(BaseSection):
     Operations are included in the Fulfillment API section
     (https://dev.cdiscount.com/marketplace/?page_id=2222)
     """
+
     @auto_refresh_token
     def submit_fulfillment_supply_order(self, prod_desc_list):
         """
@@ -63,8 +64,7 @@ class Fulfillment(BaseSection):
             check_element(desc, self.api.factory.FulfilmentProductDescription)
 
         response = self.api.client.service.SubmitFulfilmentSupplyOrder(
-            headerMessage=self.api.header,
-            request=prod_desc_list
+            headerMessage=self.api.header, request=prod_desc_list
         )
         return serialize_object(response, dict)
 
@@ -93,8 +93,7 @@ class Fulfillment(BaseSection):
         for order in order_list:
             check_element(order, self.api.factory.FulfilmentOrderLineRequest)
         response = self.api.client.service.SubmitFulfilmentOnDemandSupplyOrder(
-            headerMessage=self.api.header,
-            request={'OrderLineList': order_list}
+            headerMessage=self.api.header, request={"OrderLineList": order_list}
         )
         return serialize_object(response, dict)
 
@@ -123,12 +122,13 @@ class Fulfillment(BaseSection):
 
         :return: supply order reports
         """
-        request = self.update_with_valid_array_type(request, {'DepositIdList': 'int'})
+        request = self.update_with_valid_array_type(request, {"DepositIdList": "int"})
 
-        supply_order_report_request = self.api.factory.SupplyOrderReportRequest(**request)
+        supply_order_report_request = self.api.factory.SupplyOrderReportRequest(
+            **request
+        )
         response = self.api.client.service.GetFulfilmentSupplyOrderReportList(
-            headerMessage=self.api.header,
-            request=supply_order_report_request
+            headerMessage=self.api.header, request=supply_order_report_request
         )
         return serialize_object(response, dict)
 
@@ -146,8 +146,7 @@ class Fulfillment(BaseSection):
         :return: data for printing PDF documents, in the form of a Base64-encoded string.
         """
         response = self.api.client.service.GetFulfilmentDeliveryDocument(
-            headerMessage=self.api.header,
-            request={'DepositId': deposit_id}
+            headerMessage=self.api.header, request={"DepositId": deposit_id}
         )
         return serialize_object(response, dict)
 
@@ -174,12 +173,13 @@ class Fulfillment(BaseSection):
 
         :return: supply orders
         """
-        request = self.update_with_valid_array_type(request, {'SupplyOrderNumberList': 'string'})
+        request = self.update_with_valid_array_type(
+            request, {"SupplyOrderNumberList": "string"}
+        )
 
         supply_order_report_request = self.api.factory.SupplyOrderRequest(**request)
         response = self.api.client.service.GetFulfilmentSupplyOrder(
-            headerMessage=self.api.header,
-            request=supply_order_report_request
+            headerMessage=self.api.header, request=supply_order_report_request
         )
         return serialize_object(response, dict)
 
@@ -225,8 +225,7 @@ class Fulfillment(BaseSection):
         :return: deposit id
         """
         response = self.api.client.service.SubmitFulfilmentActivation(
-            headerMessage=self.api.header,
-            request=request
+            headerMessage=self.api.header, request=request
         )
         return serialize_object(response, dict)
 
@@ -246,10 +245,11 @@ class Fulfillment(BaseSection):
             )
 
         """
-        activation_report_request = self.api.factory.FulfilmentActivationReportRequest(**request)
+        activation_report_request = self.api.factory.FulfilmentActivationReportRequest(
+            **request
+        )
         response = self.api.client.service.GetFulfilmentActivationReportList(
-            headerMessage=self.api.header,
-            request=activation_report_request
+            headerMessage=self.api.header, request=activation_report_request
         )
         return serialize_object(response, dict)
 
@@ -275,8 +275,7 @@ class Fulfillment(BaseSection):
         """
         references = self.api.factory.FulfilmentOnDemandOrderLineFilter(**request)
         response = self.api.client.service.GetFulfilmentActivationReportList(
-            headerMessage=self.api.header,
-            request=references
+            headerMessage=self.api.header, request=references
         )
         return serialize_object(response, dict)
 
@@ -299,8 +298,7 @@ class Fulfillment(BaseSection):
         """
         seller_action = self.api.factory.OfferStateActionRequest(**request)
         response = self.api.client.service.SubmitOfferStateAction(
-            headerMessage=self.api.header,
-            offerStateRequest=seller_action
+            headerMessage=self.api.header, offerStateRequest=seller_action
         )
         return serialize_object(response, dict)
 
@@ -333,8 +331,7 @@ class Fulfillment(BaseSection):
         :return: The response
         """
         response = self.api.client.service.CreateExternalOrder(
-            headerMessage=self.api.header,
-            request={'Order': order}
+            headerMessage=self.api.header, request={"Order": order}
         )
         return serialize_object(response, dict)
 
@@ -359,9 +356,9 @@ class Fulfillment(BaseSection):
         response = self.api.client.service.GetExternalOrderStatus(
             headerMessage=self.api.header,
             request={
-                'Corporation': request.get('Corporation'),
-                'CustomerOrderNumber': request.get('CustomerOrderNumber')
-            }
+                "Corporation": request.get("Corporation"),
+                "CustomerOrderNumber": request.get("CustomerOrderNumber"),
+            },
         )
         return serialize_object(response, dict)
 
@@ -405,7 +402,6 @@ class Fulfillment(BaseSection):
         :return: ProductStockList, Status ("OK", "NoData", "KO") and TotalProductCount
         """
         response = self.api.client.service.GetProductStockList(
-            headerMessage=self.api.header,
-            request=request
+            headerMessage=self.api.header, request=request
         )
         return serialize_object(response, dict)

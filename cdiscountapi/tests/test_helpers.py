@@ -8,14 +8,8 @@ import pytest
 
 # Project imports
 from cdiscountapi.cdiscountapi import Connection
-from cdiscountapi.helpers import (
-    XmlGenerator,
-    check_element
-)
-from . import (
-    assert_response_succeeded, assert_xml_files_equal,
-    discount_component
-)
+from cdiscountapi.helpers import XmlGenerator, check_element
+from . import assert_response_succeeded, assert_xml_files_equal, discount_component
 
 from cdiscountapi.exceptions import ValidationError
 
@@ -27,8 +21,8 @@ def test_check_element_with_valid_element(api):
     """
     dynamic_type = api.factory.ValidateOrder
     valid_elements = [x[0] for x in dynamic_type.elements]
-    assert 'CarrierName' in valid_elements
-    assert check_element('CarrierName', dynamic_type) is None
+    assert "CarrierName" in valid_elements
+    assert check_element("CarrierName", dynamic_type) is None
 
 
 @pytest.mark.vcr()
@@ -39,8 +33,8 @@ def test_check_element_with_invalid_element(api):
     """
     dynamic_type = api.factory.ValidateOrder
     valid_elements = [x[0] for x in dynamic_type.elements]
-    assert 'INVALID_ELEMENT' not in valid_elements
-    pytest.raises(TypeError, check_element, 'INVALID_ELEMENT', dynamic_type)
+    assert "INVALID_ELEMENT" not in valid_elements
+    pytest.raises(TypeError, check_element, "INVALID_ELEMENT", dynamic_type)
 
 
 # XmlGenerator
@@ -50,9 +44,9 @@ def test_XmlGenerator_constructor(valid_offer_for_package):
     XmlGenerator should raise a ValueError if `data` isn't a dictionary with the key
     'OfferCollection' for Offers.xml and 'Products' for Products.xml
     """
-    XmlGenerator({'OfferCollection': [valid_offer_for_package]})
-    XmlGenerator({'Products': []})
-    pytest.raises(ValueError, XmlGenerator, {'InvalidKey': [valid_offer_for_package]})
+    XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    XmlGenerator({"Products": []})
+    pytest.raises(ValueError, XmlGenerator, {"InvalidKey": [valid_offer_for_package]})
 
 
 @pytest.mark.vcr()
@@ -61,7 +55,7 @@ def test_add_offers(valid_offer_for_package):
     XmlGenerator.add should append the unique valid offers in the
     attribute `XmlGenerator.data`
     """
-    xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
+    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
     assert len(xml_generator.data) == 1
 
     xml_generator.add([valid_offer_for_package])
@@ -71,7 +65,9 @@ def test_add_offers(valid_offer_for_package):
 
     # We create a new valid offer with a DiscountList
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
-    valid_offer_for_package1['DiscountList'] = {'DiscountComponent': [discount_component()]}
+    valid_offer_for_package1["DiscountList"] = {
+        "DiscountComponent": [discount_component()]
+    }
     xml_generator.add([valid_offer_for_package1])
 
     # There should be 2 valid offers
@@ -83,10 +79,13 @@ def test_add_offers_with_invalid_offer(valid_offer_for_package):
     """
     XmlGenerator.add should raise a TypeError when the offer is invalid
     """
-    xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
-    invalid_offer_for_package = {'invalid_offer': True}
-    pytest.raises(ValidationError, xml_generator.add, [valid_offer_for_package,
-                                                       invalid_offer_for_package])
+    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    invalid_offer_for_package = {"invalid_offer": True}
+    pytest.raises(
+        ValidationError,
+        xml_generator.add,
+        [valid_offer_for_package, invalid_offer_for_package],
+    )
 
 
 @pytest.mark.vcr()
@@ -96,19 +95,16 @@ def test_generate_offers(valid_offer_for_package):
     """
     # We add a second offer in the package
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
-    valid_offer_for_package1['Price'] = 20
-    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
-    xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
+    valid_offer_for_package1["Price"] = 20
+    valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
+    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/offers/Offers.xml') as f:
+    with open("cdiscountapi/tests/samples/offers/Offers.xml") as f:
         expected_content = f.read()
 
-    assert_xml_files_equal(
-        content, expected_content,
-        'Offer'
-    )
+    assert_xml_files_equal(content, expected_content, "Offer")
 
 
 @pytest.mark.vcr()
@@ -118,22 +114,21 @@ def test_generate_offers_with_discount(valid_offer_for_package):
     """
     # We add a second offer in the package
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
-    valid_offer_for_package1['Price'] = 20
-    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
+    valid_offer_for_package1["Price"] = 20
+    valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
     # Only the first offer has a DiscountList
-    valid_offer_for_package['DiscountList'] = {'DiscountComponent': [discount_component()]}
+    valid_offer_for_package["DiscountList"] = {
+        "DiscountComponent": [discount_component()]
+    }
 
-    xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
+    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/offers/Offers_with_discount.xml') as f:
+    with open("cdiscountapi/tests/samples/offers/Offers_with_discount.xml") as f:
         expected_content = f.read()
 
-    assert_xml_files_equal(
-        content, expected_content,
-        'Offer'
-    )
+    assert_xml_files_equal(content, expected_content, "Offer")
 
 
 @pytest.mark.vcr()
@@ -143,24 +138,24 @@ def test_generate_offers_with_offer_publication_list(valid_offer_for_package):
     """
     # We add a second offer in the package
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
-    valid_offer_for_package1['Price'] = 20
-    valid_offer_for_package1['SellerProductId'] = 'MY_SKU2'
-    xml_generator = XmlGenerator({'OfferCollection': [valid_offer_for_package]})
+    valid_offer_for_package1["Price"] = 20
+    valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
+    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml') as f:
+    with open(
+        "cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml"
+    ) as f:
         expected_content = f.read()
 
-    assert_xml_files_equal(
-        content, expected_content,
-        'Offer'
-    )
+    assert_xml_files_equal(content, expected_content, "Offer")
+
 
 # ProductPackage
 @pytest.mark.vcr()
 def test_add_products(valid_product_for_package):
-    xml_generator = XmlGenerator({'Products': [valid_product_for_package]})
+    xml_generator = XmlGenerator({"Products": [valid_product_for_package]})
     assert len(xml_generator.data) == 1
 
     xml_generator.add([valid_product_for_package])
@@ -170,7 +165,7 @@ def test_add_products(valid_product_for_package):
 
     # We create a new valid offer with a different DiscountValue
     valid_product1 = deepcopy(valid_product_for_package)
-    valid_product1['SellerProductColorName'] = "Bleu Canard"
+    valid_product1["SellerProductColorName"] = "Bleu Canard"
     xml_generator.add([valid_product1])
 
     # There should be 2 valid offers
@@ -179,9 +174,11 @@ def test_add_products(valid_product_for_package):
 
 @pytest.mark.vcr()
 def test_add_products_with_invalid_product(valid_product_for_package):
-    xml_generator = XmlGenerator({'Products': [valid_product_for_package]})
-    invalid_product = {'invalid_product': True}
-    pytest.raises(ValidationError, xml_generator.add, [valid_product_for_package, invalid_product])
+    xml_generator = XmlGenerator({"Products": [valid_product_for_package]})
+    invalid_product = {"invalid_product": True}
+    pytest.raises(
+        ValidationError, xml_generator.add, [valid_product_for_package, invalid_product]
+    )
 
 
 @pytest.mark.vcr()
@@ -191,22 +188,20 @@ def test_generate_products(valid_product_for_package):
     """
     # We add a second product in the package
     valid_product_for_package1 = deepcopy(valid_product_for_package)
-    valid_product_for_package1['EanList'] = {'ProductEan': [{"Ean": "3606918243774"}]}
-    valid_product_for_package1['SellerProductId'] = '120905784'
-    valid_product_for_package1['Size'] = '36/34'
+    valid_product_for_package1["EanList"] = {"ProductEan": [{"Ean": "3606918243774"}]}
+    valid_product_for_package1["SellerProductId"] = "120905784"
+    valid_product_for_package1["Size"] = "36/34"
 
-    xml_generator = XmlGenerator({'Products': [valid_product_for_package,
-                                               valid_product_for_package1]})
+    xml_generator = XmlGenerator(
+        {"Products": [valid_product_for_package, valid_product_for_package1]}
+    )
     xml_generator.add([valid_product_for_package])
     content = xml_generator.generate()
 
-    with open('cdiscountapi/tests/samples/products/Products.xml') as f:
+    with open("cdiscountapi/tests/samples/products/Products.xml") as f:
         expected_content = f.read()
 
-    assert_xml_files_equal(
-        content, expected_content,
-        'Product'
-    )
+    assert_xml_files_equal(content, expected_content, "Product")
 
 
 # auto_refresh_token
@@ -214,29 +209,24 @@ def test_generate_products(valid_product_for_package):
 def test_auto_refresh_token():
     # We get rid of the fixture 'api' that has a cache because we want to do a
     # new request to the server
-    api = Connection(os.getenv('CDISCOUNT_API_LOGIN'),
-                     os.getenv('CDISCOUNT_API_PASSWORD'),
-                     header_message={
-                         'Context': {
-                             'SiteID': 100,
-                             'CatalogID': 1
-                         },
-                         'Localization': {
-                             'Country': 'Fr',
-                         },
-                         'Security': {
-                             'UserName': '',
-                         },
-                         'Version': '1.0',
-                     })
+    api = Connection(
+        os.getenv("CDISCOUNT_API_LOGIN"),
+        os.getenv("CDISCOUNT_API_PASSWORD"),
+        header_message={
+            "Context": {"SiteID": 100, "CatalogID": 1},
+            "Localization": {"Country": "Fr"},
+            "Security": {"UserName": ""},
+            "Version": "1.0",
+        },
+    )
 
     # We purposely set an invalid token so that a zeep.exceptions.Fault is raised
-    api.header['Security']['TokenId'] = 'invalid_token'
-    api.token = 'invalid_token'
+    api.header["Security"]["TokenId"] = "invalid_token"
+    api.token = "invalid_token"
     # Then we run any operation
     response = api.seller.get_seller_info()
     assert_response_succeeded(response)
 
     # The token should be valid now
-    assert api.token == api.header['Security']['TokenId']
-    assert re.match(r'[a-z0-9]{32}', api.token) is not None
+    assert api.token == api.header["Security"]["TokenId"]
+    assert re.match(r"[a-z0-9]{32}", api.token) is not None

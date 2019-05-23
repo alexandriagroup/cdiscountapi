@@ -14,10 +14,7 @@ from copy import deepcopy
 
 # Third-party imports
 import zeep
-from jinja2 import (
-    Environment,
-    FileSystemLoader,
-)
+from jinja2 import Environment, FileSystemLoader
 
 from cdiscountapi.packages.validator import (
     OfferValidator,
@@ -35,13 +32,13 @@ class BasePackage(object):
     def __init__(self, preprod=False):
         self.preprod = preprod
         if self.preprod:
-            domain = 'preprod-cdiscount.com'
+            domain = "preprod-cdiscount.com"
         else:
-            domain = 'cdiscount.com'
+            domain = "cdiscount.com"
 
-        self.wsdl = 'https://wsvc.{0}/MarketplaceAPIService.svc?wsdl'.format(domain)
+        self.wsdl = "https://wsvc.{0}/MarketplaceAPIService.svc?wsdl".format(domain)
         self.client = zeep.Client(self.wsdl)
-        self.factory = self.client.type_factory('http://www.cdiscount.com')
+        self.factory = self.client.type_factory("http://www.cdiscount.com")
         self.data = []
 
     def validate(self, **kwargs):
@@ -62,13 +59,13 @@ class BasePackage(object):
 
 
 class OfferPackage(BasePackage):
-    required_keys = ['OfferCollection']
+    required_keys = ["OfferCollection"]
 
     def __init__(self, data, preprod=False):
         super().__init__(preprod=preprod)
-        self.check_offer_publication_list(data.get('OfferPublicationList'))
-        self.purge_and_replace = data.get('PurgeAndReplace', False)
-        self.add(data['OfferCollection'])
+        self.check_offer_publication_list(data.get("OfferPublicationList"))
+        self.purge_and_replace = data.get("PurgeAndReplace", False)
+        self.add(data["OfferCollection"])
 
     def check_offer_publication_list(self, ids):
         """
@@ -79,8 +76,10 @@ class OfferPackage(BasePackage):
             self.offer_publication_list = []
             return None
 
-        msg = ("The value OfferPublicationList should be a list of"
-               " integers representing the ids of the marketplaces.")
+        msg = (
+            "The value OfferPublicationList should be a list of"
+            " integers representing the ids of the marketplaces."
+        )
 
         if not isinstance(ids, (list, tuple)):
             raise TypeError(msg)
@@ -89,7 +88,7 @@ class OfferPackage(BasePackage):
             if not isinstance(_id, int):
                 raise TypeError(msg)
 
-        self.offer_publication_list = [{'Id': _id} for _id in ids]
+        self.offer_publication_list = [{"Id": _id} for _id in ids]
 
     def add(self, offers):
         for offer in offers:
@@ -127,28 +126,37 @@ class OfferPackage(BasePackage):
         new_kwargs = kwargs.copy()
 
         # We validate the lists in Offer
-        if 'DiscountList' in kwargs:
-            new_kwargs['DiscountList'] = {
-                'DiscountComponent': [DiscountComponentValidator.validate(x) for x in
-                new_kwargs['DiscountList']['DiscountComponent']
-            ]}
+        if "DiscountList" in kwargs:
+            new_kwargs["DiscountList"] = {
+                "DiscountComponent": [
+                    DiscountComponentValidator.validate(x)
+                    for x in new_kwargs["DiscountList"]["DiscountComponent"]
+                ]
+            }
 
-        if 'ShippingInformationList' in kwargs:
-            new_kwargs['ShippingInformationList'] = {
-                'ShippingInformation': [ShippingInformationValidator.validate(x) for x in
-                new_kwargs['ShippingInformationList']['ShippingInformation']
-            ]}
+        if "ShippingInformationList" in kwargs:
+            new_kwargs["ShippingInformationList"] = {
+                "ShippingInformation": [
+                    ShippingInformationValidator.validate(x)
+                    for x in new_kwargs["ShippingInformationList"][
+                        "ShippingInformation"
+                    ]
+                ]
+            }
 
         return OfferValidator.validate(new_kwargs)
 
     def generate(self):
-        loader = FileSystemLoader('cdiscountapi/templates')
+        loader = FileSystemLoader("cdiscountapi/templates")
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
-        template = env.get_template('Offers.xml')
+        template = env.get_template("Offers.xml")
         offers = deepcopy(self.data)
         extraction_mapping = {
-            'shipping_information_list': ('ShippingInformationList', 'ShippingInformation'),
-            'discount_list': ('DiscountList', 'DiscountComponent'),
+            "shipping_information_list": (
+                "ShippingInformationList",
+                "ShippingInformation",
+            ),
+            "discount_list": ("DiscountList", "DiscountComponent"),
         }
 
         offers_data = []
@@ -161,26 +169,27 @@ class OfferPackage(BasePackage):
                         offers_datum[key] = []
                     offers_datum[key].extend(self.extract_from(offer, attr1, attr2))
 
-            if 'attributes' not in offers_datum:
-                offers_datum['attributes'] = ''
+            if "attributes" not in offers_datum:
+                offers_datum["attributes"] = ""
 
             # We keep only key:value pairs whose values are not None
-            offers_datum['attributes'] += " ".join('{}="{}"'.format(k, v) for k, v in
-                                                   offer.items() if v is not None)
+            offers_datum["attributes"] += " ".join(
+                '{}="{}"'.format(k, v) for k, v in offer.items() if v is not None
+            )
             offers_data.append(offers_datum)
         return template.render(
             offers=offers_data,
             offer_publication_list=self.offer_publication_list,
-            purge_and_replace=self.purge_and_replace
+            purge_and_replace=self.purge_and_replace,
         )
 
 
 class ProductPackage(BasePackage):
-    required_keys = ['Products']
+    required_keys = ["Products"]
 
     def __init__(self, data, preprod=False):
         super().__init__(preprod=preprod)
-        self.add(data['Products'])
+        self.add(data["Products"])
 
     def add(self, products):
         for product in products:
@@ -208,28 +217,32 @@ class ProductPackage(BasePackage):
 
     def validate(self, **kwargs):
         new_kwargs = kwargs.copy()
-        if 'EanList' in kwargs:
-            new_kwargs['EanList'] = {
-                'ProductEan': [ProductEanValidator.validate(x) for x in
-                               new_kwargs['EanList']['ProductEan']]
+        if "EanList" in kwargs:
+            new_kwargs["EanList"] = {
+                "ProductEan": [
+                    ProductEanValidator.validate(x)
+                    for x in new_kwargs["EanList"]["ProductEan"]
+                ]
             }
 
-        if 'Pictures' in kwargs:
-            new_kwargs['Pictures'] = {
-                'ProductImage': [ProductImageValidator.validate(x) for x in
-                                 new_kwargs['Pictures']['ProductImage']]
+        if "Pictures" in kwargs:
+            new_kwargs["Pictures"] = {
+                "ProductImage": [
+                    ProductImageValidator.validate(x)
+                    for x in new_kwargs["Pictures"]["ProductImage"]
+                ]
             }
 
         return ProductValidator.validate(new_kwargs)
 
     def generate(self):
-        loader = FileSystemLoader('cdiscountapi/templates')
+        loader = FileSystemLoader("cdiscountapi/templates")
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
-        template = env.get_template('Products.xml')
+        template = env.get_template("Products.xml")
         products = deepcopy(self.data)
         extraction_mapping = {
-            'EanList': ('EanList', 'ProductEan'),
-            'Pictures': ('Pictures', 'ProductImage'),
+            "EanList": ("EanList", "ProductEan"),
+            "Pictures": ("Pictures", "ProductImage"),
         }
 
         products_data = []
@@ -240,15 +253,16 @@ class ProductPackage(BasePackage):
                     products_datum[key] = []
                 products_datum[key].extend(self.extract_from(product, attr1, attr2))
 
-            if 'ModelProperties' in product:
-                products_datum['ModelProperties'] = product['ModelProperties']
-                del product['ModelProperties']
+            if "ModelProperties" in product:
+                products_datum["ModelProperties"] = product["ModelProperties"]
+                del product["ModelProperties"]
 
-            if 'attributes' not in products_datum:
-                products_datum['attributes'] = ''
+            if "attributes" not in products_datum:
+                products_datum["attributes"] = ""
 
             # We keep only key:value pairs whose values are not None
-            products_datum['attributes'] += " ".join('{}="{}"'.format(k, v) for k, v in
-                                                     product.items() if v is not None)
+            products_datum["attributes"] += " ".join(
+                '{}="{}"'.format(k, v) for k, v in product.items() if v is not None
+            )
             products_data.append(products_datum)
         return template.render(products=products_data)

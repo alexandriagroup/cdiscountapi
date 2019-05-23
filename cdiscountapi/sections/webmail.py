@@ -22,6 +22,7 @@ class WebMail(BaseSection):
     Operations are included in the WebMail API section.
     (https://dev.cdiscount.com/marketplace/?page_id=167)
     """
+
     @auto_refresh_token
     def generate_discussion_mail_guid(self, order_id):
         """
@@ -39,8 +40,7 @@ class WebMail(BaseSection):
 
         """
         response = self.api.client.service.GenerateDiscussionMailGuid(
-            headerMessage=self.api.header,
-            request={'ScopusId': order_id}
+            headerMessage=self.api.header, request={"ScopusId": order_id}
         )
         return serialize_object(response, dict)
 
@@ -62,11 +62,9 @@ class WebMail(BaseSection):
 
         """
         request = self.api.factory.GetDiscussionMailListRequest(
-            DiscussionIds=self.array_of('long', discussion_ids)
+            DiscussionIds=self.array_of("long", discussion_ids)
         )
         response = self.api.client.service.GetDiscussionMailList(
-            headerMessage=self.api.header,
-            request=request
+            headerMessage=self.api.header, request=request
         )
         return serialize_object(response, dict)
-

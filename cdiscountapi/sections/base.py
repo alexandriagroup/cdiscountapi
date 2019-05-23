@@ -13,11 +13,10 @@ from zeep.helpers import serialize_object
 
 
 class BaseSection(object):
-
     def __init__(self, api):
         self.api = api
         self.arrays_factory = self.api.client.type_factory(
-                'http://schemas.microsoft.com/2003/10/Serialization/Arrays'
+            "http://schemas.microsoft.com/2003/10/Serialization/Arrays"
         )
 
     # TODO Damien: voir pour le lien
@@ -29,15 +28,21 @@ class BaseSection(object):
         (cf http://schemas.microsoft.com/2003/10/Serialization/Arrays)
         (cf https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19) ?
         """
-        valid_type_names = ('int', 'string', 'long',
-                            'KeyValueOfstringArrayOfstringty7Ep6D1',
-                            'KeyValueOfintstring')
+        valid_type_names = (
+            "int",
+            "string",
+            "long",
+            "KeyValueOfstringArrayOfstringty7Ep6D1",
+            "KeyValueOfintstring",
+        )
 
         if type_name not in valid_type_names:
-            raise TypeError("Invalid type_name. "
-                            "Please choose between {}".format(valid_type_names))
+            raise TypeError(
+                "Invalid type_name. "
+                "Please choose between {}".format(valid_type_names)
+            )
 
-        array = getattr(self.arrays_factory, 'ArrayOf{}'.format(type_name))(sequence)
+        array = getattr(self.arrays_factory, "ArrayOf{}".format(type_name))(sequence)
         return serialize_object(array, dict)
 
     def update_with_valid_array_type(self, record, keys_to_cast):

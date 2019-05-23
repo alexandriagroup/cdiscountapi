@@ -13,7 +13,7 @@ def test_get_seller_info(api):
     """
     response = api.seller.get_seller_info()
     assert_response_succeeded(response)
-    assert 'Seller' in response
+    assert "Seller" in response
 
 
 @pytest.mark.vcr()
@@ -24,4 +24,4 @@ def test_get_seller_indicators(api):
     """
     response = api.seller.get_seller_indicators()
     assert_response_succeeded(response)
-    assert 'SellerIndicators' in response
+    assert "SellerIndicators" in response

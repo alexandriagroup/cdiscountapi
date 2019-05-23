@@ -27,17 +27,15 @@ class Discussions(BaseSection):
     Operations are included in the Discussions API section.
     (https://dev.cdiscount.com/marketplace/?page_id=148)
     """
+
     @auto_refresh_token
     def get_order_claim_list(self, **order_claim_filter):
         """
         Return the list of order claims
         """
-        order_claim_filter = self.api.factory.OrderClaimFilter(
-            **order_claim_filter
-        )
+        order_claim_filter = self.api.factory.OrderClaimFilter(**order_claim_filter)
         response = self.api.client.service.GetOrderClaimList(
-            headerMessage=self.api.header,
-            orderClaimFilter=order_claim_filter
+            headerMessage=self.api.header, orderClaimFilter=order_claim_filter
         )
         return serialize_object(response, dict)
 
@@ -76,8 +74,7 @@ class Discussions(BaseSection):
             **offer_question_filter
         )
         response = self.api.client.service.GetOfferQuestionList(
-            headerMessage=self.api.header,
-            offerQuestionFilter=offer_question_filter
+            headerMessage=self.api.header, offerQuestionFilter=offer_question_filter
         )
         return serialize_object(response, dict)
 
@@ -114,8 +111,7 @@ class Discussions(BaseSection):
             **order_question_filter
         )
         response = self.api.client.service.GetOrderQuestionList(
-            headerMessage=self.api.header,
-            orderQuestionFilter=order_question_filter
+            headerMessage=self.api.header, orderQuestionFilter=order_question_filter
         )
         return serialize_object(response, dict)
 
@@ -132,10 +128,10 @@ class Discussions(BaseSection):
 
         """
         close_discussion_request = self.api.factory.CloseDiscussionRequest(
-            DiscussionIds=self.array_of('long', discussion_ids)
+            DiscussionIds=self.array_of("long", discussion_ids)
         )
         response = self.api.client.service.CloseDiscussionList(
             headerMessage=self.api.header,
-            closeDiscussionRequest=close_discussion_request
+            closeDiscussionRequest=close_discussion_request,
         )
         return serialize_object(response, dict)

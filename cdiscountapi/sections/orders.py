@@ -22,6 +22,7 @@ class Orders(BaseSection):
     Operations are included in the Orders API section.
     (https://dev.cdiscount.com/marketplace/?page_id=128)
     """
+
     @auto_refresh_token
     def get_order_list(self, **order_filter):
         """
@@ -119,22 +120,21 @@ class Orders(BaseSection):
         .. note:: If ``FetchOrderLines`` is not specified in keywords, its
                   default value will be ``True``.
         """
-        if 'States' in order_filter:
-            order_filter.update(States=self.api.factory.ArrayOfOrderStateEnum(
-                order_filter['States'])
+        if "States" in order_filter:
+            order_filter.update(
+                States=self.api.factory.ArrayOfOrderStateEnum(order_filter["States"])
             )
 
         order_filter = self.update_with_valid_array_type(
-            order_filter, {'OrderReferenceList': 'string'}
+            order_filter, {"OrderReferenceList": "string"}
         )
 
-        if 'FetchOrderLines' not in order_filter:
+        if "FetchOrderLines" not in order_filter:
             order_filter.update(FetchOrderLines=True)
 
         order_filter = self.api.factory.OrderFilter(**order_filter)
         response = self.api.client.service.GetOrderList(
-            headerMessage=self.api.header,
-            orderFilter=order_filter,
+            headerMessage=self.api.header, orderFilter=order_filter
         )
         return serialize_object(response, dict)
 
@@ -147,7 +147,7 @@ class Orders(BaseSection):
         - Carrier list
         """
         response = self.api.client.service.GetGlobalConfiguration(
-            headerMessage=self.api.header,
+            headerMessage=self.api.header
         )
         return serialize_object(response, dict)
 
@@ -165,16 +165,14 @@ class Orders(BaseSection):
             check_element(element_name, self.api.factory.ValidateOrder)
 
         # check elements ValidateOrderLine
-        for i, validate_order_line in enumerate(data['OrderLineList']):
+        for i, validate_order_line in enumerate(data["OrderLineList"]):
             for element_name in validate_order_line.keys():
                 check_element(element_name, self.api.factory.ValidateOrderLine)
 
-        data['OrderLineList'] = {
-            'ValidateOrderLine': [x for x in data.pop('OrderLineList')]
+        data["OrderLineList"] = {
+            "ValidateOrderLine": [x for x in data.pop("OrderLineList")]
         }
-        return serialize_object(
-            self.api.factory.ValidateOrder(**data), dict
-        )
+        return serialize_object(self.api.factory.ValidateOrder(**data), dict)
 
     def prepare_validations(self, data):
         """
@@ -210,9 +208,7 @@ class Orders(BaseSection):
         :returns: The ``validate_order_list_message`` dictionary created with ``data``
         """
         return {
-            'OrderList': {
-                'ValidateOrder': [self._prepare_validation(x) for x in data]
-            }
+            "OrderList": {"ValidateOrder": [self._prepare_validation(x) for x in data]}
         }
 
     # TODO Use for accept_orders
@@ -276,7 +272,7 @@ class Orders(BaseSection):
         )
         response = self.api.client.service.ValidateOrderList(
             headerMessage=self.api.header,
-            validateOrderListMessage=validate_order_list_message
+            validateOrderListMessage=validate_order_list_message,
         )
         return serialize_object(response, dict)
 
@@ -347,35 +343,34 @@ class Orders(BaseSection):
 
         """
         # Check CommercialGestureList
-        if 'CommercialGestureList' in request:
-            commercial_gestures = request['CommercialGestureList']
+        if "CommercialGestureList" in request:
+            commercial_gestures = request["CommercialGestureList"]
             if isinstance(commercial_gestures, dict):
                 commercial_gestures = [commercial_gestures]
 
             for commercial_gesture in commercial_gestures:
-                motive_id = commercial_gesture.get('MotiveId')
+                motive_id = commercial_gesture.get("MotiveId")
                 # MotiveId is a label
                 # if not isinstance(motive_id, int):
                 #     motive_id = get_motive_id(motive_id)
                 # TODO Damien: voir pour obligation d'int
                 if isinstance(motive_id, int):
-                    commercial_gesture['MotiveId'] = motive_id
+                    commercial_gesture["MotiveId"] = motive_id
         else:
             commercial_gestures = None
 
         # Request
         request = self.api.factory.CreateRefundVoucherRequest(
-            OrderNumber=request.get('OrderNumber'),
+            OrderNumber=request.get("OrderNumber"),
             CommercialGestureList=self.api.factory.ArrayOfRefundInformation(
                 commercial_gestures
             ),
             SellerRefundList=self.api.factory.ArrayOfSellerRefundRequest(
-                request.get('SellerRefundList')
-            )
+                request.get("SellerRefundList")
+            ),
         )
         response = self.api.client.service.CreateRefundVoucher(
-            headerMessage=self.api.header,
-            request=request
+            headerMessage=self.api.header, request=request
         )
         return serialize_object(response, dict)
 
@@ -415,12 +410,13 @@ class Orders(BaseSection):
             new_parcel_actions_list = None
 
         manage_parcel_request = self.api.factory.ManageParcelRequest(
-            ParcelActionsList=self.api.factory.ArrayOfParcelInfos(new_parcel_actions_list),
-            ScopusId=scopus_id
+            ParcelActionsList=self.api.factory.ArrayOfParcelInfos(
+                new_parcel_actions_list
+            ),
+            ScopusId=scopus_id,
         )
 
         response = self.api.client.service.ManageParcel(
-            headerMessage=self.api.header,
-            manageParcelRequest=manage_parcel_request
+            headerMessage=self.api.header, manageParcelRequest=manage_parcel_request
         )
         return serialize_object(response, dict)

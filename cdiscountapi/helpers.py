@@ -12,11 +12,7 @@
 import os
 import zipfile
 from functools import wraps
-from shutil import (
-    copytree,
-    make_archive,
-    rmtree
-)
+from shutil import copytree, make_archive, rmtree
 
 import json
 import zeep
@@ -25,17 +21,17 @@ from pathlib import Path
 
 
 PRODUCT_CONDITIONS = {
-    'LikeNew': 1,
-    'VeryGoodState': 2,
-    'GoodState': 3,
-    'AverageState': 4,
-    'Refurbished': 5,
-    'New': 6,
+    "LikeNew": 1,
+    "VeryGoodState": 2,
+    "GoodState": 3,
+    "AverageState": 4,
+    "Refurbished": 5,
+    "New": 6,
 }
 
 
 def check_package_type(package_type):
-    if package_type.lower() not in ('offer', 'product'):
+    if package_type.lower() not in ("offer", "product"):
         raise ValueError('package_type must be either "offer" or "product".')
 
 
@@ -47,9 +43,12 @@ def make_package(package_type, path):
     current_path = path.cwd()
     check_package_type(package_type)
     os.chdir(path)
-    files = ('Content/{}s.xml'.format(package_type.capitalize()),
-             '_rels/.rels', '[Content_Types].xml')
-    with zipfile.ZipFile(path.parent / (path.name + '.zip'), 'w') as zf:
+    files = (
+        "Content/{}s.xml".format(package_type.capitalize()),
+        "_rels/.rels",
+        "[Content_Types].xml",
+    )
+    with zipfile.ZipFile(path.parent / (path.name + ".zip"), "w") as zf:
         for f in files:
             zf.write(f, compress_type=zipfile.ZIP_DEFLATED)
     os.chdir(current_path)
@@ -86,25 +85,27 @@ def generate_package(package_type, package_name, data):
 
     # The directory in which the package will be created must exist
     if not package_name.parent.exists():
-        raise FileNotFoundError('The directory {} does not exist.'.format(package_name.parent))
+        raise FileNotFoundError(
+            "The directory {} does not exist.".format(package_name.parent)
+        )
 
-    if package_name.with_suffix('.zip').exists():
-        raise FileExistsError('The package_name {} already exist.'.format(package_name))
+    if package_name.with_suffix(".zip").exists():
+        raise FileExistsError("The package_name {} already exist.".format(package_name))
 
     # Copy tree package.
-    package_template = f'{package_type}_package'
+    package_template = f"{package_type}_package"
     package = copytree(package_template, package_name)
-    xml_filename = package_type.capitalize() + 's.xml'
+    xml_filename = package_type.capitalize() + "s.xml"
 
     # TODO Fix offer_dict
     # Add Products.xml from product_dict.
     with open(f"{package}/Content/{xml_filename}", "wb") as f:
         xml_generator = XmlGenerator(data)
-        f.write(xml_generator.generate().encode('utf8'))
+        f.write(xml_generator.generate().encode("utf8"))
 
     make_package(package_type, package_name)
     rmtree(package_name)
-    print('Successfully created {}.zip'.format(package_name))
+    print("Successfully created {}.zip".format(package_name))
 
 
 def check_element(element_name, dynamic_type):
@@ -117,8 +118,8 @@ def check_element(element_name, dynamic_type):
     valid_elements = [x[0] for x in dynamic_type.elements]
     if element_name not in valid_elements:
         raise TypeError(
-            f'{element_name} is not a valid element of {dynamic_type.name}.'
-            f' Valid elements are {valid_elements}'
+            f"{element_name} is not a valid element of {dynamic_type.name}."
+            f" Valid elements are {valid_elements}"
         )
 
 
@@ -126,23 +127,23 @@ def check_element(element_name, dynamic_type):
 #  "Shipping Fees" ou "ShippingFees" au lieu de "shipping_fees"
 def get_motive_id(label):
     label_to_motive_id = {
-        'compensation_on_missing_stock': 131,
-        'product_delivered_damaged': 132,
-        'product_delivered_missing': 132,
-        'error_of_reference': 133,
-        'error_of_color': 133,
-        'error_of_size': 133,
-        'fees_unduly_charged_to_the_customer': 134,
-        'late_delivery': 135,
-        'product_return_fees': 136,
-        'shipping_fees': 137,
-        'warranty_period_passed': 138,
-        'rights_of_withdrawal_passed': 138,
-        'others': 139,
+        "compensation_on_missing_stock": 131,
+        "product_delivered_damaged": 132,
+        "product_delivered_missing": 132,
+        "error_of_reference": 133,
+        "error_of_color": 133,
+        "error_of_size": 133,
+        "fees_unduly_charged_to_the_customer": 134,
+        "late_delivery": 135,
+        "product_return_fees": 136,
+        "shipping_fees": 137,
+        "warranty_period_passed": 138,
+        "rights_of_withdrawal_passed": 138,
+        "others": 139,
     }
     if label not in label_to_motive_id:
-        raise KeyError("Please choose a valid label ({})".format(
-            list(label_to_motive_id))
+        raise KeyError(
+            "Please choose a valid label ({})".format(list(label_to_motive_id))
         )
     return label_to_motive_id[label]
 
@@ -152,17 +153,19 @@ def auto_refresh_token(func):
     """
     Refresh the token when it's outdated and resend the request
     """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         self = args[0]
         try:
             return func(*args, **kwargs)
         except zeep.exceptions.Fault:
-            print('Refreshing token...')
+            print("Refreshing token...")
             self.api.token = self.api.get_token()
-            self.api.header['Security']['TokenId'] = self.api.token
-            print('Resending request...')
+            self.api.header["Security"]["TokenId"] = self.api.token
+            print("Resending request...")
             return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -229,16 +232,20 @@ class XmlGenerator(object):
         content = products_xml.generate()
 
     """
+
     def __init__(self, data, preprod=False):
         if OfferPackage.has_required_keys(data):
             self.package = OfferPackage(data, preprod)
         elif ProductPackage.has_required_keys(data):
             self.package = ProductPackage(data, preprod)
         else:
-            msg = ("The data should be a dictionary with the keys {offers} for"
-                   "Offers.xml and {products} for Products.xml".format(
-                       offers=OfferPackage.required_keys,
-                       products=ProductPackage.required_keys))
+            msg = (
+                "The data should be a dictionary with the keys {offers} for"
+                "Offers.xml and {products} for Products.xml".format(
+                    offers=OfferPackage.required_keys,
+                    products=ProductPackage.required_keys,
+                )
+            )
             raise ValueError(msg)
 
         self.data = self.package.data
@@ -259,15 +266,17 @@ def analyze_offer_report_property_log(response):
         codes = json.load(f)
 
     meanings = []
-    for offer_report_property_log in response['OfferLogList']['OfferReportLog']['PropertyList']:
-        meanings.append({
-            'PropertyCode': codes['property_codes'].get(
-                offer_report_property_log['PropertyCode'],
-                ''
-            ),
-            'PropertyError': codes['error_codes'].get(
-                offer_report_property_log['PropertyError'],
-                ''
-            ),
-        })
+    for offer_report_property_log in response["OfferLogList"]["OfferReportLog"][
+        "PropertyList"
+    ]:
+        meanings.append(
+            {
+                "PropertyCode": codes["property_codes"].get(
+                    offer_report_property_log["PropertyCode"], ""
+                ),
+                "PropertyError": codes["error_codes"].get(
+                    offer_report_property_log["PropertyError"], ""
+                ),
+            }
+        )
     return meanings
