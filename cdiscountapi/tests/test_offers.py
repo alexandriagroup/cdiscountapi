@@ -4,7 +4,7 @@
 
 import json
 import os
-from shutil import rmtree
+from shutil import rmtree, make_archive
 from tempfile import gettempdir, NamedTemporaryFile
 from copy import deepcopy
 import zipfile
@@ -50,7 +50,7 @@ def test_generate_offer_package(valid_offer_package):
     # ---- BEFORE ----
     package_name = Path(gettempdir()) / 'uploading_package'
     zip_file = package_name.with_suffix('.zip')
-    # Check uploading_package doesn't exists yet.
+    # Check uploading_package.zip doesn't exist yet.
     assert not package_name.exists()
     assert not zip_file.exists()
 
@@ -59,39 +59,41 @@ def test_generate_offer_package(valid_offer_package):
     Offers.generate_offer_package(package_name, valid_offer_package)
 
     # ---- AFTER ----
-    # Check uploading_package exists now.
-    assert package_name.exists()
+    # Check uploading_package.zip exists now.
+    assert not package_name.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
     with open('cdiscountapi/tests/samples/offers/Offers.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
-        created = f.read()
+    with zipfile.ZipFile(zip_file) as zf:
+        created = zf.read('Content/Offers.xml').decode()
 
     # Check Offers.xml is ok.
     assert_xml_files_equal(created, expected, 'Offer')
 
 
-def test_generate_offer_package_with_nonexistent_directory(valid_offer_for_package):
+def test_generate_offer_package_with_nonexistent_directory(valid_offer_package):
     """
     When the parent of the package_name does not exist a FileNotFoundError
     Offers.generate_offer_package should raise a FileNotFoundError
     """
-    package_name = '/nonexistent/dir/uploading_package'
+    package_name = Path('/nonexistent/dir/uploading_package')
     pytest.raises(FileNotFoundError, Offers.generate_offer_package,
-                  package_name, valid_offer_for_package)
+                  package_name, valid_offer_package)
 
 
-def test_generate_offer_package_with_existing_package_name(valid_offer_for_package):
+def test_generate_offer_package_with_existing_package_name(valid_offer_package):
     """
     When the package_name already exists Offers.generate_offer_package should
     raise a FileExistsError
     """
-    with NamedTemporaryFile() as tmp_file:
-        pytest.raises(FileExistsError, Offers.generate_offer_package,
-                      tmp_file.name, valid_offer_for_package)
+    package_name = Path(gettempdir()) / 'uploading_package'
+    package_name.mkdir()
+    make_archive(str(package_name), 'zip', package_name, base_dir='.')
+    pytest.raises(FileExistsError, Offers.generate_offer_package,
+                  package_name.with_name('.zip'), valid_offer_package)
 
 
 @pytest.mark.vcr()
@@ -115,15 +117,15 @@ def test_generate_offer_package_with_discount(valid_offer_package):
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert package_name.exists()
+    assert not package_name.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
     with open('cdiscountapi/tests/samples/offers/Offers_with_discount.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
-        created = f.read()
+    with zipfile.ZipFile(zip_file) as zf:
+        created = zf.read('Content/Offers.xml').decode()
 
     # Check Offers.xml is ok.
     assert_xml_files_equal(created, expected, 'Offer')
@@ -150,15 +152,15 @@ def test_generate_offer_package_with_offer_publication_list(valid_offer_package)
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert package_name.exists()
+    assert not package_name.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
     with open('cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
-        created = f.read()
+    with zipfile.ZipFile(zip_file) as zf:
+        created = zf.read('Content/Offers.xml').decode()
 
     # Check Offers.xml is ok.
     assert_xml_files_equal(created, expected, 'Offer')
@@ -185,15 +187,15 @@ def test_generate_offer_package_with_purge_and_replace(valid_offer_package):
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert package_name.exists()
+    assert not package_name.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
     with open('cdiscountapi/tests/samples/offers/Offers_with_purge_and_replace.xml', 'r') as f:
         expected = f.read()
 
-    with open(f'{package_name}/Content/Offers.xml', 'r') as f:
-        created = f.read()
+    with zipfile.ZipFile(zip_file) as zf:
+        created = zf.read('Content/Offers.xml').decode()
 
     # Check Offers.xml is ok.
     assert_xml_files_equal(created, expected, 'Offer')
