@@ -37,7 +37,6 @@ class WebMail(BaseSection):
 
             response = api.generate_discussion_mail_guid(order_id)
 
-
         """
         response = self.api.client.service.GenerateDiscussionMailGuid(
             headerMessage=self.api.header, request={"ScopusId": order_id}
@@ -48,7 +47,6 @@ class WebMail(BaseSection):
     def get_discussion_mail_list(self, discussion_ids):
         """
         Get encrypted mail addresses from discussions.
-
 
         This operation allows getting an encrypted mail address to contact a
         customer.

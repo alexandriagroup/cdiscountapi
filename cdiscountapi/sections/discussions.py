@@ -64,10 +64,13 @@ class Discussions(BaseSection):
         Example::
 
             response = api.get_offer_question_list(
-                StatusList={'DiscussionStateFilter': 'Open'}
+                StatusList={'DiscussionStateFilter': 'Open'},
+                BeginCreationDate='2019-01-01'
             )
 
         :returns: An OfferQuestionListMessage dictionary.
+
+        .. note:: A date is mandatory in the query.
 
         """
         offer_question_filter = self.api.factory.OfferQuestionFilter(
@@ -101,10 +104,13 @@ class Discussions(BaseSection):
         Example::
 
             response = api.get_order_question_list(
-                StatusList={'DiscussionStateFilter': 'Open'}
+                StatusList={'DiscussionStateFilter': 'Open'},
+                BeginCreationDate='2019-01-01'
             )
 
         :returns: An OrderQuestionListMessage dictionary.
+
+        .. note:: A date is mandatory in the query.
 
         """
         order_question_filter = self.api.factory.OrderQuestionFilter(

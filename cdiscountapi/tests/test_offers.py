@@ -214,8 +214,6 @@ def test_generate_offer_package_with_purge_and_replace(valid_offer_package):
     assert_xml_files_equal(created, expected, "Offer")
 
 
-@pytest.mark.skip(reason="Standby")
-@pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason="submit_offer_package not ready")
 @pytest.mark.vcr()
 def test_submit_offer_package(api):
     response = api.offers.submit_offer_package(
