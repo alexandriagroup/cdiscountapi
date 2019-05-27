@@ -19,6 +19,15 @@ class Orders(BaseSection):
     """
     Allows to list, validate or refund orders.
 
+    Methods::
+
+        get_order_list(**order_filter)
+        get_global_configuration()
+        prepare_validations(data)
+        validate_order_list(**validate_order_list_message)
+        create_refund_voucher(**request)
+        manage_parcel(parcel_actions_list=parcel_actions_list, scopus_id=scopus_id)
+
     Operations are included in the Orders API section.
     (https://dev.cdiscount.com/marketplace/?page_id=128)
     """

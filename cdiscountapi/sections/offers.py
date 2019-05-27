@@ -19,6 +19,17 @@ class Offers(BaseSection):
     """
     Offers section lets sellers retrieve information about their offers.
 
+    Methods::
+
+        get_offer_list(**filters)
+        get_offer_list_paginated(**filters)
+        generate_offer_package(package_name,
+                               offers_list,
+                               offer_publication_list=offer_publication_list,
+                               purge_and_replace=purge_and_replace)
+        submit_offer_package(url)
+        get_offer_package_submission_result(package_id)
+
     Operations are included in the Products API section
     (https://dev.cdiscount.com/marketplace/?page_id=84)
     """

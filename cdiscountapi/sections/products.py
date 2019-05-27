@@ -21,8 +21,23 @@ class Products(BaseSection):
     """
     Allows to get information about products and submit new products on Cdiscount.
 
+    Methods::
+
+        get_all_allowed_category_tree()
+        get_allowed_category_tree()
+        get_product_list(category_code)
+        get_model_list(category=category)
+        get_all_model_list()
+        get_brand_list()
+        generate_product_package(package_name, products_list)
+        submit_product_package(url)
+        get_product_package_submission_result(package_ids=package_ids)
+        get_product_package_product_matching_file_data(package_id)
+        get_product_list_by_identifier(ean_list=ean_list)
+
     Operations are included in the Products API section.
     (https://dev.cdiscount.com/marketplace/?page_id=220)
+
     """
 
     @auto_refresh_token
@@ -95,8 +110,13 @@ class Products(BaseSection):
 
         :return: models and mandatory model properties
         """
+        categories = category if isinstance(category, (list, tuple)) else [category]
+        model_filter = self.api.factory.ModelFilter(
+            self.array_of('string', categories)
+        )
+
         response = self.api.client.service.GetModelList(
-            headerMessage=self.api.header, modelFilter=category
+            headerMessage=self.api.header, modelFilter=model_filter
         )
         return serialize_object(response, dict)
 

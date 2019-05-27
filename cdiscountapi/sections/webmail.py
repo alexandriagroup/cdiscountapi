@@ -19,6 +19,11 @@ class WebMail(BaseSection):
     The WebMail API allows the seller to retrieve encrypted email address to
     contact a customer
 
+    Methods::
+
+        generate_discussion_mail_guid(order_id)
+        get_discussion_mail_list(discussion_ids)
+
     Operations are included in the WebMail API section.
     (https://dev.cdiscount.com/marketplace/?page_id=167)
     """

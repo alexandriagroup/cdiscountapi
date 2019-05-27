@@ -22,7 +22,14 @@ class Discussions(BaseSection):
     Thanks to the discussion Id and the method GetDiscussionMailList you can
     get an encrypted mail address to reply to a question or a claim.  You can
     close a discussion list with the method CloseDiscussionList and the
-    Discussion id, you cannot close a discussion without having answered
+    Discussion id, you cannot close a discussion without having answered.
+
+    Methods::
+
+        get_order_claim_list(**order_claim_filter)
+        get_offer_question_list(**offer_question_filter)
+        get_order_question_list(**order_question_filter)
+        close_discussion_list(discussion_ids)
 
     Operations are included in the Discussions API section.
     (https://dev.cdiscount.com/marketplace/?page_id=148)

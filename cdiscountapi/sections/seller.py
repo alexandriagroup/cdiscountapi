@@ -19,6 +19,11 @@ class Seller(BaseSection):
     Seller section lets sellers retrieve information about their seller account
     and their performance indicator.
 
+    Methods::
+
+        get_seller_info()
+        get_seller_indicators()
+
     Operations are included in the Seller API section.
     (https://dev.cdiscount.com/marketplace/?page_id=36)
     """

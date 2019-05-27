@@ -18,6 +18,20 @@ class Fulfillment(BaseSection):
     """
     Allows to manage the fulfillment of the supply orders.
 
+    Methods::
+
+        submit_fulfillment_supply_order(prod_desc_list)
+        submit_fulfillment_on_demand_supply_order(order_list)
+        get_fulfillment_supply_order_report_list(**request)
+        get_fulfillment_delivery_document(deposit_id)
+        get_fulfillment_supply_order
+        submit_offer_state_action(request)
+        get_fulfillment_activation_report_list(**request)
+        get_fulfillment_order_list_to_supply(**request)
+        submit_offer_state_action(**request)
+        get_external_order_status(**request)
+        get_product_stock_list(**request):
+
     Operations are included in the Fulfillment API section
     (https://dev.cdiscount.com/marketplace/?page_id=2222)
     """

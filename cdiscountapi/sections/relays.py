@@ -19,6 +19,12 @@ class Relays(BaseSection):
     Allows to get information about the different available relays and submit
     new ones.
 
+    Methods::
+
+        get_parcel_shop_list()
+        submit_relays_file(relays_file_uri)
+        get_relays_file_submission_result(relays_file_ids)
+
     Operations are included in the Relays API section.
     (https://dev.cdiscount.com/marketplace/?page_id=108)
     """
