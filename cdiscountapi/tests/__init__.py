@@ -78,6 +78,20 @@ def assert_xml_files_equal(result_content, expected_content, pkg_type):
         "Product": ("Product.EanList", "Product.ModelProperties", "Product.Pictures"),
     }
 
+    # Check the attributes "Capacity"
+    if pkg_type == "Product":
+        product_collection = pkg_type_xpath(
+            etree.XML(result_content),
+            "ProductCollection"
+        )[0]
+        expected_product_collection = pkg_type_xpath(
+            etree.XML(expected_content),
+            "ProductCollection"
+        )[0]
+
+        product_collection.get('Capacity') == expected_product_collection.get('Capacity')
+
+
     pkg_type_nodes = pkg_type_xpath(etree.XML(result_content), pkg_type)
     expected_pkg_type_nodes = pkg_type_xpath(etree.XML(expected_content), pkg_type)
     assert len(pkg_type_nodes) == len(expected_pkg_type_nodes)

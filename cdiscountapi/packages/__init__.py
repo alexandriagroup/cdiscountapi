@@ -265,4 +265,5 @@ class ProductPackage(BasePackage):
                 '{}="{}"'.format(k, v) for k, v in product.items() if v is not None
             )
             products_data.append(products_datum)
-        return template.render(products=products_data)
+        capacity = sum(len(p['Pictures']) for p in products_data)
+        return template.render(products=products_data, capacity=capacity)
