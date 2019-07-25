@@ -9,7 +9,7 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
-[0.0.1] - 2019-04-17
+[0.1.0] - 2019-07-25
 --------------------
 
 * First release.
