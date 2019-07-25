@@ -262,7 +262,7 @@ def analyze_offer_report_property_log(response):
     Return the meaning of the PropertyCode and PropertyError in the
     node OfferReportPropertyLog returned by GetOfferPackageSubmissionResult
     """
-    with open("cdiscountapi/codes/offer.json", "r") as f:
+    with open("cdiscountapi/assets/offer.json", "r") as f:
         codes = json.load(f)
 
     meanings = []

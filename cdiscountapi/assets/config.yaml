@@ -1,0 +1,13 @@
+Version: '1.0'
+
+Context:
+    SiteID: 100
+    CatalogID: 1
+
+Localization:
+    Country: 'Fr'
+    Currency: 'Eur'
+    DecimalPosition: 2
+
+Security:
+    UserName: ''
