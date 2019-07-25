@@ -6,3 +6,4 @@ __pycache__
 .envrc
 .flake8
 personal
+dist
