@@ -21,9 +21,9 @@ test-renew-vcr-records:
 	py.test $(PYTEST_FLAGS) --vcr-record=all
 
 build:
-	flit build
+	flit build --format wheel
 
 publish:
-	flit publish
+	flit publish --format wheel
 
 .PHONY: docs test
