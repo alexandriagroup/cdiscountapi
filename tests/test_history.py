@@ -1,6 +1,11 @@
+# Python imports
 import os
+
+# Third-party imports
 import pytest
-from ..cdiscountapi import Connection
+
+# Project imports
+from cdiscountapi.cdiscountapi import Connection
 
 
 def connect():

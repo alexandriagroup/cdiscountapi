@@ -2,17 +2,22 @@
 #
 # Copyright © 2019 Alexandria
 
-import json
-import os
-from shutil import rmtree
+# Python imports
 from tempfile import gettempdir, NamedTemporaryFile
 from pathlib import Path
 import zipfile
 
+# Third-party imports
 import pytest
 
-from . import CDISCOUNT_WITHOUT_DATA, assert_response_succeeded, assert_xml_files_equal
-from ..sections.products import Products
+# Project imports
+from . import (
+    CDISCOUNT_WITHOUT_DATA,
+    SAMPLES_DIR,
+    assert_response_succeeded,
+    assert_xml_files_equal
+)
+from cdiscountapi.sections.products import Products
 
 
 @pytest.mark.vcr()
@@ -77,7 +82,7 @@ def test_generate_product_package(valid_product_package):
     assert zip_file.exists()
 
     # Get expected Products.xml.
-    filename = "cdiscountapi/tests/samples/products/Products.xml"
+    filename = SAMPLES_DIR.joinpath("products", "Products.xml")
     with open(filename, "r") as f:
         expected = f.read()
 

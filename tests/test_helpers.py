@@ -9,9 +9,13 @@ import pytest
 # Project imports
 from cdiscountapi.cdiscountapi import Connection
 from cdiscountapi.helpers import XmlGenerator, check_element
-from . import assert_response_succeeded, assert_xml_files_equal, discount_component
-
 from cdiscountapi.exceptions import ValidationError
+from . import (
+    SAMPLES_DIR,
+    assert_response_succeeded,
+    assert_xml_files_equal,
+    discount_component
+)
 
 
 @pytest.mark.vcr()
@@ -101,7 +105,7 @@ def test_generate_offers(valid_offer_for_package):
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open("cdiscountapi/tests/samples/offers/Offers.xml") as f:
+    with open(SAMPLES_DIR.joinpath("offers", "Offers.xml")) as f:
         expected_content = f.read()
 
     assert_xml_files_equal(content, expected_content, "Offer")
@@ -125,7 +129,7 @@ def test_generate_offers_with_discount(valid_offer_for_package):
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
-    with open("cdiscountapi/tests/samples/offers/Offers_with_discount.xml") as f:
+    with open(SAMPLES_DIR.joinpath("offers", "Offers_with_discount.xml")) as f:
         expected_content = f.read()
 
     assert_xml_files_equal(content, expected_content, "Offer")
@@ -145,7 +149,7 @@ def test_generate_offers_with_offer_publication_list(valid_offer_for_package):
     content = xml_generator.generate()
 
     with open(
-        "cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml"
+        SAMPLES_DIR.joinpath("offers", "Offers_with_offer_publication_list.xml")
     ) as f:
         expected_content = f.read()
 
@@ -198,7 +202,7 @@ def test_generate_products(valid_product_for_package):
     xml_generator.add([valid_product_for_package])
     content = xml_generator.generate()
 
-    with open("cdiscountapi/tests/samples/products/Products.xml") as f:
+    with open(SAMPLES_DIR.joinpath("products", "Products.xml")) as f:
         expected_content = f.read()
 
     assert_xml_files_equal(content, expected_content, "Product")

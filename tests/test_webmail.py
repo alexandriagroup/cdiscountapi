@@ -1,5 +1,8 @@
+# Third-party imports
 import pytest
-from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
+
+# Project imports
+from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason="Waiting for orders")

@@ -1,4 +1,7 @@
+# Third-party imports
 import pytest
+
+# Project imports
 from . import assert_response_succeeded, assert_response_failed, CDISCOUNT_WITHOUT_DATA
 
 

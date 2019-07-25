@@ -2,21 +2,24 @@
 #
 # Copyright © 2019 Alexandria
 
+# Python imports
 from shutil import make_archive
 from tempfile import gettempdir
 import zipfile
 from pathlib import Path
 
+# Third-party imports
 import pytest
 
+# Project imports
 from . import (
-    CDISCOUNT_WITHOUT_DATA,
+    SAMPLES_DIR,
     assert_response_succeeded,
     assert_xml_files_equal,
     discount_component,
     offer_publication_list,
 )
-from ..sections.offers import Offers
+from cdiscountapi.sections.offers import Offers
 
 
 # HELPERS
@@ -61,7 +64,7 @@ def test_generate_offer_package(valid_offer_package):
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
-    with open("cdiscountapi/tests/samples/offers/Offers.xml", "r") as f:
+    with open(SAMPLES_DIR.joinpath("offers", "Offers.xml"), "r") as f:
         expected = f.read()
 
     with zipfile.ZipFile(zip_file) as zf:
@@ -128,7 +131,7 @@ def test_generate_offer_package_with_discount(valid_offer_package):
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
-    with open("cdiscountapi/tests/samples/offers/Offers_with_discount.xml", "r") as f:
+    with open(SAMPLES_DIR.joinpath("offers", "Offers_with_discount.xml"), "r") as f:
         expected = f.read()
 
     with zipfile.ZipFile(zip_file) as zf:
@@ -166,7 +169,8 @@ def test_generate_offer_package_with_offer_publication_list(valid_offer_package)
     assert_offer_package_is_valid(zip_file)
 
     with open(
-        "cdiscountapi/tests/samples/offers/Offers_with_offer_publication_list.xml", "r"
+        SAMPLES_DIR.joinpath("offers", "Offers_with_offer_publication_list.xml"),
+        "r"
     ) as f:
         expected = f.read()
 
@@ -203,7 +207,8 @@ def test_generate_offer_package_with_purge_and_replace(valid_offer_package):
     assert_offer_package_is_valid(zip_file)
 
     with open(
-        "cdiscountapi/tests/samples/offers/Offers_with_purge_and_replace.xml", "r"
+        SAMPLES_DIR.joinpath("offers", "Offers_with_purge_and_replace.xml"),
+        "r"
     ) as f:
         expected = f.read()
 

@@ -3,12 +3,16 @@
 # Copyright © 2019 Alexandria
 
 
+# Python imports
 import os
 import re
-import pytest
-from ..cdiscountapi import Connection
 
-from ..exceptions import CdiscountApiConnectionError
+# Third-party imports
+import pytest
+
+# Project imports
+from cdiscountapi.cdiscountapi import Connection
+from cdiscountapi.exceptions import CdiscountApiConnectionError
 
 
 # HELPER FUNCTION
@@ -50,7 +54,7 @@ def test_initialization():
     api = Connection(
         os.getenv("CDISCOUNT_API_LOGIN"),
         os.getenv("CDISCOUNT_API_PASSWORD"),
-        config="cdiscountapi/tests/samples/config.yaml",
+        config="cdiscountapi/assets/config.yaml",
     )
     assert re.match(r"[a-z0-9]{32}", api.token) is not None
     assert api.preprod is False
@@ -84,7 +88,7 @@ def test_header_message_with_config():
     api = Connection(
         os.getenv("CDISCOUNT_API_LOGIN"),
         os.getenv("CDISCOUNT_API_PASSWORD"),
-        config="cdiscountapi/tests/samples/config.yaml",
+        config="cdiscountapi/assets/config.yaml",
     )
 
     assert set(api.header.keys()) == {"Version", "Security", "Context", "Localization"}

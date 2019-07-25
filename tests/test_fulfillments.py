@@ -2,10 +2,14 @@
 #
 # Copyright © 2019 Alexandria
 
-import os
-import pytest
-from . import assert_response_succeeded
+# Python imports
 from unittest import skip
+
+# Third-party imports
+import pytest
+
+# Project imports
+from . import assert_response_succeeded
 
 
 @skip("submit not ready")

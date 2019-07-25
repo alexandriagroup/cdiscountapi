@@ -1,7 +1,11 @@
-import os
-import pytest
-from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
+# Python imports
 import datetime
+
+# Third-party imports
+import pytest
+
+# Project imports
+from . import assert_response_succeeded, CDISCOUNT_WITHOUT_DATA
 
 
 # close_discussion

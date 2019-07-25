@@ -1,9 +1,11 @@
 import os
 from lxml import etree
+from pathlib import Path
 
 
 # CONSTANTS
 CDISCOUNT_WITHOUT_DATA = True if os.getenv("CDISCOUNT_WITHOUT_DATA") == "1" else False
+SAMPLES_DIR = Path().joinpath("tests", "samples")
 
 
 # HELPER FUNCTIONS

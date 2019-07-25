@@ -9,7 +9,7 @@ import pytest
 from tempfile import gettempdir
 from shutil import rmtree
 from functools import lru_cache
-from ..cdiscountapi import Connection
+from cdiscountapi.cdiscountapi import Connection
 
 
 VCR_CASSETTE_DIR = Path(__file__).parent.joinpath("cassettes")

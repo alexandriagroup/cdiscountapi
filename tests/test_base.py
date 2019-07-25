@@ -1,8 +1,8 @@
-import re
-import os
+# Third-party imports
 import pytest
 
-from ..sections.base import BaseSection
+# Project imports
+from cdiscountapi.sections.base import BaseSection
 
 
 @pytest.mark.vcr()
