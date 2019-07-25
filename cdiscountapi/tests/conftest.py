@@ -87,7 +87,7 @@ def api():
         os.getenv("CDISCOUNT_API_PASSWORD"),
         header_message={
             "Context": {"SiteID": 100, "CatalogID": 1},
-            "Localization": {"Country": "Fr"},
+            "Localization": {"Country": "Fr", "Currency": "Eur"},
             "Security": {"UserName": ""},
             "Version": "1.0",
         },
