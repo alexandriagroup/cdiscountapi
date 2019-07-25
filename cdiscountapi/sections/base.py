@@ -19,7 +19,6 @@ class BaseSection(object):
             "http://schemas.microsoft.com/2003/10/Serialization/Arrays"
         )
 
-    # TODO Damien: voir pour le lien
     def array_of(self, type_name, sequence):
         """
         Cast the sequence into an array of the given type.
