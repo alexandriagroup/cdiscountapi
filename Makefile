@@ -20,5 +20,10 @@ test-coverage:
 test-renew-vcr-records:
 	py.test $(PYTEST_FLAGS) --vcr-record=all
 
+build:
+	flit build
+
+publish:
+	flit publish
 
 .PHONY: docs test
