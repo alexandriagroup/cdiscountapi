@@ -1,6 +1,6 @@
 <ProductPackage Name="test_Greg_DemandeDecreaProduit_API_Variant_SOJ144731" xmlns="clr-namespace:Cdiscount.Service.ProductIntegration.Pivot;assembly=Cdiscount.Service.ProductIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <ProductPackage.Products>
-    <ProductCollection Capacity="">
+      <ProductCollection Capacity="{{ capacity }}">
       {% for product in products %}
       <Product {{ product['attributes'] }} >
         <Product.EanList>
