@@ -5,7 +5,7 @@ import os
 import pytest
 
 # Project imports
-from cdiscountapi.cdiscountapi import Connection
+from cdiscountapi import Connection
 
 
 def connect():

@@ -11,7 +11,7 @@ import re
 import pytest
 
 # Project imports
-from cdiscountapi.cdiscountapi import Connection
+from cdiscountapi import Connection
 from cdiscountapi.exceptions import CdiscountApiConnectionError
 
 

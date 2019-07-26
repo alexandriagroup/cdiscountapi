@@ -7,7 +7,7 @@ from copy import deepcopy
 import pytest
 
 # Project imports
-from cdiscountapi.cdiscountapi import Connection
+from cdiscountapi import Connection
 from cdiscountapi.helpers import XmlGenerator, check_element
 from cdiscountapi.exceptions import ValidationError
 from . import (
