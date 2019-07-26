@@ -87,7 +87,7 @@ class Connection(object):
         elif config:
             config_path = Path(config)
             if config_path.exists():
-                conf = yaml.load(config_path.read_text())
+                conf = yaml.load(config_path.read_text(), Loader=yaml.FullLoader)
                 self.header = self.create_header_message(conf)
             else:
                 raise CdiscountApiConnectionError(
