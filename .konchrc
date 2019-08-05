@@ -9,6 +9,14 @@ from pathlib import Path
 import konch
 import yaml
 from lxml import etree
+from tabulate import tabulate
+import time
+import json
+import operator
+
+
+# CONSTANTS
+METADATA_DIR = 'personal/scripts/metadata'
 
 
 @lru_cache(maxsize=128)
@@ -66,6 +74,52 @@ def show_request(api, operation, **kwargs):
     print(etree.tostring(request, pretty_print=True).decode('utf8'))
 
 
+def show_offers_list(offers_list):
+    """
+    Usage:
+        offers_list = api.get_offers_list_paginated(PageNumber=1)
+        show_offers_list(offers_list)
+    """
+    header = ['SellerProductId', 'ProductEan', 'ProductCondition', 'Price',
+              'CreationDate', 'OfferState', 'LastUpdateDate']
+    header_fn = operator.itemgetter(*header)
+    table = [dict(zip(header, header_fn(x))) for x in offers_list['OfferList']['Offer']]
+    print(tabulate(table, headers="keys"))
+
+
+def show_offer_package_submission_results(api):
+    """
+    Usage:
+        show_offer_package_submission_results(api)
+    """
+    metadata = Path().cwd().joinpath(METADATA_DIR)
+    if not metadata.exists():
+        raise ValueError(f"Can't find the metadata directory {metadata}")
+
+    def fromepoch(epoch):
+        return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch)) 
+
+    def make_row(content):
+        row = {}
+        row['PackageId'] = content['response']['PackageId']
+        row['Success'] = content['response']['OperationSuccess']
+        row['SellerProductIds'] = ','.join(x['data']['SellerProductId'] for x in content['offers'])
+        row['PackageName'] = content['base_package_name']
+        row['Date'] = fromepoch(content['timestamp'])
+        submission_result = api.offers.get_offer_package_submission_result(
+            int(row['PackageId'])
+        )
+        row['Status'] = submission_result['PackageIntegrationStatus']
+        row['Comment'] = content['comment'][0:42]
+        return row
+
+    table = []
+    for f in metadata.iterdir():
+        content = json.loads(f.read_text())
+        table.append(make_row(content))
+    print(tabulate(table, headers='keys'))
+
+
 cdiscount_api_preprod = os.getenv('CDISCOUNT_API_PREPROD')
 preprod = analyze_preprod_choice(cdiscount_api_preprod) if\
     cdiscount_api_preprod else False
@@ -108,6 +162,8 @@ konch.config({
         'load_cassette': load_cassette,
         'create_request': create_request,
         'show_request': show_request,
+        'show_offers_list': show_offers_list,
+        'show_offer_package_submission_results': show_offer_package_submission_results
     },
     "shell": "ipython",
     "ipy_autoreload": True,
