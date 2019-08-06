@@ -9,6 +9,15 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[0.1.3] - 2019-08-06
+--------------------
+
+Added
+*****
+
+* The package name can now be specified in `generate_offers_package`.
+
+
 [0.1.2] - 2019-07-26
 --------------------
 

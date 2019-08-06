@@ -7,3 +7,4 @@ __pycache__
 .flake8
 personal
 dist
+.mypy_cache
