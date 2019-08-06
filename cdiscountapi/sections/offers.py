@@ -106,12 +106,17 @@ class Offers(BaseSection):
 
     @staticmethod
     def generate_offer_package(
-        package_name, offers_list, offer_publication_list=[], purge_and_replace=False
+            package_name,
+            package_path,
+            offers_list,
+            offer_publication_list=[],
+            purge_and_replace=False
     ):
         """
         Generate a zip offers package as cdiscount wanted.
 
-        :param str package_name: [mandatory] the full path to the offer package (without .zip)
+        :param str package_name: The name of the package
+        :param str package_path: [mandatory] the full path to the offer package (without .zip)
         :param list offer_publication_list: [optional]
         :param bool purge_and_replace: [optional]
         :param list offers_list: list of dict [{offer, shipping}, ...]:
@@ -174,6 +179,7 @@ class Offers(BaseSection):
 
             response = api.offers.generate_offer_package(
                 package_name,
+                package_path,
                 offers_list,
                 offer_publication_list=offer_publication_list,
                 purge_and_replace=purge_and_replace
@@ -183,11 +189,12 @@ class Offers(BaseSection):
         """
         return generate_package(
             "offer",
-            package_name,
+            package_path,
             {
                 "OfferCollection": offers_list,
                 "OfferPublicationList": offer_publication_list,
                 "PurgeAndReplace": purge_and_replace,
+                "Name": package_name
             },
         )
 

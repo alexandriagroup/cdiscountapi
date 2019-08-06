@@ -56,47 +56,47 @@ def make_package(package_type, path):
 
 # TODO Print the name of the package after its creation
 # TODO Remove package_type. Determine package_type from the keys in data
-def generate_package(package_type, package_name, data):
+def generate_package(package_type, package_path, data):
     """
     Generate a zip package for the offers or the products
 
     Usage::
 
-        generate_package(package_type, package_name, data)
+        generate_package(package_type, package_path, data)
 
     Example::
 
         # Generate Offer package:
-        generate_package('offer', package_name, {'OfferCollection': offers,
+        generate_package('offer', package_path, {'OfferCollection': offers,
                                                'OfferPublicationList': offer_publications,
                                                'PurgeAndReplace': purge_and_replace})
 
         # Generate Product package:
-        generate_package('product', package_name, {'Products': products})
+        generate_package('product', package_path, {'Products': products})
 
     :param str package_type: 'offer' or 'product'
-    :param str package_name: the full path to the package (without .zip)
+    :param str package_path: the full path to the package (without .zip)
     :param dict data: offers or products as you can see on
     tests/samples/products/products_to_submit.json or
     tests/samples/offers/offers_to_submit.json
     """
     check_package_type(package_type)
-    package_name = Path(package_name)
+    package_path = Path(package_path)
 
     # The directory in which the package will be created must exist
-    if not package_name.parent.exists():
+    if not package_path.parent.exists():
         raise FileNotFoundError(
-            "The directory {} does not exist.".format(package_name.parent)
+            "The directory {} does not exist.".format(package_path.parent)
         )
 
-    if package_name.with_suffix(".zip").exists():
-        raise FileExistsError("The package_name {} already exist.".format(package_name))
+    if package_path.with_suffix(".zip").exists():
+        raise FileExistsError("The package_path {} already exist.".format(package_path))
 
     # Copy tree package.
     package_template = Path().joinpath(
         "cdiscountapi", "packages", f"{package_type}_package"
     )
-    package = copytree(package_template, package_name)
+    package = copytree(package_template, package_path)
     xml_filename = package_type.capitalize() + "s.xml"
 
     # TODO Fix offer_dict
@@ -105,9 +105,9 @@ def generate_package(package_type, package_name, data):
         xml_generator = XmlGenerator(data)
         f.write(xml_generator.generate().encode("utf8"))
 
-    make_package(package_type, package_name)
-    rmtree(package_name)
-    print("Successfully created {}.zip".format(package_name))
+    make_package(package_type, package_path)
+    rmtree(package_path)
+    print("Successfully created {}.zip".format(package_path))
 
 
 def check_element(element_name, dynamic_type):

@@ -1,4 +1,4 @@
-<OfferPackage Name="Nom fichier offres" PackageType="Full" PurgeAndReplace="{{ purge_and_replace }}" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<OfferPackage Name="{{ name }}" PackageType="Full" PurgeAndReplace="{{ purge_and_replace }}" xmlns="clr-namespace:Cdiscount.Service.OfferIntegration.Pivot;assembly=Cdiscount.Service.OfferIntegration" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <OfferPackage.Offers>
     <OfferCollection Capacity="1">
         {% for offer in offers %}

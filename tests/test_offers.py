@@ -48,19 +48,19 @@ def test_get_offer_list_paginated(api):
 @pytest.mark.vcr()
 def test_generate_offer_package(valid_offer_package):
     # ---- BEFORE ----
-    package_name = Path(gettempdir()) / "uploading_package"
-    zip_file = package_name.with_suffix(".zip")
+    package_path = Path(gettempdir()) / "uploading_package"
+    zip_file = package_path.with_suffix(".zip")
     # Check uploading_package.zip doesn't exist yet.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert not zip_file.exists()
 
     # ---- PROCESS ----
     # valid_offer_package contains 2 valid offers for the offer package
-    Offers.generate_offer_package(package_name, valid_offer_package)
+    Offers.generate_offer_package("A good package", package_path, valid_offer_package)
 
     # ---- AFTER ----
     # Check uploading_package.zip exists now.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
@@ -76,30 +76,32 @@ def test_generate_offer_package(valid_offer_package):
 
 def test_generate_offer_package_with_nonexistent_directory(valid_offer_package):
     """
-    When the parent of the package_name does not exist a FileNotFoundError
+    When the parent of the package_path does not exist a FileNotFoundError
     Offers.generate_offer_package should raise a FileNotFoundError
     """
-    package_name = Path("/nonexistent/dir/uploading_package")
+    package_path = Path("/nonexistent/dir/uploading_package")
     pytest.raises(
         FileNotFoundError,
         Offers.generate_offer_package,
-        package_name,
-        valid_offer_package,
+        "A good package",
+        package_path,
+        valid_offer_package
     )
 
 
 def test_generate_offer_package_with_existing_package_name(valid_offer_package):
     """
-    When the package_name already exists Offers.generate_offer_package should
+    When the package_path already exists Offers.generate_offer_package should
     raise a FileExistsError
     """
-    package_name = Path(gettempdir()) / "uploading_package"
-    package_name.mkdir()
-    make_archive(str(package_name), "zip", package_name, base_dir=".")
+    package_path = Path(gettempdir()) / "uploading_package"
+    package_path.mkdir()
+    make_archive(str(package_path), "zip", package_path, base_dir=".")
     pytest.raises(
         FileExistsError,
         Offers.generate_offer_package,
-        package_name.with_name(".zip"),
+        "A good package",
+        package_path.with_name(".zip"),
         valid_offer_package,
     )
 
@@ -112,10 +114,10 @@ def test_generate_offer_package_with_discount(valid_offer_package):
     node DiscountList in Offers.xml
     """
     # ---- BEFORE ----
-    package_name = Path(gettempdir()) / "uploading_package"
-    zip_file = package_name.with_suffix(".zip")
+    package_path = Path(gettempdir()) / "uploading_package"
+    zip_file = package_path.with_suffix(".zip")
     # Check uploading_package doesn't exists yet.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert not zip_file.exists()
 
     # ---- PROCESS ----
@@ -123,11 +125,11 @@ def test_generate_offer_package_with_discount(valid_offer_package):
     valid_offer_package[0]["DiscountList"] = {
         "DiscountComponent": [discount_component()]
     }
-    Offers.generate_offer_package(package_name, valid_offer_package)
+    Offers.generate_offer_package("A good package", package_path, valid_offer_package)
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
@@ -149,22 +151,23 @@ def test_generate_offer_package_with_offer_publication_list(valid_offer_package)
     node OfferPublicationList in Offers.xml
     """
     # ---- BEFORE ----
-    package_name = Path(gettempdir()) / "uploading_package"
-    zip_file = package_name.with_suffix(".zip")
+    package_path = Path(gettempdir()) / "uploading_package"
+    zip_file = package_path.with_suffix(".zip")
     # Check uploading_package doesn't exists yet.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert not zip_file.exists()
 
     # ---- PROCESS ----
     Offers.generate_offer_package(
-        package_name,
+        "A good package",
+        package_path,
         valid_offer_package,
         offer_publication_list=offer_publication_list(),
     )
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
@@ -189,20 +192,21 @@ def test_generate_offer_package_with_purge_and_replace(valid_offer_package):
     PurgeAndReplace in the node OfferPackage to True in Offers.xml
     """
     # ---- BEFORE ----
-    package_name = Path(gettempdir()) / "uploading_package"
-    zip_file = package_name.with_suffix(".zip")
+    package_path = Path(gettempdir()) / "uploading_package"
+    zip_file = package_path.with_suffix(".zip")
     # Check uploading_package doesn't exists yet.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert not zip_file.exists()
 
     # ---- PROCESS ----
     Offers.generate_offer_package(
-        package_name, valid_offer_package, purge_and_replace=True
+        "A good package",
+        package_path, valid_offer_package, purge_and_replace=True
     )
 
     # ---- AFTER ----
     # Check uploading_package exists now.
-    assert not package_name.exists()
+    assert not package_path.exists()
     assert zip_file.exists()
     assert_offer_package_is_valid(zip_file)
 
