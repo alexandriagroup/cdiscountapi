@@ -13,6 +13,7 @@ from tabulate import tabulate
 import time
 import json
 import operator
+import pandas as pd
 
 
 # CONSTANTS
@@ -56,7 +57,7 @@ def load_cassette(cassette_name):
     fname = Path("cdiscountapi/tests/cassettes").joinpath(cassette_name)
     if not fname.exists():
         raise Exception(f'{fname} does not exist.')
-    return yam.load(fname.read_text())
+    return yaml.load(fname.read_text())
 
 
 def create_request(api, operation, **kwargs):
@@ -74,36 +75,42 @@ def show_request(api, operation, **kwargs):
     print(etree.tostring(request, pretty_print=True).decode('utf8'))
 
 
-def show_offers_list(offers_list):
+def get_offers_list(api, **kwargs):
     """
-    Usage:
-        offers_list = api.get_offers_list_paginated(PageNumber=1)
-        show_offers_list(offers_list)
+    Example:
+        offers_list = get_offers_list(api, PageNumber=1)
     """
+    kwargs.setdefault('PageNumber', 1)
     header = ['SellerProductId', 'ProductEan', 'ProductCondition', 'Price',
               'CreationDate', 'OfferState', 'LastUpdateDate']
     header_fn = operator.itemgetter(*header)
+    offers_list = api.offers.get_offer_list_paginated(**kwargs)
     table = [dict(zip(header, header_fn(x))) for x in offers_list['OfferList']['Offer']]
-    print(tabulate(table, headers="keys"))
+    return pd.DataFrame(table)
 
 
-def show_offer_package_submission_results(api):
+def show_offers_list(offers_list, tablefmt="simple"):
     """
     Usage:
-        show_offer_package_submission_results(api)
+        offers_list = get_offers_list(api, PageNumber=1)
+        show_offers_list(offers_list)
     """
+    print(tabulate(offers_list, headers=offers_list.columns, tablefmt=tablefmt))
+
+
+def get_offer_package_submission_results(api):
     metadata = Path().cwd().joinpath(METADATA_DIR)
     if not metadata.exists():
         raise ValueError(f"Can't find the metadata directory {metadata}")
 
     def fromepoch(epoch):
-        return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch)) 
+        return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(epoch))
 
     def make_row(content):
         row = {}
         row['PackageId'] = content['response']['PackageId']
         row['Success'] = content['response']['OperationSuccess']
-        row['SellerProductIds'] = ','.join(x['data']['SellerProductId'] for x in content['offers'])
+        row['SellerProductIds'] = ','.join(x['SellerProductId'] for x in content['offers'])
         row['PackageName'] = content['base_package_name']
         row['Date'] = fromepoch(content['timestamp'])
         submission_result = api.offers.get_offer_package_submission_result(
@@ -117,7 +124,20 @@ def show_offer_package_submission_results(api):
     for f in metadata.iterdir():
         content = json.loads(f.read_text())
         table.append(make_row(content))
-    print(tabulate(table, headers='keys'))
+    return pd.DataFrame(table)
+
+
+def show_submission_result(submission_result, tablefmt="simple"):
+    """
+    Usage:
+        show_submission_result(submission_result)
+    """
+    print(tabulate(
+        submission_result,
+        headers=submission_result.columns,
+        tablefmt=tablefmt
+        )
+    )
 
 
 cdiscount_api_preprod = os.getenv('CDISCOUNT_API_PREPROD')
@@ -162,8 +182,10 @@ konch.config({
         'load_cassette': load_cassette,
         'create_request': create_request,
         'show_request': show_request,
+        'get_offers_list': get_offers_list,
         'show_offers_list': show_offers_list,
-        'show_offer_package_submission_results': show_offer_package_submission_results
+        'get_offer_package_submission_results': get_offer_package_submission_results,
+        'show_submission_result': show_submission_result
     },
     "shell": "ipython",
     "ipy_autoreload": True,
