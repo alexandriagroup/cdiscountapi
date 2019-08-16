@@ -220,18 +220,27 @@ and their performance indicator.</p>
 
 <dl class="staticmethod">
 <dt id="cdiscountapi.cdiscountapi.Offers.generate_offer_package">
-<em class="property">static </em><code class="descname">generate_offer_package</code><span class="sig-paren">(</span><em>package_name</em>, <em>package_path</em>, <em>offers_list</em>, <em>offer_publication_list=[]</em>, <em>purge_and_replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.generate_offer_package" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">generate_offer_package</code><span class="sig-paren">(</span><em>package_name</em>, <em>package_path</em>, <em>offers_list</em>, <em>package_type='Full'</em>, <em>offer_publication_list=[]</em>, <em>purge_and_replace=False</em>, <em>overwrite=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.generate_offer_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a zip offers package as cdiscount wanted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>package_name</strong> (<em>str</em>) – The name of the package</p></li>
 <li><p><strong>package_path</strong> (<em>str</em>) – [mandatory] the full path to the offer package (without .zip)</p></li>
-<li><p><strong>offer_publication_list</strong> (<em>list</em>) – [optional]</p></li>
-<li><p><strong>purge_and_replace</strong> (<em>bool</em>) – [optional]</p></li>
-<li><p><strong>offers_list</strong> (<em>list</em>) – <p>list of dict [{offer, shipping}, …]:</p>
-<dl class="simple">
-<dt>-Offer:</dt><dd><ul>
+<li><p><strong>package_type</strong> (<em>str</em>) – [optional] The type of package (“Full” or</p></li>
+</ul>
+</dd>
+</dl>
+<p>“StockAndPrice”)
+(default: “Full”)
+:param list offer_publication_list: [optional]
+:param bool purge_and_replace: [optional]
+:param bool overwrite: [optional] Determine if an existing package is
+overwritten when a new one with the same name is created (default: True)
+:param list offers_list: list of dict [{offer, shipping}, …]:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>-Offer:</dt><dd><ul class="simple">
 <li><dl class="simple">
 <dt>Mandatory attributes:</dt><dd><ul>
 <li><p>ProductEan <em>(str)</em></p></li>
@@ -264,10 +273,10 @@ and their performance indicator.</p>
 <li><p>StrikedPrice <em>(float)</em></p></li>
 <li><dl class="simple">
 <dt>PriceMustBeAligned <em>(str)</em>:</dt><dd><ul>
-<li><p>’Empty’,</p></li>
-<li><p>’Unknown’,</p></li>
-<li><p>’Align’,</p></li>
-<li><p>’DontAlign’,</p></li>
+<li><p>‘Empty’,</p></li>
+<li><p>‘Unknown’,</p></li>
+<li><p>‘Align’,</p></li>
+<li><p>‘DontAlign’,</p></li>
 </ul>
 </dd>
 </dl>
@@ -275,11 +284,11 @@ and their performance indicator.</p>
 <li><p>MinimumPriceForPriceAlignment <em>(float)</em></p></li>
 <li><dl class="simple">
 <dt>ProductPackagingUnit <em>(str)</em>:</dt><dd><ul>
-<li><p>’None’,</p></li>
-<li><p>’Liter’,</p></li>
-<li><p>’Kilogram’,</p></li>
-<li><p>’SquareMeter’,</p></li>
-<li><p>’CubicMeter’</p></li>
+<li><p>‘None’,</p></li>
+<li><p>‘Liter’,</p></li>
+<li><p>‘Kilogram’,</p></li>
+<li><p>‘SquareMeter’,</p></li>
+<li><p>‘CubicMeter’</p></li>
 </ul>
 </dd>
 </dl>
@@ -292,24 +301,24 @@ and their performance indicator.</p>
 </li>
 </ul>
 </dd>
-<dt>-ShippingInformation:</dt><dd><ul>
+<dt>-ShippingInformation:</dt><dd><ul class="simple">
 <li><p>AdditionalShippingCharges <em>(float)</em></p></li>
 <li><dl class="simple">
 <dt>DeliveryMode <em>(DeliveryModeInformation)</em></dt><dd><ul>
-<li><p>’STD’ (‘Standart’)</p></li>
-<li><p>’TRK’ (‘Tracking’)</p></li>
-<li><p>’REG’ (‘Registered’)</p></li>
-<li><p>’COL’ (‘Collissimo’)</p></li>
-<li><p>’RCO’ (‘Relay Colis’)</p></li>
-<li><p>’REL’ (‘Mondial Relay’)</p></li>
-<li><p>’SO1’ (‘So Colissimo’)</p></li>
-<li><p>’MAG’ (‘in shop’)</p></li>
-<li><p>’LV1’</p></li>
-<li><p>’LV2’</p></li>
-<li><p>’LV’</p></li>
-<li><p>’FST’</p></li>
-<li><p>’EXP’</p></li>
-<li><p>’RIM’</p></li>
+<li><p>‘STD’ (‘Standart’)</p></li>
+<li><p>‘TRK’ (‘Tracking’)</p></li>
+<li><p>‘REG’ (‘Registered’)</p></li>
+<li><p>‘COL’ (‘Collissimo’)</p></li>
+<li><p>‘RCO’ (‘Relay Colis’)</p></li>
+<li><p>‘REL’ (‘Mondial Relay’)</p></li>
+<li><p>‘SO1’ (‘So Colissimo’)</p></li>
+<li><p>‘MAG’ (‘in shop’)</p></li>
+<li><p>‘LV1’</p></li>
+<li><p>‘LV2’</p></li>
+<li><p>‘LV’</p></li>
+<li><p>‘FST’</p></li>
+<li><p>‘EXP’</p></li>
+<li><p>‘RIM’</p></li>
 </ul>
 </dd>
 </dl>
@@ -318,10 +327,7 @@ and their performance indicator.</p>
 </ul>
 </dd>
 </dl>
-</p></li>
-</ul>
-</dd>
-</dl>
+</div></blockquote>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">offers</span><span class="o">.</span><span class="n">generate_offer_package</span><span class="p">(</span>
     <span class="n">package_name</span><span class="p">,</span>
@@ -923,13 +929,20 @@ structure than the one required for the request.</p>
 
 <dl class="staticmethod">
 <dt id="cdiscountapi.cdiscountapi.Products.generate_product_package">
-<em class="property">static </em><code class="descname">generate_product_package</code><span class="sig-paren">(</span><em>package_name</em>, <em>products_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">generate_product_package</code><span class="sig-paren">(</span><em>package_name</em>, <em>products_list</em>, <em>overwrite=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a zip product package as cdiscount wanted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>package_name</strong> (<em>str</em>) – [mandatory] the full path to the offer package (without .zip)</p></li>
-<li><p><strong>products_list</strong> (<em>list</em>) – <ul>
+<li><p><strong>overwrite</strong> (<em>bool</em>) – [optional] Determine if an existing package is</p></li>
+</ul>
+</dd>
+</dl>
+<p>overwritten when a new one with the same name is created (default: True)
+:param list products_list:</p>
+<blockquote>
+<div><ul class="simple">
 <li><dl class="simple">
 <dt>Mandatory attributes:</dt><dd><ul>
 <li><p>BrandName <em>(str)</em></p></li>
@@ -939,8 +952,8 @@ structure than the one required for the request.</p>
 <li><p>Navigation <em>(str)</em></p></li>
 <li><dl class="simple">
 <dt>ProductKind <em>(str)</em></dt><dd><ul>
-<li><p>’Variant’</p></li>
-<li><p>’Standart’</p></li>
+<li><p>‘Variant’</p></li>
+<li><p>‘Standart’</p></li>
 </ul>
 </dd>
 </dl>
@@ -968,10 +981,7 @@ structure than the one required for the request.</p>
 </dl>
 </li>
 </ul>
-</p></li>
-</ul>
-</dd>
-</dl>
+</div></blockquote>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">generate_product_package</span><span class="p">(</span><span class="n">products_list</span><span class="p">)</span>
 </pre></div>
