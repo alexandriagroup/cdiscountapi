@@ -119,7 +119,8 @@ class Offers(BaseSection):
 
         :param str package_name: The name of the package
         :param str package_path: [mandatory] the full path to the offer package (without .zip)
-        :param str package_type: [optional] The type of package ("Full" or "StockAndReplace")
+        :param str package_type: [optional] The type of package ("Full" or
+        "StockAndPrice")
         (default: "Full")
         :param list offer_publication_list: [optional]
         :param bool purge_and_replace: [optional]
