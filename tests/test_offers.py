@@ -74,6 +74,7 @@ def test_generate_offer_package(valid_offer_package):
     assert_xml_files_equal(created, expected, "Offer")
 
 
+@pytest.mark.vcr()
 def test_generate_offer_package_with_nonexistent_directory(valid_offer_package):
     """
     When the parent of the package_path does not exist a FileNotFoundError
@@ -89,6 +90,7 @@ def test_generate_offer_package_with_nonexistent_directory(valid_offer_package):
     )
 
 
+@pytest.mark.vcr()
 def test_generate_offer_package_with_existing_package_name_and_overwrite_false(valid_offer_package):
     """
     When the package_path already exists and overwrite=False, Offers.generate_offer_package should
@@ -107,6 +109,7 @@ def test_generate_offer_package_with_existing_package_name_and_overwrite_false(v
     )
 
 
+@pytest.mark.vcr()
 def test_generate_offer_package_with_existing_package_name_and_overwrite_true(valid_offer_package):
     """
     When the package_path already exists and overwrite=True, Offers.generate_offer_package should
