@@ -126,6 +126,7 @@ def test_get_order_question_list_by_date(api):
         assert response["OrderQuestionList"] is None
 
 
+@pytest.mark.vcr()
 def test_get_order_question_list_by_order_number(api):
     response = api.discussions.get_order_question_list(
         OrderNumberList=["ORDER_NUMBER_1", "ORDER_NUMBER_2"]
