@@ -109,6 +109,7 @@ class Offers(BaseSection):
             package_name,
             package_path,
             offers_list,
+            package_type="Full",
             offer_publication_list=[],
             purge_and_replace=False,
             overwrite=True
@@ -118,6 +119,8 @@ class Offers(BaseSection):
 
         :param str package_name: The name of the package
         :param str package_path: [mandatory] the full path to the offer package (without .zip)
+        :param str package_type: [optional] The type of package ("Full" or "StockAndReplace")
+        (default: "Full")
         :param list offer_publication_list: [optional]
         :param bool purge_and_replace: [optional]
         :param bool overwrite: [optional] Determine if an existing package is
@@ -197,7 +200,8 @@ class Offers(BaseSection):
                 "OfferCollection": offers_list,
                 "OfferPublicationList": offer_publication_list,
                 "PurgeAndReplace": purge_and_replace,
-                "Name": package_name
+                "Name": package_name,
+                "PackageType": package_type
             },
             overwrite=overwrite
         )

@@ -66,6 +66,7 @@ class OfferPackage(BasePackage):
         self.check_offer_publication_list(data.get("OfferPublicationList"))
         self.purge_and_replace = data.get("PurgeAndReplace", False)
         self.name = data.get("Name", "A package")
+        self.package_type = data.get("PackageType", "Full")
         self.add(data["OfferCollection"])
 
     def check_offer_publication_list(self, ids):
@@ -182,6 +183,7 @@ class OfferPackage(BasePackage):
             offers=offers_data,
             offer_publication_list=self.offer_publication_list,
             purge_and_replace=self.purge_and_replace,
+            package_type=self.package_type,
             name=self.name
         )
 

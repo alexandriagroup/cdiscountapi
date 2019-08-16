@@ -228,7 +228,10 @@ class XmlGenerator(object):
 
         offers_xml = XmlGenerator({'OfferCollection': [offer],
                                    'PurgeAndReplace': False,
-                                   'OfferPublicationList': [1, 16]},
+                                   'OfferPublicationList': [1, 16],
+                                   'Name': 'A package name',
+                                   'PackageType': "Full",
+                                    },
                                    preprod=preprod)
         content = offers_xml.generate()
 
