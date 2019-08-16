@@ -35,6 +35,36 @@ def assert_response_failed(response):
     ), "OperationSuccess should be False but is {}".format(response["OperationSuccess"])
 
 
+def assert_dict_equal(d1, d2):
+    # First we check the keys
+    not_in_d1 = [k for k in d2.keys() if k not in d1.keys()]
+    not_in_d2 = [k for k in d1.keys() if k not in d2.keys()]
+
+    error_msg = ""
+    if len(not_in_d2) > 0:
+        error_msg += "In dict1 but not in dict2: "
+        error_msg += ", ".join(not_in_d2)
+    if len(not_in_d1) > 0:
+        error_msg += "\nIn dict2 but not in dict1: "
+        error_msg += ", ".join(not_in_d1)
+
+    if len(error_msg):
+        raise AssertionError(error_msg)
+
+    # We now know all the keys are the same. We can check the values
+    different_values = []
+    for k in d1.keys():
+        if d1[k] != d2[k]:
+            different_values.append((k, d1[k], d2[k]))
+
+    if len(different_values) > 0:
+        msg = "Values are different:\n"
+        raise AssertionError(
+            msg + "\n".join("- {0}: '{1}' != '{2}'".format(*x) for x in different_values)
+        )
+
+
+
 def assert_xml_equal(result, expected, msg=""):
     result_dict = dict(result.items())
     expected_dict = dict(expected.items())
@@ -80,22 +110,29 @@ def assert_xml_files_equal(result_content, expected_content, pkg_type):
         "Product": ("Product.EanList", "Product.ModelProperties", "Product.Pictures"),
     }
 
+    result_xml = etree.XML(result_content)
+    expected_xml = etree.XML(expected_content)
+
     # Check the attributes "Capacity"
     if pkg_type == "Product":
         product_collection = pkg_type_xpath(
-            etree.XML(result_content),
+            result_xml,
             "ProductCollection"
         )[0]
         expected_product_collection = pkg_type_xpath(
-            etree.XML(expected_content),
+            expected_xml,
             "ProductCollection"
         )[0]
 
         product_collection.get('Capacity') == expected_product_collection.get('Capacity')
 
+    # Attributes of the node OfferPackage
+    # assert dict(result_xml.items()) == dict(expected_xml.items())
+    assert_dict_equal(dict(result_xml.items()), dict(expected_xml.items()))
 
-    pkg_type_nodes = pkg_type_xpath(etree.XML(result_content), pkg_type)
-    expected_pkg_type_nodes = pkg_type_xpath(etree.XML(expected_content), pkg_type)
+    # Content of the offer
+    pkg_type_nodes = pkg_type_xpath(result_xml, pkg_type)
+    expected_pkg_type_nodes = pkg_type_xpath(expected_xml, pkg_type)
     assert len(pkg_type_nodes) == len(expected_pkg_type_nodes)
 
     for i in range(len(pkg_type_nodes)):

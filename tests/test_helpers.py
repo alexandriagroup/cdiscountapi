@@ -59,7 +59,10 @@ def test_add_offers(valid_offer_for_package):
     XmlGenerator.add should append the unique valid offers in the
     attribute `XmlGenerator.data`
     """
-    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    xml_generator = XmlGenerator({
+        "OfferCollection": [valid_offer_for_package],
+        "Name": "A good package"
+    })
     assert len(xml_generator.data) == 1
 
     xml_generator.add([valid_offer_for_package])
@@ -101,7 +104,10 @@ def test_generate_offers(valid_offer_for_package):
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
     valid_offer_for_package1["Price"] = 20
     valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
-    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    xml_generator = XmlGenerator({
+        "OfferCollection": [valid_offer_for_package],
+        "Name": "A good package"
+    })
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
@@ -125,7 +131,10 @@ def test_generate_offers_with_discount(valid_offer_for_package):
         "DiscountComponent": [discount_component()]
     }
 
-    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    xml_generator = XmlGenerator({
+        "OfferCollection": [valid_offer_for_package],
+        "Name": "A good package"
+    })
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
@@ -144,7 +153,10 @@ def test_generate_offers_with_offer_publication_list(valid_offer_for_package):
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
     valid_offer_for_package1["Price"] = 20
     valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
-    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    xml_generator = XmlGenerator({
+        "OfferCollection": [valid_offer_for_package],
+        "Name": "A good package"
+    })
     xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
     content = xml_generator.generate()
 
