@@ -56,7 +56,7 @@ def make_package(package_type, path):
 
 # TODO Print the name of the package after its creation
 # TODO Remove package_type. Determine package_type from the keys in data
-def generate_package(package_type, package_path, data):
+def generate_package(package_type, package_path, data, overwrite=True):
     """
     Generate a zip package for the offers or the products
 
@@ -90,7 +90,10 @@ def generate_package(package_type, package_path, data):
         )
 
     if package_path.with_suffix(".zip").exists():
-        raise FileExistsError("The package_path {} already exist.".format(package_path))
+        if overwrite:
+            rmtree(package_path)
+        else:
+            raise FileExistsError("The package_path {} already exists.".format(package_path))
 
     # Copy tree package.
     package_template = Path().joinpath(

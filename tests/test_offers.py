@@ -89,9 +89,9 @@ def test_generate_offer_package_with_nonexistent_directory(valid_offer_package):
     )
 
 
-def test_generate_offer_package_with_existing_package_name(valid_offer_package):
+def test_generate_offer_package_with_existing_package_name_and_overwrite_false(valid_offer_package):
     """
-    When the package_path already exists Offers.generate_offer_package should
+    When the package_path already exists and overwrite=False, Offers.generate_offer_package should
     raise a FileExistsError
     """
     package_path = Path(gettempdir()) / "uploading_package"
@@ -103,6 +103,21 @@ def test_generate_offer_package_with_existing_package_name(valid_offer_package):
         "A good package",
         package_path.with_name(".zip"),
         valid_offer_package,
+        overwrite=False
+    )
+
+
+def test_generate_offer_package_with_existing_package_name_and_overwrite_true(valid_offer_package):
+    """
+    When the package_path already exists and overwrite=True, Offers.generate_offer_package should
+    overwrite the package
+    """
+    package_path = Path(gettempdir()) / "uploading_package"
+    package_path.mkdir()
+    make_archive(str(package_path), "zip", package_path, base_dir=".")
+    Offers.generate_offer_package(
+        "A good package", package_path, valid_offer_package,
+        overwrite=True
     )
 
 

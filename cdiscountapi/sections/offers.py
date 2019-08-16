@@ -110,7 +110,8 @@ class Offers(BaseSection):
             package_path,
             offers_list,
             offer_publication_list=[],
-            purge_and_replace=False
+            purge_and_replace=False,
+            overwrite=True
     ):
         """
         Generate a zip offers package as cdiscount wanted.
@@ -119,6 +120,8 @@ class Offers(BaseSection):
         :param str package_path: [mandatory] the full path to the offer package (without .zip)
         :param list offer_publication_list: [optional]
         :param bool purge_and_replace: [optional]
+        :param bool overwrite: [optional] Determine if an existing package is
+        overwritten when a new one with the same name is created (default: True)
         :param list offers_list: list of dict [{offer, shipping}, ...]:
 
             -Offer:
@@ -196,6 +199,7 @@ class Offers(BaseSection):
                 "PurgeAndReplace": purge_and_replace,
                 "Name": package_name
             },
+            overwrite=overwrite
         )
 
     @auto_refresh_token
