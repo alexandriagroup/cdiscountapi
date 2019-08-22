@@ -14,6 +14,7 @@ import time
 import json
 import operator
 import pandas as pd
+from pycdiscount import PyCdiscount
 
 
 # CONSTANTS
@@ -81,21 +82,12 @@ def get_offers_list(api, **kwargs):
         offers_list = get_offers_list(api, PageNumber=1)
     """
     kwargs.setdefault('PageNumber', 1)
-    header = ['SellerProductId', 'ProductEan', 'ProductCondition', 'Price',
+    header = ['SellerProductId', 'ProductEan', 'ProductCondition', 'Price', 'Stock',
               'CreationDate', 'OfferState', 'LastUpdateDate']
     header_fn = operator.itemgetter(*header)
     offers_list = api.offers.get_offer_list_paginated(**kwargs)
     table = [dict(zip(header, header_fn(x))) for x in offers_list['OfferList']['Offer']]
     return pd.DataFrame(table)
-
-
-def show_offers_list(offers_list, tablefmt="simple"):
-    """
-    Usage:
-        offers_list = get_offers_list(api, PageNumber=1)
-        show_offers_list(offers_list)
-    """
-    print(tabulate(offers_list, headers=offers_list.columns, tablefmt=tablefmt))
 
 
 def get_offer_package_submission_results(api):
@@ -109,14 +101,17 @@ def get_offer_package_submission_results(api):
     def make_row(content):
         row = {}
         row['PackageId'] = content['response']['PackageId']
-        row['Success'] = content['response']['OperationSuccess']
-        row['SellerProductIds'] = ','.join(x['SellerProductId'] for x in content['offers'])
-        row['PackageName'] = content['base_package_name']
-        row['Date'] = fromepoch(content['timestamp'])
         submission_result = api.offers.get_offer_package_submission_result(
             int(row['PackageId'])
         )
+        row['Success'] = submission_result['OperationSuccess']
+        row['SellerProductIds'] = ','.join(
+            x['SellerProductId'] for x in content['offers']
+        )[0:30]
+        row['PackageName'] = content['base_package_name']
+        row['Date'] = fromepoch(content['timestamp'])
         row['Status'] = submission_result['PackageIntegrationStatus']
+        row['Errors'] = submission_result['NumberOfErrors']
         row['Comment'] = content['comment'][0:42]
         return row
 
@@ -127,17 +122,12 @@ def get_offer_package_submission_results(api):
     return pd.DataFrame(table)
 
 
-def show_submission_result(submission_result, tablefmt="simple"):
+def show_table(df, tablefmt="simple"):
     """
     Usage:
-        show_submission_result(submission_result)
+        show_table(df)
     """
-    print(tabulate(
-        submission_result,
-        headers=submission_result.columns,
-        tablefmt=tablefmt
-        )
-    )
+    print(tabulate(df, headers=df.columns, tablefmt=tablefmt))
 
 
 cdiscount_api_preprod = os.getenv('CDISCOUNT_API_PREPROD')
@@ -178,14 +168,14 @@ konch.config({
                           os.getenv('CDISCOUNT_API_PASSWORD'),
                           preprod=preprod,
                           header_message=header_message),
+        'products_api': PyCdiscount(api_key=os.getenv('CDISCOUNT_API_KEY')),
         'get_tree': get_tree,
         'load_cassette': load_cassette,
         'create_request': create_request,
         'show_request': show_request,
         'get_offers_list': get_offers_list,
-        'show_offers_list': show_offers_list,
         'get_offer_package_submission_results': get_offer_package_submission_results,
-        'show_submission_result': show_submission_result
+        'show_table': show_table
     },
     "shell": "ipython",
     "ipy_autoreload": True,
