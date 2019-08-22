@@ -11,6 +11,17 @@ seller_info = c.seller.get_seller_info()
 
 ## Development
 
+[konch](https://konch.readthedocs.io/en/latest/) is really useful to help in
+interactive development. If you want to use it, make sure to export the
+environment variables **CDISCOUNT_API_LOGIN**
+and **CDISCOUNT_API_PASSWORD** and run:
+
+``` sh
+konch
+```
+
+in your terminal, in the project directory.
+
 ### Tests
 
 We use vcrpy to mock the HTTP requests. It is recommended to install libyaml
@@ -39,7 +50,7 @@ make test-renew-vcr-records
 ```
 
 * Run all the tests (including those necessiting real data)
-  
+
 ```sh
   CDISCOUNT_WITHOUT_DATA=0 make test
 ```
