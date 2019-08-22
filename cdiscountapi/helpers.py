@@ -91,7 +91,7 @@ def generate_package(package_type, package_path, data, overwrite=True):
 
     if package_path.with_suffix(".zip").exists():
         if overwrite:
-            rmtree(package_path)
+            package_path.with_suffix(".zip").unlink()
         else:
             raise FileExistsError("The package_path {} already exists.".format(package_path))
 
