@@ -98,6 +98,10 @@ class Offers(BaseSection):
 
         :return: offers answering the search criterion
         """
+        filters = self.update_with_valid_array_type(
+            filters, {"SellerProductIdList": "string"}
+        )
+
         offer_filter = self.api.factory.OfferFilterPaginated(**filters)
         response = self.api.client.service.GetOfferListPaginated(
             headerMessage=self.api.header, offerFilter=offer_filter
