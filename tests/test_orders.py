@@ -3,6 +3,7 @@ import datetime
 
 # Third-party imports
 import pytest
+import lxml
 
 # Project imports
 from . import (
@@ -12,6 +13,28 @@ from . import (
 )
 
 
+# HELPER FUNCTIONS
+def find_element(root, path, **ns):
+    return root.xpath(path, namespaces=ns)
+
+
+def assert_date_parameters_are_equal(request, node1, node2):
+    ns0 = 'http://schemas.xmlsoap.org/soap/envelope/'
+    ns1 = 'http://www.cdiscount.com'
+    path_to = 'ns0:Body/ns1:GetOrderList/ns1:orderFilter/ns1:{0}'.format
+
+    env = lxml.etree.XML(request)
+    creation_date = find_element(
+        env, path_to(node1), ns0=ns0, ns1=ns1
+    )
+    modification_date = find_element(
+        env, path_to(node2), ns0=ns0, ns1=ns1
+    )
+
+    assert creation_date[0].text == modification_date[0].text
+
+
+# TESTS
 @pytest.fixture
 def refund_voucher_request():
     return {
@@ -65,6 +88,44 @@ def test_get_order_list_by_date_with_no_order_at_date(api):
     )
     assert_response_succeeded(response)
     assert response["OrderList"] is None
+
+
+@pytest.mark.vcr()
+def test_get_order_list_with_creation_date_only(api):
+    api.orders.get_order_list(
+        BeginCreationDate=datetime.datetime(2077, 1, 1),
+        States=["ShipmentRefusedBySeller"],
+    )
+    assert_date_parameters_are_equal(
+        api.last_request, 'BeginCreationDate', 'BeginModificationDate'
+    )
+
+    api.orders.get_order_list(
+        EndCreationDate=datetime.datetime(2077, 1, 1),
+        States=["ShipmentRefusedBySeller"],
+    )
+    assert_date_parameters_are_equal(
+        api.last_request, 'EndCreationDate', 'EndModificationDate'
+    )
+
+
+@pytest.mark.vcr()
+def test_get_order_list_with_modification_date_only(api):
+    api.orders.get_order_list(
+        BeginModificationDate=datetime.datetime(2077, 1, 1),
+        States=["ShipmentRefusedBySeller"],
+    )
+    assert_date_parameters_are_equal(
+        api.last_request, 'BeginModificationDate', 'BeginCreationDate'
+    )
+
+    api.orders.get_order_list(
+        EndModificationDate=datetime.datetime(2077, 1, 1),
+        States=["ShipmentRefusedBySeller"],
+    )
+    assert_date_parameters_are_equal(
+        api.last_request, 'EndModificationDate', 'EndCreationDate'
+    )
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason="Waiting for orders")
