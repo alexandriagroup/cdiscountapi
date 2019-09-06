@@ -15,6 +15,60 @@ from .base import BaseSection
 from ..helpers import auto_refresh_token
 
 
+def update_date_filter(date_filter, p1, p2):
+    """
+    Make sure the filter on a date with param p1 is always the same as param p2 if p2 is
+    not provided.
+
+    Example:
+
+        new_filter = update_date_filter(
+            {
+                'BeginCreationDate': datetime.datetime(2019, 9, 6)},
+                'BeginCreationDate', 'BeginModificationDate'
+            )
+
+        new_filter is:
+            {
+                'BeginCreationDate': datetime.datetime(2019, 9, 6),
+                'BeginModificationDate': datetime.datetime(2019, 9, 6),
+            }
+
+    """
+    # If the first parameter is not in the filter, we just return the original filter
+    if p1 not in date_filter:
+        return date_filter
+
+    new_date_filter = date_filter.copy()
+    if p1 in date_filter and p2 not in new_date_filter:
+        new_date_filter.update({p2: new_date_filter[p1]})
+    return new_date_filter
+
+
+def complete_date_filter(date_filter):
+    """
+    Update the date filter with the missing date parameters
+
+    If BeginCreationDate is present but not BeginModificationDate, add
+    BeginModificationDate (and conversely)
+    If EndCreationDate is present but not EndModificationDate, add
+    EndModificationDate (and conversely)
+    """
+    date_filter = update_date_filter(
+        date_filter, "BeginCreationDate", "BeginModificationDate"
+    )
+    date_filter = update_date_filter(
+        date_filter, "BeginModificationDate", "BeginCreationDate"
+    )
+    date_filter = update_date_filter(
+        date_filter, "EndCreationDate", "EndModificationDate"
+    )
+    date_filter = update_date_filter(
+        date_filter, "EndModificationDate", "EndCreationDate"
+    )
+    return date_filter
+
+
 class Orders(BaseSection):
     """
     Allows to list, validate or refund orders.
@@ -133,6 +187,12 @@ class Orders(BaseSection):
             order_filter.update(
                 States=self.api.factory.ArrayOfOrderStateEnum(order_filter["States"])
             )
+
+        # For some reasons, when a date parameter is used, its "pair" must be used too
+        # Example: BeginCreationDate and BeginModificationDate must be used together
+        # (idem for EndCreationDate and EndModificationDate)
+        # We address this weird behavior with `complete_date_filter`.
+        order_filter = complete_date_filter(order_filter)
 
         order_filter = self.update_with_valid_array_type(
             order_filter, {"OrderReferenceList": "string"}
