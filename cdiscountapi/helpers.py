@@ -9,16 +9,22 @@
 """
 
 
+import json
 import os
 import zipfile
 from functools import wraps
-from shutil import copytree, make_archive, rmtree
-
-import json
-import zeep
-from cdiscountapi.packages import OfferPackage, ProductPackage
 from pathlib import Path
+from shutil import (
+    copytree,
+    rmtree,
+)
 
+import zeep
+
+from cdiscountapi.packages import (
+    OfferPackage,
+    ProductPackage,
+)
 
 PRODUCT_CONDITIONS = {
     "LikeNew": 1,
@@ -92,6 +98,7 @@ def generate_package(package_type, package_path, data, overwrite=True):
     if package_path.with_suffix(".zip").exists():
         if overwrite:
             package_path.with_suffix(".zip").unlink()
+            os.rmdir(package_path)
         else:
             raise FileExistsError("The package_path {} already exists.".format(package_path))
 
