@@ -51,19 +51,25 @@
 The format is based on <a class="reference external" href="http://keepachangelog.com/">Keep a Changelog</a> and this project adheres to
 <a class="reference external" href="http://semver.org/">Semantic Versioning</a>.</p>
 <div class="section" id="id1">
-<h2>[0.1.4] - 2019-08-16<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>[0.1.4] - 2019-09-06<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>New optional argument <cite>package_type</cite> in <cite>generate_offers_package</cite></p></li>
 <li><p>New optional argument <cite>overwrite</cite> in <cite>generate_offers_package</cite>: allows to
 overwrite an existing package</p></li>
+<li><p><cite>Orders.get_order_list</cite> automatically adds the other date parameter
+in the order (because it is required by the API)
+(i.e BeginCreationDate and BeginModificationDate must be specified together.
+Idem for EndCreationDate and EndModificationDate.)</p></li>
 </ul>
 </div>
 <div class="section" id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Some tests are improved (more accurate and mocked)</p></li>
+<li><p>Fix <cite>Offers.get_offer_list_paginated</cite>. (Bug: only the first
+SellerProductIdList was taken into account)</p></li>
 </ul>
 </div>
 </div>
@@ -103,7 +109,7 @@ the attribute Name of the OfferPackage in the XML</p></li>
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Change log</a><ul>
-<li><a class="reference internal" href="#id1">[0.1.4] - 2019-08-16</a><ul>
+<li><a class="reference internal" href="#id1">[0.1.4] - 2019-09-06</a><ul>
 <li><a class="reference internal" href="#added">Added</a></li>
 <li><a class="reference internal" href="#fixed">Fixed</a></li>
 </ul>
