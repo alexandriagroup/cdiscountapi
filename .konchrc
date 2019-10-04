@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 # vi: set ft=python :
 
+"""
+Useful functions for the development of CdiscountApi
+"""
+
 import os
+import datetime
 from cdiscountapi.cdiscountapi import Connection
 from functools import lru_cache
-from collections import defaultdict
 from pathlib import Path
 import konch
 import yaml
@@ -19,6 +23,42 @@ from pycdiscount import PyCdiscount
 
 # CONSTANTS
 METADATA_DIR = 'personal/scripts/metadata'
+
+days = datetime.timedelta(days=1)
+now = datetime.datetime.now()
+offer_filters = {
+    'BeginCreationDate': now - 300 * days,
+    'StatusList': {'DiscussionStateFilter': 'All'}
+}
+
+order_filters = {
+    'BeginCreationDate': now - 300 * days,
+}
+
+
+# HELPERS
+def strtime(date):
+    return datetime.datetime.strftime(date, '%Y-%m-%dT%H:%M:%S') if date else ""
+
+
+def extract(response):
+    """
+    Extract the individual elements from a response
+
+    Usage:
+        orders = response['OrderList']['Order']
+        offers = response['OfferList']['Offer']
+        claims = response['ClaimList']['Claim']
+    """
+    keys = (
+        ('OrderList', 'Order'),
+        ('OfferList', 'Offer'),
+        ('ClaimList', 'Claim'),
+    )
+    for k in keys:
+        if k[0] in response:
+            return response[k[0]][k[1]]
+    raise ValueError('Unknown keys: {}'.format(response.keys()))
 
 
 @lru_cache(maxsize=128)
@@ -90,6 +130,37 @@ def get_offers_list(api, **kwargs):
     return pd.DataFrame(table)
 
 
+def get_orders_list(api, **kwargs):
+    def make_row(order):
+        """
+        Usage:
+            row = make_row(response['OrderList']['Order'][i])
+        """
+        row = {}
+        row['OrderNumber'] = order['OrderNumber']
+        row['OrderState'] = order['OrderState']
+        row['CreationDate'] = order['CreationDate']
+        row['Status'] = order['CreationDate']
+        row['Price'] = order['InitialTotalAmount']
+        customer = order['Customer']
+        row['Customer'] = f'{customer["FirstName"]} {customer["LastName"]}'
+
+        items = order['OrderLineList']['OrderLine']
+        row['Ean'] = [x['ProductEan'] for x in items]
+        row['Condition'] = [x['ProductCondition'] for x in items]
+        row['Sku'] = [x['Sku'] for x in items]
+        row['Quantity'] = [x['Quantity'] for x in items]
+        row['ProductId'] = [x['ProductId'] for x in items]
+        row['HasClaim'] = [x['HasClaim'] for x in items]
+        row['SellerProductId'] = [x['SellerProductId'] for x in items]
+        return row
+
+    response = api.orders.get_order_list(**kwargs)
+    orders = response['OrderList']['Order']
+    table = [make_row(order) for order in orders]
+    return pd.DataFrame(table)
+
+
 def get_offer_package_submission_results(api):
     metadata = Path().cwd().joinpath(METADATA_DIR)
     if not metadata.exists():
@@ -120,6 +191,104 @@ def get_offer_package_submission_results(api):
         content = json.loads(f.read_text())
         table.append(make_row(content))
     return pd.DataFrame(table)
+
+
+def get_offer_questions(api, ndays=7, state='All'):
+    days = datetime.timedelta(days=1)
+    now = datetime.datetime.now()
+
+    def make_row(content):
+        row = {}
+        row['Id'] = content['Id']
+        row['CloseDate'] = strtime(content['CloseDate'])
+        row['CreationDate'] = strtime(content['CreationDate'])
+        row['LastUpdatedDate'] = strtime(content['LastUpdatedDate'])
+        row['Messages'] = len(content['Messages']['Message'])
+        row['Status'] = content['Status']
+        row['Subject'] = content['Subject'][0:30]
+        row['ProductEAN'] = content['ProductEAN']
+        row['SKU'] = content['ProductSellerReference']
+        return row
+
+    filters = {
+        'BeginCreationDate': now - ndays * days,
+        'StatusList': {'DiscussionStateFilter': state}
+    }
+    offer_question_list = api.discussions.get_offer_question_list(
+        **filters
+    )['OfferQuestionList']
+
+    if offer_question_list:
+        offer_questions = offer_question_list['OfferQuestion']
+        table = []
+        for x in offer_questions:
+            table.append(make_row(x))
+        return pd.DataFrame(table)
+
+
+def get_order_questions(api, ndays=7, state='All'):
+    days = datetime.timedelta(days=1)
+    now = datetime.datetime.now()
+
+    def make_row(content):
+        row = {}
+        row['Id'] = content['Id']
+        row['CloseDate'] = strtime(content['CloseDate'])
+        row['CreationDate'] = strtime(content['CreationDate'])
+        row['LastUpdatedDate'] = strtime(content['LastUpdatedDate'])
+        row['Messages'] = len(content['Messages']['Message'])
+        row['Status'] = content['Status']
+        row['Subject'] = content['Subject'][0:30]
+        row['OrderNumber'] = content['OrderNumber']
+        return row
+
+    filters = {
+        'BeginCreationDate': now - ndays * days,
+        'StatusList': {'DiscussionStateFilter': state}
+    }
+    order_question_list = api.discussions.get_order_question_list(
+        **filters
+    )['OrderQuestionList']
+
+    if order_question_list:
+        order_questions = order_question_list['OrderQuestion']
+        table = []
+        for x in order_questions:
+            table.append(make_row(x))
+        return pd.DataFrame(table)
+
+
+def get_order_claims(api, ndays=7, state='All'):
+    days = datetime.timedelta(days=1)
+    now = datetime.datetime.now()
+
+    def make_row(content):
+        row = {}
+        row['Id'] = content['Id']
+        row['CloseDate'] = strtime(content['CloseDate'])
+        row['CreationDate'] = strtime(content['CreationDate'])
+        row['LastUpdatedDate'] = strtime(content['LastUpdatedDate'])
+        row['Messages'] = len(content['Messages']['Message'])
+        row['Status'] = content['Status']
+        row['Subject'] = content['Subject'][0:30]
+        row['OrderNumber'] = content['OrderNumber']
+        row['ClaimType'] = content['ClaimType']
+        return row
+
+    filters = {
+        'BeginCreationDate': now - ndays * days,
+        'StatusList': {'DiscussionStateFilter': state}
+    }
+    order_claim_list = api.discussions.get_order_claim_list(
+        **filters
+    )['OrderClaimList']
+
+    if order_claim_list:
+        order_claims = order_claim_list['OrderClaim']
+        table = []
+        for x in order_claims:
+            table.append(make_row(x))
+        return pd.DataFrame(table)
 
 
 def show_table(df, tablefmt="simple"):
@@ -175,7 +344,14 @@ konch.config({
         'show_request': show_request,
         'get_offers_list': get_offers_list,
         'get_offer_package_submission_results': get_offer_package_submission_results,
-        'show_table': show_table
+        'show_table': show_table,
+        'get_offer_questions': get_offer_questions,
+        'get_order_questions': get_order_questions,
+        'get_order_claims': get_order_claims,
+        'get_orders_list': get_orders_list,
+        'offer_filters': offer_filters,
+        'order_filters': order_filters,
+        'extract': extract,
     },
     "shell": "ipython",
     "ipy_autoreload": True,
@@ -188,6 +364,3 @@ def setup():
 
 def teardown():
     pass
-
-
-# Helpers
