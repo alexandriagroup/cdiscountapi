@@ -9,6 +9,15 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[0.1.5] - 2019-10-04
+--------------------
+
+Changed
+*******
+
+* Update the main dependencies
+
+
 [0.1.4] - 2019-09-06
 --------------------
 
@@ -22,6 +31,8 @@ Added
   in the order (because it is required by the API)
   (i.e BeginCreationDate and BeginModificationDate must be specified together.
   Idem for EndCreationDate and EndModificationDate.)
+
+****
 
 Fixed
 *****
