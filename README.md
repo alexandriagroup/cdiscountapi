@@ -59,8 +59,22 @@ by default `CDISCOUNT_WITHOUT_DATA` equals 1. By setting this environment
 variable to 0, the tests may fail if no real data there are available (and no
 cassette is available)
 
+### Contribute to the project
+
 * Render the documentation:
 
 ```sh
 make docs
+```
+
+* Publish a release on pypi
+
+```sh
+make publish
+```
+
+You can also just build the package without publishing it with:
+
+```sh
+make build
 ```
