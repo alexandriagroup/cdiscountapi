@@ -103,8 +103,10 @@ def generate_package(package_type, package_path, data, overwrite=True):
             raise FileExistsError("The package_path {} already exists.".format(package_path))
 
     # Copy tree package.
-    package_template = Path().joinpath(
-        "cdiscountapi", "packages", f"{package_type}_package"
+    package_template = os.path.join(
+        os.path.dirname(__file__),
+        "packages",
+        f"{package_type}_package"
     )
     package = copytree(package_template, package_path)
     xml_filename = package_type.capitalize() + "s.xml"
