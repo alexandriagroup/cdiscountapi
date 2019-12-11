@@ -9,6 +9,15 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[0.1.8] - 2019-12-11
+--------------------
+
+Fixed
+*****
+
+* Add missing requirements.
+
+
 [0.1.7] - 2019-12-11
 --------------------
 
