@@ -24,6 +24,6 @@ build:
 	flit build --format wheel
 
 publish:
-	flit publish --format wheel
+	git push origin master && flit publish --format wheel
 
 .PHONY: docs test
