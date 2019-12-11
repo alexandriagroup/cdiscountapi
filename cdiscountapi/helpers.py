@@ -88,6 +88,7 @@ def generate_package(package_type, package_path, data, overwrite=True):
     """
     check_package_type(package_type)
     package_path = Path(package_path)
+    package = package_path.with_suffix(".zip")
 
     # The directory in which the package will be created must exist
     if not package_path.parent.exists():
@@ -95,11 +96,15 @@ def generate_package(package_type, package_path, data, overwrite=True):
             "The directory {} does not exist.".format(package_path.parent)
         )
 
-    if package_path.with_suffix(".zip").exists():
-        if overwrite:
-            package_path.with_suffix(".zip").unlink()
+    if overwrite:
+        if package.exists():
+            package.unlink()
+        if package_path.exists():
             os.rmdir(package_path)
-        else:
+    else:
+        if package.exists():
+            raise FileExistsError("The package {} already exists.".format(package))
+        if package_path.exists():
             raise FileExistsError("The package_path {} already exists.".format(package_path))
 
     # Copy tree package.
