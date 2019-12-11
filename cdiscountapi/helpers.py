@@ -100,7 +100,7 @@ def generate_package(package_type, package_path, data, overwrite=True):
         if package.exists():
             package.unlink()
         if package_path.exists():
-            os.rmdir(package_path)
+            rmtree(package_path)
     else:
         if package.exists():
             raise FileExistsError("The package {} already exists.".format(package))
