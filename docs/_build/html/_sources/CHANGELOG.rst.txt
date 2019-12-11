@@ -9,6 +9,25 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[0.1.7] - 2019-12-11
+--------------------
+
+Fixed
+*****
+
+* Improve `overwrite` in `generate_package`.
+  Both the zip file and the directory are deleted when `overwrite=True`
+
+
+[0.1.6] - 2019-12-10
+--------------------
+
+Fixed
+*****
+
+* Fix a path issue with in `generate_package`
+
+
 [0.1.5] - 2019-10-04
 --------------------
 
@@ -31,8 +50,6 @@ Added
   in the order (because it is required by the API)
   (i.e BeginCreationDate and BeginModificationDate must be specified together.
   Idem for EndCreationDate and EndModificationDate.)
-
-****
 
 Fixed
 *****
