@@ -6,6 +6,7 @@
 from tempfile import gettempdir, NamedTemporaryFile
 from pathlib import Path
 import zipfile
+from shutil import make_archive
 
 # Third-party imports
 import pytest
@@ -93,7 +94,8 @@ def test_generate_product_package(valid_product_package):
     assert_xml_files_equal(created, expected, "Product")
 
 
-def test_generate_product_package_with_nonexistent_directory(valid_product_for_package):
+@pytest.mark.vcr()
+def test_generate_product_package_with_nonexistent_directory(valid_product_package):
     """
     When the parent of the package_name does not exist a FileNotFoundError
     Products.generate_product_package should raise a FileNotFoundError
@@ -103,22 +105,45 @@ def test_generate_product_package_with_nonexistent_directory(valid_product_for_p
         FileNotFoundError,
         Products.generate_product_package,
         package_name,
-        valid_product_for_package,
+        valid_product_package,
     )
 
 
-def test_generate_product_package_with_existing_package_name(valid_product_for_package):
+@pytest.mark.vcr()
+def test_generate_product_package_with_existing_package_name_and_overwrite_false(
+    valid_product_package
+):
     """
-    When the package_name already exists Products.generate_product_package should
-    raise a FileExistsError
+    When the package_name already exists and overwrite=False,
+    Products.generate_product_package should raise a FileExistsError
     """
-    with NamedTemporaryFile() as tmp_file:
-        pytest.raises(
-            FileExistsError,
-            Products.generate_product_package,
-            tmp_file.name,
-            valid_product_for_package,
-        )
+    package_path = Path(gettempdir()) / "uploading_package"
+    package_path.mkdir()
+    make_archive(str(package_path), "zip", package_path, base_dir=".")
+    pytest.raises(
+        FileExistsError,
+        Products.generate_product_package,
+        package_path,
+        valid_product_package,
+        overwrite=False
+    )
+
+
+@pytest.mark.vcr()
+def test_generate_product_package_with_existing_package_name_and_overwrite_true(
+    valid_product_package
+):
+    """
+    When the package_path already exists and overwrite=True,
+    Products.generate_product_package should overwrite the package
+    """
+    package_path = Path(gettempdir()) / "uploading_package"
+    package_path.mkdir()
+    make_archive(str(package_path), "zip", package_path, base_dir=".")
+    Products.generate_product_package(
+        package_path, valid_product_package,
+        overwrite=True
+    )
 
 
 @pytest.mark.skipif(CDISCOUNT_WITHOUT_DATA, reason="submit_product_package not ready")

@@ -103,7 +103,7 @@ def test_generate_offer_package_with_existing_package_name_and_overwrite_false(v
         FileExistsError,
         Offers.generate_offer_package,
         "A good package",
-        package_path.with_name(".zip"),
+        package_path,
         valid_offer_package,
         overwrite=False
     )
