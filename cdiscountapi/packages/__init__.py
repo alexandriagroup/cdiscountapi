@@ -146,7 +146,7 @@ class OfferPackage(BasePackage):
                 ]
             }
 
-        return OfferValidator.validate(new_kwargs)
+        return OfferValidator.validate(new_kwargs["Offer"])
 
     def generate(self):
         loader = FileSystemLoader("cdiscountapi/templates")
@@ -237,7 +237,7 @@ class ProductPackage(BasePackage):
                 ]
             }
 
-        return ProductValidator.validate(new_kwargs)
+        return ProductValidator.validate(new_kwargs["Product"])
 
     def generate(self):
         loader = FileSystemLoader("cdiscountapi/templates")

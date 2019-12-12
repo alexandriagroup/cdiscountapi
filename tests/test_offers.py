@@ -140,7 +140,7 @@ def test_generate_offer_package_with_discount(valid_offer_package):
 
     # ---- PROCESS ----
     # We add the DiscountList in the first offer
-    valid_offer_package[0]["DiscountList"] = {
+    valid_offer_package[0]["Offer"]["DiscountList"] = {
         "DiscountComponent": [discount_component()]
     }
     Offers.generate_offer_package("A good package", package_path, valid_offer_package)

@@ -170,7 +170,7 @@ def valid_offers_for_package(valid_offer_for_package):
     valid_offer_for_package1 = deepcopy(valid_offer_for_package)
     valid_offer_for_package1["Price"] = 20
     valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
-    return [valid_offer_for_package, valid_offer_for_package1]
+    return [{"Offer": valid_offer_for_package}, {"Offer": valid_offer_for_package1}]
 
 
 @pytest.fixture
@@ -234,7 +234,7 @@ def valid_products_for_package(valid_product_for_package):
     valid_product_for_package1["Size"] = "36/34"
     valid_product_for_package1["SellerProductId"] = "120905784"
     valid_product_for_package1["EanList"]["ProductEan"][0]["Ean"] = "3606918243774"
-    return [valid_product_for_package, valid_product_for_package1]
+    return [{"Product": valid_product_for_package}, {"Product": valid_product_for_package1}]
 
 
 @pytest.fixture

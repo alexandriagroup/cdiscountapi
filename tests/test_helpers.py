@@ -48,9 +48,11 @@ def test_XmlGenerator_constructor(valid_offer_for_package):
     XmlGenerator should raise a ValueError if `data` isn't a dictionary with the key
     'OfferCollection' for Offers.xml and 'Products' for Products.xml
     """
-    XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    XmlGenerator({"OfferCollection": [{"Offer": valid_offer_for_package}]})
     XmlGenerator({"Products": []})
-    pytest.raises(ValueError, XmlGenerator, {"InvalidKey": [valid_offer_for_package]})
+    pytest.raises(
+        ValueError, XmlGenerator, {"InvalidKey": [{"Offer": valid_offer_for_package}]}
+    )
 
 
 @pytest.mark.vcr()
@@ -60,12 +62,12 @@ def test_add_offers(valid_offer_for_package):
     attribute `XmlGenerator.data`
     """
     xml_generator = XmlGenerator({
-        "OfferCollection": [valid_offer_for_package],
+        "OfferCollection": [{"Offer": valid_offer_for_package}],
         "Name": "A good package"
     })
     assert len(xml_generator.data) == 1
 
-    xml_generator.add([valid_offer_for_package])
+    xml_generator.add([{"Offer": valid_offer_for_package}])
 
     # The should be only 1 valid offer (we added 2 times the same offer)
     assert len(xml_generator.data) == 1
@@ -75,7 +77,7 @@ def test_add_offers(valid_offer_for_package):
     valid_offer_for_package1["DiscountList"] = {
         "DiscountComponent": [discount_component()]
     }
-    xml_generator.add([valid_offer_for_package1])
+    xml_generator.add([{"Offer": valid_offer_for_package1}])
 
     # There should be 2 valid offers
     assert len(xml_generator.data) == 2
@@ -86,12 +88,12 @@ def test_add_offers_with_invalid_offer(valid_offer_for_package):
     """
     XmlGenerator.add should raise a TypeError when the offer is invalid
     """
-    xml_generator = XmlGenerator({"OfferCollection": [valid_offer_for_package]})
+    xml_generator = XmlGenerator({"OfferCollection": [{"Offer": valid_offer_for_package}]})
     invalid_offer_for_package = {"invalid_offer": True}
     pytest.raises(
         ValidationError,
         xml_generator.add,
-        [valid_offer_for_package, invalid_offer_for_package],
+        [{"Offer": valid_offer_for_package}, {"Offer": invalid_offer_for_package}],
     )
 
 
@@ -105,10 +107,10 @@ def test_generate_offers(valid_offer_for_package):
     valid_offer_for_package1["Price"] = 20
     valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
     xml_generator = XmlGenerator({
-        "OfferCollection": [valid_offer_for_package],
+        "OfferCollection": [{"Offer": valid_offer_for_package}],
         "Name": "A good package"
     })
-    xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
+    xml_generator.add([{"Offer": valid_offer_for_package}, {"Offer": valid_offer_for_package1}])
     content = xml_generator.generate()
 
     with open(SAMPLES_DIR.joinpath("offers", "Offers.xml")) as f:
@@ -132,10 +134,10 @@ def test_generate_offers_with_discount(valid_offer_for_package):
     }
 
     xml_generator = XmlGenerator({
-        "OfferCollection": [valid_offer_for_package],
+        "OfferCollection": [{"Offer": valid_offer_for_package}],
         "Name": "A good package"
     })
-    xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
+    xml_generator.add([{"Offer": valid_offer_for_package}, {"Offer": valid_offer_for_package1}])
     content = xml_generator.generate()
 
     with open(SAMPLES_DIR.joinpath("offers", "Offers_with_discount.xml")) as f:
@@ -154,10 +156,10 @@ def test_generate_offers_with_offer_publication_list(valid_offer_for_package):
     valid_offer_for_package1["Price"] = 20
     valid_offer_for_package1["SellerProductId"] = "MY_SKU2"
     xml_generator = XmlGenerator({
-        "OfferCollection": [valid_offer_for_package],
+        "OfferCollection": [{"Offer": valid_offer_for_package}],
         "Name": "A good package"
     })
-    xml_generator.add([valid_offer_for_package, valid_offer_for_package1])
+    xml_generator.add([{"Offer": valid_offer_for_package}, {"Offer": valid_offer_for_package1}])
     content = xml_generator.generate()
 
     with open(
@@ -171,10 +173,10 @@ def test_generate_offers_with_offer_publication_list(valid_offer_for_package):
 # ProductPackage
 @pytest.mark.vcr()
 def test_add_products(valid_product_for_package):
-    xml_generator = XmlGenerator({"Products": [valid_product_for_package]})
+    xml_generator = XmlGenerator({"Products": [{"Product": valid_product_for_package}]})
     assert len(xml_generator.data) == 1
 
-    xml_generator.add([valid_product_for_package])
+    xml_generator.add([{"Product": valid_product_for_package}])
 
     # The should be only 1 valid offer (we added 2 times the same offer)
     assert len(xml_generator.data) == 1
@@ -182,7 +184,7 @@ def test_add_products(valid_product_for_package):
     # We create a new valid offer with a different DiscountValue
     valid_product1 = deepcopy(valid_product_for_package)
     valid_product1["SellerProductColorName"] = "Bleu Canard"
-    xml_generator.add([valid_product1])
+    xml_generator.add([{"Product": valid_product1}])
 
     # There should be 2 valid offers
     assert len(xml_generator.data) == 2
@@ -190,10 +192,11 @@ def test_add_products(valid_product_for_package):
 
 @pytest.mark.vcr()
 def test_add_products_with_invalid_product(valid_product_for_package):
-    xml_generator = XmlGenerator({"Products": [valid_product_for_package]})
+    xml_generator = XmlGenerator({"Products": [{"Product": valid_product_for_package}]})
     invalid_product = {"invalid_product": True}
     pytest.raises(
-        ValidationError, xml_generator.add, [valid_product_for_package, invalid_product]
+        ValidationError, xml_generator.add, [{"Product": valid_product_for_package},
+                                             {"Product": invalid_product}]
     )
 
 
@@ -209,9 +212,9 @@ def test_generate_products(valid_product_for_package):
     valid_product_for_package1["Size"] = "36/34"
 
     xml_generator = XmlGenerator(
-        {"Products": [valid_product_for_package, valid_product_for_package1]}
+        {"Products": [{"Product": valid_product_for_package}, {"Product": valid_product_for_package1}]}
     )
-    xml_generator.add([valid_product_for_package])
+    xml_generator.add([{"Product": valid_product_for_package}])
     content = xml_generator.generate()
 
     with open(SAMPLES_DIR.joinpath("products", "Products.xml")) as f:
