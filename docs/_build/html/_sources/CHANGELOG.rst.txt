@@ -9,6 +9,15 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[0.1.11] - 2019-12-12
+---------------------
+
+Fixed
+*****
+
+* Fix bugs with the path of the templates.
+
+
 [0.1.10] - 2019-12-12
 ---------------------
 
