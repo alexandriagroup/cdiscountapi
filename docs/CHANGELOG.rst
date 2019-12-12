@@ -9,6 +9,15 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[0.1.10] - 2019-12-12
+---------------------
+
+Fixed
+*****
+
+* Fix a bug in `OfferValidator` and `ProductValidator`.
+
+
 [0.1.9] - 2019-12-11
 --------------------
 
