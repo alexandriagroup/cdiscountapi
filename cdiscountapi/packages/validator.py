@@ -36,16 +36,10 @@ class BaseValidator(object):
 
 
 class OfferValidator(BaseValidator):
+    # Parameters common to PackageType "Full" and "StockAndPrice"
     required = {
         "ProductEan",
         "SellerProductId",
-        "ProductCondition",
-        "Price",
-        "EcoPart",
-        "Vat",
-        "DeaTax",
-        "Stock",
-        "PreparationTime",
     }
 
     optional = {
@@ -58,6 +52,14 @@ class OfferValidator(BaseValidator):
         "BluffDeliveryMax",
         "DiscountList",
         "ShippingInformationList",
+        # These parameters are only required when PackageType is "Full"
+        "ProductCondition",
+        "Price",
+        "EcoPart",
+        "Vat",
+        "DeaTax",
+        "Stock",
+        "PreparationTime",
     }
 
 
