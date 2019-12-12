@@ -11,6 +11,7 @@
 
 # Python imports
 from copy import deepcopy
+import os
 
 # Third-party imports
 import zeep
@@ -149,7 +150,9 @@ class OfferPackage(BasePackage):
         return OfferValidator.validate(new_kwargs["Offer"])
 
     def generate(self):
-        loader = FileSystemLoader("cdiscountapi/templates")
+        loader = FileSystemLoader(
+            os.path.join(os.path.dirname(__file__), "..", "templates")
+        )
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template("Offers.xml")
         offers = deepcopy(self.data)

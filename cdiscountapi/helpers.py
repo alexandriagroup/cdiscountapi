@@ -113,12 +113,12 @@ def generate_package(package_type, package_path, data, overwrite=True):
         "packages",
         f"{package_type}_package"
     )
-    package = copytree(package_template, package_path)
+    copytree(package_template, package_path)
     xml_filename = package_type.capitalize() + "s.xml"
 
     # TODO Fix offer_dict
     # Add Products.xml from product_dict.
-    with open(f"{package}/Content/{xml_filename}", "wb") as f:
+    with open(f"{package_path}/Content/{xml_filename}", "wb") as f:
         xml_generator = XmlGenerator(data)
         f.write(xml_generator.generate().encode("utf8"))
 
