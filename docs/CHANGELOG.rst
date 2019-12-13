@@ -9,6 +9,15 @@ The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
 
+[0.1.12] - 2019-12-13
+---------------------
+
+Fixed
+*****
+
+* Fix `OfferValidator.validate` so it can handle both "Full" and "StockAndPrice" package types.
+
+
 [0.1.11] - 2019-12-12
 ---------------------
 
