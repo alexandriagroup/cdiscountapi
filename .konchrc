@@ -193,6 +193,28 @@ def get_offer_package_submission_results(api):
     return pd.DataFrame(table)
 
 
+def get_offer_package_submission_result(api, feed_submission_id):
+    def make_row(content):
+        row = {}
+        row["Status"] = content["OfferIntegrationStatus"]
+        row["Ean"] = content["ProductEan"]
+        row["SKU"] = content["SellerProductId"]
+        row["Validated"] = content["Validated"]
+        plog = content["PropertyList"]["OfferReportPropertyLog"][0]
+        row["PropertyCode"] = plog["PropertyCode"]
+        row["PropertyError"] = plog["PropertyError"]
+        row["Name"] = plog["Name"]
+        return row
+    offer_package_submission_result = api.offers.get_offer_package_submission_result(
+        feed_submission_id
+    )["OfferLogList"]
+
+    if offer_package_submission_result:
+        offer_report_logs = offer_package_submission_result["OfferReportLog"]
+        table = map(make_row, offer_report_logs)
+        return pd.DataFrame(table)
+
+
 def get_offer_questions(api, ndays=7, state='All'):
     days = datetime.timedelta(days=1)
     now = datetime.datetime.now()
@@ -343,7 +365,8 @@ konch.config({
         'create_request': create_request,
         'show_request': show_request,
         'get_offers_list': get_offers_list,
-        'get_offer_package_submission_results': get_offer_package_submission_results,
+        # 'get_offer_package_submission_results': get_offer_package_submission_results,
+        'get_offer_package_submission_result': get_offer_package_submission_result,
         'show_table': show_table,
         'get_offer_questions': get_offer_questions,
         'get_order_questions': get_order_questions,
