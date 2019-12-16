@@ -1,0 +1,138 @@
+[
+    {
+        "code": 10,
+        "meaning": "Required field, please enter data"
+    },
+    {
+        "code": 11,
+        "meaning": "Incorrect data format, check the required format"
+    },
+    {
+        "code": 12,
+        "meaning": "Data incorrect length, check the required format"
+    },
+    {
+        "code": 13,
+        "meaning": "Non existent - Request its creation in the 'product creation' section of the seller interface"
+    },
+    {
+        "code": 14,
+        "meaning": "Product already known"
+    },
+    {
+        "code": 15,
+        "meaning": "Ask permission to sell this product to the seller support"
+    },
+    {
+        "code": 16,
+        "meaning": "Invalid key, check EAN"
+    },
+    {
+        "code": 17,
+        "meaning": "Incorrect value as greater than the maximum value, check the consistency of values"
+    },
+    {
+        "code": 17,
+        "meaning": "Incorrect value as lower than the minimum value, check the consistency of values"
+    },
+    {
+        "code": 18,
+        "meaning": "Not enough stock relative to pending orders"
+    },
+    {
+        "code": 19,
+        "meaning": "Incorrect value, price lower than or equal to \u20ac0"
+    },
+    {
+        "code": 20,
+        "meaning": "Incorrect value, reference price lower than 0,10\u20ac"
+    },
+    {
+        "code": 21,
+        "meaning": "Error occurred during integration"
+    },
+    {
+        "code": 23,
+        "meaning": "Incorrect value, reference price lower than the sale price"
+    },
+    {
+        "code": 24,
+        "meaning": "A offer already exists for this produit with another reference, impossible to modify, please use the old reference"
+    },
+    {
+        "code": 25,
+        "meaning": "Seller reference already used for another EAN or another produit condition. Please change your reference"
+    },
+    {
+        "code": 26,
+        "meaning": "End date/time earlier than Start date/time"
+    },
+    {
+        "code": 27,
+        "meaning": "Products with variations (size/colour): to be created for your seller account in the 'product creation'"
+    },
+    {
+        "code": 28,
+        "meaning": "Offer already submitted and awaiting processing"
+    },
+    {
+        "code": 29,
+        "meaning": "Price {0} is an amount lower than the eco part + DEA"
+    },
+    {
+        "code": 30,
+        "meaning": "Reference unknown. You must create your product before putting an offer, or put an offer on an existing product using the EAN"
+    },
+    {
+        "code": 31,
+        "meaning": "You have several products with the reference seller. Please use the EAN"
+    },
+    {
+        "code": 32,
+        "meaning": "Off (being activated), the offer is on hold, it will be published in the hour"
+    },
+    {
+        "code": 34,
+        "meaning": "Existing but not open to the marketplace. Please contact the sellersupport"
+    },
+    {
+        "code": 35,
+        "meaning": "Value greater than the permitted ceiling 30.00"
+    },
+    {
+        "code": 36,
+        "meaning": "This offer does not exist and can not be updated. You must first create"
+    },
+    {
+        "code": 39,
+        "meaning": "Fulfillment: Product dereferenced of Fulfillment with stock> 0. You must take all your products on our warehouse before reactivating this offer"
+    },
+    {
+        "code": 40,
+        "meaning": "Not configured - You must set the Mode in the section 'Your shipping choices' before entering the file data"
+    },
+    {
+        "code": 43,
+        "meaning": "Not accessible to your subscription"
+    },
+    {
+        "code": 44,
+        "meaning": "Thank you to first take back your stock ...."
+    },
+    {
+        "code": 45,
+        "meaning": "Non-salable only"
+    },
+    {
+        "code": 48,
+        "meaning": "Several eans match the product, please contact the account manager"
+    },
+    {
+        "code": 80,
+        "meaning": "Offer created"
+    },
+    {
+        "code": 90,
+        "meaning": "Offer updated"
+    }
+]

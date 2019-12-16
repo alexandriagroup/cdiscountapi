@@ -41,6 +41,20 @@ def strtime(date):
     return datetime.datetime.strftime(date, '%Y-%m-%dT%H:%M:%S') if date else ""
 
 
+@lru_cache(maxsize=128)
+def error_codes():
+    with open("docs/error_codes.json") as f:
+        data = json.load(f)
+    return pd.DataFrame(data)
+
+
+@lru_cache(maxsize=128)
+def property_codes():
+    with open("docs/property_codes.json") as f:
+        data = json.load(f)
+    return pd.DataFrame(data)
+
+
 def extract(response):
     """
     Extract the individual elements from a response
@@ -375,6 +389,8 @@ konch.config({
         'offer_filters': offer_filters,
         'order_filters': order_filters,
         'extract': extract,
+        'property_codes': property_codes,
+        'error_codes': error_codes,
     },
     "shell": "ipython",
     "ipy_autoreload": True,

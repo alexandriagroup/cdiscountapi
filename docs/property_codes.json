@@ -1,0 +1,226 @@
+[
+    {
+        "code": 0,
+        "meaning": ""
+    },
+    {
+        "code": 1,
+        "meaning": "EAN"
+    },
+    {
+        "code": 2,
+        "meaning": "Product status"
+    },
+    {
+        "code": 3,
+        "meaning": "Seller product reference"
+    },
+    {
+        "code": 4,
+        "meaning": "SKU"
+    },
+    {
+        "code": 5,
+        "meaning": "Stock"
+    },
+    {
+        "code": 6,
+        "meaning": "Price"
+    },
+    {
+        "code": 7,
+        "meaning": "VAT"
+    },
+    {
+        "code": 8,
+        "meaning": "Eco part"
+    },
+    {
+        "code": 9,
+        "meaning": "Min shipping time"
+    },
+    {
+        "code": 10,
+        "meaning": "Max shipping time"
+    },
+    {
+        "code": 11,
+        "meaning": "Shipping fee - Standard mode"
+    },
+    {
+        "code": 12,
+        "meaning": "Shipping fee - Tracked mode"
+    },
+    {
+        "code": 13,
+        "meaning": "Shipping fee - Registered mode"
+    },
+    {
+        "code": 14,
+        "meaning": "Offers comment"
+    },
+    {
+        "code": 15,
+        "meaning": "Additional Shipping fee - Standard mode"
+    },
+    {
+        "code": 16,
+        "meaning": "Additional Shipping fee - Tracked mode"
+    },
+    {
+        "code": 17,
+        "meaning": "Additional Shipping fee - Registered mode"
+    },
+    {
+        "code": 18,
+        "meaning": "Reference price"
+    },
+    {
+        "code": 19,
+        "meaning": "Promotion type"
+    },
+    {
+        "code": 20,
+        "meaning": "Promotion type - Start date"
+    },
+    {
+        "code": 21,
+        "meaning": "Promotion type - Start hour"
+    },
+    {
+        "code": 22,
+        "meaning": "Promotion type - End date"
+    },
+    {
+        "code": 23,
+        "meaning": "Package"
+    },
+    {
+        "code": 24,
+        "meaning": "Product"
+    },
+    {
+        "code": 25,
+        "meaning": "Promotion type - End Hour"
+    },
+    {
+        "code": 26,
+        "meaning": "Discount %"
+    },
+    {
+        "code": 27,
+        "meaning": "Sales Reference Price"
+    },
+    {
+        "code": 28,
+        "meaning": "Offer"
+    },
+    {
+        "code": 29,
+        "meaning": "Delivery charges - Mode Immediate Withdrawal"
+    },
+    {
+        "code": 30,
+        "meaning": "Additional Delivery Fee - Immediate Withdrawal Mode"
+    },
+    {
+        "code": 31,
+        "meaning": "DEA"
+    },
+    {
+        "code": 40,
+        "meaning": "Store delivery"
+    },
+    {
+        "code": 41,
+        "meaning": "Store delivery - Min shipping time"
+    },
+    {
+        "code": 42,
+        "meaning": "Store delivery - Max shipping time"
+    },
+    {
+        "code": 43,
+        "meaning": "Store delivery - shipping fee"
+    },
+    {
+        "code": 44,
+        "meaning": "Store delivery - Additional shipping fee"
+    },
+    {
+        "code": 45,
+        "meaning": "Home delivery"
+    },
+    {
+        "code": 46,
+        "meaning": "Lowest allowable price"
+    },
+    {
+        "code": 48,
+        "meaning": "Mondial Relay pick up - Min shipping time"
+    },
+    {
+        "code": 49,
+        "meaning": "Mondial Relay pick up - Shipping fee"
+    },
+    {
+        "code": 50,
+        "meaning": "Mondial Relay pick up - Shipping fee"
+    },
+    {
+        "code": 51,
+        "meaning": "Mondial Relay pick up - Additional shipping fee"
+    },
+    {
+        "code": 52,
+        "meaning": "Relais colis pick up"
+    },
+    {
+        "code": 53,
+        "meaning": "Relais colis pick up - Min shipping time"
+    },
+    {
+        "code": 54,
+        "meaning": "Relais colis pick up - Max shipping time"
+    },
+    {
+        "code": 55,
+        "meaning": "Relais colis pick up - Shipping fee"
+    },
+    {
+        "code": 56,
+        "meaning": "Relais colis pick up - Additional shipping fee"
+    },
+    {
+        "code": 57,
+        "meaning": "SoColissimo pick up"
+    },
+    {
+        "code": 58,
+        "meaning": "SoColissimo pick up - Min shipping time"
+    },
+    {
+        "code": 59,
+        "meaning": "SoColissimo pick up - Max shipping time"
+    },
+    {
+        "code": 60,
+        "meaning": "SoColissimo pick up - Shipping fee"
+    },
+    {
+        "code": 61,
+        "meaning": "SoColissimo pick up - Additional shipping fee"
+    },
+    {
+        "code": 62,
+        "meaning": "Packaging unit"
+    },
+    {
+        "code": 63,
+        "meaning": "Product packaging"
+    },
+    {
+        "code": 64,
+        "meaning": "Fullfilment"
+    }
+]
