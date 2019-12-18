@@ -157,7 +157,9 @@ class Products(BaseSection):
         return serialize_object(response, dict)
 
     @staticmethod
-    def generate_product_package(package_name, products_list, overwrite=True):
+    def generate_product_package(
+            package_name, package_path, products_list, overwrite=True
+    ):
         """
         Generate a zip product package as cdiscount wanted.
 
@@ -196,8 +198,11 @@ class Products(BaseSection):
         """
         return generate_package(
             "product",
-            package_name,
-            {"Products": products_list},
+            package_path,
+            {
+                "ProductCollection": products_list,
+                "Name": package_name,
+            },
             overwrite=overwrite
         )
 

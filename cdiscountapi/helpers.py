@@ -262,7 +262,7 @@ class XmlGenerator(object):
             self.package = ProductPackage(data, preprod)
         else:
             msg = (
-                "The data should be a dictionary with the keys {offers} for"
+                "The data should be a dictionary with the keys {offers} for "
                 "Offers.xml and {products} for Products.xml".format(
                     offers=OfferPackage.required_keys,
                     products=ProductPackage.required_keys,

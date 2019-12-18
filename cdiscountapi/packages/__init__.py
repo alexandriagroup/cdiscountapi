@@ -192,11 +192,12 @@ class OfferPackage(BasePackage):
 
 
 class ProductPackage(BasePackage):
-    required_keys = ["Products"]
+    required_keys = ["ProductCollection"]
 
     def __init__(self, data, preprod=False):
         super().__init__(preprod=preprod)
-        self.add(data["Products"])
+        self.name = data.get("Name", "A package")
+        self.add(data["ProductCollection"])
 
     def add(self, products):
         for product in products:
@@ -273,4 +274,6 @@ class ProductPackage(BasePackage):
             )
             products_data.append(products_datum)
         capacity = sum(len(p['Pictures']) for p in products_data)
-        return template.render(products=products_data, capacity=capacity)
+        return template.render(
+            products=products_data, capacity=capacity, name=self.name
+        )
