@@ -42,17 +42,23 @@ def strtime(date):
 
 
 @lru_cache(maxsize=128)
-def error_codes():
-    with open("docs/error_codes.json") as f:
+def get_codes(filename, code=None):
+    with open(filename) as f:
         data = json.load(f)
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
+    if code:
+        result = df[df.code == code].meaning.values[0]
+    else:
+        result = df
+    return result
 
 
-@lru_cache(maxsize=128)
-def property_codes():
-    with open("docs/property_codes.json") as f:
-        data = json.load(f)
-    return pd.DataFrame(data)
+def error_codes(code=None):
+    return get_codes("docs/error_codes.json", code)
+
+
+def property_codes(code=None):
+    return get_codes("docs/property_codes.json", code)
 
 
 def extract(response):
@@ -130,17 +136,35 @@ def show_request(api, operation, **kwargs):
     print(etree.tostring(request, pretty_print=True).decode('utf8'))
 
 
+def make_offer_row(offer):
+    row = {}
+    row["Sku"] = offer["SellerProductId"]
+    row["Ean"] = offer["ProductEan"]
+    row["Condition"] = offer["ProductCondition"]
+    row["Price"] = offer["Price"]
+    row["Quantity"] = offer["Stock"]
+    row["CreationDate"] = offer["CreationDate"]
+    row["OfferState"] = offer["OfferState"]
+    row["LastUpdateDate"] = offer["LastUpdateDate"]
+    return row
+
+
 def get_offers_list(api, **kwargs):
     """
     Example:
         offers_list = get_offers_list(api, PageNumber=1)
     """
     kwargs.setdefault('PageNumber', 1)
-    header = ['SellerProductId', 'ProductEan', 'ProductCondition', 'Price', 'Stock',
-              'CreationDate', 'OfferState', 'LastUpdateDate']
-    header_fn = operator.itemgetter(*header)
     offers_list = api.offers.get_offer_list_paginated(**kwargs)
-    table = [dict(zip(header, header_fn(x))) for x in offers_list['OfferList']['Offer']]
+    table = [make_offer_row(offer) for offer in offers_list]
+    return pd.DataFrame(table)
+
+
+def get_offer_list_paginated(api, **kwargs):
+    kwargs.setdefault('PageNumber', 1)
+    response = api.offers.get_offer_list_paginated(**kwargs)
+    offer_list_paginated = response['OfferList']['Offer']
+    table = [make_offer_row(offer) for offer in offer_list_paginated]
     return pd.DataFrame(table)
 
 
@@ -379,6 +403,7 @@ konch.config({
         'create_request': create_request,
         'show_request': show_request,
         'get_offers_list': get_offers_list,
+        'get_offer_list_paginated': get_offer_list_paginated,
         # 'get_offer_package_submission_results': get_offer_package_submission_results,
         'get_offer_package_submission_result': get_offer_package_submission_result,
         'show_table': show_table,
