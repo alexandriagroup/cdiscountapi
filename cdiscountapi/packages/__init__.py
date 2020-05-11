@@ -244,7 +244,9 @@ class ProductPackage(BasePackage):
         return ProductValidator.validate(new_kwargs["Product"])
 
     def generate(self):
-        loader = FileSystemLoader("cdiscountapi/templates")
+        loader = FileSystemLoader(
+            os.path.join(os.path.dirname(__file__), "..", "templates")
+        )
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template("Products.xml")
         products = deepcopy(self.data)
