@@ -200,7 +200,7 @@ class Products(BaseSection):
             "product",
             package_path,
             {
-                "ProductCollection": products_list,
+                "Products": products_list,
                 "Name": package_name,
             },
             overwrite=overwrite
