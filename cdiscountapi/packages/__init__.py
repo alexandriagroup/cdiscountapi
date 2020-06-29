@@ -249,7 +249,7 @@ class ProductPackage(BasePackage):
         )
         env = Environment(loader=loader, trim_blocks=True, lstrip_blocks=True)
         template = env.get_template("Products.xml")
-        products = deepcopy(self.data)
+        products = deepcopy(self.data["Products"])
         extraction_mapping = {
             "EanList": ("EanList", "ProductEan"),
             "Pictures": ("Pictures", "ProductImage"),
@@ -257,22 +257,23 @@ class ProductPackage(BasePackage):
 
         products_data = []
         for product in products:
+            prod = product['Product']
             products_datum = {}
             for key, (attr1, attr2) in extraction_mapping.items():
                 if key not in products_datum:
                     products_datum[key] = []
-                products_datum[key].extend(self.extract_from(product, attr1, attr2))
+                products_datum[key].append(self.extract_from(prod, attr1, attr2))
 
-            if "ModelProperties" in product:
-                products_datum["ModelProperties"] = product["ModelProperties"]
-                del product["ModelProperties"]
+            if "ModelProperties" in prod:
+                products_datum["ModelProperties"] = prod["ModelProperties"]
+                del prod["ModelProperties"]
 
             if "attributes" not in products_datum:
                 products_datum["attributes"] = ""
 
             # We keep only key:value pairs whose values are not None
             products_datum["attributes"] += " ".join(
-                '{}="{}"'.format(k, v) for k, v in product.items() if v is not None
+                '{}="{}"'.format(k, v) for k, v in prod.items() if v is not None
             )
             products_data.append(products_datum)
         capacity = sum(len(p['Pictures']) for p in products_data)

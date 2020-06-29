@@ -5,7 +5,7 @@
       <Product {{ product['attributes'] }} >
         <Product.EanList>
             {% for product_ean in product['EanList'] %}
-            <ProductEan Ean="{{ product_ean['Ean'] }}"/>
+            <ProductEan Ean="{{ product_ean }}"/>
             {% endfor %}
         </Product.EanList>
         <Product.ModelProperties>
@@ -17,7 +17,7 @@
         </Product.ModelProperties>
         <Product.Pictures>
           {% for product_image in product['Pictures'] %}
-          <ProductImage Uri="{{ product_image['Uri'] }}"/>
+          <ProductImage Uri="{{ product_image }}"/>
           {% endfor %}
         </Product.Pictures>
       </Product>
