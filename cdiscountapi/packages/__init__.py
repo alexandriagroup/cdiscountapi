@@ -192,12 +192,12 @@ class OfferPackage(BasePackage):
 
 
 class ProductPackage(BasePackage):
-    required_keys = ["ProductCollection"]
+    required_keys = ["Products"]
 
     def __init__(self, data, preprod=False):
         super().__init__(preprod=preprod)
         self.name = data.get("Name", "A package")
-        self.add(data["ProductCollection"])
+        self.add(data["Products"])
 
     def add(self, products):
         for product in products:
