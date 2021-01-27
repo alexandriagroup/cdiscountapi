@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog`_ and this project adheres to
 `Semantic Versioning`_.
 
+[0.2.0] - 2020-01-27
+---------------------
+
+* Upgrade dependencies
+* Migrate repository to github
+
 
 [0.1.12] - 2019-12-13
 ---------------------

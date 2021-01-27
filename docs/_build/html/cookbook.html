@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cookbook &#8212; CdiscountAPI  documentation</title>
-    <link rel="stylesheet" href="_static/nameko.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="_static/nameko.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developer interface" href="api.html" />
@@ -40,7 +40,8 @@
         <li class="right" >
           <a href="advanced_usage.html" title="Advanced usage"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CdiscountAPI  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CdiscountAPI  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Cookbook</a></li> 
       </ul>
     </div>  
 
@@ -54,7 +55,7 @@
 <div class="section" id="offers">
 <h2>Offers<a class="headerlink" href="#offers" title="Permalink to this headline">¶</a></h2>
 <p>We’ll assume we want to create an offer with the following parameters and values:</p>
-<table class="docutils align-center">
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 52%" />
 <col style="width: 48%" />
@@ -135,7 +136,7 @@
 <div class="section" id="orders">
 <h2>Orders<a class="headerlink" href="#orders" title="Permalink to this headline">¶</a></h2>
 <p>We’ll assume there is an order with one order line with the following parameters and values:</p>
-<table class="docutils align-center">
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 57%" />
 <col style="width: 43%" />
@@ -212,6 +213,7 @@ customer, you can refuse the shipment:</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -250,15 +252,15 @@ customer, you can refuse the shipment:</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>

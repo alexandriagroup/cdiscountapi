@@ -9,23 +9,23 @@ author-email = "mathilde.ziboura@abc-culture.fr"
 classifiers = ["License :: OSI Approved :: MIT License"]
 
 requires = [ 
-    "requests==2.22.0",
-    "requests_mock==1.7.0",
-    "zeep==3.4.0",
+    "requests==2.25.1",
+    "requests_mock==1.8.0",
+    "zeep==4.0.0",
     "dicttoxml==1.7.4",
-    "PyYAML==5.1.2",
-    "jinja2==2.10.3",
+    "PyYAML==5.4.1",
+    "jinja2==2.11.1",
 ]
 
 requires-python = ">=3.6"
 
 [tool.flit.metadata.requires-extra]
 test = [
-    "pytest==5.2.0",
-    "vcrpy==2.1.0",
+    "pytest==6.2.2",
+    "vcrpy==4.1.1",
     "pytest-vcr==1.0.2",
-    "coverage==4.5.4",
-    "pytest-cov==2.7.1",
+    "coverage==5.4",
+    "pytest-cov==2.11.1",
 ]
 dev = [
     "pdbpp",
@@ -36,4 +36,4 @@ dev = [
 doc = ["sphinx", "sphinx-nameko-theme"]
 
 [tool.black]
-line-length = 88
+line-length = 120

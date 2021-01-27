@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Developer interface &#8212; CdiscountAPI  documentation</title>
-    <link rel="stylesheet" href="_static/nameko.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="stylesheet" href="_static/nameko.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Change log" href="CHANGELOG.html" />
@@ -40,7 +40,8 @@
         <li class="right" >
           <a href="cookbook.html" title="Cookbook"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">CdiscountAPI  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">CdiscountAPI  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Developer interface</a></li> 
       </ul>
     </div>  
 
@@ -55,9 +56,9 @@
 </div>
 <span class="target" id="module-cdiscountapi.cdiscountapi"></span><div class="section" id="connection">
 <h2>Connection<a class="headerlink" href="#connection" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Connection">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>login</em>, <em>password</em>, <em>preprod=False</em>, <em>header_message={}</em>, <em>config=''</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Connection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">login</span></em>, <em class="sig-param"><span class="n">password</span></em>, <em class="sig-param"><span class="n">preprod</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">header_message</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class to manage the interaction with the CdiscountMarketplace API</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -75,15 +76,15 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">preprod</span><span class="p">,</span> <span class="n">header_message</span><span class="o">=</span><span class="n">header_message</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="attribute">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Connection.last_request">
-<code class="descname">last_request</code><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection.last_request" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">last_request</code><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection.last_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the last SOAP request</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Connection.last_response">
-<code class="descname">last_response</code><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection.last_response" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">last_response</code><a class="headerlink" href="#cdiscountapi.cdiscountapi.Connection.last_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the last SOAP response</p>
 </dd></dl>
 
@@ -92,9 +93,9 @@
 </div>
 <div class="section" id="seller">
 <h2>Seller<a class="headerlink" href="#seller" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Seller">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Seller</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Seller</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller" title="Permalink to this definition">¶</a></dt>
 <dd><p>Seller section lets sellers retrieve information about their seller account
 and their performance indicator.</p>
 <p>Methods:</p>
@@ -104,18 +105,18 @@ and their performance indicator.</p>
 </div>
 <p>Operations are included in the Seller API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=36">https://dev.cdiscount.com/marketplace/?page_id=36</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Seller.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Seller.get_seller_indicators">
-<code class="descname">get_seller_indicators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_indicators" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_seller_indicators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_indicators" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>To get all rates about seller as:</dt><dd><ul class="simple">
 <li><p>Order Acceptation</p></li>
@@ -133,9 +134,9 @@ and their performance indicator.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Seller.get_seller_info">
-<code class="descname">get_seller_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_info" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_seller_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.get_seller_info" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>To get seller info as:</dt><dd><ul class="simple">
 <li><p>Delivery Modes</p></li>
@@ -160,9 +161,9 @@ and their performance indicator.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Seller.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Seller.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -192,9 +193,9 @@ and their performance indicator.</p>
 </div>
 <div class="section" id="offers">
 <h2>Offers<a class="headerlink" href="#offers" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Offers">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Offers</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Offers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Offers section lets sellers retrieve information about their offers.</p>
 <p>Methods:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_offer_list</span><span class="p">(</span><span class="o">**</span><span class="n">filters</span><span class="p">)</span>
@@ -209,18 +210,18 @@ and their performance indicator.</p>
 </div>
 <p>Operations are included in the Products API section
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=84">https://dev.cdiscount.com/marketplace/?page_id=84</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Offers.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Offers.generate_offer_package">
-<em class="property">static </em><code class="descname">generate_offer_package</code><span class="sig-paren">(</span><em>package_name</em>, <em>package_path</em>, <em>offers_list</em>, <em>package_type='Full'</em>, <em>offer_publication_list=[]</em>, <em>purge_and_replace=False</em>, <em>overwrite=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.generate_offer_package" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">generate_offer_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package_name</span></em>, <em class="sig-param"><span class="n">package_path</span></em>, <em class="sig-param"><span class="n">offers_list</span></em>, <em class="sig-param"><span class="n">package_type</span><span class="o">=</span><span class="default_value">'Full'</span></em>, <em class="sig-param"><span class="n">offer_publication_list</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">purge_and_replace</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.generate_offer_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a zip offers package as cdiscount wanted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -345,9 +346,9 @@ overwritten when a new one with the same name is created (default: True)
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Offers.get_offer_list">
-<code class="descname">get_offer_list</code><span class="sig-paren">(</span><em>**filters</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_offer_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">filters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>To search offers.</p>
 <p>This operation seeks offers according to the
 following criteria:</p>
@@ -369,9 +370,9 @@ following criteria:</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Offers.get_offer_list_paginated">
-<code class="descname">get_offer_list_paginated</code><span class="sig-paren">(</span><em>**filters</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list_paginated" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_offer_list_paginated</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">filters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_list_paginated" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recovery of the offers page by page.</p>
 <ul class="simple">
 <li><p>PageNumber (int) [mandatory]</p></li>
@@ -423,9 +424,9 @@ following criteria:</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Offers.get_offer_package_submission_result">
-<code class="descname">get_offer_package_submission_result</code><span class="sig-paren">(</span><em>package_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_package_submission_result" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_offer_package_submission_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.get_offer_package_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>This operation makes it possible to know the progress report of the offers import.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -437,9 +438,9 @@ following criteria:</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Offers.submit_offer_package">
-<code class="descname">submit_offer_package</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.submit_offer_package" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">submit_offer_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.submit_offer_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>To import offers.
 It is used to add new offers to the Cdiscount marketplace
 or to modify/update offers that already exists.</p>
@@ -461,9 +462,9 @@ Finally, you can use submit_offer_package(url)</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Offers.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Offers.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -493,9 +494,9 @@ Finally, you can use submit_offer_package(url)</p>
 </div>
 <div class="section" id="orders">
 <h2>Orders<a class="headerlink" href="#orders" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Orders">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Orders</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Orders</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows to list, validate or refund orders.</p>
 <p>Methods:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_order_list</span><span class="p">(</span><span class="o">**</span><span class="n">order_filter</span><span class="p">)</span>
@@ -508,18 +509,18 @@ Finally, you can use submit_offer_package(url)</p>
 </div>
 <p>Operations are included in the Orders API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=128">https://dev.cdiscount.com/marketplace/?page_id=128</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.create_refund_voucher">
-<code class="descname">create_refund_voucher</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.create_refund_voucher" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_refund_voucher</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.create_refund_voucher" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method still allows refunding lines of an order whose state is
 “ShippedBySeller”.</p>
 <p>An additional feature allows to make a commercial gesture on an order
@@ -608,9 +609,9 @@ MKPCDS before and after shipping and on an order MKPFBC after shipping.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.get_global_configuration">
-<code class="descname">get_global_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.get_global_configuration" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_global_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.get_global_configuration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get cdiscount settings. This method allows to get a list of several
 settings:</p>
 <ul class="simple">
@@ -618,9 +619,9 @@ settings:</p>
 </ul>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.get_order_list">
-<code class="descname">get_order_list</code><span class="sig-paren">(</span><em>**order_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.get_order_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_order_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">order_filter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.get_order_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>To search orders.</p>
 <p>This operation makes it possible to seek orders according to the
 following criteria:</p>
@@ -740,9 +741,9 @@ default value will be <code class="docutils literal notranslate"><span class="pr
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.manage_parcel">
-<code class="descname">manage_parcel</code><span class="sig-paren">(</span><em>parcel_actions_list=None</em>, <em>scopus_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.manage_parcel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">manage_parcel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parcel_actions_list</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scopus_id</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.manage_parcel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ask for investigation or ask for delivery certification.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -769,9 +770,9 @@ default value will be <code class="docutils literal notranslate"><span class="pr
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.prepare_validations">
-<code class="descname">prepare_validations</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.prepare_validations" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">prepare_validations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.prepare_validations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the dictionary used to validate the orders in
 <a class="reference internal" href="#cdiscountapi.cdiscountapi.Orders.validate_order_list" title="cdiscountapi.cdiscountapi.Orders.validate_order_list"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Orders.validate_order_list()</span></code></a></p>
 <p>This method tries to simplify the creation of the data necessary to
@@ -807,9 +808,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -834,9 +835,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Orders.validate_order_list">
-<code class="descname">validate_order_list</code><span class="sig-paren">(</span><em>**validate_order_list_message</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.validate_order_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">validate_order_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">validate_order_list_message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Orders.validate_order_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate a list of orders</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -898,9 +899,9 @@ structure than the one required for the request.</p>
 </div>
 <div class="section" id="products">
 <h2>Products<a class="headerlink" href="#products" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Products">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Products</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Products</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows to get information about products and submit new products on Cdiscount.</p>
 <p>Methods:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_all_allowed_category_tree</span><span class="p">()</span>
@@ -918,18 +919,18 @@ structure than the one required for the request.</p>
 </div>
 <p>Operations are included in the Products API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=220">https://dev.cdiscount.com/marketplace/?page_id=220</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="staticmethod">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.generate_product_package">
-<em class="property">static </em><code class="descname">generate_product_package</code><span class="sig-paren">(</span><em>package_name</em>, <em>products_list</em>, <em>overwrite=True</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">generate_product_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package_name</span></em>, <em class="sig-param"><span class="n">package_path</span></em>, <em class="sig-param"><span class="n">products_list</span></em>, <em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.generate_product_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a zip product package as cdiscount wanted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -988,9 +989,9 @@ structure than the one required for the request.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree">
-<code class="descname">get_all_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_all_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>All categories.</p>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_all_allowed_category_tree</span><span class="p">()</span>
@@ -1003,9 +1004,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_all_model_list">
-<code class="descname">get_all_model_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_model_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_all_model_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_all_model_list" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Doesn’t work at the moment.</p>
@@ -1022,9 +1023,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_allowed_category_tree">
-<code class="descname">get_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_allowed_category_tree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_allowed_category_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Categories which are accessible to the seller.</p>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_allowed_category_tree</span><span class="p">()</span>
@@ -1037,9 +1038,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_brand_list">
-<code class="descname">get_brand_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_brand_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_brand_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_brand_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Complete list of the brands</p>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">get_brand_list</span><span class="p">()</span>
@@ -1052,9 +1053,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_model_list">
-<code class="descname">get_model_list</code><span class="sig-paren">(</span><em>category=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_model_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_model_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">category</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_model_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Model categories allocated to the seller.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1074,9 +1075,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_list">
-<code class="descname">get_product_list</code><span class="sig-paren">(</span><em>category_code</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_product_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">category_code</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search products in the reference frame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1094,9 +1095,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_list_by_identifier">
-<code class="descname">get_product_list_by_identifier</code><span class="sig-paren">(</span><em>ean_list=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list_by_identifier" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_product_list_by_identifier</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ean_list</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_list_by_identifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Obtain details for a list of products</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1114,9 +1115,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_package_product_matching_file_data">
-<code class="descname">get_product_package_product_matching_file_data</code><span class="sig-paren">(</span><em>package_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_product_matching_file_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_product_package_product_matching_file_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_product_matching_file_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Information of the created products.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1134,9 +1135,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.get_product_package_submission_result">
-<code class="descname">get_product_package_submission_result</code><span class="sig-paren">(</span><em>package_ids=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_submission_result" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_product_package_submission_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package_ids</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.get_product_package_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Progress status of a product import.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1154,9 +1155,9 @@ structure than the one required for the request.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.submit_product_package">
-<code class="descname">submit_product_package</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.submit_product_package" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">submit_product_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.submit_product_package" title="Permalink to this definition">¶</a></dt>
 <dd><p>To ask for the creation of products.
 It could included between 10K and 20K products by package.</p>
 <p>There is 2 ways to use it.</p>
@@ -1181,9 +1182,9 @@ Finally, you can use submit_product_package(url)</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Products.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Products.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1213,9 +1214,9 @@ Finally, you can use submit_product_package(url)</p>
 </div>
 <div class="section" id="relays">
 <h2>Relays<a class="headerlink" href="#relays" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Relays">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Relays</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Relays</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows to get information about the different available relays and submit
 new ones.</p>
 <p>Methods:</p>
@@ -1226,18 +1227,18 @@ new ones.</p>
 </div>
 <p>Operations are included in the Relays API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=108">https://dev.cdiscount.com/marketplace/?page_id=108</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Relays.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Relays.get_parcel_shop_list">
-<code class="descname">get_parcel_shop_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_parcel_shop_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_parcel_shop_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_parcel_shop_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>To get a list of relays known.</p>
 <p>Usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">relays</span><span class="o">.</span><span class="n">get_parcel_shop_list</span><span class="p">()</span>
@@ -1245,9 +1246,9 @@ new ones.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result">
-<code class="descname">get_relays_file_submission_result</code><span class="sig-paren">(</span><em>relays_file_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_relays_file_submission_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relays_file_ids</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.get_relays_file_submission_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the state of progress of the relays file submission.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1267,9 +1268,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Relays.submit_relays_file">
-<code class="descname">submit_relays_file</code><span class="sig-paren">(</span><em>relays_file_uri</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.submit_relays_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">submit_relays_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relays_file_uri</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.submit_relays_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send information about relays in a file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1290,9 +1291,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Relays.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Relays.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1322,9 +1323,9 @@ new ones.</p>
 </div>
 <div class="section" id="fulfillment">
 <h2>Fulfillment<a class="headerlink" href="#fulfillment" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Fulfillment</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Fulfillment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allows to manage the fulfillment of the supply orders.</p>
 <p>Methods:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">submit_fulfillment_supply_order</span><span class="p">(</span><span class="n">prod_desc_list</span><span class="p">)</span>
@@ -1342,18 +1343,18 @@ new ones.</p>
 </div>
 <p>Operations are included in the Fulfillment API section
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=2222">https://dev.cdiscount.com/marketplace/?page_id=2222</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.create_external_order">
-<code class="descname">create_external_order</code><span class="sig-paren">(</span><em>**order</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.create_external_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_external_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">order</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.create_external_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>create an order from another marketplace.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1388,9 +1389,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_external_order_status">
-<code class="descname">get_external_order_status</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_external_order_status" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_external_order_status</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_external_order_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>to get order integration status</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1414,9 +1415,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_activation_report_list">
-<code class="descname">get_fulfillment_activation_report_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_activation_report_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fulfillment_activation_report_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_activation_report_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>To get status and details about fulfillment products activation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1435,9 +1436,9 @@ new ones.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_delivery_document">
-<code class="descname">get_fulfillment_delivery_document</code><span class="sig-paren">(</span><em>deposit_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_delivery_document" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fulfillment_delivery_document</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">deposit_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_delivery_document" title="Permalink to this definition">¶</a></dt>
 <dd><p>To get pdf document data for a supply order delivery, in the form of a Base64-encoded string.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1455,9 +1456,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_order_list_to_supply">
-<code class="descname">get_fulfillment_order_list_to_supply</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_order_list_to_supply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fulfillment_order_list_to_supply</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_order_list_to_supply" title="Permalink to this definition">¶</a></dt>
 <dd><p>To ask for fulfillment on demand order lines to supply.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1484,9 +1485,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order">
-<code class="descname">get_fulfillment_supply_order</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fulfillment_supply_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1517,9 +1518,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order_report_list">
-<code class="descname">get_fulfillment_supply_order_report_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order_report_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fulfillment_supply_order_report_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_fulfillment_supply_order_report_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>To search supply order reports.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1551,9 +1552,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.get_product_stock_list">
-<code class="descname">get_product_stock_list</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_product_stock_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_product_stock_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.get_product_stock_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>List seller product</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1607,9 +1608,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_activation">
-<code class="descname">submit_fulfillment_activation</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_activation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">submit_fulfillment_activation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_activation" title="Permalink to this definition">¶</a></dt>
 <dd><p>To ask for products activation (or deactivation)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1660,9 +1661,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_on_demand_supply_order">
-<code class="descname">submit_fulfillment_on_demand_supply_order</code><span class="sig-paren">(</span><em>order_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_on_demand_supply_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">submit_fulfillment_on_demand_supply_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_on_demand_supply_order" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>order_list</strong> – list of dict as:
@@ -1685,9 +1686,9 @@ new ones.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_supply_order">
-<code class="descname">submit_fulfillment_supply_order</code><span class="sig-paren">(</span><em>prod_desc_list</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_supply_order" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">submit_fulfillment_supply_order</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prod_desc_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_fulfillment_supply_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>This operation create a deposit that will asynchronously triggered supply order creation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1736,9 +1737,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.submit_offer_state_action">
-<code class="descname">submit_offer_state_action</code><span class="sig-paren">(</span><em>**request</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_offer_state_action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">submit_offer_state_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.submit_offer_state_action" title="Permalink to this definition">¶</a></dt>
 <dd><p>To set an offer online or offline</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1762,9 +1763,9 @@ new ones.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Fulfillment.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Fulfillment.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1794,9 +1795,9 @@ new ones.</p>
 </div>
 <div class="section" id="discussions">
 <h2>Discussions<a class="headerlink" href="#discussions" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.Discussions">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">Discussions</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">Discussions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions" title="Permalink to this definition">¶</a></dt>
 <dd><p>There are 3 ways to get discussions: discussions id, the discussions
 status, and all messages.</p>
 <p>Thanks to the discussion Id and the method GetDiscussionMailList you can
@@ -1812,18 +1813,18 @@ Discussion id, you cannot close a discussion without having answered.</p>
 </div>
 <p>Operations are included in the Discussions API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=148">https://dev.cdiscount.com/marketplace/?page_id=148</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Discussions.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Discussions.close_discussion_list">
-<code class="descname">close_discussion_list</code><span class="sig-paren">(</span><em>discussion_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.close_discussion_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">close_discussion_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">discussion_ids</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.close_discussion_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close a discussion list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1836,9 +1837,9 @@ Discussion id, you cannot close a discussion without having answered.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Discussions.get_offer_question_list">
-<code class="descname">get_offer_question_list</code><span class="sig-paren">(</span><em>**offer_question_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_offer_question_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_offer_question_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">offer_question_filter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_offer_question_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the list of questions about offers with the specified criteria</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1888,15 +1889,15 @@ Discussion id, you cannot close a discussion without having answered.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Discussions.get_order_claim_list">
-<code class="descname">get_order_claim_list</code><span class="sig-paren">(</span><em>**order_claim_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_order_claim_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_order_claim_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">order_claim_filter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_order_claim_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the list of order claims</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Discussions.get_order_question_list">
-<code class="descname">get_order_question_list</code><span class="sig-paren">(</span><em>**order_question_filter</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_order_question_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_order_question_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">order_question_filter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.get_order_question_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the list of questions about orders with the specified criteria</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1944,9 +1945,9 @@ Discussion id, you cannot close a discussion without having answered.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.Discussions.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.Discussions.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1976,9 +1977,9 @@ Discussion id, you cannot close a discussion without having answered.</p>
 </div>
 <div class="section" id="webmail">
 <h2>WebMail<a class="headerlink" href="#webmail" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="cdiscountapi.cdiscountapi.WebMail">
-<em class="property">class </em><code class="descclassname">cdiscountapi.cdiscountapi.</code><code class="descname">WebMail</code><span class="sig-paren">(</span><em>api</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">cdiscountapi.cdiscountapi.</code><code class="sig-name descname">WebMail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail" title="Permalink to this definition">¶</a></dt>
 <dd><p>The WebMail API allows the seller to retrieve encrypted email address to
 contact a customer</p>
 <p>Methods:</p>
@@ -1988,18 +1989,18 @@ contact a customer</p>
 </div>
 <p>Operations are included in the WebMail API section.
 (<a class="reference external" href="https://dev.cdiscount.com/marketplace/?page_id=167">https://dev.cdiscount.com/marketplace/?page_id=167</a>)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.WebMail.array_of">
-<code class="descname">array_of</code><span class="sig-paren">(</span><em>type_name</em>, <em>sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.array_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">array_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_name</span></em>, <em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.array_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cast the sequence into an array of the given type.</p>
 <p>The arrays are defined in the XSD file
 (cf <a class="reference external" href="http://schemas.microsoft.com/2003/10/Serialization/Arrays">http://schemas.microsoft.com/2003/10/Serialization/Arrays</a>)
 (cf <a class="reference external" href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-ipamm/38d7c101-385d-4180-bb95-983955f41e19</a>) ?</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid">
-<code class="descname">generate_discussion_mail_guid</code><span class="sig-paren">(</span><em>order_id</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">generate_discussion_mail_guid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.generate_discussion_mail_guid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate an encrypted mail address from an order.</p>
 <p>This operation allows getting an encrypted mail address to contact a
 customer.</p>
@@ -2014,9 +2015,9 @@ customer.</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.WebMail.get_discussion_mail_list">
-<code class="descname">get_discussion_mail_list</code><span class="sig-paren">(</span><em>discussion_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.get_discussion_mail_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_discussion_mail_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">discussion_ids</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.get_discussion_mail_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get encrypted mail addresses from discussions.</p>
 <p>This operation allows getting an encrypted mail address to contact a
 customer.</p>
@@ -2029,9 +2030,9 @@ response = api.webmail.get_discussion_mail_list(ids)</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="cdiscountapi.cdiscountapi.WebMail.update_with_valid_array_type">
-<code class="descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em>record</em>, <em>keys_to_cast</em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_with_valid_array_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em>, <em class="sig-param"><span class="n">keys_to_cast</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cdiscountapi.cdiscountapi.WebMail.update_with_valid_array_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the dictionary with the array having the valid type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2062,6 +2063,7 @@ response = api.webmail.get_discussion_mail_list(ids)</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -2097,15 +2099,15 @@ response = api.webmail.get_discussion_mail_list(ids)</p>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
