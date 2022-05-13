@@ -4,28 +4,28 @@ build-backend = "flit.buildapi"
 
 [tool.flit.metadata]
 module = "cdiscountapi"
-author = "ZIBOURA Mathilde, RABOIS Damien"
-author-email = "mathilde.ziboura@abc-culture.fr"
+author = "ZIBOURA Mathilde, RABOIS Damien, Nicolas Baccelli"
+author-email = "nicolas.baccelli@abc-culture.fr"
 classifiers = ["License :: OSI Approved :: MIT License"]
 
 requires = [ 
-    "requests==2.26.0",
-    "requests_mock==1.9.3",
-    "zeep==4.1.0",
-    "dicttoxml==1.7.4",
-    "PyYAML==6.0",
-    "jinja2==3.0.3",
+    "requests>=2.26.0",
+    "requests_mock>=1.9.3",
+    "zeep>=4.1.0",
+    "dicttoxml>=1.7.4",
+    "PyYAML>=6.0",
+    "jinja2>=3.0.3",
 ]
 
 requires-python = ">=3.6"
 
 [tool.flit.metadata.requires-extra]
 test = [
-    "pytest==6.2.5",
-    "vcrpy==4.1.1",
-    "pytest-vcr==1.0.2",
-    "coverage==6.1.2",
-    "pytest-cov==3.0.0",
+    "pytest>=6.2.5",
+    "vcrpy>=4.1.1",
+    "pytest-vcr>=1.0.2",
+    "coverage>=6.1.2",
+    "pytest-cov>=3.0.0",
 ]
 dev = [
     "pdbpp",

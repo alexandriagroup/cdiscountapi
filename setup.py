@@ -17,12 +17,12 @@ readme = read('README.md')
 changelog = read('docs/CHANGELOG.rst').replace('.. _changelog:', '')
 
 install_requirements = [
-    "requests==2.26.0",
-    "requests_mock==1.9.3",
-    "zeep==4.1.0",
-    "dicttoxml==1.7.4",
-    "PyYAML==6.0",
-    "jinja2==3.0.3",
+    "requests>=2.26.0",
+    "requests_mock>=1.9.3",
+    "zeep>=4.1.0",
+    "dicttoxml>=1.7.4",
+    "PyYAML>=6.0",
+    "jinja2>=3.0.3",
 ]
 
 version = ''
